@@ -1,0 +1,21 @@
+﻿using ExpenseTracker.Application.Validation;
+using ExpenseTracker.Domain.SharedKernel;
+using MediatR;
+using System.ComponentModel.DataAnnotations;
+
+namespace ExpenseTracker.Application.UseCases.Expense.Commands;
+
+public class AddNewExpenseCommand : IRequest<Result>
+{
+    [Required(ErrorMessage = "Please enter expense amount")]
+    public decimal Amount { get; set; } = 0.0m;
+    [Required(ErrorMessage = "Currency is required")]
+    [NotEmptyGuid(ErrorMessage = "Please select Currency")]
+    public Guid CurrencyId { get; set; }
+    public string? Description { get; set; }
+    [Required(ErrorMessage = "Please enter expense date")]
+    public string ExpenseDate { get; set; } = DateTime.UtcNow.Date.ToString();
+    [Required(ErrorMessage = "Please select expense category")]
+    [NotEmptyGuid(ErrorMessage = "Please select expense category")]
+    public Guid CategoryId { get; set; }
+}
