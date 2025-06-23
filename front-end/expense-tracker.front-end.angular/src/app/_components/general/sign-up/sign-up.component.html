@@ -1,0 +1,11 @@
+<div class="signup-container">
+    <mat-card class="signup-card">
+        <mat-card-content>
+            <h2 class="title">Add your email address</h2>
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
+            <et-signup-add-email></et-signup-add-email>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,14 @@
+<div class="page-title-bar">
+    <div class="title-and-breadcrumb">
+        <h2 class="page-title">{{ pageTitle }}</h2>
+        @if(breadcrumbItems && breadcrumbItems.length) {
+        <nav *ngIf="breadcrumbItems?.length" class="breadcrumb-nav" aria-label="breadcrumb">
+            <ol class="breadcrumb-list">
+                <li *ngFor="let item of breadcrumbItems" class="breadcrumb-item">
+                    <a [routerLink]="item.link || []">{{ item.label }}</a>
+                </li>
+            </ol>
+        </nav>
+        }
+    </div>
+</div>

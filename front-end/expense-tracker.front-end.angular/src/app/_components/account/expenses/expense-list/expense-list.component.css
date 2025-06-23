@@ -1,0 +1,45 @@
+.expense-list-container {
+  padding: 1rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.mat-column-actions {
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  color: gray;
+  padding: 1rem;
+}
+.cell-amount {
+  text-align: right;
+  padding-right: 30px;
+}
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.left-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.advanced-search-toggle {
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #3f51b5;
+}
+.export-button {
+  background-color: rgb(35, 104, 3); /* deep purple */
+  color: white;
+}

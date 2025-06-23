@@ -1,0 +1,13 @@
+.app-footer {
+  background-color: #673bb7;
+  border-top: 1px solid #444; /* matches Tailwind's default border color */
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  text-align: center;
+  color: #e8f0fe;
+  font-size: 0.9rem;
+}

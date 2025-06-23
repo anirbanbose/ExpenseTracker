@@ -1,0 +1,56 @@
+.page-title-bar {
+  margin-bottom: 16px;
+}
+
+.title-and-breadcrumb {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .title-and-breadcrumb {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+}
+
+.breadcrumb-nav {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.breadcrumb-list {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-item::after {
+  content: "/";
+  padding: 0 0.5rem;
+  color: #aaa;
+}
+
+.breadcrumb-item:last-child::after {
+  content: "";
+}
+
+.breadcrumb-item a {
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}

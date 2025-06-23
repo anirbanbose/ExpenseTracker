@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+mat-card {
+  background-color: white !important;
+}
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important;
+}
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
+.mat-column-amount > .mat-sort-header-container {
+  justify-content: flex-end !important;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #fca5a5;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}

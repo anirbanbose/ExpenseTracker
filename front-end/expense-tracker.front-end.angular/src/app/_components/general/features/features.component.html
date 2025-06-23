@@ -1,0 +1,11 @@
+<section class="feature-section mat-typography">
+    <div class="container">
+        <h1 class="headline">Features That Empower You</h1>
+        <div class="divider"></div>
+        <p class="subtext">Designed to help you manage your money better and smarter.</p>
+
+        <div class="feature-grid">
+            <et-feature *ngFor="let feature of features" [feature]="feature"></et-feature>
+        </div>
+    </div>
+</section>

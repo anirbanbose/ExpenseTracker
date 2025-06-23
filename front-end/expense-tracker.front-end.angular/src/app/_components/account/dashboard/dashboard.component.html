@@ -1,0 +1,57 @@
+<div class="dashboard-container">
+    <!-- Page Title & Breadcrumb -->
+    <et-page-title-bar [pageTitle]="pageTitle" [breadcrumbItems]="breadcrumbItems"></et-page-title-bar>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+        <mat-card class="summary-card">
+            <mat-card-content>
+                <p class="summary-label">Total Expenses (Last 12 Months)</p>
+                <div class="summary-values">
+                    <p *ngFor="let value of summaryData.totalExpenses" class="summary-value">{{value}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="summary-card">
+            <mat-card-content>
+                <p class="summary-label">Total Expenses (This Month)</p>
+                <div class="summary-values">
+                    <p *ngFor="let value of summaryData.currentMonthExpenses" class="summary-value">{{value}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="summary-card">
+            <mat-card-content>
+                <p class="summary-label">Top Category (This Month)</p>
+                <div class="summary-values">
+                    <p *ngFor="let value of summaryData.currentMonthTopCategoryExpense" class="summary-value">
+                        {{value?.categoryName}} -
+                        {{value?.expense}}</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!-- Chart and Recent Activity -->
+    <div class="dashboard-main">
+        <!-- Spending Chart -->
+        <mat-card class="chart-card">
+            <mat-card-content>
+                <h2 class="section-title">Spending Chart (Last 12 Months)</h2>
+                <div class="chart-placeholder">
+                    <et-dashboard-expense-chart style="width: 100%; height: 300px;"></et-dashboard-expense-chart>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Recent Expenses -->
+        <mat-card class="recent-expenses-card">
+            <mat-card-content>
+                <h2 class="section-title">Your Last Spending</h2>
+                <et-dashboard-recent-expenses></et-dashboard-recent-expenses>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

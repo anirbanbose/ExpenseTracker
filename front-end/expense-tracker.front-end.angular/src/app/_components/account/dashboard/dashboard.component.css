@@ -1,0 +1,74 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.summary-card {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.summary-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.summary-values {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.summary-value {
+  flex: 1;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.dashboard-main {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 16px;
+}
+
+.chart-card,
+.recent-expenses-card {
+  height: 100%;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.chart-placeholder {
+  height: 300px;
+  background-color: #f1f1f1;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 8px; /* optional padding */
+  overflow: hidden;
+}
+
+.text-right {
+  text-align: right;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-main {
+    grid-template-columns: 100%;
+  }
+}

@@ -1,0 +1,36 @@
+.cta-section {
+  background-color: #eff6ff; /* Tailwind blue-600 */
+  color: white;
+  text-align: center;
+  padding: 48px 16px;
+}
+
+.cta-container {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 1.875rem; /* Tailwind text-3xl */
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1f2937;
+}
+
+.cta-subtitle {
+  margin-bottom: 24px;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.cta-button {
+  padding: 12px 24px;
+  font-size: 1.125rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #2563eb !important;
+  transform: scale(1.05);
+}

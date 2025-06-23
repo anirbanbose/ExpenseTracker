@@ -1,0 +1,26 @@
+<mat-nav-list class="sidebar">
+    <a mat-list-item [routerLink]="'/account/dashboard'" routerLinkActive="active-link" class="sidebar-link">
+        <mat-icon class="icon">dashboard</mat-icon>
+        <span class="link-text">Dashboard</span>
+    </a>
+
+    <a mat-list-item [routerLink]="'/account/expenses'" routerLinkActive="active-link" class="sidebar-link">
+        <mat-icon class="icon">receipt_long</mat-icon>
+        <span class="link-text">Expenses</span>
+    </a>
+
+    <a mat-list-item [routerLink]="'/account/reports'" routerLinkActive="active-link" class="sidebar-link">
+        <mat-icon class="icon">bar_chart</mat-icon>
+        <span class="link-text">Reports</span>
+    </a>
+
+    <a mat-list-item [routerLink]="'/account/profile'" routerLinkActive="active-link" class="sidebar-link">
+        <mat-icon class="icon">person</mat-icon>
+        <span class="link-text">Profile</span>
+    </a>
+
+    <a mat-list-item [routerLink]="'/account/settings'" routerLinkActive="active-link" class="sidebar-link">
+        <mat-icon class="icon">settings</mat-icon>
+        <span class="link-text">Settings</span>
+    </a>
+</mat-nav-list>

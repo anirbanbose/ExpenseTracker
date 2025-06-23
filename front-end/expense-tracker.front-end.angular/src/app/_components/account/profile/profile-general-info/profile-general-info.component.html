@@ -1,0 +1,53 @@
+<mat-card class="profile-card">
+    <mat-card-header style="padding-bottom: 20px;">
+        <mat-card-title>General Information</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="profileForm" (ngSubmit)="onSaveProfile()">
+            <mat-form-field class="full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" required />
+                <mat-error
+                    *ngIf="showValidationError('firstName') && profileForm.controls['firstName'].hasError('required')">
+                    First Name is <strong>required</strong>.
+                </mat-error>
+                <mat-error
+                    *ngIf="showValidationError('firstName') && profileForm.controls['firstName'].hasError('maxlength')">
+                    First Name can't be more than <strong>100 characters</strong>.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Middle Name</mat-label>
+                <input matInput formControlName="middleName" />
+                <mat-error
+                    *ngIf="showValidationError('middleName') && profileForm.controls['middleName'].hasError('maxlength')">
+                    Middle Name can't be more than <strong>100 characters</strong>.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" required />
+                <mat-error
+                    *ngIf="showValidationError('lastName') && profileForm.controls['lastName'].hasError('required')">
+                    Last Name is <strong>required</strong>.
+                </mat-error>
+                <mat-error
+                    *ngIf="showValidationError('lastName') && profileForm.controls['lastName'].hasError('maxlength')">
+                    Last Name can't be more than <strong>100 characters</strong>.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" required [disabled]="true" />
+            </mat-form-field>
+
+            <div class="form-actions">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

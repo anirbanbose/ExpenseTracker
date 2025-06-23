@@ -1,0 +1,10 @@
+.empty-state {
+  text-align: center;
+  color: gray;
+  padding: 1rem;
+}
+
+.cell-amount {
+  text-align: right;
+  padding-right: 10px;
+}

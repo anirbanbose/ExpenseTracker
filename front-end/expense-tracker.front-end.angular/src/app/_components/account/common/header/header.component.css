@@ -1,0 +1,44 @@
+.account-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-logo {
+  height: 32px;
+  width: 32px;
+}
+
+.app-title {
+  color: #e8f0fe;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.user-menu-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+}
+
+.user-name {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .user-name {
+    display: inline;
+  }
+}

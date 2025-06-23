@@ -1,0 +1,57 @@
+.sidebar {
+  width: 16rem;
+  height: 100%;
+  background-color: #2e2e2e;
+  color: white;
+  padding-top: 1rem;
+}
+
+.icon {
+  margin-right: 1rem;
+  color: white;
+}
+
+.link-text {
+  font-size: 1rem;
+  color: white;
+}
+
+.sidebar-link {
+  display: flex !important; /* Force flex to override Material default */
+  align-items: center; /* Vertically center icon and text */
+  gap: 12px; /* Space between icon and text */
+  padding: 8px 16px;
+  text-decoration: none;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  height: auto !important; /* Prevent fixed height interfering */
+}
+
+a.mat-mdc-list-item {
+  color: white;
+  border-radius: 4px;
+  margin: 0.25rem 0;
+  transition: background-color 0.2s ease;
+}
+a.mat-mdc-list-item:hover {
+  background-color: #673bb7;
+  color: black;
+}
+
+a.mat-mdc-list-item .mat-icon {
+  font-size: 20px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+a.mat-mdc-list-item .link-text {
+  line-height: 1;
+}
+
+a.mat-mdc-list-item.active-link {
+  background-color: #4a90e2;
+  font-weight: 500;
+  color: white;
+  border-radius: 4px;
+}

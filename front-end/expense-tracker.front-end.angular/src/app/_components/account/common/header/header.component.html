@@ -1,0 +1,31 @@
+<mat-toolbar color="primary" class="account-toolbar">
+    <!-- Logo / App Name -->
+    <div class="toolbar-left">
+        <img src="logo.png" alt="Logo" class="app-logo" />
+        <a routerLink="/" class="app-title">Expense Tracker</a>
+    </div>
+
+    <!-- Spacer -->
+    <span class="spacer"></span>
+
+    <!-- User Menu -->
+    <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
+        <span class="user-name">Welcome, {{ userFullName }}</span>
+        <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item [routerLink]="'/account/profile'">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+        </button>
+        <button mat-menu-item [routerLink]="'/account/settings'">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

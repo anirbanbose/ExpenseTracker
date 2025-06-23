@@ -1,0 +1,31 @@
+.account-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.drawer-container {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+.drawer {
+  width: 240px;
+  background-color: #2b2b2b;
+  color: white;
+  overflow: hidden;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}

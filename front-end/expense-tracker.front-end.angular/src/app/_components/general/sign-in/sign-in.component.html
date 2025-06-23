@@ -1,0 +1,46 @@
+<div class="signin-container">
+    <mat-card class="signin-card">
+        <mat-card-content>
+            <h2 class="signin-title">Login to Your Account</h2>
+
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <mat-form-field class="w-full mb-4">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" type="email" placeholder="email@example.com" />
+                    <mat-error *ngIf="showValidationError('email')">
+                        <ng-container *ngIf="loginForm.controls['email'].hasError('required')">
+                            Email is <strong>required</strong>.
+                        </ng-container>
+                        <ng-container *ngIf="loginForm.controls['email'].hasError('email')">
+                            Please enter a valid <strong>Email address</strong>.
+                        </ng-container>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-full mb-4">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" type="password" placeholder="********" />
+                    <mat-error
+                        *ngIf="showValidationError('password') && loginForm.controls['password'].hasError('required')">
+                        Password is <strong>required</strong>.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-checkbox formControlName="rememberMe" color="primary">Remember me</mat-checkbox>
+
+                <div class="mt-6">
+                    <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+                </div>
+            </form>
+
+            <p class="signup-link">
+                Don't have an account?
+                <a routerLink="/sign-up">Sign up</a>
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,25 @@
+<div class="account-layout mat-typography">
+    <!-- Header -->
+    <et-account-header></et-account-header>
+
+    <!-- Main content with sidebar and router outlet -->
+    <mat-sidenav-container class="drawer-container">
+        <!-- Sidebar (auto mode based on screen size) -->
+        <mat-sidenav #drawer [mode]="sidenavMode" [opened]="isLargeScreen" class="drawer">
+            <et-account-sidebar></et-account-sidebar>
+        </mat-sidenav>
+
+        <!-- Main content area -->
+        <mat-sidenav-content class="main-content">
+            <button mat-button class="menu-toggle" (click)="drawer.toggle()" *ngIf="!isLargeScreen">
+                ☰ Menu
+            </button>
+            <div class="content-wrapper">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <!-- Footer -->
+    <et-footer></et-footer>
+</div>

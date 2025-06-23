@@ -1,0 +1,7 @@
+<mat-card class="testimonial-card">
+    <blockquote class="comment">“{{ testimonial.comment }}”</blockquote>
+    <div class="user-info">
+        <img [src]="testimonial.avatarUrl" [alt]="testimonial.name" class="avatar" />
+        <p class="name">— {{ testimonial.name }}</p>
+    </div>
+</mat-card>

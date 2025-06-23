@@ -1,0 +1,70 @@
+.app-header {
+  background-color: #673bb7;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  color: #e8f0fe;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-logo img {
+  height: 32px;
+  width: 32px;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #e8f0fe;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-link {
+  color: #e8f0fe;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: #60a5fa;
+}
+
+.user-button {
+  color: #e8f0fe;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mat-mdc-button:not(:disabled) {
+  color: #e8f0fe;
+}
+
+.user-button:hover {
+  color: #60a5fa;
+}
+
+.sign-up-button {
+  color: white;
+}

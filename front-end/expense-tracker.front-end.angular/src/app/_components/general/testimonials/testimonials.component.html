@@ -1,0 +1,10 @@
+<section class="testimonials-section mat-typography">
+    <div class="container">
+        <h1 class="headline">What Our Users Say</h1>
+        <p class="subtext">Real stories from people who've taken control of their finances.</p>
+
+        <div class="testimonial-grid">
+            <et-testimonial *ngFor="let testimonial of testimonials" [testimonial]="testimonial"></et-testimonial>
+        </div>
+    </div>
+</section>

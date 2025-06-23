@@ -1,0 +1,36 @@
+.hero-section {
+  background-color: #eff6ff; /* Tailwind's blue-50 */
+  padding: 80px 0;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: #4b5563;
+  margin-bottom: 24px;
+}
+
+.hero-button {
+  font-size: 1.125rem;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.hero-button:hover {
+  background-color: #2563eb !important;
+  transform: scale(1.05);
+}
