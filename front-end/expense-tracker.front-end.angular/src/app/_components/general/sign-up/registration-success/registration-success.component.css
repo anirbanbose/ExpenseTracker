@@ -1,0 +1,43 @@
+.success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 80px 16px;
+  flex-grow: 1;
+}
+.success-card {
+  max-width: 480px;
+  width: 100%;
+  padding: 24px;
+  text-align: center;
+}
+.success-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+  height: 64px;
+}
+
+.success-icon {
+  font-size: 64px;
+  color: #4caf50;
+}
+.success-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 12px 0;
+  text-align: center;
+}
+.success-message {
+  margin-top: 16px;
+  font-size: 16px;
+}
+.mat-icon {
+  height: 64px;
+  width: 64px;
+}
+.success-actions {
+  justify-content: center;
+  margin-top: 16px;
+}

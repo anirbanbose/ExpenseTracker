@@ -1,11 +1,5 @@
-<!-- <div *ngFor="let expense of expenses" class="expense-item">
-    {{expense.expenseDate | date: 'longDate'}} - {{expense.description}} - {{expense.expenseAmount}}
-</div> -->
-
 <div class="expense-list-container">
-    <!-- Page Title & Breadcrumb -->
     <et-page-title-bar [pageTitle]="pageTitle" [breadcrumbItems]="breadcrumbItems"></et-page-title-bar>
-    <!-- Actions: Add New & Advanced Search Toggle -->
     <div class="actions-container">
         <div class="left-actions">
             <button mat-raised-button color="primary" (click)="onAddNew()">

@@ -7,9 +7,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HelperService } from '../../../../_helpers/helper-service/helper.service';
 import { CommonModule } from '@angular/common';
 import { passwordMatchValidator } from '../../../../_validators/password-match-validator';
-import { ProfileService } from '../../../../_services/profile/profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../../_services/auth/auth.service';
+import { AccountService } from '../../../../_services/account/account.service';
 
 @Component({
   selector: 'et-profile-change-password',
@@ -30,7 +30,7 @@ export class ProfileChangePasswordComponent {
   private fb = inject(FormBuilder);
   private _helperService = inject(HelperService);
   private _authService = inject(AuthService);
-  private _profileService = inject(ProfileService);
+  private _accountService = inject(AccountService);
 
   passwordForm = this.fb.group({
     currentPassword: ['', Validators.required],
@@ -44,7 +44,7 @@ export class ProfileChangePasswordComponent {
     this.errorMessage = '';
     if (this.passwordForm.valid) {
       const formValue = this.passwordForm.value;
-      this._profileService.changePassword(formValue).subscribe({
+      this._accountService.changePassword(formValue).subscribe({
         next: (data: any) => {
           if (data) {
             this._snackBar.open(data.message, 'Close', {

@@ -1,0 +1,19 @@
+form {
+  width: 500px !important;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.grey-button {
+  background-color: rgb(211, 210, 210);
+  color: black;
+}

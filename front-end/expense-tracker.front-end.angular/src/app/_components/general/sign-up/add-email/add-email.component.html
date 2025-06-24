@@ -1,7 +1,7 @@
 <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
-    <mat-form-field class="w-full mb-4">
+    <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" placeholder="email@example.com" />
+        <input matInput formControlName="email" type="email" placeholder="email@example.com" required />
         <mat-error *ngIf="showValidationError('email')">
             <ng-container *ngIf="emailForm.controls['email'].hasError('required')">
                 Email is <strong>required</strong>.
@@ -9,9 +9,13 @@
             <ng-container *ngIf="emailForm.controls['email'].hasError('email')">
                 Please enter a valid <strong>Email address</strong>.
             </ng-container>
+            <ng-container *ngIf="emailForm.controls['email'].hasError('uniqueEmail')">
+                This email is already <strong>registered</strong> with us. Please use a different email.
+            </ng-container>
         </mat-error>
     </mat-form-field>
     <div class="mt-6 button-container">
-        <button mat-flat-button color="primary" type="submit" [disabled]="emailForm.invalid">Login</button>
+        <button mat-flat-button color="primary" type="submit">Next
+            <mat-icon iconPositionEnd>arrow_forward</mat-icon></button>
     </div>
 </form>

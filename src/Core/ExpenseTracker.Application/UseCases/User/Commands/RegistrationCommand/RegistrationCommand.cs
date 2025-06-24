@@ -15,11 +15,7 @@ public class RegistrationCommand : IRequest<Result>
     [Required(ErrorMessage = "Please enter your password")]
     [MaxLength(16, ErrorMessage = "Password can't be more than 16 characters.")]
     [MinLength(6, ErrorMessage = "Password can't be less than 6 characters.")]
-    public string Password { get; set; } = string.Empty;
-
-    [Required(ErrorMessage = "Please enter confirm password")]
-    [Compare("Password", ErrorMessage = "Password and confirm password do not match.")]
-    public string ConfirmPassword { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;    
 
     [Required(ErrorMessage = "Please enter your first name")]
     [MaxLength(100, ErrorMessage = "First name can't be more than 100 characters.")]

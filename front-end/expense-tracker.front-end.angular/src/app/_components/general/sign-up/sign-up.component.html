@@ -1,11 +1,18 @@
-<div class="signup-container">
+<div class="signup-container" *ngIf="registrationProcess !== 4">
     <mat-card class="signup-card">
         <mat-card-content>
-            <h2 class="title">Add your email address</h2>
+            <h2 class="title">{{getPageTitle()}}</h2>
             <div *ngIf="errorMessage" class="error-message">
                 {{ errorMessage }}
             </div>
-            <et-signup-add-email></et-signup-add-email>
+            <et-signup-add-email *ngIf="registrationProcess === 1" [email]="signupModel.email"
+                (emailAdded)="onEmailAdded($event)"></et-signup-add-email>
+            <et-signup-add-password *ngIf="registrationProcess === 2" (onBack)="onBackButtonClicked()"
+                (passwordAdded)="onPasswordAdded($event)"></et-signup-add-password>
+            <et-signup-add-details *ngIf="registrationProcess === 3" (onBack)="onBackButtonClicked()"
+                (detailsAdded)="onDetailsAdded($event)"></et-signup-add-details>
+
         </mat-card-content>
     </mat-card>
 </div>
+<et-signup-registration-success *ngIf="registrationProcess === 4"></et-signup-registration-success>

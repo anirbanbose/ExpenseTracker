@@ -34,3 +34,8 @@ mat-card {
   margin-bottom: 16px;
   font-size: 0.9rem;
 }
+
+.grey-button {
+  background-color: rgb(221, 144, 144);
+  color: black;
+}

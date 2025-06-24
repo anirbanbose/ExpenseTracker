@@ -5,6 +5,7 @@ using ExpenseTracker.Domain.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace ExpenseTracker.Presentation.Api.Controllers
 {
@@ -60,6 +61,29 @@ namespace ExpenseTracker.Presentation.Api.Controllers
             Response.Cookies.Delete(Constants.ACCESS_TOKEN_NAME);
             return Ok(new { message = "Logged out" });
         }
+
+        [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Register([FromBody] RegistrationCommand request)
+        {
+            if (request == null)
+            {
+                return BadRequest(new { errorMessage = "Request cannot be null" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var registrationResponse = await _sender.Send(request);
+            if (registrationResponse != null && registrationResponse.IsSuccess)
+            {
+                return Ok(new { message = "Regitration Success" });
+            }
+            return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = "Registration failed. Please try again later." });            
+        }
+
 
         [Authorize]
         [HttpGet("me")]
@@ -123,6 +147,15 @@ namespace ExpenseTracker.Presentation.Api.Controllers
 
             }
             return BadRequest(new { errorMessage = "Failed to Change password" });
+        }
+
+
+        [HttpGet("email-available")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> EmailAvailable(string email)
+        {
+            EmailAvailableQuery query = new EmailAvailableQuery(email);
+            return Ok(await _sender.Send(query));
         }
     }
 }

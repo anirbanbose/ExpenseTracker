@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileService } from '../../../../_services/profile/profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../../../_services/auth/auth.service';
+import { AccountService } from '../../../../_services/account/account.service';
 
 @Component({
   selector: 'et-profile-general-info',
@@ -28,6 +29,7 @@ export class ProfileGeneralInfoComponent implements OnInit {
   private fb = inject(FormBuilder);
   private _helperService = inject(HelperService);
   private _profileService = inject(ProfileService);
+  private _accountService = inject(AccountService);
   private _authService = inject(AuthService);
   isFormSubmitted = false;
 
@@ -112,7 +114,7 @@ export class ProfileGeneralInfoComponent implements OnInit {
   }
 
   getLoggedInUser(): any {
-    this._profileService.getLoggedinUser().subscribe({
+    this._accountService.getLoggedinUser().subscribe({
       next: (data: any) => {
         if (data) {
           this._authService.setLoggedinUser(data);

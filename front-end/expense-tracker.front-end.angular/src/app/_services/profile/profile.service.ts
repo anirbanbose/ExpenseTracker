@@ -17,13 +17,4 @@ export class ProfileService {
     return this.httpClient.post(`api/profile/update`, profile);
   }
 
-  changePassword(model: any): any {
-    return this.httpClient.post(`api/account/change-password`, model);
-  }
-
-
-  getLoggedinUser(): any {
-    return this.httpClient.get(`api/account/loggedin-user`);
-  }
-
 }

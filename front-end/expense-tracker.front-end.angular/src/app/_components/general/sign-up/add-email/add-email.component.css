@@ -8,21 +8,3 @@
   justify-content: right;
   margin-top: 24px;
 }
-
-mat-form-field {
-  width: 100%;
-}
-
-mat-form-field.mat-form-field-appearance-standard .mat-form-field-underline {
-  background-color: #cbd5e1;
-}
-
-mat-form-field.mat-form-field-appearance-standard.mat-focused
-  .mat-form-field-underline {
-  background-color: #3b82f6;
-}
-
-.mat-form-field-label {
-  color: #374151 !important;
-  font-weight: 600;
-}
