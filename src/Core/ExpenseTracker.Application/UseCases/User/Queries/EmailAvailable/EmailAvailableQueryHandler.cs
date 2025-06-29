@@ -31,9 +31,8 @@ public class EmailAvailableQueryHandler : BaseHandler, IRequestHandler<EmailAvai
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex.Message, ex);
-        }
-            
+            _logger?.LogError(ex, $"Error occurred while processing the email available request - {request}.");
+        }            
         return false;
     }
 }

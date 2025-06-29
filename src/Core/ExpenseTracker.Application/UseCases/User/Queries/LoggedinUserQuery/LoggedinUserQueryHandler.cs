@@ -1,6 +1,4 @@
 ﻿using ExpenseTracker.Application.DTO.User;
-using ExpenseTracker.Domain.Models;
-using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
@@ -25,16 +23,16 @@ public class LoggedinUserQueryHandler : BaseHandler, IRequestHandler<LoggedinUse
         {
             return Result<LoggedInUserDTO>.ArgumentNullResult();
         }
+        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
+        {
+            return Result<LoggedInUserDTO>.UserNotAuthenticatedResult();
+        }
         try
         {
-            if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-            {
-                return Result<LoggedInUserDTO>.UserNotAuthenticatedResult();
-            }
             var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken, true);
-            if (currentUser is null)
+            if (currentUser is null || currentUser.Deleted)
             {
-                _logger.LogWarning($"User not authenticated.");
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
                 return Result<LoggedInUserDTO>.UserNotAuthenticatedResult();
             }
             var loggedInUser = LoggedInUserDTO.FromDomain(currentUser);
@@ -43,7 +41,7 @@ public class LoggedinUserQueryHandler : BaseHandler, IRequestHandler<LoggedinUse
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex.Message, ex);
+            _logger?.LogError(ex, $"Error occurred while getting the LoggedinUser data for the user: {CurrentUserName}.");
         }
         return Result<LoggedInUserDTO>.FailureResult("Account.LoggedinUser", "Loggedin User failed.");
     }

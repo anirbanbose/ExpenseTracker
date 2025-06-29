@@ -30,6 +30,19 @@ export class HelperService {
     });
   }
 
+  goToReturnUrl(returnUrl: string | null) {
+    if (returnUrl) {
+      this._router.navigateByUrl(returnUrl, { replaceUrl: true });
+    }
+  }
+
+  navigateToUrlWithSearchParams(url: string, queryParams: any) {
+    this._router.navigate([`${url}`], {
+      queryParams: queryParams,
+      queryParamsHandling: 'merge'
+    });
+  }
+
   getErrorMessages(errorObject: any): string[] {
     let errorMessages: string[] = [];
     let error = errorObject.error;

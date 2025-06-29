@@ -21,7 +21,7 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
 
     public async Task<Expense?> GetExpenseByIdAsync(Guid id, Guid userId, CancellationToken cancellationToken)
     {
-        return await Table.Include(d => d.Category).AsSplitQuery().FirstOrDefaultAsync(d => d.Id == id && d.ExpenseOwnerId == userId, cancellationToken);
+        return await Table.Include(d => d.Category).AsSplitQuery().FirstOrDefaultAsync(d => d.Id == id && !d.Deleted && d.ExpenseOwnerId == userId, cancellationToken);
     }
 
     public async Task<IEnumerable<Expense>> GetExpensesByUserIdAsync(Guid userId, CancellationToken cancellationToken)
@@ -56,8 +56,8 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
         query = query.AsSplitQuery().AsQueryable();
 
         var orderByExprssion = Order.ToOrderExpression();
-        query = IsAscendingSort ? query.OrderBy(orderByExprssion) : query.OrderByDescending(orderByExprssion);
-
+        query = IsAscendingSort ? query.OrderBy(orderByExprssion).ThenByDescending(d => d.CreatedDate) : query.OrderByDescending(orderByExprssion).ThenByDescending(d => d.CreatedDate);
+        
         var items = await query.Skip(PageIndex * PageSize).Take(PageSize).ToListAsync(cancellationToken);
 
         return PagedResult<Expense>.SuccessResult(items, totalCount, PageIndex, PageSize);
@@ -86,9 +86,34 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
         query = query.AsSplitQuery().AsQueryable();
 
         var orderByExprssion = Order.ToOrderExpression();
-        query = IsAscendingSort ? query.OrderBy(orderByExprssion) : query.OrderByDescending(orderByExprssion);
+        query = IsAscendingSort ? query.OrderBy(orderByExprssion).ThenByDescending(d => d.CreatedDate) : query.OrderByDescending(orderByExprssion).ThenByDescending(d => d.CreatedDate);
+        
 
         return await query.ToListAsync(cancellationToken);
+    }
+
+    public async Task<PagedResult<Expense>> SearchExpensesAsync(Guid expenseId, Guid userId, int PageSize, CancellationToken cancellationToken)
+    {
+        IQueryable<Expense> query = TableNoTracking;
+        query = query.Include(d => d.ExpenseOwner)
+                        .Include(d => d.Category);
+        query = query.Where(d => d.ExpenseOwnerId == userId && !d.Deleted).OrderByDescending(d => d.ExpenseDate).ThenByDescending(d => d.CreatedDate);
+
+        var item = await query.FirstOrDefaultAsync(d => d.Id == expenseId);
+
+        int itemIndex = query.ToList().FindIndex(e => e.Id == expenseId);
+        int PageIndex = (int)Math.Ceiling((double)(itemIndex + 1) / PageSize);
+
+
+        var totalCount = await query.CountAsync();
+
+        query = query.AsSplitQuery().AsQueryable();
+
+        var items = await query
+            .Skip(PageIndex * PageSize)
+            .Take(PageSize).ToListAsync(cancellationToken);
+
+        return PagedResult<Expense>.SuccessResult(items, totalCount, PageIndex, PageSize);
     }
 
     public async Task<IEnumerable<Expense>> GetRecentExpensesAsync(Guid userId, int recordCount, CancellationToken cancellationToken)
@@ -100,7 +125,7 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
 
         var totalCount = await query.CountAsync();
 
-        query = query.AsSplitQuery().AsQueryable().OrderByDescending(d => d.ExpenseDate);
+        query = query.AsSplitQuery().AsQueryable().OrderByDescending(d => d.ExpenseDate).ThenByDescending(d => d.CreatedDate);
 
         return await query.Take(recordCount).ToListAsync(cancellationToken);
     }
@@ -128,4 +153,41 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
         }
         MarkAsUpdated(expense);
     }
+
+
+//    public static void GetPageForItem(YourDbContext context, int itemId, int pageSize)
+//    {
+//        // 1. Determine the item's position
+//        var item = context.YourEntities.Find(itemId);
+
+//        if (item == null)
+//        {
+//            Console.WriteLine($"Item with ID {itemId} not found.");
+//            return;
+//        }
+
+//        int itemIndex = context.YourEntities.OrderBy(e => e.Id).ToList().FindIndex(e => e.Id == itemId);
+
+
+//        // 2. Calculate the page number
+//        int pageNumber = (int)Math.Ceiling((double)(itemIndex + 1) / pageSize);
+
+
+//        // 3. Retrieve the page
+//        var page = context.YourEntities
+//            .OrderBy(e => e.Id)
+//            .Skip((pageNumber - 1) * pageSize)
+//            .Take(pageSize)
+//            .ToList();
+
+
+//        Console.WriteLine($"Page number containing item {itemId}: {pageNumber}");
+
+//        // Print the page contents
+//        foreach (var entity in page)
+//        {
+//            Console.WriteLine($"  - {entity.Id}: {entity.Name}"); // Replace with your entity properties
+//        }
+//    }
+//}
 }

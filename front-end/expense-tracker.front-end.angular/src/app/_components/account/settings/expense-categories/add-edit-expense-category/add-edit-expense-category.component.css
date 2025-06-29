@@ -1,0 +1,35 @@
+.expense-category-add-container {
+  padding: 1rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .form-row {
+    flex-direction: row;
+  }
+}
+
+.form-field {
+  flex: 1;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.required {
+  color: red;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}

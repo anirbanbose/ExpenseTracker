@@ -1,0 +1,15 @@
+<div class="expense-category-add-container">
+    <form [formGroup]="expenseCategoryForm" (ngSubmit)="onSubmit()" novalidate>
+        <mat-form-field appearance="fill" class="full-width form-field">
+            <mat-label>Category Name </mat-label>
+            <input matInput id="name" type="text" formControlName="name" placeholder="Enter name" required>
+            <mat-error *ngIf="showValidationError('name') && expenseCategoryForm.controls['name'].hasError('required')">
+                Category name is <strong>required</strong>.
+            </mat-error>
+        </mat-form-field>
+        <div class="form-actions">
+            <button mat-raised-button type="button" appearance="outline" (click)="onCancel()">Cancel</button>
+            <button mat-raised-button color="primary" type="submit">Save Expense</button>
+        </div>
+    </form>
+</div>

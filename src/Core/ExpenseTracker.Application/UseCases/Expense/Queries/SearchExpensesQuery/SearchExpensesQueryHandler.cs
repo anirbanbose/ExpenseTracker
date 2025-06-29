@@ -28,23 +28,30 @@ public class SearchExpensesQueryHandler : BaseHandler, IRequestHandler<SearchExp
         {
             return PagedResult<ExpenseListDTO>.UserNotAuthenticatedResult();
         }
-        var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-        if (currentUser is null)
+        try
         {
-            _logger.LogWarning($"User not authenticated.");
-            return PagedResult<ExpenseListDTO>.UserNotAuthenticatedResult();
-        }
-        var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.currencyId, request.startDate, request.endDate), currentUser.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
-
-        if (expenseResult.IsSuccess && expenseResult.Items is not null)
-        {
-            List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();
-            expenseResult.Items.ToList().ForEach(expense =>
+            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
+            if (currentUser is null || currentUser.Deleted)
             {
-                dtoList.Add(ExpenseListDTO.FromDomain(expense));
-            });
-            return PagedResult<ExpenseListDTO>.SuccessResult(dtoList, expenseResult.TotalCount, expenseResult.PageIndex, expenseResult.PageSize);
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
+                return PagedResult<ExpenseListDTO>.UserNotAuthenticatedResult();
+            }
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.currencyId, request.startDate, request.endDate), currentUser.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
+
+            if (expenseResult.IsSuccess && expenseResult.Items is not null)
+            {
+                List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();
+                expenseResult.Items.ToList().ForEach(expense =>
+                {
+                    dtoList.Add(ExpenseListDTO.FromDomain(expense));
+                });
+                return PagedResult<ExpenseListDTO>.SuccessResult(dtoList, expenseResult.TotalCount, expenseResult.PageIndex, expenseResult.PageSize);
+            }
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Error occurred while searching expenses with request - {request} for the user: {CurrentUserName}.");
+        }      
 
         return PagedResult<ExpenseListDTO>.FailureResult("Expense.SearchExpenses", "Couldn't fetch the expense list.");
     }

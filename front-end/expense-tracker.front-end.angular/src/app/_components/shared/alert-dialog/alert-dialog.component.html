@@ -1,0 +1,13 @@
+<div style="margin:10px">
+    <h2 mat-dialog-title>{{ title }}</h2>
+
+    <mat-dialog-content>
+        <p>{{ message }}</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="center">
+        <button mat-raised-button color="primary" (click)="onConfirm()">
+            {{ okText }}
+        </button>
+    </mat-dialog-actions>
+</div>

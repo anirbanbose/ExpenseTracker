@@ -1,0 +1,12 @@
+.settings-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 16px;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    grid-template-columns: 100%;
+  }
+}

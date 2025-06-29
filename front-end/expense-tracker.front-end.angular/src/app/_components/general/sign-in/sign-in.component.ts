@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -73,8 +74,8 @@ export class SignInComponent implements OnInit {
         if (data) {
           if (data?.isLoggedIn) {
             if (this.returnUrl && this.returnUrl.trim() != '') {
-              window.location.href = this.returnUrl;
-              //this.router.navigate([this.returnUrl]);
+              //window.location.href = this.returnUrl;
+              this.router.navigateByUrl(this.returnUrl, { replaceUrl: true });
             }
             else {
               this.router.navigate(['/account/dashboard']);
@@ -82,15 +83,18 @@ export class SignInComponent implements OnInit {
           }
         }
         else {
-          this.errorMessage = "There was an issue while signing you in. Please try again later.";
+          this.errorMessage = "Invalid login attempt. Please try again later.";
         }
       },
-      error: (err: any) => {
-        if (err) {
-          this.errorMessage = err;
+      error: (err: HttpErrorResponse) => {
+        if (err.status == 401) {
+          this.errorMessage = err.error?.errorMessage;
+        }
+        else if (err.error?.errorMessage) {
+          this.errorMessage = err.error?.errorMessage;
         }
         else {
-          this.errorMessage = "There was an issue while signing you in. Please try again later";
+          this.errorMessage = "Invalid login attempt. Please try again later";
         }
       }
     });

@@ -1,16 +1,10 @@
-﻿using ExpenseTracker.Application.DTO.ExpenseCategory;
-using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
 
@@ -39,33 +33,36 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
         {
             return Result.ArgumentNullResult();
         }
+        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
+        {
+            return Result.UserNotAuthenticatedResult();
+        }
         try
         {
-            if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-            {
-                return Result<ExpenseCategoryDTO?>.UserNotAuthenticatedResult();
-            }
             var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null)
+            if (currentUser is null || currentUser.Deleted)
             {
-                _logger.LogWarning($"User not authenticated.");
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
                 return Result.UserNotAuthenticatedResult();
             }
             var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id, currentUser.Id, cancellationToken);
             if(expense is null)
             {
-                return Result.FailureResult("Expense.UpdateExpense", "Expense not found.");
+                _logger.LogWarning($"Expense with Id - {request.Id} not found.");
+                return Result.FailureResult("Expense.UpdateExpense", $"Expense not found.");
             }
 
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.CategoryId, cancellationToken);
             if (expenseCategory is null)
             {
-                return Result.FailureResult("Expense.UpdateExpense", "Expense category not found.");
+                _logger.LogWarning($"Expense category with Id - {request.CategoryId} not found.");
+                return Result.FailureResult("Expense.UpdateExpense", $"Expense category not found.");
             }
             var currency = await _currencyRepository.GetCurrencyByIdAsync(request.CurrencyId, cancellationToken);
             if (currency is null)
             {
-                return Result.FailureResult("Expense.UpdateExpense", "Currency not found.");
+                _logger.LogWarning($"Currency with Id {request.CurrencyId} not found.");
+                return Result.FailureResult("Expense.UpdateExpense", $"Currency not found.");
             }
             expense.Update(
                 new Money(request.Amount, currency.Id, currency.Code, currency.Symbol),
@@ -80,7 +77,7 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex.Message, ex);
+            _logger?.LogError(ex, $"Error occurred while updating expense- {request} for the user: {CurrentUserName}.");
         }
         return Result.FailureResult("Expense.UpdateExpense", "Update expense failed.");
     }

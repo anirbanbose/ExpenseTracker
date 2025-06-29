@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
 
-public class AddNewExpenseCommand : IRequest<Result>
+public class AddNewExpenseCommand : IRequest<Result<Guid?>>
 {
     [Required(ErrorMessage = "Please enter expense amount")]
     public decimal Amount { get; set; } = 0.0m;

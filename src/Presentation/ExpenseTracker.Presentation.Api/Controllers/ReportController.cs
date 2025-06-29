@@ -1,10 +1,10 @@
-﻿using ExpenseTracker.Application.UseCases.Expense.Queries;
-using ExpenseTracker.Application.UseCases.Report;
+﻿using ExpenseTracker.Application.UseCases.Report;
 using ExpenseTracker.Domain.Enums;
 using ExpenseTracker.Domain.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace ExpenseTracker.Presentation.Api.Controllers;
 
@@ -14,17 +14,16 @@ namespace ExpenseTracker.Presentation.Api.Controllers;
 public class ReportController : ControllerBase
 {
     private readonly ISender _sender;
-    private readonly ILogger<ReportController> _logger;
 
-    public ReportController(ILogger<ReportController> logger, ISender sender)
+    public ReportController(ISender sender)
     {
-        _logger = logger;
         _sender = sender;
     }
 
     [HttpGet("expense-export")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ExpenseExport(string? search, string? categoryId, string? currencyId, string? startDate, string? endDate, ExpenseListOrder order = ExpenseListOrder.ExpenseDate, bool isAscending = false, ReportFormat reportFormat = ReportFormat.Excel )
     {
         ExpenseExportQuery query = new ExpenseExportQuery(
@@ -39,7 +38,7 @@ public class ReportController : ControllerBase
         );
 
         var expenseExportResult = await _sender.Send(query);
-        if (expenseExportResult.IsSuccess)
+        if (expenseExportResult is not null && expenseExportResult.IsSuccess)
         {
             string extension = reportFormat == ReportFormat.Pdf ? "pdf" : "xlsx";
             string contentType = reportFormat == ReportFormat.Pdf
@@ -48,6 +47,6 @@ public class ReportController : ControllerBase
 
             return File(expenseExportResult.Value, contentType, $"Expense Export.{extension}");
         }
-        return BadRequest(new { errorMessage = expenseExportResult.ErrorMessage ?? "Failed to generate export file." });
+        return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = expenseExportResult?.ErrorMessage ?? "Failed to generate export file." });
     }
 }

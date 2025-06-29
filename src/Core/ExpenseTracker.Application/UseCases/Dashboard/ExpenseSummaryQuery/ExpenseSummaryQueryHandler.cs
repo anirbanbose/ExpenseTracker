@@ -26,38 +26,44 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
         {
             return Result<ExpenseSummaryDTO>.UserNotAuthenticatedResult();
         }
-        var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-        if (currentUser is null)
+        try
         {
-            _logger.LogWarning($"User not authenticated.");
-            return Result<ExpenseSummaryDTO>.UserNotAuthenticatedResult();
-        }
-
-        var expenses = await _expenseRepository.GetExpensesByUserIdAsync(currentUser.Id, cancellationToken);
-
-        if (expenses is not null)
-        {
-            DateTime today = DateTime.UtcNow;
-            var startDate = new DateTime(today.Year, today.Month, 1).AddMonths(-11);
-
-            IEnumerable<string> totalExpenses = GetYearTotalExpenses(expenses, today, startDate, request.YearTotalExpenseRecordCount);
-
-            int currentMonth = today.Month;
-            int currentYear = today.Year;
-
-            IEnumerable<string> monthTotalExpenses = GetMonthTotalExpenses(expenses, currentMonth, currentYear, request.MonthTotalExpenseRecordCount);
-
-            IEnumerable<CategoryExpenseDTO> categoryHighestExpenses = GetCategoryTotalExpenses(expenses, currentMonth, currentYear, request.CategoryTotalExpenseRecordCount);
-
-            var expenseSummaryDTO = new ExpenseSummaryDTO
+            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
+            if (currentUser is null || currentUser.Deleted)
             {
-                TotalExpenses = totalExpenses.ToList(),
-                CurrentMonthExpenses = monthTotalExpenses.ToList(),
-                CurrentMonthTopCategoryExpense = categoryHighestExpenses.ToList(),
-            };
-            return Result<ExpenseSummaryDTO>.SuccessResult(expenseSummaryDTO);
-        }
+                _logger.LogWarning("User not authenticated.");
+                return Result<ExpenseSummaryDTO>.UserNotAuthenticatedResult();
+            }
 
+            var expenses = await _expenseRepository.GetExpensesByUserIdAsync(currentUser.Id, cancellationToken);
+
+            if (expenses is not null)
+            {
+                DateTime today = DateTime.UtcNow;
+                var startDate = new DateTime(today.Year, today.Month, 1).AddMonths(-11);
+
+                IEnumerable<string> totalExpenses = GetYearTotalExpenses(expenses, today, startDate, request.YearTotalExpenseRecordCount);
+
+                int currentMonth = today.Month;
+                int currentYear = today.Year;
+
+                IEnumerable<string> monthTotalExpenses = GetMonthTotalExpenses(expenses, currentMonth, currentYear, request.MonthTotalExpenseRecordCount);
+
+                IEnumerable<CategoryExpenseDTO> categoryHighestExpenses = GetCategoryTotalExpenses(expenses, currentMonth, currentYear, request.CategoryTotalExpenseRecordCount);
+
+                var expenseSummaryDTO = new ExpenseSummaryDTO
+                {
+                    TotalExpenses = totalExpenses.ToList(),
+                    CurrentMonthExpenses = monthTotalExpenses.ToList(),
+                    CurrentMonthTopCategoryExpense = categoryHighestExpenses.ToList(),
+                };
+                return Result<ExpenseSummaryDTO>.SuccessResult(expenseSummaryDTO);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Error occurred while handling ExpenseSummaryQuery with request - {request}  for the user: {CurrentUserName}.");
+        } 
         return Result<ExpenseSummaryDTO>.FailureResult("DashboardSummary.ExpenseSummary", "Couldn't fetch expense summary data.");
     }
 

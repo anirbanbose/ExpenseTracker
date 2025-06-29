@@ -26,24 +26,24 @@ public class CurrencyRepository(ApplicationDbContext dbContext) : BaseRepository
 
     public async Task<Currency?> GetCurrencyByCodeAsync(string code, CancellationToken cancellationToken)
     {
-        return await Table.FirstOrDefaultAsync(d => d.Code.Equals(code, StringComparison.OrdinalIgnoreCase), cancellationToken);
+        return await Table.FirstOrDefaultAsync(d => d.Code.ToLower().Equals(code.ToLower()), cancellationToken);
     }
 
     public async Task<Currency?> GetCurrencyByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await Table.FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
+        return await Table.FirstOrDefaultAsync(d => d.Id == id && !d.Deleted, cancellationToken);
     }
 
     public async Task<PagedResult<Currency>> SearchCurrenciesAsync(string? search, int pageIndex, int pageSize, CurrencyListOrder order, bool isAscendingSort, CancellationToken cancellationToken)
     {
-        string searchString = !string.IsNullOrWhiteSpace(search) ? search.Trim() : string.Empty;
+        string searchString = !string.IsNullOrWhiteSpace(search) ? search.Trim().ToLower() : string.Empty;
 
         IQueryable<Currency> query = TableNoTracking;
 
         query = query.Where(d => (string.IsNullOrEmpty(searchString)
-                                || d.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase)
-                                || d.Code.Contains(searchString, StringComparison.OrdinalIgnoreCase)
-                                || (!string.IsNullOrEmpty(d.Symbol) && d.Symbol.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                                || d.Name.ToLower().Contains(searchString)
+                                || d.Code.ToLower().Contains(searchString)
+                                || (!string.IsNullOrEmpty(d.Symbol) && d.Symbol.ToLower().Contains(searchString))
                                 ));
 
         var totalCount = await query.CountAsync();

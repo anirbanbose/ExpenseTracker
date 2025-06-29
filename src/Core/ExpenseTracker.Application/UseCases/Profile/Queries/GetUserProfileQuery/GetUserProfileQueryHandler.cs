@@ -20,27 +20,27 @@ public class GetUserProfileQueryHandler : BaseHandler, IRequestHandler<GetUserPr
 
     public async Task<Result<UserProfileDTO>> Handle(GetUserProfileQuery request, CancellationToken cancellationToken)
     {
-        try
+        if (request is null)
         {
-            if (request is null)
-            {
-                return Result<UserProfileDTO>.FailureResult("Profile.GetUserProfile", "Request cannot be null.");
-            }
-            if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-            {
-                return Result<UserProfileDTO>.UserNotAuthenticatedResult();
-            }
+            return Result<UserProfileDTO>.ArgumentNullResult();
+        }
+        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
+        {
+            return Result<UserProfileDTO>.UserNotAuthenticatedResult();
+        }
+        try
+        {            
             var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null)
+            if (currentUser is null || currentUser.Deleted)
             {
-                _logger.LogWarning($"User not authenticated.");
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
                 return Result<UserProfileDTO>.UserNotAuthenticatedResult();
             }
             return Result<UserProfileDTO>.SuccessResult(UserProfileDTO.FromDomain(currentUser));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while handling GetUserProfileQuery.");
+            _logger.LogError(ex, $"An error occurred while handling GetUserProfileQuery for the user: {CurrentUserName}.");
         }        
         return Result<UserProfileDTO>.FailureResult("Profile.GetUserProfile", "Couldn't fetch the profile data.");
     }

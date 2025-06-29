@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.RecentExpensesQuery;
 
-
 public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExpensesQuery, Result<List<RecentExpenseListDTO>>>
 {
     private readonly IExpenseRepository _expenseRepository;
@@ -28,21 +27,28 @@ public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExp
         {
             return Result<List<RecentExpenseListDTO>>.UserNotAuthenticatedResult();
         }
-        var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-        if (currentUser is null)
+        try
         {
-            _logger.LogWarning($"User not authenticated.");
-            return Result<List<RecentExpenseListDTO>>.UserNotAuthenticatedResult();
-        }
-        var expenseResult = await _expenseRepository.GetRecentExpensesAsync(currentUser.Id, request.recordCount, cancellationToken);
-        if (expenseResult is not null)
-        {
-            List<RecentExpenseListDTO> dtoList = new List<RecentExpenseListDTO>();
-            expenseResult.ToList().ForEach(expense =>
+            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
+            if (currentUser is null || currentUser.Deleted)
             {
-                dtoList.Add(RecentExpenseListDTO.FromDomain(expense));
-            });
-            return Result<List<RecentExpenseListDTO>>.SuccessResult(dtoList);
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
+                return Result<List<RecentExpenseListDTO>>.UserNotAuthenticatedResult();
+            }
+            var expenseResult = await _expenseRepository.GetRecentExpensesAsync(currentUser.Id, request.recordCount, cancellationToken);
+            if (expenseResult is not null)
+            {
+                List<RecentExpenseListDTO> dtoList = new List<RecentExpenseListDTO>();
+                expenseResult.ToList().ForEach(expense =>
+                {
+                    dtoList.Add(RecentExpenseListDTO.FromDomain(expense));
+                });
+                return Result<List<RecentExpenseListDTO>>.SuccessResult(dtoList);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Error occurred while fetching recent expenses with request - {request} for the user: {CurrentUserName}.");
         }
         return Result<List<RecentExpenseListDTO>>.FailureResult("Expense.RecentExpenses", "Couldn't fetch the expense list.");
     }

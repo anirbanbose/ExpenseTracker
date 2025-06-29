@@ -23,29 +23,33 @@ public class GetExpenseQueryHandler : BaseHandler, IRequestHandler<GetExpenseQue
 
     public async Task<Result<ExpenseDTO>> Handle(GetExpenseQuery request, CancellationToken cancellationToken)
     {
-        if(request is null)
+        if(request is null || !request.Id.HasValue)
         {
-            return Result<ExpenseDTO>.FailureResult("Expense.GetExpense", "Request cannot be null.");
-        }
-        if (!request.Id.HasValue)
-        {
-            return Result<ExpenseDTO>.FailureResult("Expense.GetExpense", "Id cannot be null.");
+            return Result<ExpenseDTO>.ArgumentNullResult();
         }
         if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
         {
             return Result<ExpenseDTO>.UserNotAuthenticatedResult();
         }
-        var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-        if (currentUser is null)
+        try
         {
-            _logger.LogWarning($"User not authenticated.");
-            return Result<ExpenseDTO>.UserNotAuthenticatedResult();
+            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
+            if (currentUser is null || currentUser.Deleted)
+            {
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
+                return Result<ExpenseDTO>.UserNotAuthenticatedResult();
+            }
+            var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id.Value, currentUser.Id, cancellationToken);
+            if (expense is not null)
+            {
+                return Result<ExpenseDTO>.SuccessResult(ExpenseDTO.FromDomain(expense));
+            }
         }
-        var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id.Value, currentUser.Id, cancellationToken);
-        if(expense is not null)
+        catch (Exception ex)
         {
-            return Result<ExpenseDTO>.SuccessResult(ExpenseDTO.FromDomain(expense));
+            _logger.LogError(ex, $"Error occurred while fetching expense details for expense id: {request.Id.Value.ToString()} for the user: {CurrentUserName}.");
         }
+        
         return Result<ExpenseDTO>.FailureResult("Expense.SearchExpenses", "Couldn't fetch the expense list.");
     }
 }

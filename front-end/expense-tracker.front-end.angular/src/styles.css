@@ -25,6 +25,10 @@ mat-card {
   justify-content: flex-end !important;
 }
 
+.mat-column-expenseCount > .mat-sort-header-container {
+  justify-content: center !important;
+}
+
 .error-message {
   background-color: #fee2e2;
   color: #b91c1c;
@@ -33,9 +37,4 @@ mat-card {
   border: 1px solid #fca5a5;
   margin-bottom: 16px;
   font-size: 0.9rem;
-}
-
-.grey-button {
-  background-color: rgb(221, 144, 144);
-  color: black;
 }

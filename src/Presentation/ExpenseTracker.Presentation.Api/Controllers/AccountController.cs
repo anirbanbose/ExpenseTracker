@@ -25,19 +25,20 @@ namespace ExpenseTracker.Presentation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Login([FromBody] LoginQuery request)
         {
             if(request == null)
             {
+                _logger.LogInformation("Login request is null.");
                 return BadRequest(new { errorMessage = "Request cannot be null" });
             }
             if (!ModelState.IsValid)
             {
+                _logger.LogInformation("Model state is invalid: {ModelState}", ModelState);
                 return BadRequest(ModelState);
             }
             var loginResponse = await _sender.Send(request);
-            if (loginResponse != null && loginResponse.IsSuccess)
+            if (loginResponse is not null && loginResponse.IsSuccess)
             {
                 return Ok(new
                 {
@@ -57,7 +58,6 @@ namespace ExpenseTracker.Presentation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Logout()
         {
-            // Clear the authentication cookie
             Response.Cookies.Delete(Constants.ACCESS_TOKEN_NAME);
             return Ok(new { message = "Logged out" });
         }
@@ -77,16 +77,17 @@ namespace ExpenseTracker.Presentation.Api.Controllers
                 return BadRequest(ModelState);
             }
             var registrationResponse = await _sender.Send(request);
-            if (registrationResponse != null && registrationResponse.IsSuccess)
+            if (registrationResponse is not null && registrationResponse.IsSuccess)
             {
                 return Ok(new { message = "Regitration Success" });
             }
-            return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = "Registration failed. Please try again later." });            
+            return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = registrationResponse?.ErrorMessage ?? "Registration failed. Please try again later." });            
         }
-
 
         [Authorize]
         [HttpGet("me")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Me()
         {
             var username = User.Identity?.Name;
@@ -121,6 +122,7 @@ namespace ExpenseTracker.Presentation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand request)
         {
             if (request == null)
@@ -141,12 +143,10 @@ namespace ExpenseTracker.Presentation.Api.Controllers
                 else if(changePasswordResponse.Code == Constants.AuthenticationErrorCode)
                 {
                     return Unauthorized(new {
-                        errorMessage = changePasswordResponse?.ErrorMessage ?? "User unauthorized." });
+                        errorMessage = changePasswordResponse.ErrorMessage ?? "User unauthorized." });
                 }
-                return BadRequest(new { errorMessage = changePasswordResponse?.ErrorMessage ?? "Failed to Change password" });
-
             }
-            return BadRequest(new { errorMessage = "Failed to Change password" });
+            return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = changePasswordResponse?.ErrorMessage ?? "Failed to Change password" });
         }
 
 

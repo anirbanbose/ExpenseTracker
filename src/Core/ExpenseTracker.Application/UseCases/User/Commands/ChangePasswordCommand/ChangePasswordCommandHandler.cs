@@ -27,16 +27,16 @@ public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangeP
         {
             return Result.ArgumentNullResult();
         }
+        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
+        {
+            return Result.UserNotAuthenticatedResult();
+        }
         try
         {
-            if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-            {
-                return Result.UserNotAuthenticatedResult();
-            }
             var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken, true);
-            if (currentUser is null)
+            if (currentUser is null || currentUser.Deleted)
             {
-                _logger.LogWarning($"User not authenticated.");
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
                 return Result.UserNotAuthenticatedResult();
             }
             var verifyPasswordResult = currentUser.VerifyPassword(request.CurrentPassword);
@@ -51,7 +51,7 @@ public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangeP
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex.Message, ex);
+            _logger?.LogError(ex, $"Error occurred while updating user password for the user: {CurrentUserName} with password change request - {request}.");
         }
         return Result.FailureResult("Account.ChangePassword", "Password couldn't be changed. Please try again later.");
     }

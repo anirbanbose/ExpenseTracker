@@ -21,19 +21,18 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
         _logger = logger;
     }
 
-
     public async Task<Result<List<ExpenseCategoryDTO>>> Handle(GetAllExpenseCategoriesByUserIdQuery request, CancellationToken cancellationToken)
-    {        
-        try
+    {
+        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
         {
-            if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-            {
-                return Result<List<ExpenseCategoryDTO>>.UserNotAuthenticatedResult();
-            }
+            return Result<List<ExpenseCategoryDTO>>.UserNotAuthenticatedResult();
+        }
+        try
+        {            
             var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null)
+            if (currentUser is null || currentUser.Deleted)
             {
-                _logger.LogWarning($"User not authenticated.");
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
                 return Result<List<ExpenseCategoryDTO>>.UserNotAuthenticatedResult();
             }
             var expenseCategories = await _expenseCategoryRepository.GetAllExpenseCategoriesByUserIdAsync(currentUser.Id, cancellationToken);
@@ -47,9 +46,9 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while handling GetAllExpenseCategoriesByUserIdQuery.");
+            _logger.LogError(ex, $"An error occurred while handling GetAllExpenseCategoriesByUserIdQuery for the user {CurrentUserName}.");
         }
-        return Result<List<ExpenseCategoryDTO>>.FailureResult("ExpenseCategory.UnknownException", "An error occurred while processing your request.");
+        return Result<List<ExpenseCategoryDTO>>.FailureResult("ExpenseCategory.GetAllExpenseCategories", "An error occurred while fetching the list of expense categories.");
     }
 
 }

@@ -1,7 +1,9 @@
 ﻿
+using ExpenseTracker.Domain.SharedKernel;
+
 namespace ExpenseTracker.Domain.Models;
 
-public partial class ExpenseCategory
+public partial class ExpenseCategory : Entity<ExpenseCategoryId>
 {
     private ExpenseCategory(ExpenseCategoryId id) : base(id) { }
 
@@ -15,5 +17,14 @@ public partial class ExpenseCategory
     public void UpdateName(string name)
     {
         Name = name;
+    }
+
+    public new void MarkAsDeleted()
+    {
+        if(Expenses.Any())
+        {
+            throw new InvalidOperationException("Cannot delete an expense category that has associated expenses.");
+        }
+        base.MarkAsDeleted();
     }
 }

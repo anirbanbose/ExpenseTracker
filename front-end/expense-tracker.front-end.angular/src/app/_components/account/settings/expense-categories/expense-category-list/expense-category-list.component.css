@@ -1,0 +1,38 @@
+.expense-category-list-container {
+  padding: 1rem;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 8px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.form-field {
+  flex-grow: 1; /* Take up remaining space */
+  margin-right: 10px; /* Add some spacing */
+}
+
+.add-button {
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.cell-expense-count {
+  text-align: center;
+}
+.mat-column-actions {
+  text-align: center;
+}
+
+.link {
+  color: #673bb7;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,11 +1,13 @@
-﻿using ExpenseTracker.Application.UseCases.Dashboard.RecentExpensesQuery;
+﻿using ExpenseTracker.Application.DTO.Expense;
 using ExpenseTracker.Application.UseCases.Expense.Commands;
 using ExpenseTracker.Application.UseCases.Expense.Queries;
 using ExpenseTracker.Domain.Enums;
+using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace ExpenseTracker.Presentation.Api.Controllers;
 
@@ -33,73 +35,75 @@ public class ExpenseController : ControllerBase
     {
         if (request == null)
         {
+            _logger.LogInformation("Add expense request is null.");
             return BadRequest(new { errorMessage = "Request cannot be null" });
         }
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Model state is invalid: {ModelState}", ModelState);
             return BadRequest(ModelState);
-        }
-        var username = User.Identity?.Name;
-        if (string.IsNullOrEmpty(username))
-        {
-            return Unauthorized(new { errorMessage = "User is not authenticated" });
         }
         var result = await _sender.Send(request);
 
-        if (result.IsSuccess)
+        if (result is not null && result.IsSuccess)
         {
-            return Ok(new { message = "Expense added successfully" });
+            return Ok(new { id = result.Value, message = "Expense added successfully" });
         }
-        return BadRequest(new { errorMessage = result.ErrorMessage ?? "Failed to add expense" });
+        return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = result?.ErrorMessage ?? "Failed to add expense" });
     }
 
     [HttpGet("search")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> SearchExpenses(string? search, string? categoryId, string? currencyId, string? startDate, string? endDate, int pageIndex = 0, int pageSize = 10, int order = 2, bool isAscending = false)
-    {
+    {        
         SearchExpensesQuery query = new SearchExpensesQuery(
-            search: search,
-            expenseCategoryId: categoryId.IsGuid() ? categoryId!.ToGuid() : null,
-            currencyId: currencyId.IsGuid() ? currencyId!.ToGuid() : null,
-            startDate: startDate.IsDate() ? startDate!.ToDate() : null,
-            endDate: endDate.IsDate() ? endDate!.ToDate() : null,
-            pageIndex: pageIndex,
-            pageSize: pageSize,
-            order: (ExpenseListOrder)order,
-            IsAscendingSort: isAscending
-        );
-        
-        var expenseListResult = await _sender.Send(query);
-        if (expenseListResult.IsSuccess)
+                search: search,
+                expenseCategoryId: categoryId.IsGuid() ? categoryId!.ToGuid() : null,
+                currencyId: currencyId.IsGuid() ? currencyId!.ToGuid() : null,
+                startDate: startDate.IsDate() ? startDate!.ToDate() : null,
+                endDate: endDate.IsDate() ? endDate!.ToDate() : null,
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+                order: (ExpenseListOrder)order,
+                IsAscendingSort: isAscending
+            );
+        PagedResult<ExpenseListDTO> expenseListResult = await _sender.Send(query);
+
+        if (expenseListResult is not null && expenseListResult.IsSuccess)
         {
             return Ok(expenseListResult);
         }
-        return BadRequest(new { errorMessage = expenseListResult.ErrorMessage ?? "Failed to retrieve expenses." });
+        return BadRequest(new { errorMessage = expenseListResult?.ErrorMessage ?? "Failed to retrieve expenses." });
     }
 
     [HttpGet()]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> GetExpense(string? id)
     {
-        GetExpenseQuery query = new GetExpenseQuery(Id : id.IsGuid() ? id!.ToGuid() : null);
+        GetExpenseQuery query = new GetExpenseQuery(id.IsGuid() ? id!.ToGuid() : null);
 
         var expenseResult = await _sender.Send(query);
-        if (expenseResult.IsSuccess)
+        if (expenseResult is not null && expenseResult.IsSuccess)
         {
             return Ok(expenseResult);
         }
-        return BadRequest(new { errorMessage = expenseResult.ErrorMessage ?? "Failed to retrieve expense." });
+        return BadRequest(new { errorMessage = expenseResult?.ErrorMessage ?? "Failed to retrieve expense." });
     }
 
     [HttpDelete()]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> DeleteExpense(string? id)
     {
-        if (id is null || string.IsNullOrEmpty(id) || !id.IsGuid())
+        if (string.IsNullOrEmpty(id) || !id.IsGuid())
         {
+            _logger.LogInformation("Delete Expense Id is not valid {id}.", id);
             return BadRequest(new { errorMessage = "Not a valid Id." });
         }
         DeleteExpenseCommand command = new DeleteExpenseCommand()
@@ -108,13 +112,12 @@ public class ExpenseController : ControllerBase
         };
 
         var expenseDeleteResult = await _sender.Send(command);
-        if (expenseDeleteResult.IsSuccess)
+        if (expenseDeleteResult is not null && expenseDeleteResult.IsSuccess)
         {
             return Ok();
         }
-        return BadRequest(new { errorMessage = expenseDeleteResult.ErrorMessage ?? "Failed to delete expense." });
+        return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = expenseDeleteResult?.ErrorMessage ?? "Failed to delete expense" });
     }
-
 
     [HttpPost("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -125,24 +128,21 @@ public class ExpenseController : ControllerBase
     {
         if (request == null)
         {
+            _logger.LogInformation("Update expense request is null.");
             return BadRequest(new { errorMessage = "Request cannot be null" });
         }
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation("Model state is invalid: {ModelState}", ModelState);
             return BadRequest(ModelState);
-        }
-        var username = User.Identity?.Name;
-        if (string.IsNullOrEmpty(username))
-        {
-            return Unauthorized(new { errorMessage = "User is not authenticated" });
         }
         var result = await _sender.Send(request);
 
-        if (result.IsSuccess)
+        if (result is not null && result.IsSuccess)
         {
             return Ok(new { message = "Expense updated successfully" });
         }
-        return BadRequest(new { errorMessage = result.ErrorMessage ?? "Failed to update expense" });
+        return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = result?.ErrorMessage ?? "Failed to update expense" });
     }
 
 

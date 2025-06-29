@@ -12,13 +12,11 @@ public class GetAllCurrenciesQueryHandler : BaseHandler, IRequestHandler<GetAllC
     private readonly ICurrencyRepository _currencyRepository;
     private readonly ILogger<GetAllCurrenciesQueryHandler> _logger;
 
-
     public GetAllCurrenciesQueryHandler(IHttpContextAccessor httpContextAccessor, ICurrencyRepository currencyRepository, ILogger<GetAllCurrenciesQueryHandler> logger) : base(httpContextAccessor)
     {
         _currencyRepository = currencyRepository;
         _logger = logger;
     }
-
 
     public async Task<Result<List<CurrencyDTO>>> Handle(GetAllCurrenciesQuery request, CancellationToken cancellationToken)
     { 
@@ -39,7 +37,6 @@ public class GetAllCurrenciesQueryHandler : BaseHandler, IRequestHandler<GetAllC
             _logger.LogError(ex, "An error occurred while handling GetAllCurrenciesQuery.");
         }
         return Result<List<CurrencyDTO>>.FailureResult("Currency.UnknownException", "An error occurred while processing your request.");
-
     }
 
 }

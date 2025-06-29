@@ -1,1 +1,33 @@
-<p>general-settings works!</p>
+<mat-card class="settings-card">
+    <mat-card-header style="padding-bottom: 20px;">
+        <mat-card-title>Settings</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="settingsForm" (ngSubmit)="saveSettings()">
+            <mat-form-field class="full-width">
+                <mat-label>Preferred Currency </mat-label>
+                <mat-select id="preferredCurrencyId" formControlName="preferredCurrencyId" required>
+                    <mat-option *ngFor="let c of currencies" [value]="c.value">
+                        {{ c.text }}
+                    </mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="showValidationError('preferredCurrencyId') && settingsForm.controls['preferredCurrencyId'].hasError('required')">
+                    Preferred currency is <strong>required</strong>.
+                </mat-error>
+            </mat-form-field>
+            <div class="checkbox-container">
+                <mat-checkbox color="primary" formControlName="enableMonthlyExpenseReportMail">Enable Monthly Report
+                    Mail</mat-checkbox>
+                <mat-checkbox color="primary" formControlName="enableDailyExpenseReportMail">Enable Daily Report
+                    Mail</mat-checkbox>
+            </div>
+            <div class="form-actions">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!settingsForm.valid">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

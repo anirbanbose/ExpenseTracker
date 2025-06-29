@@ -26,26 +26,34 @@ public class SearchCurrenciesQueryHandler : BaseHandler, IRequestHandler<SearchC
         {
             return PagedResult<CurrencyDTO>.UserNotAuthenticatedResult();
         }
-        var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-        if (currentUser is null)
+        try
         {
-            _logger.LogWarning($"User not authenticated.");
-            return PagedResult<CurrencyDTO>.UserNotAuthenticatedResult();
-        }
-        var currenciesResult = await _currencyRepository.SearchCurrenciesAsync(request.search, request.pageIndex, request.pageSize, request.order, request.isAscendingSort, cancellationToken);
-        if (!currenciesResult.IsSuccess && currenciesResult.Items.Any())
-        {
-            return PagedResult<CurrencyDTO>.NotFoundResult("No currencies found.");
-        }
-        if (currenciesResult.IsSuccess && currenciesResult.Items.Any())
-        {
-            List<CurrencyDTO> dtoList = new List<CurrencyDTO>();
-            currenciesResult.Items.ToList().ForEach(currency =>
+            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
+            if (currentUser is null || currentUser.Deleted)
             {
-                dtoList.Add(CurrencyDTO.FromDomain(currency));
-            });
-            return PagedResult<CurrencyDTO>.SuccessResult(dtoList, currenciesResult.TotalCount, currenciesResult.PageIndex, currenciesResult.PageSize);
+                _logger.LogWarning("User not authenticated.");
+                return PagedResult<CurrencyDTO>.UserNotAuthenticatedResult();
+            }
+            var currenciesResult = await _currencyRepository.SearchCurrenciesAsync(request.search, request.pageIndex, request.pageSize, request.order, request.isAscendingSort, cancellationToken);
+            if (!currenciesResult.IsSuccess && currenciesResult.Items.Any())
+            {
+                return PagedResult<CurrencyDTO>.NotFoundResult("No currencies found.");
+            }
+            if (currenciesResult.IsSuccess && currenciesResult.Items.Any())
+            {
+                List<CurrencyDTO> dtoList = new List<CurrencyDTO>();
+                currenciesResult.Items.ToList().ForEach(currency =>
+                {
+                    dtoList.Add(CurrencyDTO.FromDomain(currency));
+                });
+                return PagedResult<CurrencyDTO>.SuccessResult(dtoList, currenciesResult.TotalCount, currenciesResult.PageIndex, currenciesResult.PageSize);
+            }
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while handling SearchCurrenciesQuery for the user: {CurrentUserName}.");
+        }
+       
         return PagedResult<CurrencyDTO>.FailureResult("Currency.SearchCurrencies", "Couldn't fetch the currency list.");
     }
 

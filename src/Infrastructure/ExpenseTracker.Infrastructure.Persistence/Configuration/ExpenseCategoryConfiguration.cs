@@ -18,7 +18,7 @@ public class ExpenseCategoryConfiguration : IEntityTypeConfiguration<ExpenseCate
                 value => new ExpenseCategoryId(value)
             );
 
-        builder.Property(d => d.Name).HasMaxLength(250).IsRequired();
+        builder.Property(d => d.Name).HasMaxLength(100).IsRequired();
         builder.Property(d => d.IsSystemCategory).IsRequired();
 
         builder.HasOne(t => t.CategoryOwner)

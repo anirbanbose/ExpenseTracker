@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
 
-public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewExpenseCommand, Result>
+public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewExpenseCommand, Result<Guid?>>
 {
     private readonly IUserRepository _userRepository;
     private readonly IExpenseRepository _expenseRepository;
@@ -27,33 +27,35 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
         _logger = logger;
     }
 
-    public async Task<Result> Handle(AddNewExpenseCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Guid?>> Handle(AddNewExpenseCommand request, CancellationToken cancellationToken)
     {
         if (request is null)
         {
-            return Result.ArgumentNullResult();
+            return Result<Guid?>.ArgumentNullResult();
+        }
+        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
+        {
+            return Result<Guid?>.UserNotAuthenticatedResult();
         }
         try
         {
-            if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-            {
-                return Result.UserNotAuthenticatedResult();
-            }
             var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null)
+            if (currentUser is null || currentUser.Deleted)
             {
-                _logger.LogWarning($"User not authenticated.");
-                return Result.UserNotAuthenticatedResult();
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
+                return Result<Guid?>.UserNotAuthenticatedResult();
             }            
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.CategoryId, cancellationToken);
             if (expenseCategory is null)
             {
-                return Result.FailureResult("Expense.AddNewExpense", "Expense category not found.");
+                _logger.LogWarning($"Expense category with Id - {request.CategoryId} not found.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Expense category not found.");
             }
             var currency = await _currencyRepository.GetCurrencyByIdAsync(request.CurrencyId, cancellationToken);
             if (currency is null)
             {
-                return Result.FailureResult("Expense.AddNewExpense", "Currency not found.");
+                _logger.LogWarning($"Currency with Id {request.CurrencyId} not found.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Currency not found.");
             }
             var expense = new Domain.Models.Expense(
                     new Money(request.Amount, currency.Id, currency.Code, currency.Symbol), 
@@ -66,12 +68,12 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
             await _expenseRepository.AddExpenseAsync(expense);
             await _unitOfWork.CommitAsync(cancellationToken);
 
-            return Result.SuccessResult();
+            return Result<Guid?>.SuccessResult(expense.Id);
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex.Message, ex);
+            _logger?.LogError(ex, $"Error occurred while adding new expense- {request} for the user: {CurrentUserName}.");
         }
-        return Result.FailureResult("Expense.AddNewExpense", "Adding new expense failed.");
+        return Result<Guid?>.FailureResult("Expense.AddNewExpense", "Adding new expense failed.");
     }
 }

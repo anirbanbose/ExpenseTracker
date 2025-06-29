@@ -30,11 +30,13 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, R
             var currency = await _currencyRepository.GetCurrencyByIdAsync(request.PreferredCurrencyId, cancellationToken);
             if(currency is null)
             {
+                _logger.LogWarning($"Preferred currency with Id - {request.PreferredCurrencyId} not found.");
                 return Result.FailureResult("Account.UserRegistration", "Preferred currency not found.");
             }
             var userResult = Domain.Models.User.Create(_userRepository, request.Email, request.Password, currency, request.FirstName, request.LastName, request.MiddleName);
             if (userResult.IsFailure)
             {
+                _logger.LogWarning($"User registration failed for this request - {request}.");
                 return Result.FailureResult("Account.UserRegistration", userResult.ErrorMessage);
             }
             
@@ -46,7 +48,7 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, R
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex.Message, ex);
+            _logger?.LogError(ex, $"Error occurred while registering a user with request - {request}.");
         }
         return Result.FailureResult("Account.UserRegistration", "Account registration failed.");
     }

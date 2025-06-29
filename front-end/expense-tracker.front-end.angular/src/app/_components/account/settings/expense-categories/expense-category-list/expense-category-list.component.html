@@ -1,0 +1,68 @@
+<div class="expense-category-list-container">
+    <div class="actions-container">
+        <button mat-raised-button class="add-button" color="primary" (click)="onAddNew()">
+            <mat-icon>add</mat-icon> Add New
+        </button>
+        <mat-form-field class="form-field">
+            <mat-label>Search</mat-label>
+            <input matInput [(ngModel)]="searchText" placeholder="Search by text" (keyup.enter)="onSearch()" />
+            @if(searchText) {
+            <button mat-icon-button matSuffix (click)="onClearSearch()">
+                <mat-icon>close</mat-icon>
+            </button>
+            }
+            <button matSuffix mat-flat-button color="accent" appearance="fill" class="button" (click)="onSearch()">
+                Search<mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="table-wrapper">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" matSort [matSortActive]="sortColumn"
+            [matSortDirection]="sortDirection" (matSortChange)="handleSortEvent($event)" matSortDisableClear>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Category Name</th>
+                <td mat-cell *matCellDef="let expenseCategory">{{ expenseCategory.name }}</td>
+            </ng-container>
+
+            <!-- Amount Column -->
+            <ng-container matColumnDef="expenseCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Expenses</th>
+                <td mat-cell *matCellDef="let expenseCategory" class="cell-expense-count">
+                    @if(expenseCategory.expenseCount > 0) {
+                    <a class="link" (click)="goToExpenseList(expenseCategory)">{{expenseCategory.expenseCount }}</a>
+                    }
+                    @else {
+                    {{ expenseCategory.expenseCount }}
+                    }
+
+                </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="text-center">Actions</th>
+                <td mat-cell *matCellDef="let expenseCategory" class="text-center">
+                    <button mat-icon-button color="primary" (click)="onEdit(expenseCategory)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="onDelete(expenseCategory)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <!-- Table Header & Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Empty State -->
+            <tr *matNoDataRow>
+                <td colspan="5" class="empty-state">No expense category found.</td>
+            </tr>
+        </table>
+    </div>
+    <mat-paginator [pageIndex]="pageIndex" [pageSize]="pageSize" [length]="totalCategoryCount"
+        [pageSizeOptions]="[5, 10, 25]" (page)="handlePageEvent($event)"></mat-paginator>
+</div>

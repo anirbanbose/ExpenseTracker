@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HelperService } from '../../../../_helpers/helper-service/helper.service';
 import { ExpenseCategoryService } from '../../../../_services/expense-category/expense-category.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageTitleBarComponent } from '../../common/page-title-bar/page-title-bar.component';
 import { CurrencyService } from '../../../../_services/currency/currency.service';
@@ -20,6 +20,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { formatISO } from 'date-fns';
 import { ExpenseService } from '../../../../_services/expense/expense.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../../../_services/auth/auth.service';
 
 
 @Component({
@@ -49,6 +50,7 @@ export class ExpenseAddEditComponent implements OnInit {
   private _snackBar = inject(MatSnackBar);
   private fb = inject(FormBuilder);
   private _helperService = inject(HelperService);
+  private _authService = inject(AuthService);
   private _expenseCategoryService = inject(ExpenseCategoryService);
   private _expenseService = inject(ExpenseService);
   private _currencyService = inject(CurrencyService);
@@ -73,7 +75,7 @@ export class ExpenseAddEditComponent implements OnInit {
   isFormSubmitted = false;
 
   id: string | null = null;
-
+  returnUrl: string | null = null;
 
   ngOnInit(): void {
     this.getExpenseCategories();
@@ -87,6 +89,7 @@ export class ExpenseAddEditComponent implements OnInit {
         this.breadcrumbItems[2].label = 'Edit Expense';
         this.getExpense();
       }
+      this.returnUrl = params.get('returnUrl');
     });
   }
 
@@ -118,16 +121,15 @@ export class ExpenseAddEditComponent implements OnInit {
         this._expenseService.updateExpense(modelData).subscribe({
           next: (data: any) => {
             if (data) {
-              console.log(data);
               this._snackBar.open(data.message, 'Close', {
                 duration: 5000
               });
-              this.router.navigate(['/account/expenses/list']);
+              this.goBackToList();
             }
           },
           error: (err: HttpErrorResponse) => {
             if (err.status == 401) {
-              //this._helperService.handle401Error(this._snackBar, this._authService);
+              this._helperService.handle401Error(this._snackBar, this._authService);
             }
             else if (err.error?.errorMessage) {
               this._snackBar.open(err.error?.errorMessage, 'Close', {
@@ -149,12 +151,12 @@ export class ExpenseAddEditComponent implements OnInit {
               this._snackBar.open(data.message, 'Close', {
                 duration: 5000
               });
-              this.router.navigate(['/account/expenses/list']);
+              this.goBackToList();
             }
           },
           error: (err: HttpErrorResponse) => {
             if (err.status == 401) {
-              //this._helperService.handle401Error(this._snackBar, this._authService);
+              this._helperService.handle401Error(this._snackBar, this._authService);
             }
             else if (err.error?.errorMessage) {
               this._snackBar.open(err.error?.errorMessage, 'Close', {
@@ -169,12 +171,11 @@ export class ExpenseAddEditComponent implements OnInit {
           }
         });
       }
-
     }
   }
 
   onCancel(): void {
-    this.router.navigate(['/account/expenses/list']);
+    this.goBackToList();
   }
 
   getExpenseCategories(): void {
@@ -285,4 +286,12 @@ export class ExpenseAddEditComponent implements OnInit {
     });
   }
 
+  goBackToList() {
+    if (this.returnUrl) {
+      this._helperService.goToReturnUrl(this.returnUrl);
+    }
+    else {
+      this.router.navigate(['/account/expenses/list']);
+    }
+  }
 }

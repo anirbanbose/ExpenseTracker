@@ -45,7 +45,7 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
   readonly dialog = inject(MatDialog);
   private _snackBar = inject(MatSnackBar);
   displayedColumns: string[] = ['date', 'category', 'description', 'amount', 'actions'];
-  dataSource = new MatTableDataSource<any>([]); // Replace 'any' with your expense model
+  dataSource = new MatTableDataSource<any>([]);
   totalExpensesCount: number = 0;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageSize = 10;
@@ -81,10 +81,10 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
       this.currencyId = params.get('cu');
       this.startDate = params.get('sd');
       this.endDate = params.get('ed');
-      this.pageIndex = params.get('pi') ? Number(params.get('pi')) : 0;
-      this.pageSize = params.get('ps') ? Number(params.get('ps')) : 10;
       this.sortColumn = params.get('sa') === 'amount' ? 'amount' : params.get('sa') === 'category' ? 'category' : params.get('sa') ?? 'date';
       this.sortDirection = params.get('sdir') ? (params.get('sdir') === 'asc' ? 'asc' : 'desc') : 'desc';
+      this.pageIndex = params.get('pi') ? Number(params.get('pi')) : 0;
+      this.pageSize = params.get('ps') ? Number(params.get('ps')) : 10;
     });
   }
 
@@ -92,10 +92,12 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
     this.getExpenses();
   }
   ngAfterViewInit() {
-    if (this.paginator)
+    if (this.paginator) {
       this.dataSource.paginator = this.paginator;
-    if (this.sort)
+    }
+    if (this.sort) {
       this.dataSource.sort = this.sort;
+    }
   }
 
 
@@ -143,6 +145,7 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
         if (response.isSuccess) {
           this.dataSource = response.items;
           this.totalExpensesCount = response.totalCount;
+          this.paginator.pageIndex = this.pageIndex;
         }
       },
       error: (error: any) => {
@@ -172,7 +175,8 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
   }
 
   onAddNew(): void {
-    this.router.navigate(['/account/expenses/add']);
+    const currentUrl = this.router.url;
+    this.router.navigate(['/account/expenses/add', { returnUrl: currentUrl }]);
   }
 
   toggleAdvancedSearch(event: Event): void {

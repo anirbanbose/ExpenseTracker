@@ -27,16 +27,16 @@ public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdatePr
         {
             return Result.ArgumentNullResult();
         }
-        try
+        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
         {
-            if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-            {
-                return Result.UserNotAuthenticatedResult();
-            }
+            return Result.UserNotAuthenticatedResult();
+        }
+        try
+        {            
             var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken, true);
-            if (currentUser is null)
+            if (currentUser is null || currentUser.Deleted)
             {
-                _logger.LogWarning($"User not authenticated.");
+                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
                 return Result.UserNotAuthenticatedResult();
             }
 
@@ -49,7 +49,7 @@ public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdatePr
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex.Message, ex);
+            _logger?.LogError(ex, $"Error occurred while updating profile- {request} for the user: {CurrentUserName}.");
         }
         return Result.FailureResult("Profile.UpdateProfile", "Profile update failed.");
     }

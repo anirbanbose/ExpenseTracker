@@ -4,4 +4,4 @@ using MediatR;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Queries;
 
-public record GetExpenseCategoryByIdQuery(Guid id) : IRequest<Result<ExpenseCategoryDTO?>>;
+public record GetExpenseCategoryByIdQuery(Guid? Id) : IRequest<Result<ExpenseCategoryDTO?>>;
