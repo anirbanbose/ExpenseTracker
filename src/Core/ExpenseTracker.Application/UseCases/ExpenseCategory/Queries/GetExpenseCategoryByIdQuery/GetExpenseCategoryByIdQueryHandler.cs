@@ -22,22 +22,16 @@ public class GetExpenseCategoryByIdQueryHandler : BaseHandler, IRequestHandler<G
 
     public async Task<Result<ExpenseCategoryDTO?>> Handle(GetExpenseCategoryByIdQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<ExpenseCategoryDTO?>.UserNotAuthenticatedResult();
-        }
         if (request is null || !request.Id.HasValue)
         {
             return Result<ExpenseCategoryDTO?>.ArgumentNullResult();
         }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<ExpenseCategoryDTO?>.UserNotAuthenticatedResult();
-            }
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<ExpenseCategoryDTO?>());
+            if (failureResult != null)
+                return failureResult;
+
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id.Value, currentUser.Id, cancellationToken);
             if (expenseCategory is null)
             {

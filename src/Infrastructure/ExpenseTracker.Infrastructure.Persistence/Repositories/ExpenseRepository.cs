@@ -136,7 +136,7 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
         query = query.Include(d => d.ExpenseOwner)
                         .Include(d => d.Category);
         query = query.Where(d => d.ExpenseOwnerId == userId && !d.Deleted);
-        var endDate = await query.MaxAsync(e => e.ExpenseDate);
+        var endDate = query.Any() ? await query.MaxAsync(e => e.ExpenseDate) : DateTime.UtcNow.Date;
 
         var startDate = new DateTime(endDate.Year, endDate.Month, 1).AddMonths(-11);
 
@@ -144,7 +144,6 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
             .Where(e => e.ExpenseDate >= startDate && e.ExpenseDate <= endDate)
             .ToListAsync(cancellationToken);
     }
-
     public void UpdateExpense(Expense expense)
     {
         if (expense is null)
@@ -154,40 +153,4 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
         MarkAsUpdated(expense);
     }
 
-
-//    public static void GetPageForItem(YourDbContext context, int itemId, int pageSize)
-//    {
-//        // 1. Determine the item's position
-//        var item = context.YourEntities.Find(itemId);
-
-//        if (item == null)
-//        {
-//            Console.WriteLine($"Item with ID {itemId} not found.");
-//            return;
-//        }
-
-//        int itemIndex = context.YourEntities.OrderBy(e => e.Id).ToList().FindIndex(e => e.Id == itemId);
-
-
-//        // 2. Calculate the page number
-//        int pageNumber = (int)Math.Ceiling((double)(itemIndex + 1) / pageSize);
-
-
-//        // 3. Retrieve the page
-//        var page = context.YourEntities
-//            .OrderBy(e => e.Id)
-//            .Skip((pageNumber - 1) * pageSize)
-//            .Take(pageSize)
-//            .ToList();
-
-
-//        Console.WriteLine($"Page number containing item {itemId}: {pageNumber}");
-
-//        // Print the page contents
-//        foreach (var entity in page)
-//        {
-//            Console.WriteLine($"  - {entity.Id}: {entity.Name}"); // Replace with your entity properties
-//        }
-//    }
-//}
 }

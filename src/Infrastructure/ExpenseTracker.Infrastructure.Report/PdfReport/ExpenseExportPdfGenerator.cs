@@ -5,9 +5,9 @@ using QuestPDF.Helpers;
 
 namespace ExpenseTracker.Infrastructure.Report;
 
-public class ExpenseExportPdfGenerator : IPdfReportGenerator<ExpenseExportDTO>
+public class ExpenseExportPdfGenerator : IPdfReportGenerator<List<ExpenseReportDataDTO>>
 {
-    public Task<byte[]> GenerateAsync(ExpenseExportDTO exportData)
+    public Task<byte[]> GenerateAsync(List<ExpenseReportDataDTO> exportData)
     {
         var doc = Document.Create(container =>
         {
@@ -30,7 +30,7 @@ public class ExpenseExportPdfGenerator : IPdfReportGenerator<ExpenseExportDTO>
                         header.Cell().AlignRight().Text("Amount").Bold();
                     });
 
-                    foreach (var expense in exportData.ReportData)
+                    foreach (var expense in exportData)
                     {
                         table.Cell().Text(expense.ExpenseDate.Date.ToString("dd MMM yyyy"));
                         table.Cell().Text(expense.Category);

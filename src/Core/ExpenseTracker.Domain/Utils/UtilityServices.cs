@@ -19,4 +19,15 @@ public class UtilityServices
         }
         return areSame;
     }
+
+    public static string GetMonthName(int? monthNumber)
+    {
+        if (!monthNumber.HasValue || monthNumber < 1 || monthNumber > 12)
+        {
+            throw new Exception("Invalid Month Number");
+        }
+
+        DateTime date = new DateTime(2024, monthNumber.Value, 1); // Year doesn't matter here
+        return date.ToString("MMMM");
+    }
 }

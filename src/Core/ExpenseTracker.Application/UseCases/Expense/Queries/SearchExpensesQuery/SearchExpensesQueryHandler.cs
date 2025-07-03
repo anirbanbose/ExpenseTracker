@@ -14,7 +14,6 @@ public class SearchExpensesQueryHandler : BaseHandler, IRequestHandler<SearchExp
     private readonly IUserRepository _userRepository;
     private readonly ILogger<SearchExpensesQueryHandler> _logger;
 
-
     public SearchExpensesQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SearchExpensesQueryHandler> logger) : base(httpContextAccessor)
     {
         _expenseRepository = expenseRepository;
@@ -24,20 +23,13 @@ public class SearchExpensesQueryHandler : BaseHandler, IRequestHandler<SearchExp
 
     public async Task<PagedResult<ExpenseListDTO>> Handle(SearchExpensesQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return PagedResult<ExpenseListDTO>.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return PagedResult<ExpenseListDTO>.UserNotAuthenticatedResult();
-            }
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.currencyId, request.startDate, request.endDate), currentUser.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new PagedResultUserNotAuthenticatedFactory<ExpenseListDTO>());
+            if (failureResult != null)
+                return failureResult;
 
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.currencyId, request.startDate, request.endDate), currentUser.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
             if (expenseResult.IsSuccess && expenseResult.Items is not null)
             {
                 List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();

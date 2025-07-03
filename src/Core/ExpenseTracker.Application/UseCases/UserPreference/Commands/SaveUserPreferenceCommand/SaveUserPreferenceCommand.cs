@@ -1,5 +1,4 @@
-﻿
-using ExpenseTracker.Application.Validation;
+﻿using ExpenseTracker.Application.Validation;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
 using System.ComponentModel.DataAnnotations;

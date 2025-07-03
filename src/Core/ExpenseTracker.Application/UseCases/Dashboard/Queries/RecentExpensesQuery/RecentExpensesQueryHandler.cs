@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace ExpenseTracker.Application.UseCases.Dashboard.RecentExpensesQuery;
+namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
 public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExpensesQuery, Result<List<RecentExpenseListDTO>>>
 {
@@ -23,18 +23,12 @@ public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExp
 
     public async Task<Result<List<RecentExpenseListDTO>>> Handle(RecentExpensesQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<List<RecentExpenseListDTO>>.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<List<RecentExpenseListDTO>>.UserNotAuthenticatedResult();
-            }
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<List<RecentExpenseListDTO>>());
+            if (failureResult != null)
+                return failureResult;
+
             var expenseResult = await _expenseRepository.GetRecentExpensesAsync(currentUser.Id, request.recordCount, cancellationToken);
             if (expenseResult is not null)
             {

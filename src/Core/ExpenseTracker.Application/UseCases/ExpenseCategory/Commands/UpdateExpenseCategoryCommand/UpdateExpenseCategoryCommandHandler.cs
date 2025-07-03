@@ -28,18 +28,12 @@ public class UpdateExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         {
             return Result.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result.UserNotAuthenticatedResult();
-            }
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            if (failureResult != null)
+                return failureResult;
+
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id, currentUser.Id, cancellationToken);
             if (expenseCategory is null)
             {

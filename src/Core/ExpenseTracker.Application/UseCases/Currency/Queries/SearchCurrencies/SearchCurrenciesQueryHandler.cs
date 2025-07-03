@@ -21,19 +21,13 @@ public class SearchCurrenciesQueryHandler : BaseHandler, IRequestHandler<SearchC
     }
 
     public async Task<PagedResult<CurrencyDTO>> Handle(SearchCurrenciesQuery request, CancellationToken cancellationToken)
-    {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return PagedResult<CurrencyDTO>.UserNotAuthenticatedResult();
-        }
+    {        
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning("User not authenticated.");
-                return PagedResult<CurrencyDTO>.UserNotAuthenticatedResult();
-            }
+            var (currentUser, pagedFailureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new PagedResultUserNotAuthenticatedFactory<CurrencyDTO>());
+            if (pagedFailureResult != null)
+                return pagedFailureResult;
+
             var currenciesResult = await _currencyRepository.SearchCurrenciesAsync(request.search, request.pageIndex, request.pageSize, request.order, request.isAscendingSort, cancellationToken);
             if (!currenciesResult.IsSuccess && currenciesResult.Items.Any())
             {

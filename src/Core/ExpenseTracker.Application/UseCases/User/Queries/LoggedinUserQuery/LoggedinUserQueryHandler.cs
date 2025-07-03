@@ -23,18 +23,12 @@ public class LoggedinUserQueryHandler : BaseHandler, IRequestHandler<LoggedinUse
         {
             return Result<LoggedInUserDTO>.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<LoggedInUserDTO>.UserNotAuthenticatedResult();
-        }
         try
-        {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken, true);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<LoggedInUserDTO>.UserNotAuthenticatedResult();
-            }
+        {            
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<LoggedInUserDTO>());
+            if (failureResult != null)
+                return failureResult;
+
             var loggedInUser = LoggedInUserDTO.FromDomain(currentUser);
 
             return Result<LoggedInUserDTO>.SuccessResult(loggedInUser);

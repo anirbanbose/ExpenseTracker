@@ -28,22 +28,16 @@ public class AddNewExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         {
             return Result<Guid?>.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<Guid?>.UserNotAuthenticatedResult();
-        }
         try
-        {            
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<Guid?>.UserNotAuthenticatedResult();
-            }
+        {
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<Guid?>());
+            if (failureResult != null)
+                return failureResult;
+
             var expenseCategory = new Domain.Models.ExpenseCategory(
                     request.Name,
                     false,
-                    currentUser.Id
+                    currentUser?.Id
                     );
 
             await _expenseCategoryRepository.AddExpenseCategoryAsync(expenseCategory);

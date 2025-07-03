@@ -24,18 +24,11 @@ public class GetUserProfileQueryHandler : BaseHandler, IRequestHandler<GetUserPr
         {
             return Result<UserProfileDTO>.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<UserProfileDTO>.UserNotAuthenticatedResult();
-        }
         try
-        {            
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<UserProfileDTO>.UserNotAuthenticatedResult();
-            }
+        { 
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<UserProfileDTO>());
+            if (failureResult != null)
+                return failureResult;
             return Result<UserProfileDTO>.SuccessResult(UserProfileDTO.FromDomain(currentUser));
         }
         catch (Exception ex)

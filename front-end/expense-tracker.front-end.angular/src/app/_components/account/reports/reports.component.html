@@ -1,1 +1,38 @@
-<p>reports works!</p>
+<div class="report-container mat-typography">
+    <et-page-title-bar [pageTitle]="'Expense Reports'" [breadcrumbItems]="breadcrumbItems"></et-page-title-bar>
+
+
+    <mat-card class="report-controls">
+        <div class="controls-grid">
+            <mat-form-field>
+                <mat-label>Report Type</mat-label>
+                <mat-select [(ngModel)]="selectedReportType" (selectionChange)="reportTypeChanged()">
+                    <mat-option [value]="1">Monthly</mat-option>
+                    <mat-option [value]="2">Yearly</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <ng-container [ngSwitch]="selectedReportType">
+                <et-month-picker *ngSwitchCase="1" (monthSelectedEvent)="dateRangeSelected($event)"></et-month-picker>
+                <et-year-picker *ngSwitchCase="2" (yearSelectedEvent)="dateRangeSelected($event)"></et-year-picker>
+            </ng-container>
+
+            <mat-form-field>
+                <mat-label>View As</mat-label>
+                <mat-select [(ngModel)]="selectedViewMode" (selectionChange)="viewModeChanged()">
+                    <mat-option [value]="1">Excel Download</mat-option>
+                    <mat-option [value]="2">PDF Download</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <div class="actions">
+                <button mat-raised-button color="primary" (click)="loadReport()">Generate</button>
+            </div>
+        </div>
+    </mat-card>
+
+    <!-- Report Preview -->
+    <ng-container *ngIf="selectedViewMode === 1 && reportData">
+
+    </ng-container>
+</div>

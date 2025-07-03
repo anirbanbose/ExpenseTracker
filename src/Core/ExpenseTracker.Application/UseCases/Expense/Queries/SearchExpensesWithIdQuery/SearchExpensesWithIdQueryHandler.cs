@@ -22,18 +22,12 @@ public class SearchExpensesWithIdQueryHandler : BaseHandler, IRequestHandler<Sea
 
     public async Task<PagedResult<ExpenseListDTO>> Handle(SearchExpensesWithIdQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return PagedResult<ExpenseListDTO>.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return PagedResult<ExpenseListDTO>.UserNotAuthenticatedResult();
-            }
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new PagedResultUserNotAuthenticatedFactory<ExpenseListDTO>());
+            if (failureResult != null)
+                return failureResult;
+
             var expenseResult = await _expenseRepository.SearchExpensesAsync(request.id, currentUser.Id, request.pageSize, cancellationToken);
 
             if (expenseResult.IsSuccess && expenseResult.Items is not null)

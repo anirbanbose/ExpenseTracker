@@ -28,24 +28,19 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : BaseHandler, IRequest
             _logger.LogWarning("GetCurrentUserPreferredCurrencyQuery request is null.");
             return Result<CurrencyDTO>.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<CurrencyDTO>.UserNotAuthenticatedResult();
-        }
         try
-        {            
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<CurrencyDTO>.UserNotAuthenticatedResult();
-            }
-            if (currentUser.Preference is null)
+        {
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<CurrencyDTO>());
+            if (failureResult != null)
+                return failureResult;
+
+            var user = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);
+            if (user is null || user?.Preference is null)
             {
                 _logger.LogWarning($"User preference for user {CurrentUserName} not found.");
                 return Result<CurrencyDTO>.NotFoundResult("User preference not found.");
             }
-            var preferredCurrency = await _currencyRepository.GetCurrencyByIdAsync(currentUser?.Preference?.PreferredCurrencyId, cancellationToken);
+            var preferredCurrency = await _currencyRepository.GetCurrencyByIdAsync(user.Preference.PreferredCurrencyId, cancellationToken);
             if (preferredCurrency is null)
             {
                 _logger.LogWarning($"Preferred currency not found for user {CurrentUserName}.");

@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace ExpenseTracker.Application.UseCases.Dashboard;
+namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
 public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSummaryQuery, Result<ExpenseSummaryDTO>>
 {
@@ -22,18 +22,11 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
 
     public async Task<Result<ExpenseSummaryDTO>> Handle(ExpenseSummaryQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<ExpenseSummaryDTO>.UserNotAuthenticatedResult();
-        }
         try
-        {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning("User not authenticated.");
-                return Result<ExpenseSummaryDTO>.UserNotAuthenticatedResult();
-            }
+        {            
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<ExpenseSummaryDTO>());
+            if (failureResult != null)
+                return failureResult;
 
             var expenses = await _expenseRepository.GetExpensesByUserIdAsync(currentUser.Id, cancellationToken);
 
@@ -78,7 +71,7 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
                         .Select(g => new
                         {
                             Currency = g.Key.CurrencyKey,
-                            Category = g.Key.Category,
+                            g.Key.Category,
                             Total = g.Sum(x => x.ExpenseAmount.Amount)
                         })
                         .OrderByDescending(x => x.Total)

@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace ExpenseTracker.Application.UseCases.Dashboard;
+namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
 public class SpendingChartQueryHandler : BaseHandler, IRequestHandler<SpendingChartQuery, Result<SpendingChartDTO>>
 {
@@ -22,21 +22,13 @@ public class SpendingChartQueryHandler : BaseHandler, IRequestHandler<SpendingCh
 
     public async Task<Result<SpendingChartDTO>> Handle(SpendingChartQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<SpendingChartDTO>.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<SpendingChartDTO>.UserNotAuthenticatedResult();
-            }
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<SpendingChartDTO>());
+            if (failureResult != null)
+                return failureResult;
 
             var expenses = await _expenseRepository.GetLast12MonthsExpensesAsync(currentUser.Id, cancellationToken);
-
             if (expenses is not null)
             {
                 var groupedExpenses = expenses

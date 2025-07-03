@@ -68,3 +68,5 @@ public class PagedResult<T> : Result
     public static new PagedResult<T> UserNotAuthenticatedResult() => FailureResult(Error.UserNotAuthenticatedError());
     public static new PagedResult<T> UnauthorizedAccessResult() => FailureResult(Error.PermissionError());
 }
+
+

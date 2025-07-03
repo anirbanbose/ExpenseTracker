@@ -24,18 +24,12 @@ public class SearchExpenseCategoriesQueryHandler : BaseHandler, IRequestHandler<
 
     public async Task<PagedResult<ExpenseCategoryDTO>> Handle(SearchExpenseCategoriesQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return PagedResult<ExpenseCategoryDTO>.UserNotAuthenticatedResult();
-        }
         try
-        {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return PagedResult<ExpenseCategoryDTO>.UserNotAuthenticatedResult();
-            }
+        {            
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new PagedResultUserNotAuthenticatedFactory<ExpenseCategoryDTO>());
+            if (failureResult != null)
+                return failureResult;
+
             var expenseCategoryResult = await _expenseCategoryRepository.SearchUserExpenseCategoriesAsync(ExpenseCategorySearchModel.Create(request.Search), currentUser.Id, request.PageIndex, request.PageSize, request.Order, request.IsAscendingSort, cancellationToken);
 
             if (expenseCategoryResult.IsSuccess && expenseCategoryResult.Items.Any())

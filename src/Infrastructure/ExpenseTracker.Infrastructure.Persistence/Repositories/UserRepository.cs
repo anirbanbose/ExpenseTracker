@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Infrastructure.Persistence.Repositories.Common;
 using ExpenseTracker.Domain.Models;
@@ -17,17 +16,17 @@ public class UserRepository(ApplicationDbContext dbContext) : BaseRepository<Use
         await base.AddAsync(user);
     }
 
-    public async Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken, bool trackEntity = false)
+    public async Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        IQueryable<User> table = trackEntity ? Table : TableNoTracking;
-        return await table
-            .Include(d => d.Preference).AsSplitQuery()
+        return await TableNoTracking
             .FirstOrDefaultAsync(d => string.Equals(d.Email.ToLower(), email.ToLower()), cancellationToken);
     }
 
     public async Task<User?> GetUserByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await Table.FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
+        return await Table
+            .Include(d => d.Preference).AsSplitQuery()
+            .FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
     }
 
 

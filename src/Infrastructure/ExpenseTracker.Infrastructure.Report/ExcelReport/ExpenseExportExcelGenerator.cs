@@ -4,9 +4,9 @@ using ExpenseTracker.Application.DTO.Report;
 
 namespace ExpenseTracker.Infrastructure.Report;
 
-public class ExpenseExportExcelGenerator : IExcelReportGenerator<ExpenseExportDTO>
+public class ExpenseExportExcelGenerator : IExcelReportGenerator<List<ExpenseReportDataDTO>>
 {
-    public Task<byte[]> GenerateAsync(ExpenseExportDTO exportData)
+    public Task<byte[]> GenerateAsync(List<ExpenseReportDataDTO> exportData)
     {
         using var wb = new XLWorkbook();
         var ws = wb.AddWorksheet("Expense Export");
@@ -20,7 +20,7 @@ public class ExpenseExportExcelGenerator : IExcelReportGenerator<ExpenseExportDT
 
         rowNumber = AddTableRow(ws, rowNumber, "Date", "Category", "Description", "Amount", true);
 
-        foreach (var expense in exportData.ReportData)
+        foreach (var expense in exportData)
         {
             rowNumber = AddTableRow(ws, rowNumber, expense.ExpenseDate.Date.ToString("dd MMM yyyy"), expense.Category, expense.Description, expense.ExpenseAmount);
         }

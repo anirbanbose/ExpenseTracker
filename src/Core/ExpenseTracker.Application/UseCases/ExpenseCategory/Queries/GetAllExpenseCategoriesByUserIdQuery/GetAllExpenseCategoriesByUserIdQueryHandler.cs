@@ -23,18 +23,12 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
 
     public async Task<Result<List<ExpenseCategoryDTO>>> Handle(GetAllExpenseCategoriesByUserIdQuery request, CancellationToken cancellationToken)
     {
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<List<ExpenseCategoryDTO>>.UserNotAuthenticatedResult();
-        }
         try
-        {            
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<List<ExpenseCategoryDTO>>.UserNotAuthenticatedResult();
-            }
+        {
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<List<ExpenseCategoryDTO>>());
+            if (failureResult != null)
+                return failureResult;
+
             var expenseCategories = await _expenseCategoryRepository.GetAllExpenseCategoriesByUserIdAsync(currentUser.Id, cancellationToken);
             if (expenseCategories is null || !expenseCategories.Any())
             {

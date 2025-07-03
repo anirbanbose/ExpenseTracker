@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Application.UseCases.Dashboard;
-using ExpenseTracker.Application.UseCases.Dashboard.RecentExpensesQuery;
+﻿using ExpenseTracker.Application.UseCases.Dashboard.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

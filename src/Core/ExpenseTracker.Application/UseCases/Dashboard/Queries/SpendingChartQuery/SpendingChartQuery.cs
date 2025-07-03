@@ -2,6 +2,6 @@
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
 
-namespace ExpenseTracker.Application.UseCases.Dashboard;
+namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
 public record SpendingChartQuery() : IRequest<Result<SpendingChartDTO>>;

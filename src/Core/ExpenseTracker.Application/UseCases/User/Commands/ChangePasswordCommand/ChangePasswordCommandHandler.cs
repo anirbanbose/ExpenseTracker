@@ -27,27 +27,25 @@ public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangeP
         {
             return Result.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken, true);
-            if (currentUser is null || currentUser.Deleted)
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            if (failureResult != null)
+                return failureResult;
+
+            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);
+            if(userToBeUpdated is not null)
             {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result.UserNotAuthenticatedResult();
-            }
-            var verifyPasswordResult = currentUser.VerifyPassword(request.CurrentPassword);
-            if (verifyPasswordResult.IsSuccess)
-            {
-                currentUser.ChangePassword(request.NewPassword);
-                _userRepository.UpdateUser(currentUser);
-                await _unitOfWork.CommitAsync(cancellationToken);
-                return Result.SuccessResult();
-            }
-            return Result.FailureResult("Account.ChangePassword", "Password couldn't be changed. There is an issue with the Password combination.");
+                var verifyPasswordResult = currentUser.VerifyPassword(request.CurrentPassword);
+                if (verifyPasswordResult.IsSuccess)
+                {
+                    userToBeUpdated.ChangePassword(request.NewPassword);
+                    _userRepository.UpdateUser(userToBeUpdated);
+                    await _unitOfWork.CommitAsync(cancellationToken);
+                    return Result.SuccessResult();
+                }
+                return Result.FailureResult("Account.ChangePassword", "Password couldn't be changed. There is an issue with the Password combination.");
+            }            
         }
         catch (Exception ex)
         {

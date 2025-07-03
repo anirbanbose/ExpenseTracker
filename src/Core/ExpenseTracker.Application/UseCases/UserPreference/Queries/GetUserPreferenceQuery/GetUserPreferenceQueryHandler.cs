@@ -24,24 +24,19 @@ public class GetUserPreferenceQueryHandler : BaseHandler, IRequestHandler<GetUse
         {
             return Result<UserPreferenceDTO>.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result<UserPreferenceDTO>.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result<UserPreferenceDTO>.UserNotAuthenticatedResult();
-            }
-            if (currentUser.Preference is null)
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<UserPreferenceDTO>());
+            if (failureResult != null)
+                return failureResult;
+
+            var user = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);
+            if(user is null || user?.Preference is null)
             {
                 _logger.LogWarning($"User preference not found for user: {CurrentUserName}");
                 return Result<UserPreferenceDTO>.NotFoundResult("User preference not found.");
             }
-            return Result<UserPreferenceDTO>.SuccessResult(UserPreferenceDTO.FromDomain(currentUser.Preference));
+            return Result<UserPreferenceDTO>.SuccessResult(UserPreferenceDTO.FromDomain(user.Preference));
         }
         catch (Exception ex)
         {

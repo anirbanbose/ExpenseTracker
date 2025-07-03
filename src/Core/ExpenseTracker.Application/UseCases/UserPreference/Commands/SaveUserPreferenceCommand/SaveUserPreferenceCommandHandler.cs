@@ -28,19 +28,14 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
         {
             return Result.ArgumentNullResult();
         }
-        if (!IsCurrentUserAuthenticated || string.IsNullOrEmpty(CurrentUserName))
-        {
-            return Result.UserNotAuthenticatedResult();
-        }
         try
         {
-            var currentUser = await _userRepository.GetUserByEmailAsync(CurrentUserName, cancellationToken, true);
-            if (currentUser is null || currentUser.Deleted)
-            {
-                _logger.LogWarning($"User - {CurrentUserName} is not authenticated.");
-                return Result.UserNotAuthenticatedResult();
-            }
-            if (currentUser.Preference is null)
+            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            if (failureResult != null)
+                return failureResult;
+
+            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);  
+            if (userToBeUpdated is null || userToBeUpdated.Preference is null)
             {
                 _logger.LogWarning($"User preference not found for user - {CurrentUserName}.");
                 return Result.FailureResult("UserPreference.SaveUserPreference", "User preference not found.");
@@ -51,8 +46,9 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
                 _logger.LogWarning($"Preferred currence with Id - {request.PreferredCurrencyId} not found for user - {CurrentUserName}.");
                 return Result.FailureResult("UserPreference.SaveUserPreference", "Currency not found.");
             }
-            var userPreference = currentUser.Preference;
-            currentUser.AddOrUpdatePreference(currency, request.EnableMonthlyExpenseReportMail, request.EnableDailyExpenseReportMail);  
+            var userPreference = userToBeUpdated.Preference;
+            userToBeUpdated.AddOrUpdatePreference(currency, request.EnableMonthlyExpenseReportMail, request.EnableDailyExpenseReportMail);
+            _userRepository.UpdateUser(userToBeUpdated);
             await _unitOfWork.CommitAsync(cancellationToken);
 
             return Result.SuccessResult();

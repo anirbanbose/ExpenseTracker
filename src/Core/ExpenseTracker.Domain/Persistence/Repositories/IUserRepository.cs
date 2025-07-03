@@ -7,5 +7,5 @@ public interface IUserRepository
     Task AddUserAsync(User user);
     void UpdateUser(User user);
     Task<User?> GetUserByIdAsync(Guid id, CancellationToken cancellationToken);
-    Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken, bool trackEntity = false);
+    Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken);
 }

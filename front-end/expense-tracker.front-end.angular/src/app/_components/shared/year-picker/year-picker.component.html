@@ -1,0 +1,6 @@
+<mat-form-field style="padding-right: 16px;">
+    <mat-label>Select Year</mat-label>
+    <mat-select [(ngModel)]="selectedYear" (selectionChange)="yearSelected()">
+        <mat-option *ngFor="let year of years" [value]="year.value">{{year.label}}</mat-option>
+    </mat-select>
+</mat-form-field>

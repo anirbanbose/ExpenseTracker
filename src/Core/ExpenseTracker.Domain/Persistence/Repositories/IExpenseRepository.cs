@@ -15,5 +15,5 @@ public interface IExpenseRepository
     Task<IEnumerable<Expense>> SearchExpensesAsync(ExpenseSearchModel search, Guid userId, ExpenseListOrder Order, bool IsAscendingSort, CancellationToken cancellationToken);
     Task<PagedResult<Expense>> SearchExpensesAsync(Guid id, Guid userId, int PageSize, CancellationToken cancellationToken);
     Task<IEnumerable<Expense>> GetRecentExpensesAsync(Guid userId, int recordCount, CancellationToken cancellationToken);
-    Task<IEnumerable<Expense>> GetLast12MonthsExpensesAsync(Guid userId, CancellationToken cancellationToken);
+    Task<IEnumerable<Expense>> GetLast12MonthsExpensesAsync(Guid userId, CancellationToken cancellationToken);    
 }
