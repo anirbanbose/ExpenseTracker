@@ -9,8 +9,8 @@ export class DashboardService {
   constructor() { }
 
 
-  getExpenseSummary(yearRecordCount: number, monthRecordCount: number, categoryRecordCount: number): any {
-    return this.httpClient.get(`api/dashboard/expense-summary?yearRecordCount=${yearRecordCount}&monthRecordCount=${monthRecordCount}&categoryRecordCount=${categoryRecordCount}`);
+  getExpenseSummary(): any {
+    return this.httpClient.get(`api/dashboard/expense-summary`);
   }
 
   getRecentExpenses(recordCount: number = 5): any {

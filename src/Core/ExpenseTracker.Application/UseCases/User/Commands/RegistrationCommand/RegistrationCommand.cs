@@ -28,7 +28,7 @@ public class RegistrationCommand : IRequest<Result>
     [MaxLength(100, ErrorMessage = "Middle name can't be more than 100 characters.")]
     public string? MiddleName { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Please select your preferred currency")]
-    [NotEmptyGuid(ErrorMessage = "Please select your preferred currency")]
+    [Required(ErrorMessage = "Please select your currency")]
+    [NotEmptyGuid(ErrorMessage = "Please select your currency")]
     public Guid PreferredCurrencyId { get; set; }
 }

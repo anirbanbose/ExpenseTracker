@@ -40,14 +40,8 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
                 _logger.LogWarning($"User preference not found for user - {CurrentUserName}.");
                 return Result.FailureResult("UserPreference.SaveUserPreference", "User preference not found.");
             }
-            var currency = await _currencyRepository.GetCurrencyByIdAsync(request.PreferredCurrencyId, cancellationToken);
-            if (currency is null)
-            {
-                _logger.LogWarning($"Preferred currence with Id - {request.PreferredCurrencyId} not found for user - {CurrentUserName}.");
-                return Result.FailureResult("UserPreference.SaveUserPreference", "Currency not found.");
-            }
             var userPreference = userToBeUpdated.Preference;
-            userToBeUpdated.AddOrUpdatePreference(currency, request.EnableMonthlyExpenseReportMail, request.EnableDailyExpenseReportMail);
+            userPreference.Update(request.EnableMonthlyExpenseReportMail, request.EnableDailyExpenseReportMail);
             _userRepository.UpdateUser(userToBeUpdated);
             await _unitOfWork.CommitAsync(cancellationToken);
 

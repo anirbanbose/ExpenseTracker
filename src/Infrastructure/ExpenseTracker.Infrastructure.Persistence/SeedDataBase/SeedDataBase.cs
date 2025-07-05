@@ -149,7 +149,6 @@ public class SeedDataBase : ISeedDataBase
                         var expenseModel = new Expense(
                             new Money(
                                 expense.Amount, 
-                                currency is not null? currency.Id : preferredCurrency.Id, 
                                 currency is not null ? currency.Code : preferredCurrency.Code, 
                                 currency is not null ? currency.Symbol : preferredCurrency.Symbol
                                 ),

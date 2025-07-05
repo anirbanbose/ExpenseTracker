@@ -52,25 +52,25 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
                 endDate = new DateTime(request.year, request.month.Value, daysInMonth);
             }
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(null, null, null, startDate, endDate), currentUser.Id, Domain.Enums.ExpenseListOrder.ExpenseDate, true, cancellationToken);
+            if(currentUser?.Preference is null)
+            {
+                _logger?.LogWarning($"User preference not present for the user: {CurrentUserName}.");
+                return Result<byte[]>.FailureResult("Report.ExpenseReport", "Couldn't generate expense export file.");
+            }
+
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(null, null, startDate, endDate), currentUser.Id, Domain.Enums.ExpenseListOrder.ExpenseDate, true, cancellationToken);
             if (expenseResult is not null)
             {
-                var currencies = await _currencyRepository.GetAllCurrenciesAsync(cancellationToken);
-                if (currencies is null || !currencies.Any())
+                var currency = await _currencyRepository.GetCurrencyByIdAsync(currentUser?.Preference?.PreferredCurrencyId, cancellationToken);
+                if (currency is null)
                 {
-                    return Result<byte[]>.FailureResult("Report.ExpenseReport", "No Currencies found.");
+                    return Result<byte[]>.FailureResult("Report.ExpenseReport", "Couldn't generate expense export file.");
                 }
 
-                var groupedByCurrency = expenseResult
-                    .GroupBy(e => new { e.ExpenseAmount.CurrencyId, e.ExpenseAmount.CurrencyCode, e.ExpenseAmount.CurrencySymbol })
-                    .Select(g => new ExpenseReportCurrencyGroupDTO(
-                        currencies.Any(c => c.Id == g.Key.CurrencyId) ? CurrencyDTO.FromDomain(currencies.FirstOrDefault(c => c.Id == g.Key.CurrencyId)) : null,
-                        new Money(g.Sum(x => x.ExpenseAmount.Amount), g.Key.CurrencyId, g.Key.CurrencyCode, g.Key.CurrencySymbol).FormattedAmount,
-                        g.Select(d => new ExpenseReportDataDTO(d.ExpenseDate, d.Category.Name, d.Description, d.ExpenseAmount.FormattedAmount)).ToList()
-                    )).ToList();
+                var totalAmmount = expenseResult.Sum(d => d.ExpenseAmount.Amount);
+                var itemList = expenseResult.Select(d => new ExpenseReportDataItemDTO(d.ExpenseDate, d.Category.Name, d.Description, d.ExpenseAmount.ToString())).ToList();
 
-
-                ExpenseReportDTO expenseReport = new ExpenseReportDTO(request.reportType, request.year, request.month, groupedByCurrency);
+                ExpenseReportDTO expenseReport = new ExpenseReportDTO(request.reportType, request.year, request.month, new Money(totalAmmount, currency.Code, currency.Symbol).ToString(), itemList);
                 var report = request.reportFormat == Domain.Enums.ReportFormat.Pdf ? _pdfReportGenerator.GenerateAsync(expenseReport) : _excelReportGenerator.GenerateAsync(expenseReport);
                  
                 return Result<byte[]>.SuccessResult(report.Result);

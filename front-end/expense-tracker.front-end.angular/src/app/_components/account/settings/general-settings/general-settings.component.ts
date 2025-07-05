@@ -34,20 +34,16 @@ export class GeneralSettingsComponent implements OnInit {
   private fb = inject(FormBuilder);
   private _helperService = inject(HelperService);
   private _authService = inject(AuthService);
-  private _currencyService = inject(CurrencyService);
   private _settingsService = inject(SettingsService);
   isFormSubmitted = false;
-  currencies: any[] = [];
 
   settingsForm: FormGroup = this.fb.group({
-    preferredCurrencyId: [null, [Validators.required]],
     enableMonthlyExpenseReportMail: [false],
     enableDailyExpenseReportMail: [false]
   });
 
 
   ngOnInit(): void {
-    this.getCurrencies();
     this.getSettingsData();
   }
 
@@ -56,7 +52,6 @@ export class GeneralSettingsComponent implements OnInit {
       next: (data: any) => {
         if (data && data.isSuccess) {
           this.settingsForm.patchValue({
-            preferredCurrencyId: data.value?.preferredCurrencyId,
             enableMonthlyExpenseReportMail: data.value?.enableMonthlyExpenseReportMail,
             enableDailyExpenseReportMail: data.value?.enableDailyExpenseReportMail
           });
@@ -73,29 +68,6 @@ export class GeneralSettingsComponent implements OnInit {
         }
         else {
           this._snackBar.open('There was an issue in fetching the user settings. ', 'Close', {
-            duration: 5000
-          });
-        }
-      }
-    });
-  }
-
-
-  getCurrencies(): void {
-    this._currencyService.getCurrenciesForSelect().subscribe({
-      next: (data: any) => {
-        if (data && data.length > 0) {
-          this.currencies = data;
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.error?.errorMessage) {
-          this._snackBar.open(err.error?.errorMessage, 'Close', {
-            duration: 5000
-          });
-        }
-        else {
-          this._snackBar.open('There was an issue in fetching currencies. ', 'Close', {
             duration: 5000
           });
         }

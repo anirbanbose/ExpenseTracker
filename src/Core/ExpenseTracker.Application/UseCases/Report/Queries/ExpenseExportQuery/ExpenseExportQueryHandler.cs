@@ -15,10 +15,10 @@ public class ExpenseExportQueryHandler : BaseHandler, IRequestHandler<ExpenseExp
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IUserRepository _userRepository;
     private readonly ILogger<ExpenseExportQueryHandler> _logger;
-    private readonly IExcelReportGenerator<List<ExpenseReportDataDTO>> _excelExportGenerator;
-    private readonly IPdfReportGenerator<List<ExpenseReportDataDTO>> _pdfExportGenerator;
+    private readonly IExcelReportGenerator<List<ExpenseReportDataItemDTO>> _excelExportGenerator;
+    private readonly IPdfReportGenerator<List<ExpenseReportDataItemDTO>> _pdfExportGenerator;
 
-    public ExpenseExportQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IExcelReportGenerator<List<ExpenseReportDataDTO>> excelExportGenerator, IPdfReportGenerator<List<ExpenseReportDataDTO>> pdfExportGenerator, ILogger<ExpenseExportQueryHandler> logger) : base(httpContextAccessor)
+    public ExpenseExportQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IExcelReportGenerator<List<ExpenseReportDataItemDTO>> excelExportGenerator, IPdfReportGenerator<List<ExpenseReportDataItemDTO>> pdfExportGenerator, ILogger<ExpenseExportQueryHandler> logger) : base(httpContextAccessor)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;
@@ -36,13 +36,13 @@ public class ExpenseExportQueryHandler : BaseHandler, IRequestHandler<ExpenseExp
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.currencyId, request.startDate, request.endDate), currentUser.Id, request.order, request.IsAscendingSort, cancellationToken);
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser.Id, request.order, request.IsAscendingSort, cancellationToken);
             if (expenseResult is not null)
             {
-                var reportData = new List<ExpenseReportDataDTO>();
+                var reportData = new List<ExpenseReportDataItemDTO>();
                 expenseResult.ToList().ForEach(category =>
                 {
-                    reportData.Add(ExpenseReportDataDTO.FromDomain(category));
+                    reportData.Add(ExpenseReportDataItemDTO.FromDomain(category));
                 });
                 var report = request.reportFormat == Domain.Enums.ReportFormat.Pdf ? _pdfExportGenerator.GenerateAsync(reportData) : _excelExportGenerator.GenerateAsync(reportData);
 

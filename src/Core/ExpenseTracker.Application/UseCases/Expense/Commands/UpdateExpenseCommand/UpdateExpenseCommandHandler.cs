@@ -12,8 +12,8 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
 {
     private readonly IUserRepository _userRepository;
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly ICurrencyRepository _currencyRepository;
+    private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UpdateExpenseCommandHandler> _logger;
 
@@ -39,6 +39,13 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
             if (failureResult != null)
                 return failureResult;
 
+            var userPreference = currentUser?.Preference;
+            if (userPreference is null)
+            {
+                _logger.LogWarning($"User preference not found for user: {CurrentUserName}.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Adding new expense failed.");
+            }
+
             var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id, currentUser.Id, cancellationToken);
             if(expense is null)
             {
@@ -52,14 +59,15 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
                 _logger.LogWarning($"Expense category with Id - {request.CategoryId} not found.");
                 return Result.FailureResult("Expense.UpdateExpense", $"Expense category not found.");
             }
-            var currency = await _currencyRepository.GetCurrencyByIdAsync(request.CurrencyId, cancellationToken);
+            var currency = await _currencyRepository.GetCurrencyByIdAsync(userPreference.PreferredCurrencyId, cancellationToken);
             if (currency is null)
             {
-                _logger.LogWarning($"Currency with Id {request.CurrencyId} not found.");
-                return Result.FailureResult("Expense.UpdateExpense", $"Currency not found.");
+                _logger.LogWarning($"Currency with Id {userPreference.PreferredCurrencyId} not found.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Currency not found.");
             }
+
             expense.Update(
-                new Money(request.Amount, currency.Id, currency.Code, currency.Symbol),
+                new Money(request.Amount, currency.Code, currency.Symbol),
                 request.Description,
                 expenseCategory.Id,
                 request.ExpenseDate.ToDate()

@@ -10,7 +10,7 @@ namespace ExpenseTracker.Infrastructure.Persistence.Repositories.Common
         public readonly ApplicationDbContext DbContext;
         protected DbSet<TEntity> Entities { get; }
         protected virtual IQueryable<TEntity> Table => Entities;
-        protected virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTrackingWithIdentityResolution();
+        protected virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
         protected BaseRepository(ApplicationDbContext dbContext)
         {

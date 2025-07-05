@@ -31,23 +31,11 @@ public partial class User : Entity<UserId>
         };
         user.SetPassword(password);
 
-        user.AddOrUpdatePreference(preferredCurrency, false, false);
+        user.Preference = UserPreference.Create(user.Id, preferredCurrency, false, false);
 
         //user.AddDomainEvent(new UserRegisteredDomainEvent(user.UserName, user.Name.FullName));
 
         return DomainResult<User>.SuccessResult(user);
-    }
-
-    public void AddOrUpdatePreference(Currency preferredCurrency, bool sendMonthlyExpenseReportMail, bool sendDailyExpenseReportMail)
-    {
-        if (Preference is not null)
-        {
-            Preference.Update(preferredCurrency.Id, sendMonthlyExpenseReportMail, sendDailyExpenseReportMail);
-        }
-        else
-        {
-            Preference = UserPreference.Create(Id, preferredCurrency, sendMonthlyExpenseReportMail, sendDailyExpenseReportMail);
-        }
     }
 
     public void AddExpenseCategory(string categoryName)

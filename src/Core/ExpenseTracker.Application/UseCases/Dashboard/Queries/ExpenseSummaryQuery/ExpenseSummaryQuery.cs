@@ -4,4 +4,4 @@ using MediatR;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
-public record ExpenseSummaryQuery(int YearTotalExpenseRecordCount, int MonthTotalExpenseRecordCount, int CategoryTotalExpenseRecordCount) : IRequest<Result<ExpenseSummaryDTO>>;
+public record ExpenseSummaryQuery() : IRequest<Result<ExpenseSummaryDTO>>;

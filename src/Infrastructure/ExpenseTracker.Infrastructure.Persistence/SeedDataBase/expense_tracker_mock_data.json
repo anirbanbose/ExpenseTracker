@@ -14,6002 +14,5004 @@
     ],
     "Expenses": [
       {
-        "Amount": 4177.96,
-        "CurrencyCode": "INR",
+        "Amount": 4177.96,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 2955.9,
-        "CurrencyCode": "INR",
+        "Amount": 2955.9,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3998.55,
-        "CurrencyCode": "INR",
+        "Amount": 3998.55,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 498.46,
-        "CurrencyCode": "INR",
+        "Amount": 498.46,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 4141.24,
-        "CurrencyCode": "INR",
+        "Amount": 4141.24,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 1453.62,
-        "CurrencyCode": "INR",
+        "Amount": 1453.62,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 1206.66,
-        "CurrencyCode": "INR",
+        "Amount": 1206.66,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 1855.96,
-        "CurrencyCode": "INR",
+        "Amount": 1855.96,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 1667.47,
-        "CurrencyCode": "INR",
+        "Amount": 1667.47,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 1517.09,
-        "CurrencyCode": "INR",
+        "Amount": 1517.09,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 3817.44,
-        "CurrencyCode": "INR",
+        "Amount": 3817.44,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 997.45,
-        "CurrencyCode": "INR",
+        "Amount": 997.45,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 1579.49,
-        "CurrencyCode": "INR",
+        "Amount": 1579.49,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 3480.91,
-        "CurrencyCode": "INR",
+        "Amount": 3480.91,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 2837.35,
-        "CurrencyCode": "INR",
+        "Amount": 2837.35,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 1156.71,
-        "CurrencyCode": "INR",
+        "Amount": 1156.71,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 4204.66,
-        "CurrencyCode": "INR",
+        "Amount": 4204.66,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 3443.3,
-        "CurrencyCode": "INR",
+        "Amount": 3443.3,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1805.55,
-        "CurrencyCode": "INR",
+        "Amount": 1805.55,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 1461.03,
-        "CurrencyCode": "INR",
+        "Amount": 1461.03,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 627.51,
-        "CurrencyCode": "INR",
+        "Amount": 627.51,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 396.99,
-        "CurrencyCode": "INR",
+        "Amount": 396.99,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 4114.88,
-        "CurrencyCode": "INR",
+        "Amount": 4114.88,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 1021.94,
-        "CurrencyCode": "INR",
+        "Amount": 1021.94,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 1300.59,
-        "CurrencyCode": "INR",
+        "Amount": 1300.59,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 3325.43,
-        "CurrencyCode": "INR",
+        "Amount": 3325.43,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 1084.3,
-        "CurrencyCode": "INR",
+        "Amount": 1084.3,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 928.06,
-        "CurrencyCode": "INR",
+        "Amount": 928.06,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 3125.84,
-        "CurrencyCode": "INR",
+        "Amount": 3125.84,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 3717.82,
-        "CurrencyCode": "INR",
+        "Amount": 3717.82,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 470.54,
-        "CurrencyCode": "INR",
+        "Amount": 470.54,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 4678.21,
-        "CurrencyCode": "INR",
+        "Amount": 4678.21,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 514.18,
-        "CurrencyCode": "INR",
+        "Amount": 514.18,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 2499.91,
-        "CurrencyCode": "INR",
+        "Amount": 2499.91,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 1550.77,
-        "CurrencyCode": "INR",
+        "Amount": 1550.77,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 3715.62,
-        "CurrencyCode": "INR",
+        "Amount": 3715.62,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 1289.3,
-        "CurrencyCode": "INR",
+        "Amount": 1289.3,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 436.62,
-        "CurrencyCode": "INR",
+        "Amount": 436.62,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 720.28,
-        "CurrencyCode": "INR",
+        "Amount": 720.28,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 2495.18,
-        "CurrencyCode": "INR",
+        "Amount": 2495.18,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 1181.21,
-        "CurrencyCode": "INR",
+        "Amount": 1181.21,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 3467.71,
-        "CurrencyCode": "INR",
+        "Amount": 3467.71,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 2084.33,
-        "CurrencyCode": "INR",
+        "Amount": 2084.33,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 911.43,
-        "CurrencyCode": "INR",
+        "Amount": 911.43,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 4503.89,
-        "CurrencyCode": "INR",
+        "Amount": 4503.89,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 3653.54,
-        "CurrencyCode": "INR",
+        "Amount": 3653.54,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 158.56,
-        "CurrencyCode": "INR",
+        "Amount": 158.56,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 1432.66,
-        "CurrencyCode": "INR",
+        "Amount": 1432.66,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 325.79,
-        "CurrencyCode": "INR",
+        "Amount": 325.79,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 3837.36,
-        "CurrencyCode": "INR",
+        "Amount": 3837.36,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 1755.47,
-        "CurrencyCode": "INR",
+        "Amount": 1755.47,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 489.9,
-        "CurrencyCode": "INR",
+        "Amount": 489.9,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 4557.63,
-        "CurrencyCode": "INR",
+        "Amount": 4557.63,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 3617.61,
-        "CurrencyCode": "INR",
+        "Amount": 3617.61,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 1261.27,
-        "CurrencyCode": "INR",
+        "Amount": 1261.27,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 3372.48,
-        "CurrencyCode": "INR",
+        "Amount": 3372.48,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 437.69,
-        "CurrencyCode": "INR",
+        "Amount": 437.69,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 977.13,
-        "CurrencyCode": "INR",
+        "Amount": 977.13,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 4446.53,
-        "CurrencyCode": "INR",
+        "Amount": 4446.53,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 3503.38,
-        "CurrencyCode": "INR",
+        "Amount": 3503.38,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 4471.55,
-        "CurrencyCode": "INR",
+        "Amount": 4471.55,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 368.89,
-        "CurrencyCode": "INR",
+        "Amount": 368.89,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 601.7,
-        "CurrencyCode": "INR",
+        "Amount": 601.7,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 1617.45,
-        "CurrencyCode": "INR",
+        "Amount": 1617.45,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 3992.97,
-        "CurrencyCode": "INR",
+        "Amount": 3992.97,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 1746.04,
-        "CurrencyCode": "INR",
+        "Amount": 1746.04,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 2267.27,
-        "CurrencyCode": "INR",
+        "Amount": 2267.27,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 858.18,
-        "CurrencyCode": "INR",
+        "Amount": 858.18,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 984.45,
-        "CurrencyCode": "INR",
+        "Amount": 984.45,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 4735.16,
-        "CurrencyCode": "INR",
+        "Amount": 4735.16,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 2025.18,
-        "CurrencyCode": "INR",
+        "Amount": 2025.18,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 2650.65,
-        "CurrencyCode": "INR",
+        "Amount": 2650.65,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 718.08,
-        "CurrencyCode": "INR",
+        "Amount": 718.08,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 1786.56,
-        "CurrencyCode": "INR",
+        "Amount": 1786.56,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 1487.23,
-        "CurrencyCode": "INR",
+        "Amount": 1487.23,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 3488.09,
-        "CurrencyCode": "INR",
+        "Amount": 3488.09,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 4706.71,
-        "CurrencyCode": "INR",
+        "Amount": 4706.71,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 4112.98,
-        "CurrencyCode": "INR",
+        "Amount": 4112.98,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 1379.01,
-        "CurrencyCode": "INR",
+        "Amount": 1379.01,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 835.52,
-        "CurrencyCode": "INR",
+        "Amount": 835.52,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 4413.96,
-        "CurrencyCode": "INR",
+        "Amount": 4413.96,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 1285.44,
-        "CurrencyCode": "INR",
+        "Amount": 1285.44,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 2806.25,
-        "CurrencyCode": "INR",
+        "Amount": 2806.25,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4161.4,
-        "CurrencyCode": "INR",
+        "Amount": 4161.4,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 3839.23,
-        "CurrencyCode": "INR",
+        "Amount": 3839.23,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 1454.43,
-        "CurrencyCode": "INR",
+        "Amount": 1454.43,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 608.02,
-        "CurrencyCode": "INR",
+        "Amount": 608.02,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 4078.92,
-        "CurrencyCode": "INR",
+        "Amount": 4078.92,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 591.19,
-        "CurrencyCode": "INR",
+        "Amount": 591.19,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 3339.79,
-        "CurrencyCode": "INR",
+        "Amount": 3339.79,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 297.06,
-        "CurrencyCode": "INR",
+        "Amount": 297.06,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 3784.89,
-        "CurrencyCode": "INR",
+        "Amount": 3784.89,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 3562.59,
-        "CurrencyCode": "INR",
+        "Amount": 3562.59,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 1083.62,
-        "CurrencyCode": "INR",
+        "Amount": 1083.62,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 282.39,
-        "CurrencyCode": "INR",
+        "Amount": 282.39,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 182.82,
-        "CurrencyCode": "INR",
+        "Amount": 182.82,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 1489.8,
-        "CurrencyCode": "INR",
+        "Amount": 1489.8,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2621.06,
-        "CurrencyCode": "INR",
+        "Amount": 2621.06,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 1733.55,
-        "CurrencyCode": "INR",
+        "Amount": 1733.55,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 1568.31,
-        "CurrencyCode": "INR",
+        "Amount": 1568.31,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 3438.04,
-        "CurrencyCode": "INR",
+        "Amount": 3438.04,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 3011.34,
-        "CurrencyCode": "INR",
+        "Amount": 3011.34,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2710.69,
-        "CurrencyCode": "INR",
+        "Amount": 2710.69,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 2599.19,
-        "CurrencyCode": "INR",
+        "Amount": 2599.19,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 3392.44,
-        "CurrencyCode": "INR",
+        "Amount": 3392.44,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 4616.99,
-        "CurrencyCode": "INR",
+        "Amount": 4616.99,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 3042.3,
-        "CurrencyCode": "INR",
+        "Amount": 3042.3,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 1520.84,
-        "CurrencyCode": "INR",
+        "Amount": 1520.84,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 3127.32,
-        "CurrencyCode": "INR",
+        "Amount": 3127.32,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 3981.92,
-        "CurrencyCode": "INR",
+        "Amount": 3981.92,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 2077.57,
-        "CurrencyCode": "INR",
+        "Amount": 2077.57,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 2655.92,
-        "CurrencyCode": "INR",
+        "Amount": 2655.92,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 4584.93,
-        "CurrencyCode": "INR",
+        "Amount": 4584.93,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 4055.3,
-        "CurrencyCode": "INR",
+        "Amount": 4055.3,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 4611.77,
-        "CurrencyCode": "INR",
+        "Amount": 4611.77,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 4623.92,
-        "CurrencyCode": "INR",
+        "Amount": 4623.92,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 1388.45,
-        "CurrencyCode": "INR",
+        "Amount": 1388.45,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 4345.41,
-        "CurrencyCode": "INR",
+        "Amount": 4345.41,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 3885.54,
-        "CurrencyCode": "INR",
+        "Amount": 3885.54,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 4531.11,
-        "CurrencyCode": "INR",
+        "Amount": 4531.11,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 706.93,
-        "CurrencyCode": "INR",
+        "Amount": 706.93,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 4252.14,
-        "CurrencyCode": "INR",
+        "Amount": 4252.14,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 3946.07,
-        "CurrencyCode": "INR",
+        "Amount": 3946.07,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 901.42,
-        "CurrencyCode": "INR",
+        "Amount": 901.42,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 2574.76,
-        "CurrencyCode": "INR",
+        "Amount": 2574.76,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 1482.61,
-        "CurrencyCode": "INR",
+        "Amount": 1482.61,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 4673.17,
-        "CurrencyCode": "INR",
+        "Amount": 4673.17,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3683.74,
-        "CurrencyCode": "INR",
+        "Amount": 3683.74,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 4039.95,
-        "CurrencyCode": "INR",
+        "Amount": 4039.95,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 2108.6,
-        "CurrencyCode": "INR",
+        "Amount": 2108.6,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 2786.64,
-        "CurrencyCode": "INR",
+        "Amount": 2786.64,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 4237.58,
-        "CurrencyCode": "INR",
+        "Amount": 4237.58,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 2758.26,
-        "CurrencyCode": "INR",
+        "Amount": 2758.26,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 2866.53,
-        "CurrencyCode": "INR",
+        "Amount": 2866.53,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 4860.34,
-        "CurrencyCode": "INR",
+        "Amount": 4860.34,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 557.99,
-        "CurrencyCode": "INR",
+        "Amount": 557.99,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 2950.41,
-        "CurrencyCode": "INR",
+        "Amount": 2950.41,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 2786.88,
-        "CurrencyCode": "INR",
+        "Amount": 2786.88,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 615.68,
-        "CurrencyCode": "INR",
+        "Amount": 615.68,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 1969.07,
-        "CurrencyCode": "INR",
+        "Amount": 1969.07,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 3899.2,
-        "CurrencyCode": "INR",
+        "Amount": 3899.2,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 1755.8,
-        "CurrencyCode": "INR",
+        "Amount": 1755.8,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 3051.05,
-        "CurrencyCode": "INR",
+        "Amount": 3051.05,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 2568.5,
-        "CurrencyCode": "INR",
+        "Amount": 2568.5,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 2101.18,
-        "CurrencyCode": "INR",
+        "Amount": 2101.18,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 3969.91,
-        "CurrencyCode": "INR",
+        "Amount": 3969.91,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 2669.73,
-        "CurrencyCode": "INR",
+        "Amount": 2669.73,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4703.26,
-        "CurrencyCode": "INR",
+        "Amount": 4703.26,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 1422.92,
-        "CurrencyCode": "INR",
+        "Amount": 1422.92,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 3325.89,
-        "CurrencyCode": "INR",
+        "Amount": 3325.89,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 3067.97,
-        "CurrencyCode": "INR",
+        "Amount": 3067.97,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 2385.54,
-        "CurrencyCode": "INR",
+        "Amount": 2385.54,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 4304.57,
-        "CurrencyCode": "INR",
+        "Amount": 4304.57,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 1007.07,
-        "CurrencyCode": "INR",
+        "Amount": 1007.07,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 3372.62,
-        "CurrencyCode": "INR",
+        "Amount": 3372.62,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4292.27,
-        "CurrencyCode": "INR",
+        "Amount": 4292.27,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 3998.94,
-        "CurrencyCode": "INR",
+        "Amount": 3998.94,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 2731.22,
-        "CurrencyCode": "INR",
+        "Amount": 2731.22,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 4401.64,
-        "CurrencyCode": "INR",
+        "Amount": 4401.64,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 2116.3,
-        "CurrencyCode": "INR",
+        "Amount": 2116.3,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 4833.01,
-        "CurrencyCode": "INR",
+        "Amount": 4833.01,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 2397.73,
-        "CurrencyCode": "INR",
+        "Amount": 2397.73,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 1651.91,
-        "CurrencyCode": "INR",
+        "Amount": 1651.91,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 4116.32,
-        "CurrencyCode": "INR",
+        "Amount": 4116.32,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 1918.78,
-        "CurrencyCode": "INR",
+        "Amount": 1918.78,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 2042.16,
-        "CurrencyCode": "INR",
+        "Amount": 2042.16,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 835.14,
-        "CurrencyCode": "INR",
+        "Amount": 835.14,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 3301.86,
-        "CurrencyCode": "INR",
+        "Amount": 3301.86,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 3905.23,
-        "CurrencyCode": "INR",
+        "Amount": 3905.23,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 1936.43,
-        "CurrencyCode": "INR",
+        "Amount": 1936.43,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 4159.31,
-        "CurrencyCode": "INR",
+        "Amount": 4159.31,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 2892.19,
-        "CurrencyCode": "INR",
+        "Amount": 2892.19,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2491.41,
-        "CurrencyCode": "INR",
+        "Amount": 2491.41,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 1779.73,
-        "CurrencyCode": "INR",
+        "Amount": 1779.73,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 3680.39,
-        "CurrencyCode": "INR",
+        "Amount": 3680.39,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 2027.43,
-        "CurrencyCode": "INR",
+        "Amount": 2027.43,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 1549.84,
-        "CurrencyCode": "INR",
+        "Amount": 1549.84,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 2032.11,
-        "CurrencyCode": "INR",
+        "Amount": 2032.11,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 2382.79,
-        "CurrencyCode": "INR",
+        "Amount": 2382.79,        
         "Category": "Utilities",
         "Description": "Electricity bill"
       },
       {
-        "Amount": 1902.71,
-        "CurrencyCode": "INR",
+        "Amount": 1902.71,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 2198.05,
-        "CurrencyCode": "INR",
+        "Amount": 2198.05,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 1332.9,
-        "CurrencyCode": "INR",
+        "Amount": 1332.9,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 3634.72,
-        "CurrencyCode": "INR",
+        "Amount": 3634.72,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 1561.45,
-        "CurrencyCode": "INR",
+        "Amount": 1561.45,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4326.74,
-        "CurrencyCode": "INR",
+        "Amount": 4326.74,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 2546.34,
-        "CurrencyCode": "INR",
+        "Amount": 2546.34,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 3645.36,
-        "CurrencyCode": "INR",
+        "Amount": 3645.36,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 4848.43,
-        "CurrencyCode": "INR",
+        "Amount": 4848.43,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 1044.84,
-        "CurrencyCode": "INR",
+        "Amount": 1044.84,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 927.76,
-        "CurrencyCode": "INR",
+        "Amount": 927.76,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 3106.51,
-        "CurrencyCode": "INR",
+        "Amount": 3106.51,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 627.34,
-        "CurrencyCode": "INR",
+        "Amount": 627.34,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 2287.41,
-        "CurrencyCode": "INR",
+        "Amount": 2287.41,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 4636.69,
-        "CurrencyCode": "INR",
+        "Amount": 4636.69,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 1999.15,
-        "CurrencyCode": "INR",
+        "Amount": 1999.15,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 2470.98,
-        "CurrencyCode": "INR",
+        "Amount": 2470.98,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 3313.3,
-        "CurrencyCode": "INR",
+        "Amount": 3313.3,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 3948.09,
-        "CurrencyCode": "INR",
+        "Amount": 3948.09,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 1677.02,
-        "CurrencyCode": "INR",
+        "Amount": 1677.02,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 754.76,
-        "CurrencyCode": "INR",
+        "Amount": 754.76,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 1119.25,
-        "CurrencyCode": "INR",
+        "Amount": 1119.25,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 2124.95,
-        "CurrencyCode": "INR",
+        "Amount": 2124.95,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 1904.7,
-        "CurrencyCode": "INR",
+        "Amount": 1904.7,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 589.55,
-        "CurrencyCode": "INR",
+        "Amount": 589.55,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 1109.12,
-        "CurrencyCode": "INR",
+        "Amount": 1109.12,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3418.5,
-        "CurrencyCode": "INR",
+        "Amount": 3418.5,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 543.62,
-        "CurrencyCode": "INR",
+        "Amount": 543.62,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 1041.03,
-        "CurrencyCode": "INR",
+        "Amount": 1041.03,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 1446.06,
-        "CurrencyCode": "INR",
+        "Amount": 1446.06,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 1665.93,
-        "CurrencyCode": "INR",
+        "Amount": 1665.93,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 1394.22,
-        "CurrencyCode": "INR",
+        "Amount": 1394.22,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 1582.32,
-        "CurrencyCode": "INR",
+        "Amount": 1582.32,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4198.86,
-        "CurrencyCode": "INR",
+        "Amount": 4198.86,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 4068.76,
-        "CurrencyCode": "INR",
+        "Amount": 4068.76,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 1066.43,
-        "CurrencyCode": "INR",
+        "Amount": 1066.43,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 1314.42,
-        "CurrencyCode": "INR",
+        "Amount": 1314.42,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 567.04,
-        "CurrencyCode": "INR",
+        "Amount": 567.04,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3182.33,
-        "CurrencyCode": "INR",
+        "Amount": 3182.33,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1634.25,
-        "CurrencyCode": "INR",
+        "Amount": 1634.25,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 3656.92,
-        "CurrencyCode": "INR",
+        "Amount": 3656.92,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 2462.58,
-        "CurrencyCode": "INR",
+        "Amount": 2462.58,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 2105.18,
-        "CurrencyCode": "INR",
+        "Amount": 2105.18,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 2791.37,
-        "CurrencyCode": "INR",
+        "Amount": 2791.37,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 380.05,
-        "CurrencyCode": "INR",
+        "Amount": 380.05,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 1091.99,
-        "CurrencyCode": "INR",
+        "Amount": 1091.99,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 1471.59,
-        "CurrencyCode": "INR",
+        "Amount": 1471.59,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 113.08,
-        "CurrencyCode": "INR",
+        "Amount": 113.08,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 1925.45,
-        "CurrencyCode": "INR",
+        "Amount": 1925.45,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 3505.44,
-        "CurrencyCode": "INR",
+        "Amount": 3505.44,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 110.49,
-        "CurrencyCode": "INR",
+        "Amount": 110.49,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 4738.55,
-        "CurrencyCode": "INR",
+        "Amount": 4738.55,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 1630.79,
-        "CurrencyCode": "INR",
+        "Amount": 1630.79,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 958.21,
-        "CurrencyCode": "INR",
+        "Amount": 958.21,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 2035.51,
-        "CurrencyCode": "INR",
+        "Amount": 2035.51,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 1505.82,
-        "CurrencyCode": "INR",
+        "Amount": 1505.82,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 4633.54,
-        "CurrencyCode": "INR",
+        "Amount": 4633.54,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 2280.42,
-        "CurrencyCode": "INR",
+        "Amount": 2280.42,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 725.24,
-        "CurrencyCode": "INR",
+        "Amount": 725.24,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4610.23,
-        "CurrencyCode": "INR",
+        "Amount": 4610.23,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 1476.36,
-        "CurrencyCode": "INR",
+        "Amount": 1476.36,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 821.0,
-        "CurrencyCode": "INR",
+        "Amount": 821.0,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 4689.72,
-        "CurrencyCode": "INR",
+        "Amount": 4689.72,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 1989.21,
-        "CurrencyCode": "INR",
+        "Amount": 1989.21,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 4338.8,
-        "CurrencyCode": "INR",
+        "Amount": 4338.8,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 3802.91,
-        "CurrencyCode": "INR",
+        "Amount": 3802.91,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 2497.8,
-        "CurrencyCode": "INR",
+        "Amount": 2497.8,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 2603.28,
-        "CurrencyCode": "INR",
+        "Amount": 2603.28,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 3205.12,
-        "CurrencyCode": "INR",
+        "Amount": 3205.12,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 653.31,
-        "CurrencyCode": "INR",
+        "Amount": 653.31,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 2714.42,
-        "CurrencyCode": "INR",
+        "Amount": 2714.42,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 870.14,
-        "CurrencyCode": "INR",
+        "Amount": 870.14,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 3517.34,
-        "CurrencyCode": "INR",
+        "Amount": 3517.34,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 3333.68,
-        "CurrencyCode": "INR",
+        "Amount": 3333.68,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 3983.44,
-        "CurrencyCode": "INR",
+        "Amount": 3983.44,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 3863.51,
-        "CurrencyCode": "INR",
+        "Amount": 3863.51,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 2151.51,
-        "CurrencyCode": "INR",
+        "Amount": 2151.51,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 1239.41,
-        "CurrencyCode": "INR",
+        "Amount": 1239.41,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 4450.9,
-        "CurrencyCode": "INR",
+        "Amount": 4450.9,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 250.39,
-        "CurrencyCode": "INR",
+        "Amount": 250.39,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 1628.99,
-        "CurrencyCode": "INR",
+        "Amount": 1628.99,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 619.29,
-        "CurrencyCode": "INR",
+        "Amount": 619.29,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 383.05,
-        "CurrencyCode": "INR",
+        "Amount": 383.05,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 271.08,
-        "CurrencyCode": "INR",
+        "Amount": 271.08,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 2322.08,
-        "CurrencyCode": "INR",
+        "Amount": 2322.08,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 4952.04,
-        "CurrencyCode": "INR",
+        "Amount": 4952.04,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 2061.76,
-        "CurrencyCode": "INR",
+        "Amount": 2061.76,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 2815.31,
-        "CurrencyCode": "INR",
+        "Amount": 2815.31,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 819.99,
-        "CurrencyCode": "INR",
+        "Amount": 819.99,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1684.89,
-        "CurrencyCode": "INR",
+        "Amount": 1684.89,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 709.21,
-        "CurrencyCode": "INR",
+        "Amount": 709.21,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 1489.84,
-        "CurrencyCode": "INR",
+        "Amount": 1489.84,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 381.53,
-        "CurrencyCode": "INR",
+        "Amount": 381.53,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 2869.94,
-        "CurrencyCode": "INR",
+        "Amount": 2869.94,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 4911.09,
-        "CurrencyCode": "INR",
+        "Amount": 4911.09,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 925.41,
-        "CurrencyCode": "INR",
+        "Amount": 925.41,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 3702.14,
-        "CurrencyCode": "INR",
+        "Amount": 3702.14,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 4525.37,
-        "CurrencyCode": "INR",
+        "Amount": 4525.37,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 2184.82,
-        "CurrencyCode": "INR",
+        "Amount": 2184.82,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 2951.04,
-        "CurrencyCode": "INR",
+        "Amount": 2951.04,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 4404.91,
-        "CurrencyCode": "INR",
+        "Amount": 4404.91,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 1042.24,
-        "CurrencyCode": "INR",
+        "Amount": 1042.24,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 2771.64,
-        "CurrencyCode": "INR",
+        "Amount": 2771.64,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 651.76,
-        "CurrencyCode": "INR",
+        "Amount": 651.76,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 1802.91,
-        "CurrencyCode": "INR",
+        "Amount": 1802.91,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 3373.46,
-        "CurrencyCode": "INR",
+        "Amount": 3373.46,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 1084.73,
-        "CurrencyCode": "INR",
+        "Amount": 1084.73,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 4443.14,
-        "CurrencyCode": "INR",
+        "Amount": 4443.14,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 4314.6,
-        "CurrencyCode": "INR",
+        "Amount": 4314.6,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 4490.28,
-        "CurrencyCode": "INR",
+        "Amount": 4490.28,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 4389.64,
-        "CurrencyCode": "INR",
+        "Amount": 4389.64,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 4613.29,
-        "CurrencyCode": "INR",
+        "Amount": 4613.29,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 4937.69,
-        "CurrencyCode": "INR",
+        "Amount": 4937.69,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 1720.85,
-        "CurrencyCode": "INR",
+        "Amount": 1720.85,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4935.91,
-        "CurrencyCode": "INR",
+        "Amount": 4935.91,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 2626.51,
-        "CurrencyCode": "INR",
+        "Amount": 2626.51,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 173.03,
-        "CurrencyCode": "INR",
+        "Amount": 173.03,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 2255.11,
-        "CurrencyCode": "INR",
+        "Amount": 2255.11,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 1659.25,
-        "CurrencyCode": "INR",
+        "Amount": 1659.25,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 2190.63,
-        "CurrencyCode": "INR",
+        "Amount": 2190.63,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 4098.0,
-        "CurrencyCode": "INR",
+        "Amount": 4098.0,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 618.54,
-        "CurrencyCode": "INR",
+        "Amount": 618.54,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 3122.3,
-        "CurrencyCode": "INR",
+        "Amount": 3122.3,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 3423.41,
-        "CurrencyCode": "INR",
+        "Amount": 3423.41,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 4956.99,
-        "CurrencyCode": "INR",
+        "Amount": 4956.99,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 2303.59,
-        "CurrencyCode": "INR",
+        "Amount": 2303.59,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 186.82,
-        "CurrencyCode": "INR",
+        "Amount": 186.82,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 3570.61,
-        "CurrencyCode": "INR",
+        "Amount": 3570.61,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 4709.47,
-        "CurrencyCode": "INR",
+        "Amount": 4709.47,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 4961.11,
-        "CurrencyCode": "INR",
+        "Amount": 4961.11,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 850.49,
-        "CurrencyCode": "INR",
+        "Amount": 850.49,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 2900.5,
-        "CurrencyCode": "INR",
+        "Amount": 2900.5,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 1845.51,
-        "CurrencyCode": "INR",
+        "Amount": 1845.51,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 832.34,
-        "CurrencyCode": "INR",
+        "Amount": 832.34,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 2886.78,
-        "CurrencyCode": "INR",
+        "Amount": 2886.78,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 214.07,
-        "CurrencyCode": "INR",
+        "Amount": 214.07,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 3067.68,
-        "CurrencyCode": "INR",
+        "Amount": 3067.68,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 1889.32,
-        "CurrencyCode": "INR",
+        "Amount": 1889.32,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 4983.3,
-        "CurrencyCode": "INR",
+        "Amount": 4983.3,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 4649.96,
-        "CurrencyCode": "INR",
+        "Amount": 4649.96,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 3605.31,
-        "CurrencyCode": "INR",
+        "Amount": 3605.31,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 4859.49,
-        "CurrencyCode": "INR",
+        "Amount": 4859.49,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 4796.24,
-        "CurrencyCode": "INR",
+        "Amount": 4796.24,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 3416.14,
-        "CurrencyCode": "INR",
+        "Amount": 3416.14,        
         "Category": "Utilities",
         "Description": "Electricity bill"
       },
       {
-        "Amount": 4385.21,
-        "CurrencyCode": "INR",
+        "Amount": 4385.21,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 4926.17,
-        "CurrencyCode": "INR",
+        "Amount": 4926.17,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 2016.62,
-        "CurrencyCode": "INR",
+        "Amount": 2016.62,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 4323.57,
-        "CurrencyCode": "INR",
+        "Amount": 4323.57,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 3311.59,
-        "CurrencyCode": "INR",
+        "Amount": 3311.59,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 3063.59,
-        "CurrencyCode": "INR",
+        "Amount": 3063.59,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 4973.29,
-        "CurrencyCode": "INR",
+        "Amount": 4973.29,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 3514.21,
-        "CurrencyCode": "INR",
+        "Amount": 3514.21,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 3437.95,
-        "CurrencyCode": "INR",
+        "Amount": 3437.95,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 3668.15,
-        "CurrencyCode": "INR",
+        "Amount": 3668.15,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 2291.98,
-        "CurrencyCode": "INR",
+        "Amount": 2291.98,        
         "Category": "Utilities",
         "Description": "Electricity bill"
       },
       {
-        "Amount": 4409.17,
-        "CurrencyCode": "INR",
+        "Amount": 4409.17,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 3683.26,
-        "CurrencyCode": "INR",
+        "Amount": 3683.26,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 4146.62,
-        "CurrencyCode": "INR",
+        "Amount": 4146.62,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 941.1,
-        "CurrencyCode": "INR",
+        "Amount": 941.1,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 1070.01,
-        "CurrencyCode": "INR",
+        "Amount": 1070.01,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 1034.88,
-        "CurrencyCode": "INR",
+        "Amount": 1034.88,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 2249.77,
-        "CurrencyCode": "INR",
+        "Amount": 2249.77,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 1153.5,
-        "CurrencyCode": "INR",
+        "Amount": 1153.5,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 1805.68,
-        "CurrencyCode": "INR",
+        "Amount": 1805.68,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 4705.85,
-        "CurrencyCode": "INR",
+        "Amount": 4705.85,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 605.38,
-        "CurrencyCode": "INR",
+        "Amount": 605.38,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 1455.55,
-        "CurrencyCode": "INR",
+        "Amount": 1455.55,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 2717.52,
-        "CurrencyCode": "INR",
+        "Amount": 2717.52,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 2679.8,
-        "CurrencyCode": "INR",
+        "Amount": 2679.8,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 1502.25,
-        "CurrencyCode": "INR",
+        "Amount": 1502.25,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 2426.8,
-        "CurrencyCode": "INR",
+        "Amount": 2426.8,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 4598.39,
-        "CurrencyCode": "INR",
+        "Amount": 4598.39,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 173.18,
-        "CurrencyCode": "INR",
+        "Amount": 173.18,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 1237.94,
-        "CurrencyCode": "INR",
+        "Amount": 1237.94,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 4289.77,
-        "CurrencyCode": "INR",
+        "Amount": 4289.77,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 2814.24,
-        "CurrencyCode": "INR",
+        "Amount": 2814.24,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 3172.02,
-        "CurrencyCode": "INR",
+        "Amount": 3172.02,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 1302.03,
-        "CurrencyCode": "INR",
+        "Amount": 1302.03,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4291.25,
-        "CurrencyCode": "INR",
+        "Amount": 4291.25,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 4157.01,
-        "CurrencyCode": "INR",
+        "Amount": 4157.01,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 2093.97,
-        "CurrencyCode": "INR",
+        "Amount": 2093.97,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 4942.73,
-        "CurrencyCode": "INR",
+        "Amount": 4942.73,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 4744.72,
-        "CurrencyCode": "INR",
+        "Amount": 4744.72,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 3517.38,
-        "CurrencyCode": "INR",
+        "Amount": 3517.38,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 1556.69,
-        "CurrencyCode": "INR",
+        "Amount": 1556.69,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 1149.55,
-        "CurrencyCode": "INR",
+        "Amount": 1149.55,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 3414.1,
-        "CurrencyCode": "INR",
+        "Amount": 3414.1,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 459.25,
-        "CurrencyCode": "INR",
+        "Amount": 459.25,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 3128.61,
-        "CurrencyCode": "INR",
+        "Amount": 3128.61,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 398.84,
-        "CurrencyCode": "INR",
+        "Amount": 398.84,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 1295.09,
-        "CurrencyCode": "INR",
+        "Amount": 1295.09,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 1019.28,
-        "CurrencyCode": "INR",
+        "Amount": 1019.28,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2413.27,
-        "CurrencyCode": "INR",
+        "Amount": 2413.27,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 151.01,
-        "CurrencyCode": "INR",
+        "Amount": 151.01,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 1347.57,
-        "CurrencyCode": "INR",
+        "Amount": 1347.57,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 1279.68,
-        "CurrencyCode": "INR",
+        "Amount": 1279.68,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 4928.46,
-        "CurrencyCode": "INR",
+        "Amount": 4928.46,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 1055.87,
-        "CurrencyCode": "INR",
+        "Amount": 1055.87,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 438.71,
-        "CurrencyCode": "INR",
+        "Amount": 438.71,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 2700.3,
-        "CurrencyCode": "INR",
+        "Amount": 2700.3,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 3035.8,
-        "CurrencyCode": "INR",
+        "Amount": 3035.8,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 2169.96,
-        "CurrencyCode": "INR",
+        "Amount": 2169.96,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 3157.21,
-        "CurrencyCode": "INR",
+        "Amount": 3157.21,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 3497.38,
-        "CurrencyCode": "INR",
+        "Amount": 3497.38,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 4562.69,
-        "CurrencyCode": "INR",
+        "Amount": 4562.69,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 4868.01,
-        "CurrencyCode": "INR",
+        "Amount": 4868.01,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 3099.34,
-        "CurrencyCode": "INR",
+        "Amount": 3099.34,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 2378.32,
-        "CurrencyCode": "INR",
+        "Amount": 2378.32,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 3160.0,
-        "CurrencyCode": "INR",
+        "Amount": 3160.0,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 4628.82,
-        "CurrencyCode": "INR",
+        "Amount": 4628.82,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 2009.62,
-        "CurrencyCode": "INR",
+        "Amount": 2009.62,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 968.44,
-        "CurrencyCode": "INR",
+        "Amount": 968.44,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 3738.3,
-        "CurrencyCode": "INR",
+        "Amount": 3738.3,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 1400.45,
-        "CurrencyCode": "INR",
+        "Amount": 1400.45,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 2104.31,
-        "CurrencyCode": "INR",
+        "Amount": 2104.31,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 4196.21,
-        "CurrencyCode": "INR",
+        "Amount": 4196.21,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 1689.65,
-        "CurrencyCode": "INR",
+        "Amount": 1689.65,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 4192.26,
-        "CurrencyCode": "INR",
+        "Amount": 4192.26,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 429.99,
-        "CurrencyCode": "INR",
+        "Amount": 429.99,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 3870.53,
-        "CurrencyCode": "INR",
+        "Amount": 3870.53,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 3943.77,
-        "CurrencyCode": "INR",
+        "Amount": 3943.77,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 3470.18,
-        "CurrencyCode": "INR",
+        "Amount": 3470.18,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 4890.52,
-        "CurrencyCode": "INR",
+        "Amount": 4890.52,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 3569.97,
-        "CurrencyCode": "INR",
+        "Amount": 3569.97,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 404.02,
-        "CurrencyCode": "INR",
+        "Amount": 404.02,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 1364.51,
-        "CurrencyCode": "INR",
+        "Amount": 1364.51,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 762.81,
-        "CurrencyCode": "INR",
+        "Amount": 762.81,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 2481.46,
-        "CurrencyCode": "INR",
+        "Amount": 2481.46,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 3900.31,
-        "CurrencyCode": "INR",
+        "Amount": 3900.31,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 1067.09,
-        "CurrencyCode": "INR",
+        "Amount": 1067.09,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 297.47,
-        "CurrencyCode": "INR",
+        "Amount": 297.47,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 3456.68,
-        "CurrencyCode": "INR",
+        "Amount": 3456.68,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 2907.34,
-        "CurrencyCode": "INR",
+        "Amount": 2907.34,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 481.75,
-        "CurrencyCode": "INR",
+        "Amount": 481.75,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 1858.08,
-        "CurrencyCode": "INR",
+        "Amount": 1858.08,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1751.72,
-        "CurrencyCode": "INR",
+        "Amount": 1751.72,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 3122.99,
-        "CurrencyCode": "INR",
+        "Amount": 3122.99,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 1382.22,
-        "CurrencyCode": "INR",
+        "Amount": 1382.22,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 3051.09,
-        "CurrencyCode": "INR",
+        "Amount": 3051.09,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 4168.75,
-        "CurrencyCode": "INR",
+        "Amount": 4168.75,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 1032.12,
-        "CurrencyCode": "INR",
+        "Amount": 1032.12,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 1760.6,
-        "CurrencyCode": "INR",
+        "Amount": 1760.6,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1590.54,
-        "CurrencyCode": "INR",
+        "Amount": 1590.54,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 4484.22,
-        "CurrencyCode": "INR",
+        "Amount": 4484.22,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 529.87,
-        "CurrencyCode": "INR",
+        "Amount": 529.87,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 1541.22,
-        "CurrencyCode": "INR",
+        "Amount": 1541.22,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 3645.17,
-        "CurrencyCode": "INR",
+        "Amount": 3645.17,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 4313.47,
-        "CurrencyCode": "INR",
+        "Amount": 4313.47,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 580.69,
-        "CurrencyCode": "INR",
+        "Amount": 580.69,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 693.43,
-        "CurrencyCode": "INR",
+        "Amount": 693.43,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 3507.39,
-        "CurrencyCode": "INR",
+        "Amount": 3507.39,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 965.63,
-        "CurrencyCode": "INR",
+        "Amount": 965.63,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 3784.8,
-        "CurrencyCode": "INR",
+        "Amount": 3784.8,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 4683.02,
-        "CurrencyCode": "INR",
+        "Amount": 4683.02,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 687.23,
-        "CurrencyCode": "INR",
+        "Amount": 687.23,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 3005.26,
-        "CurrencyCode": "INR",
+        "Amount": 3005.26,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 3468.81,
-        "CurrencyCode": "INR",
+        "Amount": 3468.81,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 4843.78,
-        "CurrencyCode": "INR",
+        "Amount": 4843.78,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 1476.81,
-        "CurrencyCode": "INR",
+        "Amount": 1476.81,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 2063.08,
-        "CurrencyCode": "INR",
+        "Amount": 2063.08,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 1589.51,
-        "CurrencyCode": "INR",
+        "Amount": 1589.51,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 1820.73,
-        "CurrencyCode": "INR",
+        "Amount": 1820.73,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 3750.9,
-        "CurrencyCode": "INR",
+        "Amount": 3750.9,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 2514.74,
-        "CurrencyCode": "INR",
+        "Amount": 2514.74,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 647.29,
-        "CurrencyCode": "INR",
+        "Amount": 647.29,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 4882.84,
-        "CurrencyCode": "INR",
+        "Amount": 4882.84,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 629.38,
-        "CurrencyCode": "INR",
+        "Amount": 629.38,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 2552.2,
-        "CurrencyCode": "INR",
+        "Amount": 2552.2,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 1664.56,
-        "CurrencyCode": "INR",
+        "Amount": 1664.56,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 2400.13,
-        "CurrencyCode": "INR",
+        "Amount": 2400.13,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 1043.7,
-        "CurrencyCode": "INR",
+        "Amount": 1043.7,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 3014.29,
-        "CurrencyCode": "INR",
+        "Amount": 3014.29,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 4653.62,
-        "CurrencyCode": "INR",
+        "Amount": 4653.62,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 1027.36,
-        "CurrencyCode": "INR",
+        "Amount": 1027.36,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 2380.01,
-        "CurrencyCode": "INR",
+        "Amount": 2380.01,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 4000.33,
-        "CurrencyCode": "INR",
+        "Amount": 4000.33,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 3725.98,
-        "CurrencyCode": "INR",
+        "Amount": 3725.98,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 1757.85,
-        "CurrencyCode": "INR",
+        "Amount": 1757.85,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 1951.94,
-        "CurrencyCode": "INR",
+        "Amount": 1951.94,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 1024.32,
-        "CurrencyCode": "INR",
+        "Amount": 1024.32,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 1654.81,
-        "CurrencyCode": "INR",
+        "Amount": 1654.81,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
         "Amount": 1016.89,
-        "CurrencyCode": "INR",
+        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
         "Amount": 2207.71,
-        "CurrencyCode": "INR",
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
         "Amount": 2737.35,
-        "CurrencyCode": "INR",
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 2433.65,
-        "CurrencyCode": "INR",
+        "Amount": 2433.65,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3288.33,
-        "CurrencyCode": "INR",
+        "Amount": 3288.33,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 1568.66,
-        "CurrencyCode": "INR",
+        "Amount": 1568.66,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 344.37,
-        "CurrencyCode": "INR",
+        "Amount": 344.37,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 1842.0,
-        "CurrencyCode": "INR",
+        "Amount": 1842.0,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 1102.69,
-        "CurrencyCode": "INR",
+        "Amount": 1102.69,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 789.37,
-        "CurrencyCode": "INR",
+        "Amount": 789.37,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 3420.23,
-        "CurrencyCode": "INR",
+        "Amount": 3420.23,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 128.37,
-        "CurrencyCode": "INR",
+        "Amount": 128.37,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 2235.48,
-        "CurrencyCode": "INR",
+        "Amount": 2235.48,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 2964.61,
-        "CurrencyCode": "INR",
+        "Amount": 2964.61,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 894.33,
-        "CurrencyCode": "INR",
+        "Amount": 894.33,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 287.85,
-        "CurrencyCode": "INR",
+        "Amount": 287.85,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 111.28,
-        "CurrencyCode": "INR",
+        "Amount": 111.28,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 584.78,
-        "CurrencyCode": "INR",
+        "Amount": 584.78,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 2978.27,
-        "CurrencyCode": "INR",
+        "Amount": 2978.27,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 4314.92,
-        "CurrencyCode": "INR",
+        "Amount": 4314.92,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 4311.94,
-        "CurrencyCode": "INR",
+        "Amount": 4311.94,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 2573.63,
-        "CurrencyCode": "INR",
+        "Amount": 2573.63,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 3829.04,
-        "CurrencyCode": "INR",
+        "Amount": 3829.04,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 2678.54,
-        "CurrencyCode": "INR",
+        "Amount": 2678.54,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 847.68,
-        "CurrencyCode": "INR",
+        "Amount": 847.68,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 2231.16,
-        "CurrencyCode": "INR",
+        "Amount": 2231.16,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 1570.66,
-        "CurrencyCode": "INR",
+        "Amount": 1570.66,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 760.89,
-        "CurrencyCode": "INR",
+        "Amount": 760.89,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 2791.45,
-        "CurrencyCode": "INR",
+        "Amount": 2791.45,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 1482.48,
-        "CurrencyCode": "INR",
+        "Amount": 1482.48,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 2274.36,
-        "CurrencyCode": "INR",
+        "Amount": 2274.36,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 2616.37,
-        "CurrencyCode": "INR",
+        "Amount": 2616.37,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 1105.66,
-        "CurrencyCode": "INR",
+        "Amount": 1105.66,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 3810.45,
-        "CurrencyCode": "INR",
+        "Amount": 3810.45,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 3109.04,
-        "CurrencyCode": "INR",
+        "Amount": 3109.04,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 2224.6,
-        "CurrencyCode": "INR",
+        "Amount": 2224.6,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 2895.92,
-        "CurrencyCode": "INR",
+        "Amount": 2895.92,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 3488.96,
-        "CurrencyCode": "INR",
+        "Amount": 3488.96,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 4248.54,
-        "CurrencyCode": "INR",
+        "Amount": 4248.54,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 341.9,
-        "CurrencyCode": "INR",
+        "Amount": 341.9,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 771.17,
-        "CurrencyCode": "INR",
+        "Amount": 771.17,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3459.4,
-        "CurrencyCode": "INR",
+        "Amount": 3459.4,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 4533.75,
-        "CurrencyCode": "INR",
+        "Amount": 4533.75,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 1961.19,
-        "CurrencyCode": "INR",
+        "Amount": 1961.19,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 1352.74,
-        "CurrencyCode": "INR",
+        "Amount": 1352.74,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 4173.49,
-        "CurrencyCode": "INR",
+        "Amount": 4173.49,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 1401.54,
-        "CurrencyCode": "INR",
+        "Amount": 1401.54,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 3161.37,
-        "CurrencyCode": "INR",
+        "Amount": 3161.37,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 430.34,
-        "CurrencyCode": "INR",
+        "Amount": 430.34,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 3681.16,
-        "CurrencyCode": "INR",
+        "Amount": 3681.16,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 4721.93,
-        "CurrencyCode": "INR",
+        "Amount": 4721.93,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 3763.63,
-        "CurrencyCode": "INR",
+        "Amount": 3763.63,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 225.46,
-        "CurrencyCode": "INR",
+        "Amount": 225.46,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 3598.3,
-        "CurrencyCode": "INR",
+        "Amount": 3598.3,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 117.85,
-        "CurrencyCode": "INR",
+        "Amount": 117.85,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 137.59,
-        "CurrencyCode": "INR",
+        "Amount": 137.59,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 2932.33,
-        "CurrencyCode": "INR",
+        "Amount": 2932.33,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 3148.12,
-        "CurrencyCode": "INR",
+        "Amount": 3148.12,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 2497.51,
-        "CurrencyCode": "INR",
+        "Amount": 2497.51,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 690.91,
-        "CurrencyCode": "INR",
+        "Amount": 690.91,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 3682.18,
-        "CurrencyCode": "INR",
+        "Amount": 3682.18,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 2832.83,
-        "CurrencyCode": "INR",
+        "Amount": 2832.83,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 293.62,
-        "CurrencyCode": "INR",
+        "Amount": 293.62,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 4680.52,
-        "CurrencyCode": "INR",
+        "Amount": 4680.52,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 2328.88,
-        "CurrencyCode": "INR",
+        "Amount": 2328.88,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 3201.98,
-        "CurrencyCode": "INR",
+        "Amount": 3201.98,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 252.24,
-        "CurrencyCode": "INR",
+        "Amount": 252.24,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 4648.44,
-        "CurrencyCode": "INR",
+        "Amount": 4648.44,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 1644.57,
-        "CurrencyCode": "INR",
+        "Amount": 1644.57,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 3804.0,
-        "CurrencyCode": "INR",
+        "Amount": 3804.0,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 1895.51,
-        "CurrencyCode": "INR",
+        "Amount": 1895.51,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 2036.05,
-        "CurrencyCode": "INR",
+        "Amount": 2036.05,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 3706.73,
-        "CurrencyCode": "INR",
+        "Amount": 3706.73,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 222.2,
-        "CurrencyCode": "INR",
+        "Amount": 222.2,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 3450.52,
-        "CurrencyCode": "INR",
+        "Amount": 3450.52,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 2253.56,
-        "CurrencyCode": "INR",
+        "Amount": 2253.56,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 925.9,
-        "CurrencyCode": "INR",
+        "Amount": 925.9,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
         "Amount": 3067.65,
-        "CurrencyCode": "INR",
+        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 2802.32,
-        "CurrencyCode": "INR",
+        "Amount": 2802.32,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 770.51,
-        "CurrencyCode": "INR",
+        "Amount": 770.51,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 3259.37,
-        "CurrencyCode": "INR",
+        "Amount": 3259.37,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 2200.74,
-        "CurrencyCode": "INR",
+        "Amount": 2200.74,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 2204.71,
-        "CurrencyCode": "INR",
+        "Amount": 2204.71,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 3795.18,
-        "CurrencyCode": "INR",
+        "Amount": 3795.18,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 3727.35,
-        "CurrencyCode": "INR",
+        "Amount": 3727.35,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 4923.15,
-        "CurrencyCode": "INR",
+        "Amount": 4923.15,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 2034.67,
-        "CurrencyCode": "INR",
+        "Amount": 2034.67,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 3425.25,
-        "CurrencyCode": "INR",
+        "Amount": 3425.25,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 309.61,
-        "CurrencyCode": "INR",
+        "Amount": 309.61,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 2282.97,
-        "CurrencyCode": "INR",
+        "Amount": 2282.97,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 608.31,
-        "CurrencyCode": "INR",
+        "Amount": 608.31,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 1919.49,
-        "CurrencyCode": "INR",
+        "Amount": 1919.49,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 4422.99,
-        "CurrencyCode": "INR",
+        "Amount": 4422.99,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 612.38,
-        "CurrencyCode": "INR",
+        "Amount": 612.38,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 4923.48,
-        "CurrencyCode": "INR",
+        "Amount": 4923.48,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 4340.18,
-        "CurrencyCode": "INR",
+        "Amount": 4340.18,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 1138.88,
-        "CurrencyCode": "INR",
+        "Amount": 1138.88,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 1659.81,
-        "CurrencyCode": "INR",
+        "Amount": 1659.81,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 4220.37,
-        "CurrencyCode": "INR",
+        "Amount": 4220.37,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 790.89,
-        "CurrencyCode": "INR",
+        "Amount": 790.89,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 3769.8,
-        "CurrencyCode": "INR",
+        "Amount": 3769.8,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 1762.85,
-        "CurrencyCode": "INR",
+        "Amount": 1762.85,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 3891.29,
-        "CurrencyCode": "INR",
+        "Amount": 3891.29,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 666.06,
-        "CurrencyCode": "INR",
+        "Amount": 666.06,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 2428.12,
-        "CurrencyCode": "INR",
+        "Amount": 2428.12,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 338.18,
-        "CurrencyCode": "INR",
+        "Amount": 338.18,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 3875.01,
-        "CurrencyCode": "INR",
+        "Amount": 3875.01,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 1754.93,
-        "CurrencyCode": "INR",
+        "Amount": 1754.93,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 540.7,
-        "CurrencyCode": "INR",
+        "Amount": 540.7,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 1884.5,
-        "CurrencyCode": "INR",
+        "Amount": 1884.5,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 1657.08,
-        "CurrencyCode": "INR",
+        "Amount": 1657.08,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 3807.87,
-        "CurrencyCode": "INR",
+        "Amount": 3807.87,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 4748.81,
-        "CurrencyCode": "INR",
+        "Amount": 4748.81,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 783.46,
-        "CurrencyCode": "INR",
+        "Amount": 783.46,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 3955.71,
-        "CurrencyCode": "INR",
+        "Amount": 3955.71,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 3834.06,
-        "CurrencyCode": "INR",
+        "Amount": 3834.06,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 1714.53,
-        "CurrencyCode": "INR",
+        "Amount": 1714.53,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 2953.89,
-        "CurrencyCode": "INR",
+        "Amount": 2953.89,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 2863.76,
-        "CurrencyCode": "INR",
+        "Amount": 2863.76,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 1220.03,
-        "CurrencyCode": "INR",
+        "Amount": 1220.03,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 1247.28,
-        "CurrencyCode": "INR",
+        "Amount": 1247.28,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 1425.32,
-        "CurrencyCode": "INR",
+        "Amount": 1425.32,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 2248.55,
-        "CurrencyCode": "INR",
+        "Amount": 2248.55,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4504.12,
-        "CurrencyCode": "INR",
+        "Amount": 4504.12,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 3007.72,
-        "CurrencyCode": "INR",
+        "Amount": 3007.72,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 666.77,
-        "CurrencyCode": "INR",
+        "Amount": 666.77,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4543.44,
-        "CurrencyCode": "INR",
+        "Amount": 4543.44,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 2272.19,
-        "CurrencyCode": "INR",
+        "Amount": 2272.19,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 3720.85,
-        "CurrencyCode": "INR",
+        "Amount": 3720.85,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 1934.46,
-        "CurrencyCode": "INR",
+        "Amount": 1934.46,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 1553.21,
-        "CurrencyCode": "INR",
+        "Amount": 1553.21,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 4362.4,
-        "CurrencyCode": "INR",
+        "Amount": 4362.4,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 516.14,
-        "CurrencyCode": "INR",
+        "Amount": 516.14,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 222.78,
-        "CurrencyCode": "INR",
+        "Amount": 222.78,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 2845.78,
-        "CurrencyCode": "INR",
+        "Amount": 2845.78,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 3942.75,
-        "CurrencyCode": "INR",
+        "Amount": 3942.75,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 4444.02,
-        "CurrencyCode": "INR",
+        "Amount": 4444.02,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 1176.89,
-        "CurrencyCode": "INR",
+        "Amount": 1176.89,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 2056.3,
-        "CurrencyCode": "INR",
+        "Amount": 2056.3,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 2071.66,
-        "CurrencyCode": "INR",
+        "Amount": 2071.66,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 4466.86,
-        "CurrencyCode": "INR",
+        "Amount": 4466.86,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 3746.87,
-        "CurrencyCode": "INR",
+        "Amount": 3746.87,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 3203.9,
-        "CurrencyCode": "INR",
+        "Amount": 3203.9,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 3052.01,
-        "CurrencyCode": "INR",
+        "Amount": 3052.01,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 4588.21,
-        "CurrencyCode": "INR",
+        "Amount": 4588.21,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 4773.36,
-        "CurrencyCode": "INR",
+        "Amount": 4773.36,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2011.18,
-        "CurrencyCode": "INR",
+        "Amount": 2011.18,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 1278.47,
-        "CurrencyCode": "INR",
+        "Amount": 1278.47,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 816.2,
-        "CurrencyCode": "INR",
+        "Amount": 816.2,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 1267.48,
-        "CurrencyCode": "INR",
+        "Amount": 1267.48,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 2602.59,
-        "CurrencyCode": "INR",
+        "Amount": 2602.59,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 2424.2,
-        "CurrencyCode": "INR",
+        "Amount": 2424.2,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 3175.08,
-        "CurrencyCode": "INR",
+        "Amount": 3175.08,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 4018.86,
-        "CurrencyCode": "INR",
+        "Amount": 4018.86,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 2474.72,
-        "CurrencyCode": "INR",
+        "Amount": 2474.72,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 2504.62,
-        "CurrencyCode": "INR",
+        "Amount": 2504.62,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 3598.36,
-        "CurrencyCode": "INR",
+        "Amount": 3598.36,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 2221.95,
-        "CurrencyCode": "INR",
+        "Amount": 2221.95,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 4584.81,
-        "CurrencyCode": "INR",
+        "Amount": 4584.81,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 2795.1,
-        "CurrencyCode": "INR",
+        "Amount": 2795.1,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 1599.09,
-        "CurrencyCode": "INR",
+        "Amount": 1599.09,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 602.03,
-        "CurrencyCode": "INR",
+        "Amount": 602.03,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 610.4,
-        "CurrencyCode": "INR",
+        "Amount": 610.4,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 906.09,
-        "CurrencyCode": "INR",
+        "Amount": 906.09,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 1408.61,
-        "CurrencyCode": "INR",
+        "Amount": 1408.61,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4459.6,
-        "CurrencyCode": "INR",
+        "Amount": 4459.6,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 4836.44,
-        "CurrencyCode": "INR",
+        "Amount": 4836.44,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 4241.88,
-        "CurrencyCode": "INR",
+        "Amount": 4241.88,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 2168.86,
-        "CurrencyCode": "INR",
+        "Amount": 2168.86,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 1856.49,
-        "CurrencyCode": "INR",
+        "Amount": 1856.49,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 569.44,
-        "CurrencyCode": "INR",
+        "Amount": 569.44,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 761.62,
-        "CurrencyCode": "INR",
+        "Amount": 761.62,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 2253.45,
-        "CurrencyCode": "INR",
+        "Amount": 2253.45,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 2324.99,
-        "CurrencyCode": "INR",
+        "Amount": 2324.99,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 3841.3,
-        "CurrencyCode": "INR",
+        "Amount": 3841.3,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 2107.7,
-        "CurrencyCode": "INR",
+        "Amount": 2107.7,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 4702.72,
-        "CurrencyCode": "INR",
+        "Amount": 4702.72,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 2697.22,
-        "CurrencyCode": "INR",
+        "Amount": 2697.22,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 3641.52,
-        "CurrencyCode": "INR",
+        "Amount": 3641.52,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 3553.28,
-        "CurrencyCode": "INR",
+        "Amount": 3553.28,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 1335.6,
-        "CurrencyCode": "INR",
+        "Amount": 1335.6,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 2439.11,
-        "CurrencyCode": "INR",
+        "Amount": 2439.11,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 4003.05,
-        "CurrencyCode": "INR",
+        "Amount": 4003.05,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 4032.64,
-        "CurrencyCode": "INR",
+        "Amount": 4032.64,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 1926.35,
-        "CurrencyCode": "INR",
+        "Amount": 1926.35,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 3322.33,
-        "CurrencyCode": "INR",
+        "Amount": 3322.33,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 4937.47,
-        "CurrencyCode": "INR",
+        "Amount": 4937.47,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 4555.47,
-        "CurrencyCode": "INR",
+        "Amount": 4555.47,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 1170.17,
-        "CurrencyCode": "INR",
+        "Amount": 1170.17,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 1092.24,
-        "CurrencyCode": "INR",
+        "Amount": 1092.24,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 1345.7,
-        "CurrencyCode": "INR",
+        "Amount": 1345.7,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 1917.55,
-        "CurrencyCode": "INR",
+        "Amount": 1917.55,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 4521.87,
-        "CurrencyCode": "INR",
+        "Amount": 4521.87,        
         "Category": "Utilities",
         "Description": "Electricity bill"
       },
       {
-        "Amount": 547.63,
-        "CurrencyCode": "INR",
+        "Amount": 547.63,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 4265.75,
-        "CurrencyCode": "INR",
+        "Amount": 4265.75,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1789.69,
-        "CurrencyCode": "INR",
+        "Amount": 1789.69,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 3911.41,
-        "CurrencyCode": "INR",
+        "Amount": 3911.41,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 2635.97,
-        "CurrencyCode": "INR",
+        "Amount": 2635.97,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 746.41,
-        "CurrencyCode": "INR",
+        "Amount": 746.41,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 4976.78,
-        "CurrencyCode": "INR",
+        "Amount": 4976.78,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 4488.84,
-        "CurrencyCode": "INR",
+        "Amount": 4488.84,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 1783.29,
-        "CurrencyCode": "INR",
+        "Amount": 1783.29,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 3001.28,
-        "CurrencyCode": "INR",
+        "Amount": 3001.28,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 945.14,
-        "CurrencyCode": "INR",
+        "Amount": 945.14,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 216.9,
-        "CurrencyCode": "INR",
+        "Amount": 216.9,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 1091.39,
-        "CurrencyCode": "INR",
+        "Amount": 1091.39,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 520.72,
-        "CurrencyCode": "INR",
+        "Amount": 520.72,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 3627.19,
-        "CurrencyCode": "INR",
+        "Amount": 3627.19,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 3551.15,
-        "CurrencyCode": "INR",
+        "Amount": 3551.15,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 1925.98,
-        "CurrencyCode": "INR",
+        "Amount": 1925.98,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 4227.86,
-        "CurrencyCode": "INR",
+        "Amount": 4227.86,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 4614.12,
-        "CurrencyCode": "INR",
+        "Amount": 4614.12,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 4027.63,
-        "CurrencyCode": "INR",
+        "Amount": 4027.63,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 4679.91,
-        "CurrencyCode": "INR",
+        "Amount": 4679.91,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 2439.83,
-        "CurrencyCode": "INR",
+        "Amount": 2439.83,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 2920.09,
-        "CurrencyCode": "INR",
+        "Amount": 2920.09,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 4401.81,
-        "CurrencyCode": "INR",
+        "Amount": 4401.81,        
         "Category": "Household Supplies",
         "Description": "Kitchen utensils"
       },
       {
-        "Amount": 4582.16,
-        "CurrencyCode": "INR",
+        "Amount": 4582.16,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 818.46,
-        "CurrencyCode": "INR",
+        "Amount": 818.46,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 2624.09,
-        "CurrencyCode": "INR",
+        "Amount": 2624.09,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 2313.68,
-        "CurrencyCode": "INR",
+        "Amount": 2313.68,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 313.98,
-        "CurrencyCode": "INR",
+        "Amount": 313.98,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 3619.78,
-        "CurrencyCode": "INR",
+        "Amount": 3619.78,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 1795.63,
-        "CurrencyCode": "INR",
+        "Amount": 1795.63,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 4524.37,
-        "CurrencyCode": "INR",
+        "Amount": 4524.37,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 3054.99,
-        "CurrencyCode": "INR",
+        "Amount": 3054.99,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 237.27,
-        "CurrencyCode": "INR",
+        "Amount": 237.27,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 2449.88,
-        "CurrencyCode": "INR",
+        "Amount": 2449.88,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 1717.98,
-        "CurrencyCode": "INR",
+        "Amount": 1717.98,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 656.33,
-        "CurrencyCode": "INR",
+        "Amount": 656.33,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2029.96,
-        "CurrencyCode": "INR",
+        "Amount": 2029.96,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 2471.13,
-        "CurrencyCode": "INR",
+        "Amount": 2471.13,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 638.45,
-        "CurrencyCode": "INR",
+        "Amount": 638.45,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 975.03,
-        "CurrencyCode": "INR",
+        "Amount": 975.03,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 4172.44,
-        "CurrencyCode": "INR",
+        "Amount": 4172.44,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 3818.66,
-        "CurrencyCode": "INR",
+        "Amount": 3818.66,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 1158.66,
-        "CurrencyCode": "INR",
+        "Amount": 1158.66,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 965.08,
-        "CurrencyCode": "INR",
+        "Amount": 965.08,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 4917.6,
-        "CurrencyCode": "INR",
+        "Amount": 4917.6,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 3588.83,
-        "CurrencyCode": "INR",
+        "Amount": 3588.83,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 4891.47,
-        "CurrencyCode": "INR",
+        "Amount": 4891.47,        
         "Category": "Utilities",
         "Description": "Electricity bill"
       },
       {
-        "Amount": 1452.92,
-        "CurrencyCode": "INR",
+        "Amount": 1452.92,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 4856.87,
-        "CurrencyCode": "INR",
+        "Amount": 4856.87,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 1377.73,
-        "CurrencyCode": "INR",
+        "Amount": 1377.73,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 3124.23,
-        "CurrencyCode": "INR",
+        "Amount": 3124.23,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 1854.76,
-        "CurrencyCode": "INR",
+        "Amount": 1854.76,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 3588.98,
-        "CurrencyCode": "INR",
+        "Amount": 3588.98,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 1033.02,
-        "CurrencyCode": "INR",
+        "Amount": 1033.02,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 4077.64,
-        "CurrencyCode": "INR",
+        "Amount": 4077.64,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 3771.77,
-        "CurrencyCode": "INR",
+        "Amount": 3771.77,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 3296.01,
-        "CurrencyCode": "INR",
+        "Amount": 3296.01,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 2880.61,
-        "CurrencyCode": "INR",
+        "Amount": 2880.61,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 1509.93,
-        "CurrencyCode": "INR",
+        "Amount": 1509.93,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 1413.51,
-        "CurrencyCode": "INR",
+        "Amount": 1413.51,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 4979.42,
-        "CurrencyCode": "INR",
+        "Amount": 4979.42,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 430.77,
-        "CurrencyCode": "INR",
+        "Amount": 430.77,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 1995.63,
-        "CurrencyCode": "INR",
+        "Amount": 1995.63,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 618.39,
-        "CurrencyCode": "INR",
+        "Amount": 618.39,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 3870.35,
-        "CurrencyCode": "INR",
+        "Amount": 3870.35,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4651.12,
-        "CurrencyCode": "INR",
+        "Amount": 4651.12,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 1741.3,
-        "CurrencyCode": "INR",
+        "Amount": 1741.3,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 4823.36,
-        "CurrencyCode": "INR",
+        "Amount": 4823.36,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 2587.44,
-        "CurrencyCode": "INR",
+        "Amount": 2587.44,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 690.09,
-        "CurrencyCode": "INR",
+        "Amount": 690.09,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 3227.23,
-        "CurrencyCode": "INR",
+        "Amount": 3227.23,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 863.71,
-        "CurrencyCode": "INR",
+        "Amount": 863.71,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 351.25,
-        "CurrencyCode": "INR",
+        "Amount": 351.25,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 3332.42,
-        "CurrencyCode": "INR",
+        "Amount": 3332.42,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 974.01,
-        "CurrencyCode": "INR",
+        "Amount": 974.01,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 3500.56,
-        "CurrencyCode": "INR",
+        "Amount": 3500.56,        
         "Category": "Car Maintenance",
         "Description": "Tire replacement"
       },
       {
-        "Amount": 4986.37,
-        "CurrencyCode": "INR",
+        "Amount": 4986.37,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4559.08,
-        "CurrencyCode": "INR",
+        "Amount": 4559.08,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 4825.01,
-        "CurrencyCode": "INR",
+        "Amount": 4825.01,        
         "Category": "Medicine",
         "Description": "Doctor's prescription"
       },
       {
-        "Amount": 3609.22,
-        "CurrencyCode": "INR",
+        "Amount": 3609.22,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 3913.9,
-        "CurrencyCode": "INR",
+        "Amount": 3913.9,       
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 1130.63,
-        "CurrencyCode": "INR",
+        "Amount": 1130.63,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 2013.28,
-        "CurrencyCode": "INR",
+        "Amount": 2013.28,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 3705.64,
-        "CurrencyCode": "INR",
+        "Amount": 3705.64,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 4168.72,
-        "CurrencyCode": "INR",
+        "Amount": 4168.72,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4611.34,
-        "CurrencyCode": "INR",
+        "Amount": 4611.34,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 2955.8,
-        "CurrencyCode": "INR",
+        "Amount": 2955.8,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 2197.6,
-        "CurrencyCode": "INR",
+        "Amount": 2197.6,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 423.98,
-        "CurrencyCode": "INR",
+        "Amount": 423.98,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 2186.04,
-        "CurrencyCode": "INR",
+        "Amount": 2186.04,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 1574.41,
-        "CurrencyCode": "INR",
+        "Amount": 1574.41,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 2491.6,
-        "CurrencyCode": "INR",
+        "Amount": 2491.6,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 4254.08,
-        "CurrencyCode": "INR",
+        "Amount": 4254.08,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 2124.82,
-        "CurrencyCode": "INR",
+        "Amount": 2124.82,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 4270.23,
-        "CurrencyCode": "INR",
+        "Amount": 4270.23,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 454.37,
-        "CurrencyCode": "INR",
+        "Amount": 454.37,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 471.33,
-        "CurrencyCode": "INR",
+        "Amount": 471.33,        
         "Category": "Household Supplies",
         "Description": "Laundry detergent"
       },
       {
-        "Amount": 991.99,
-        "CurrencyCode": "INR",
+        "Amount": 991.99,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1601.9,
-        "CurrencyCode": "INR",
+        "Amount": 1601.9,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 376.53,
-        "CurrencyCode": "INR",
+        "Amount": 376.53,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 563.73,
-        "CurrencyCode": "INR",
+        "Amount": 563.73,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 136.88,
-        "CurrencyCode": "INR",
+        "Amount": 136.88,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 2819.48,
-        "CurrencyCode": "INR",
+        "Amount": 2819.48,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 3867.46,
-        "CurrencyCode": "INR",
+        "Amount": 3867.46,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 4998.06,
-        "CurrencyCode": "INR",
+        "Amount": 4998.06,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 4811.83,
-        "CurrencyCode": "INR",
+        "Amount": 4811.83,        
         "Category": "Shopping",
         "Description": "Grocery shopping"
       },
       {
-        "Amount": 1814.18,
-        "CurrencyCode": "INR",
+        "Amount": 1814.18,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 841.77,
-        "CurrencyCode": "INR",
+        "Amount": 841.77,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 3691.36,
-        "CurrencyCode": "INR",
+        "Amount": 3691.36,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 4247.98,
-        "CurrencyCode": "INR",
+        "Amount": 4247.98,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 1433.22,
-        "CurrencyCode": "INR",
+        "Amount": 1433.22,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 3285.53,
-        "CurrencyCode": "INR",
+        "Amount": 3285.53,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 4409.62,
-        "CurrencyCode": "INR",
+        "Amount": 4409.62,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 2298.06,
-        "CurrencyCode": "INR",
+        "Amount": 2298.06,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 1615.69,
-        "CurrencyCode": "INR",
+        "Amount": 1615.69,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 4387.07,
-        "CurrencyCode": "INR",
+        "Amount": 4387.07,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 4776.72,
-        "CurrencyCode": "INR",
+        "Amount": 4776.72,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 444.27,
-        "CurrencyCode": "INR",
+        "Amount": 444.27,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 857.85,
-        "CurrencyCode": "INR",
+        "Amount": 857.85,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 954.77,
-        "CurrencyCode": "INR",
+        "Amount": 954.77,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 4825.15,
-        "CurrencyCode": "INR",
+        "Amount": 4825.15,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 3317.5,
-        "CurrencyCode": "INR",
+        "Amount": 3317.5,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 3525.51,
-        "CurrencyCode": "INR",
+        "Amount": 3525.51,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 2197.24,
-        "CurrencyCode": "INR",
+        "Amount": 2197.24,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 462.09,
-        "CurrencyCode": "INR",
+        "Amount": 462.09,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 950.99,
-        "CurrencyCode": "INR",
+        "Amount": 950.99,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 2074.85,
-        "CurrencyCode": "INR",
+        "Amount": 2074.85,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 4213.25,
-        "CurrencyCode": "INR",
+        "Amount": 4213.25,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 1723.81,
-        "CurrencyCode": "INR",
+        "Amount": 1723.81,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 2177.38,
-        "CurrencyCode": "INR",
+        "Amount": 2177.38,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4244.44,
-        "CurrencyCode": "INR",
+        "Amount": 4244.44,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 4072.74,
-        "CurrencyCode": "INR",
+        "Amount": 4072.74,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 1821.71,
-        "CurrencyCode": "INR",
+        "Amount": 1821.71,        
         "Category": "Electronics",
         "Description": "Laptop accessories"
       },
       {
-        "Amount": 1043.31,
-        "CurrencyCode": "INR",
+        "Amount": 1043.31,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 4806.24,
-        "CurrencyCode": "INR",
+        "Amount": 4806.24,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 1275.26,
-        "CurrencyCode": "INR",
+        "Amount": 1275.26,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 3490.07,
-        "CurrencyCode": "INR",
+        "Amount": 3490.07,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 4401.03,
-        "CurrencyCode": "INR",
+        "Amount": 4401.03,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 1948.84,
-        "CurrencyCode": "INR",
+        "Amount": 1948.84,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 4882.56,
-        "CurrencyCode": "INR",
+        "Amount": 4882.56,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 1650.81,
-        "CurrencyCode": "INR",
+        "Amount": 1650.81,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 490.43,
-        "CurrencyCode": "INR",
+        "Amount": 490.43,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 4110.8,
-        "CurrencyCode": "INR",
+        "Amount": 4110.8,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 2593.03,
-        "CurrencyCode": "INR",
+        "Amount": 2593.03,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 4352.13,
-        "CurrencyCode": "INR",
+        "Amount": 4352.13,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 4348.35,
-        "CurrencyCode": "INR",
+        "Amount": 4348.35,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 1367.39,
-        "CurrencyCode": "INR",
+        "Amount": 1367.39,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 4522.82,
-        "CurrencyCode": "INR",
+        "Amount": 4522.82,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 1546.58,
-        "CurrencyCode": "INR",
+        "Amount": 1546.58,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 3164.45,
-        "CurrencyCode": "INR",
+        "Amount": 3164.45,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4088.36,
-        "CurrencyCode": "INR",
+        "Amount": 4088.36,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 3328.57,
-        "CurrencyCode": "INR",
+        "Amount": 3328.57,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 3132.34,
-        "CurrencyCode": "INR",
+        "Amount": 3132.34,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 2880.69,
-        "CurrencyCode": "INR",
+        "Amount": 2880.69,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 1426.17,
-        "CurrencyCode": "INR",
+        "Amount": 1426.17,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 2573.13,
-        "CurrencyCode": "INR",
+        "Amount": 2573.13,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 4666.81,
-        "CurrencyCode": "INR",
+        "Amount": 4666.81,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 2757.65,
-        "CurrencyCode": "INR",
+        "Amount": 2757.65,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 2001.17,
-        "CurrencyCode": "INR",
+        "Amount": 2001.17,        
         "Category": "Restaurant",
         "Description": "Cafe visit"
       },
       {
-        "Amount": 3872.35,
-        "CurrencyCode": "INR",
+        "Amount": 3872.35,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4348.09,
-        "CurrencyCode": "INR",
+        "Amount": 4348.09,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 1583.02,
-        "CurrencyCode": "INR",
+        "Amount": 1583.02,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 1143.39,
-        "CurrencyCode": "INR",
+        "Amount": 1143.39,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 2615.02,
-        "CurrencyCode": "INR",
+        "Amount": 2615.02,        
         "Category": "Restaurant",
         "Description": "Dinner at restaurant"
       },
       {
-        "Amount": 1231.75,
-        "CurrencyCode": "INR",
+        "Amount": 1231.75,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 3854.94,
-        "CurrencyCode": "INR",
+        "Amount": 3854.94,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 2446.88,
-        "CurrencyCode": "INR",
+        "Amount": 2446.88,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 3072.95,
-        "CurrencyCode": "INR",
+        "Amount": 3072.95,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 1568.58,
-        "CurrencyCode": "INR",
+        "Amount": 1568.58,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 3374.75,
-        "CurrencyCode": "INR",
+        "Amount": 3374.75,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 3661.07,
-        "CurrencyCode": "INR",
+        "Amount": 3661.07,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 3439.93,
-        "CurrencyCode": "INR",
+        "Amount": 3439.93,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 4938.04,
-        "CurrencyCode": "INR",
+        "Amount": 4938.04,        
         "Category": "Groceries",
         "Description": "Vegetables and fruits"
       },
       {
-        "Amount": 1176.14,
-        "CurrencyCode": "INR",
+        "Amount": 1176.14,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 4671.24,
-        "CurrencyCode": "INR",
+        "Amount": 4671.24,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 1280.05,
-        "CurrencyCode": "INR",
+        "Amount": 1280.05,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 3835.07,
-        "CurrencyCode": "INR",
+        "Amount": 3835.07,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 177.31,
-        "CurrencyCode": "INR",
+        "Amount": 177.31,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3386.19,
-        "CurrencyCode": "INR",
+        "Amount": 3386.19,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 4051.05,
-        "CurrencyCode": "INR",
+        "Amount": 4051.05,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 3205.31,
-        "CurrencyCode": "INR",
+        "Amount": 3205.31,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 399.51,
-        "CurrencyCode": "INR",
+        "Amount": 399.51,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 2374.33,
-        "CurrencyCode": "INR",
+        "Amount": 2374.33,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 4635.28,
-        "CurrencyCode": "INR",
+        "Amount": 4635.28,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 627.5,
-        "CurrencyCode": "INR",
+        "Amount": 627.5,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 398.95,
-        "CurrencyCode": "INR",
+        "Amount": 398.95,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 1215.21,
-        "CurrencyCode": "INR",
+        "Amount": 1215.21,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 3180.5,
-        "CurrencyCode": "INR",
+        "Amount": 3180.5,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 4431.8,
-        "CurrencyCode": "INR",
+        "Amount": 4431.8,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 4636.02,
-        "CurrencyCode": "INR",
+        "Amount": 4636.02,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 437.28,
-        "CurrencyCode": "INR",
+        "Amount": 437.28,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 1661.58,
-        "CurrencyCode": "INR",
+        "Amount": 1661.58,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 3510.56,
-        "CurrencyCode": "INR",
+        "Amount": 3510.56,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 2526.74,
-        "CurrencyCode": "INR",
+        "Amount": 2526.74,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 1845.01,
-        "CurrencyCode": "INR",
+        "Amount": 1845.01,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 3221.62,
-        "CurrencyCode": "INR",
+        "Amount": 3221.62,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 3194.19,
-        "CurrencyCode": "INR",
+        "Amount": 3194.19,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 1033.21,
-        "CurrencyCode": "INR",
+        "Amount": 1033.21,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 3663.42,
-        "CurrencyCode": "INR",
+        "Amount": 3663.42,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 109.49,
-        "CurrencyCode": "INR",
+        "Amount": 109.49,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 576.26,
-        "CurrencyCode": "INR",
+        "Amount": 576.26,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 2985.88,
-        "CurrencyCode": "INR",
+        "Amount": 2985.88,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 4192.53,
-        "CurrencyCode": "INR",
+        "Amount": 4192.53,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 4177.48,
-        "CurrencyCode": "INR",
+        "Amount": 4177.48,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 3957.51,
-        "CurrencyCode": "INR",
+        "Amount": 3957.51,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 4307.86,
-        "CurrencyCode": "INR",
+        "Amount": 4307.86,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 4370.4,
-        "CurrencyCode": "INR",
+        "Amount": 4370.4,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 2921.24,
-        "CurrencyCode": "INR",
+        "Amount": 2921.24,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2963.66,
-        "CurrencyCode": "INR",
+        "Amount": 2963.66,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 304.57,
-        "CurrencyCode": "INR",
+        "Amount": 304.57,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 491.0,
-        "CurrencyCode": "INR",
+        "Amount": 491.0,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 4577.94,
-        "CurrencyCode": "INR",
+        "Amount": 4577.94,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 4746.98,
-        "CurrencyCode": "INR",
+        "Amount": 4746.98,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 3179.65,
-        "CurrencyCode": "INR",
+        "Amount": 3179.65,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 3954.11,
-        "CurrencyCode": "INR",
+        "Amount": 3954.11,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 2131.93,
-        "CurrencyCode": "INR",
+        "Amount": 2131.93,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 4617.8,
-        "CurrencyCode": "INR",
+        "Amount": 4617.8,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 3011.26,
-        "CurrencyCode": "INR",
+        "Amount": 3011.26,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 4963.97,
-        "CurrencyCode": "INR",
+        "Amount": 4963.97,        
         "Category": "Utilities",
         "Description": "Electricity bill"
       },
       {
-        "Amount": 2957.03,
-        "CurrencyCode": "INR",
+        "Amount": 2957.03,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 4159.64,
-        "CurrencyCode": "INR",
+        "Amount": 4159.64,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 4520.24,
-        "CurrencyCode": "INR",
+        "Amount": 4520.24,        
         "Category": "Flight Fare",
         "Description": "Flight to Mumbai"
       },
       {
-        "Amount": 691.26,
-        "CurrencyCode": "INR",
+        "Amount": 691.26,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 4078.92,
-        "CurrencyCode": "INR",
+        "Amount": 4078.92,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 3872.93,
-        "CurrencyCode": "INR",
+        "Amount": 3872.93,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 1959.21,
-        "CurrencyCode": "INR",
+        "Amount": 1959.21,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 227.95,
-        "CurrencyCode": "INR",
+        "Amount": 227.95,        
         "Category": "Groceries",
         "Description": "Monthly grocery bulk buy"
       },
       {
-        "Amount": 2732.09,
-        "CurrencyCode": "INR",
+        "Amount": 2732.09,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 3435.38,
-        "CurrencyCode": "INR",
+        "Amount": 3435.38,        
         "Category": "Utilities",
         "Description": "Electricity bill"
       },
       {
-        "Amount": 3902.52,
-        "CurrencyCode": "INR",
+        "Amount": 3902.52,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 4847.8,
-        "CurrencyCode": "INR",
+        "Amount": 4847.8,        
         "Category": "House Rent",
         "Description": "Monthly house rent"
       },
       {
-        "Amount": 2925.39,
-        "CurrencyCode": "INR",
+        "Amount": 2925.39,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 2140.46,
-        "CurrencyCode": "INR",
+        "Amount": 2140.46,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 1206.02,
-        "CurrencyCode": "INR",
+        "Amount": 1206.02,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 2608.79,
-        "CurrencyCode": "INR",
+        "Amount": 2608.79,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 401.98,
-        "CurrencyCode": "INR",
+        "Amount": 401.98,        
         "Category": "Flight Fare",
         "Description": "Holiday air fare"
       },
       {
-        "Amount": 1401.66,
-        "CurrencyCode": "INR",
+        "Amount": 1401.66,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 3376.96,
-        "CurrencyCode": "INR",
+        "Amount": 3376.96,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 3520.3,
-        "CurrencyCode": "INR",
+        "Amount": 3520.3,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 4676.73,
-        "CurrencyCode": "INR",
+        "Amount": 4676.73,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 3477.63,
-        "CurrencyCode": "INR",
+        "Amount": 3477.63,       
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 4692.58,
-        "CurrencyCode": "INR",
+        "Amount": 4692.58,        
         "Category": "Car Maintenance",
         "Description": "Brake check"
       },
       {
-        "Amount": 4923.93,
-        "CurrencyCode": "INR",
+        "Amount": 4923.93,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 3702.32,
-        "CurrencyCode": "INR",
+        "Amount": 3702.32,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 2928.31,
-        "CurrencyCode": "INR",
+        "Amount": 2928.31,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 2675.35,
-        "CurrencyCode": "INR",
+        "Amount": 2675.35,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 4239.32,
-        "CurrencyCode": "INR",
+        "Amount": 4239.32,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 4633.28,
-        "CurrencyCode": "INR",
+        "Amount": 4633.28,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 1634.69,
-        "CurrencyCode": "INR",
+        "Amount": 1634.69,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 2490.03,
-        "CurrencyCode": "INR",
+        "Amount": 2490.03,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 3492.88,
-        "CurrencyCode": "INR",
+        "Amount": 3492.88,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 669.57,
-        "CurrencyCode": "INR",
+        "Amount": 669.57,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 1099.08,
-        "CurrencyCode": "INR",
+        "Amount": 1099.08,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 137.96,
-        "CurrencyCode": "INR",
+        "Amount": 137.96,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 1486.04,
-        "CurrencyCode": "INR",
+        "Amount": 1486.04,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 2189.56,
-        "CurrencyCode": "INR",
+        "Amount": 2189.56,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 1470.48,
-        "CurrencyCode": "INR",
+        "Amount": 1470.48,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 1795.68,
-        "CurrencyCode": "INR",
+        "Amount": 1795.68,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 2538.41,
-        "CurrencyCode": "INR",
+        "Amount": 2538.41,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 4012.19,
-        "CurrencyCode": "INR",
+        "Amount": 4012.19,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
-        "Amount": 4770.07,
-        "CurrencyCode": "INR",
+        "Amount": 4770.07,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 3142.16,
-        "CurrencyCode": "INR",
+        "Amount": 3142.16,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 2258.1,
-        "CurrencyCode": "INR",
+        "Amount": 2258.1,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 4561.58,
-        "CurrencyCode": "INR",
+        "Amount": 4561.58,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 2501.29,
-        "CurrencyCode": "INR",
+        "Amount": 2501.29,        
         "Category": "Hotel",
         "Description": "Weekend getaway hotel"
       },
       {
-        "Amount": 3876.94,
-        "CurrencyCode": "INR",
+        "Amount": 3876.94,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 172.01,
-        "CurrencyCode": "INR",
+        "Amount": 172.01,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 4695.62,
-        "CurrencyCode": "INR",
+        "Amount": 4695.62,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 2042.81,
-        "CurrencyCode": "INR",
+        "Amount": 2042.81,        
         "Category": "Electronics",
         "Description": "Headphones"
       },
       {
-        "Amount": 2599.51,
-        "CurrencyCode": "INR",
+        "Amount": 2599.51,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 2865.4,
-        "CurrencyCode": "INR",
+        "Amount": 2865.4,        
         "Category": "Fuel",
         "Description": "Gas for car"
       },
       {
-        "Amount": 2797.85,
-        "CurrencyCode": "INR",
+        "Amount": 2797.85,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 1181.89,
-        "CurrencyCode": "INR",
+        "Amount": 1181.89,        
         "Category": "Utilities",
         "Description": "Gas connection bill"
       },
       {
-        "Amount": 1001.95,
-        "CurrencyCode": "INR",
+        "Amount": 1001.95,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 2533.05,
-        "CurrencyCode": "INR",
+        "Amount": 2533.05,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 4909.29,
-        "CurrencyCode": "INR",
+        "Amount": 4909.29,        
         "Category": "Restaurant",
         "Description": "Lunch with friends"
       },
       {
-        "Amount": 3751.57,
-        "CurrencyCode": "INR",
+        "Amount": 3751.57,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 147.18,
-        "CurrencyCode": "INR",
+        "Amount": 147.18,        
         "Category": "Childcare",
         "Description": "School supplies"
       },
       {
-        "Amount": 732.35,
-        "CurrencyCode": "INR",
+        "Amount": 732.35,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 3566.04,
-        "CurrencyCode": "INR",
+        "Amount": 3566.04,        
         "Category": "Electronics",
         "Description": "Mobile purchase"
       },
       {
-        "Amount": 1114.66,
-        "CurrencyCode": "INR",
+        "Amount": 1114.66,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 4890.73,
-        "CurrencyCode": "INR",
+        "Amount": 4890.73,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 3635.42,
-        "CurrencyCode": "INR",
+        "Amount": 3635.42,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 2411.22,
-        "CurrencyCode": "INR",
+        "Amount": 2411.22,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 4887.4,
-        "CurrencyCode": "INR",
+        "Amount": 4887.4,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 4249.31,
-        "CurrencyCode": "INR",
+        "Amount": 4249.31,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 1360.71,
-        "CurrencyCode": "INR",
+        "Amount": 1360.71,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 232.51,
-        "CurrencyCode": "INR",
+        "Amount": 232.51,        
         "Category": "Fuel",
         "Description": "Petrol refill"
       },
       {
-        "Amount": 388.03,
-        "CurrencyCode": "INR",
+        "Amount": 388.03,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 3595.69,
-        "CurrencyCode": "INR",
+        "Amount": 3595.69,        
         "Category": "Bank Fees",
         "Description": "Account maintenance fee"
       },
       {
-        "Amount": 3918.41,
-        "CurrencyCode": "INR",
+        "Amount": 3918.41,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 179.13,
-        "CurrencyCode": "INR",
+        "Amount": 179.13,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 2211.14,
-        "CurrencyCode": "INR",
+        "Amount": 2211.14,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 4306.72,
-        "CurrencyCode": "INR",
+        "Amount": 4306.72,        
         "Category": "Flight Fare",
         "Description": "Business trip flight"
       },
       {
-        "Amount": 2104.91,
-        "CurrencyCode": "INR",
+        "Amount": 2104.91,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 3937.72,
-        "CurrencyCode": "INR",
+        "Amount": 3937.72,        
         "Category": "Shopping",
         "Description": "Mall shopping"
       },
       {
-        "Amount": 2005.46,
-        "CurrencyCode": "INR",
+        "Amount": 2005.46,        
         "Category": "Investments",
         "Description": "Crypto investment"
       },
       {
-        "Amount": 630.13,
-        "CurrencyCode": "INR",
+        "Amount": 630.13,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 4497.48,
-        "CurrencyCode": "INR",
+        "Amount": 4497.48,        
         "Category": "Pet Care",
         "Description": "Pet food"
       },
       {
-        "Amount": 1684.82,
-        "CurrencyCode": "INR",
+        "Amount": 1684.82,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 4346.38,
-        "CurrencyCode": "INR",
+        "Amount": 4346.38,        
         "Category": "Office Supplies",
         "Description": "Stationery items"
       },
       {
-        "Amount": 2829.27,
-        "CurrencyCode": "INR",
+        "Amount": 2829.27,        
         "Category": "Car Maintenance",
         "Description": "Oil change"
       },
       {
-        "Amount": 937.82,
-        "CurrencyCode": "INR",
+        "Amount": 937.82,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 1398.57,
-        "CurrencyCode": "INR",
+        "Amount": 1398.57,        
         "Category": "House Rent",
         "Description": "Advance rent payment"
       },
       {
-        "Amount": 539.09,
-        "CurrencyCode": "INR",
+        "Amount": 539.09,        
         "Category": "Fuel",
         "Description": "Diesel refill"
       },
       {
-        "Amount": 1022.65,
-        "CurrencyCode": "INR",
+        "Amount": 1022.65,        
         "Category": "Personal Care",
         "Description": "Spa treatment"
       },
       {
-        "Amount": 2337.11,
-        "CurrencyCode": "INR",
+        "Amount": 2337.11,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 2254.8,
-        "CurrencyCode": "INR",
+        "Amount": 2254.8,        
         "Category": "Childcare",
         "Description": "Tuition fees"
       },
       {
-        "Amount": 4908.13,
-        "CurrencyCode": "INR",
+        "Amount": 4908.13,        
         "Category": "Medicine",
         "Description": "Prescription refill"
       },
       {
-        "Amount": 2921.2,
-        "CurrencyCode": "INR",
+        "Amount": 2921.2,        
         "Category": "Pet Care",
         "Description": "Pet grooming"
       },
       {
-        "Amount": 3851.07,
-        "CurrencyCode": "INR",
+        "Amount": 3851.07,        
         "Category": "Restaurant",
         "Description": "Takeaway food"
       },
       {
-        "Amount": 3914.95,
-        "CurrencyCode": "INR",
+        "Amount": 3914.95,        
         "Category": "Shopping",
         "Description": "Clothing purchase"
       },
       {
-        "Amount": 1480.23,
-        "CurrencyCode": "INR",
+        "Amount": 1480.23,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 1516.93,
-        "CurrencyCode": "INR",
+        "Amount": 1516.93,        
         "Category": "Utilities",
         "Description": "Water bill"
       },
       {
-        "Amount": 3324.53,
-        "CurrencyCode": "INR",
+        "Amount": 3324.53,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 4953.76,
-        "CurrencyCode": "INR",
+        "Amount": 4953.76,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 3353.69,
-        "CurrencyCode": "INR",
+        "Amount": 3353.69,        
         "Category": "Childcare",
         "Description": "Toys for kids"
       },
       {
-        "Amount": 3713.37,
-        "CurrencyCode": "INR",
+        "Amount": 3713.37,        
         "Category": "Groceries",
         "Description": "Weekly groceries"
       },
       {
-        "Amount": 4154.91,
-        "CurrencyCode": "INR",
+        "Amount": 4154.91,        
         "Category": "Entertainment",
         "Description": "Theme park visit"
       },
       {
-        "Amount": 1862.51,
-        "CurrencyCode": "INR",
+        "Amount": 1862.51,        
         "Category": "Office Supplies",
         "Description": "Printer ink"
       },
       {
-        "Amount": 3031.76,
-        "CurrencyCode": "INR",
+        "Amount": 3031.76,        
         "Category": "Office Supplies",
         "Description": "Office chair"
       },
       {
-        "Amount": 783.88,
-        "CurrencyCode": "INR",
+        "Amount": 783.88,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 893.6,
-        "CurrencyCode": "INR",
+        "Amount": 893.6,        
         "Category": "Household Supplies",
         "Description": "Cleaning supplies"
       },
       {
-        "Amount": 480.08,
-        "CurrencyCode": "INR",
+        "Amount": 480.08,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 4593.79,
-        "CurrencyCode": "INR",
+        "Amount": 4593.79,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 1976.57,
-        "CurrencyCode": "INR",
+        "Amount": 1976.57,        
         "Category": "Personal Care",
         "Description": "Skincare purchase"
       },
       {
-        "Amount": 639.99,
-        "CurrencyCode": "INR",
+        "Amount": 639.99,        
         "Category": "Personal Care",
         "Description": "Salon visit"
       },
       {
-        "Amount": 3359.23,
-        "CurrencyCode": "INR",
+        "Amount": 3359.23,        
         "Category": "Shopping",
         "Description": "Online shopping"
       },
       {
-        "Amount": 4602.28,
-        "CurrencyCode": "INR",
+        "Amount": 4602.28,        
         "Category": "Entertainment",
         "Description": "Concert entry"
       },
       {
-        "Amount": 3137.13,
-        "CurrencyCode": "INR",
+        "Amount": 3137.13,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 4760.0,
-        "CurrencyCode": "INR",
+        "Amount": 4760.0,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 3329.84,
-        "CurrencyCode": "INR",
+        "Amount": 3329.84,        
         "Category": "Hotel",
         "Description": "Hotel stay in Delhi"
       },
       {
-        "Amount": 3133.69,
-        "CurrencyCode": "INR",
+        "Amount": 3133.69,        
         "Category": "Hotel",
         "Description": "Business accommodation"
       },
       {
-        "Amount": 2221.21,
-        "CurrencyCode": "INR",
+        "Amount": 2221.21,        
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
-        "Amount": 3223.24,
-        "CurrencyCode": "INR",
+        "Amount": 3223.24,        
         "Category": "Bank Fees",
         "Description": "ATM fee"
       },
       {
-        "Amount": 4349.9,
-        "CurrencyCode": "INR",
+        "Amount": 4349.9,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 2232.42,
-        "CurrencyCode": "INR",
+        "Amount": 2232.42,        
         "Category": "Entertainment",
         "Description": "Movie ticket"
       },
       {
-        "Amount": 3033.37,
-        "CurrencyCode": "INR",
+        "Amount": 3033.37,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 4063.21,
-        "CurrencyCode": "INR",
+        "Amount": 4063.21,        
         "Category": "Investments",
         "Description": "Mutual fund"
       },
       {
-        "Amount": 1292.04,
-        "CurrencyCode": "INR",
+        "Amount": 1292.04,        
         "Category": "Pet Care",
         "Description": "Vet visit"
       },
       {
         "Amount": 4693.59,
-        "CurrencyCode": "INR",
         "Category": "Medicine",
         "Description": "Pharmacy visit"
       },
       {
         "Amount": 620.88,
-        "CurrencyCode": "INR",
         "Category": "Investments",
         "Description": "Stock purchase"
       },
       {
-        "Amount": 2927.23,
-        "CurrencyCode": "INR",
+        "Amount": 2927.23,        
         "Category": "Entertainment",
         "Description": "Streaming subscription"
       },
       {
-        "Amount": 737.66,
-        "CurrencyCode": "INR",
+        "Amount": 737.66,        
         "Category": "Bank Fees",
         "Description": "Overdraft charge"
       },
       {
-        "Amount": 2595.64,
-        "CurrencyCode": "INR",
+        "Amount": 2595.64,        
         "Category": "Utilities",
         "Description": "Internet charges"
       },
       {
-        "Amount": 4718.24,
-        "CurrencyCode": "INR",
+        "Amount": 4718.24,        
         "Category": "Investments",
         "Description": "Stock purchase"
       },

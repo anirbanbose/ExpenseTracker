@@ -18,9 +18,8 @@ public partial class UserPreference : Entity<UserId>
         return userPreference;
     }
 
-    public void Update(CurrencyId preferredCurrencyId, bool sendMonthlyExpenseReportMail, bool sendDailyExpenseReportMail)
+    public void Update(bool sendMonthlyExpenseReportMail, bool sendDailyExpenseReportMail)
     {
-        PreferredCurrencyId = preferredCurrencyId;
         SendMonthlyExpenseReportMail = sendMonthlyExpenseReportMail;
         SendDailyExpenseReportMail = sendDailyExpenseReportMail;
     }

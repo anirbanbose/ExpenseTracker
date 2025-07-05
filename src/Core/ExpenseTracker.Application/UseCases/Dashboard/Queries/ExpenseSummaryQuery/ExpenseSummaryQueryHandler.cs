@@ -35,14 +35,14 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
                 DateTime today = DateTime.UtcNow;
                 var startDate = new DateTime(today.Year, today.Month, 1).AddMonths(-11);
 
-                IEnumerable<string> totalExpenses = GetYearTotalExpenses(expenses, today, startDate, request.YearTotalExpenseRecordCount);
+                IEnumerable<string> totalExpenses = GetYearTotalExpenses(expenses, today, startDate);
 
                 int currentMonth = today.Month;
                 int currentYear = today.Year;
 
-                IEnumerable<string> monthTotalExpenses = GetMonthTotalExpenses(expenses, currentMonth, currentYear, request.MonthTotalExpenseRecordCount);
+                IEnumerable<string> monthTotalExpenses = GetMonthTotalExpenses(expenses, currentMonth, currentYear);
 
-                IEnumerable<CategoryExpenseDTO> categoryHighestExpenses = GetCategoryTotalExpenses(expenses, currentMonth, currentYear, request.CategoryTotalExpenseRecordCount);
+                IEnumerable<CategoryExpenseDTO> categoryHighestExpenses = GetCategoryTotalExpenses(expenses, currentMonth, currentYear);
 
                 var expenseSummaryDTO = new ExpenseSummaryDTO
                 {
@@ -60,12 +60,12 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
         return Result<ExpenseSummaryDTO>.FailureResult("DashboardSummary.ExpenseSummary", "Couldn't fetch expense summary data.");
     }
 
-    private static IEnumerable<CategoryExpenseDTO> GetCategoryTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, int currentMonth, int currentYear, int recordCount)
+    private static IEnumerable<CategoryExpenseDTO> GetCategoryTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, int currentMonth, int currentYear)
     {
         return expenses.Where(d => d.ExpenseDate.Month == currentMonth && d.ExpenseDate.Year == currentYear)
                         .GroupBy(e => new
                         {
-                            CurrencyKey = $"{e.ExpenseAmount.CurrencyCode}{(!string.IsNullOrEmpty(e.ExpenseAmount.CurrencySymbol) ? " " + e.ExpenseAmount.CurrencySymbol : "")}",
+                            CurrencyKey = !string.IsNullOrEmpty(e.ExpenseAmount.CurrencySymbol) ? e.ExpenseAmount.CurrencySymbol : e.ExpenseAmount.CurrencyCode,
                             e.Category
                         })
                         .Select(g => new
@@ -75,38 +75,38 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
                             Total = g.Sum(x => x.ExpenseAmount.Amount)
                         })
                         .OrderByDescending(x => x.Total)
-                        .Take(recordCount)
+                        .Take(1)
                         .Select(x => new CategoryExpenseDTO(
                             x.Category.Name,
                             $"{x.Currency}{decimal.Round(x.Total, 2, MidpointRounding.ToEven):N2}"
                         ));
     }
 
-    private static IEnumerable<string> GetMonthTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, int currentMonth, int currentYear, int recordCount)
+    private static IEnumerable<string> GetMonthTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, int currentMonth, int currentYear)
     {
         return expenses.Where(d => d.ExpenseDate.Month == currentMonth && d.ExpenseDate.Year == currentYear)
-                        .GroupBy(e => new { CurrencyKey = $"{e.ExpenseAmount.CurrencyCode}{(!string.IsNullOrEmpty(e.ExpenseAmount.CurrencySymbol) ? " " + e.ExpenseAmount.CurrencySymbol : "")}" })
+                        .GroupBy(e => new { CurrencyKey = !string.IsNullOrEmpty(e.ExpenseAmount.CurrencySymbol) ? e.ExpenseAmount.CurrencySymbol : e.ExpenseAmount.CurrencyCode })
                         .Select(g => new
                         {
                             Currency = g.Key.CurrencyKey,
                             Total = g.Sum(x => x.ExpenseAmount.Amount)
                         })
                         .OrderByDescending(d => d.Total)
-                        .Take(recordCount)
+                        .Take(1)
                         .Select(g => $"{g.Currency}{decimal.Round(g.Total, 2, MidpointRounding.ToEven):N2}");
     }
 
-    private static IEnumerable<string> GetYearTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, DateTime today, DateTime startDate, int recordCount)
+    private static IEnumerable<string> GetYearTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, DateTime today, DateTime startDate)
     {
         return expenses.Where(e => e.ExpenseDate >= startDate && e.ExpenseDate <= today)
-                        .GroupBy(e => new { CurrencyKey = $"{e.ExpenseAmount.CurrencyCode}{(!string.IsNullOrEmpty(e.ExpenseAmount.CurrencySymbol) ? " " + e.ExpenseAmount.CurrencySymbol : "")}" })
+                        .GroupBy(e => new { CurrencyKey = !string.IsNullOrEmpty(e.ExpenseAmount.CurrencySymbol) ? e.ExpenseAmount.CurrencySymbol : e.ExpenseAmount.CurrencyCode })
                         .Select(g => new
                         {
                             Currency = g.Key.CurrencyKey,
                             Total = g.Sum(x => x.ExpenseAmount.Amount)
                         })
                         .OrderByDescending(d => d.Total)
-                        .Take(recordCount)
+                        .Take(1)
                         .Select(d => $"{d.Currency}{decimal.Round(d.Total, 2, MidpointRounding.ToEven):N2}");
     }
 }

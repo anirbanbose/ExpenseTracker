@@ -37,11 +37,6 @@ public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
                 .IsRequired()
                 .HasColumnName("Amount");
 
-            money.Property(m => m.CurrencyId)
-                .HasColumnType("uniqueidentifier")
-                .IsRequired()
-                .HasColumnName("CurrencyId");
-
             money.Property(m => m.CurrencyCode)
                 .HasMaxLength(10)
                 .IsRequired()

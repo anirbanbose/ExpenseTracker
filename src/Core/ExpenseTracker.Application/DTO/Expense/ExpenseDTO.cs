@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.Application.DTO.Expense;
 
-public record ExpenseDTO(Guid Id, string? Description, decimal ExpenseAmount, DateTime ExpenseDate, ExpenseCategoryDTO Category, Guid CurrencyId)
+public record ExpenseDTO(Guid Id, string? Description, decimal ExpenseAmount, DateTime ExpenseDate, ExpenseCategoryDTO Category, string CurrencyCode)
 {
     public static ExpenseDTO FromDomain(Domain.Models.Expense expense)
     {
@@ -12,6 +12,6 @@ public record ExpenseDTO(Guid Id, string? Description, decimal ExpenseAmount, Da
             expense.ExpenseAmount.Amount, 
             expense.ExpenseDate, 
             new ExpenseCategoryDTO(expense.Category.Id, expense.Category.Name, expense.Category.IsSystemCategory, expense.Category.Expenses.Count ), 
-            expense.ExpenseAmount.CurrencyId);
+            expense.ExpenseAmount.CurrencyCode);
     }
 }

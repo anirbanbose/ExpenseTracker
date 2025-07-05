@@ -23,58 +23,46 @@ public class ExpensePdfReportGenerator : IPdfReportGenerator<ExpenseReportDTO>
                 page.Content().Background(Colors.White).Padding(5)
                 .Column(column =>
                 {
-                    int currentCurrencyCount = 0;
-                    foreach (var item in expenseReport.groupedExpenseReportData)
+                    column.Item().DefaultTextStyle(t => t.FontSize(10)).Table(table =>
                     {
-                        if (item.currency is not null)
+                        table.ColumnsDefinition(columns => { columns.ConstantColumn(30); columns.RelativeColumn(1); columns.RelativeColumn(2); ; columns.RelativeColumn(3); ; columns.RelativeColumn(1); });
+                        
+                        table.Header(header =>
                         {
-                            column.Item().PaddingBottom(10).Background(Colors.Grey.Lighten2).AlignCenter().AlignMiddle().Text($"{item.currency.Name} Expenses").FontSize(14).Bold();
-                        }
-
-                        column.Item().Table(table =>
+                            header.Cell().Text("#").Bold();
+                            header.Cell().Text("Date").Bold();
+                            header.Cell().Text("Category").Bold();
+                            header.Cell().Text("Description").Bold();
+                            header.Cell().AlignRight().Text("Amount").Bold();
+                        });
+                        int rowCount = 0;
+                        int totalCount = expenseReport.reportData.Count;
+                        foreach (var expense in expenseReport.reportData)
                         {
-                            table.ColumnsDefinition(columns => { columns.RelativeColumn(); columns.RelativeColumn(); ; columns.RelativeColumn(); ; columns.RelativeColumn(); });
-
-                            table.Header(header =>
+                            rowCount++;
+                            if (rowCount == totalCount)
                             {
-                                header.Cell().Text("Date").Bold();
-                                header.Cell().Text("Category").Bold();
-                                header.Cell().Text("Description").Bold();
-                                header.Cell().AlignRight().Text("Amount").Bold();
-                            });
-                            int rowCount = 0;
-                            int totalCount = item.reportData.Count;
-                            foreach (var expense in item.reportData)
+                                table.Cell().PaddingBottom(8).Text(rowCount.ToString());
+                                table.Cell().PaddingBottom(8).Text(expense.ExpenseDate.Date.ToString("dd MMM yyyy"));
+                                table.Cell().PaddingBottom(8).Text(expense.Category);
+                                table.Cell().PaddingBottom(8).Text(expense.Description?.Truncate(50, true));
+                                table.Cell().PaddingBottom(8).AlignRight().Text(expense.ExpenseAmount);
+                            }
+                            else
                             {
-                                rowCount++;
-                                if(rowCount == totalCount)
-                                {
-                                    table.Cell().PaddingBottom(8).Text(expense.ExpenseDate.Date.ToString("dd MMM yyyy"));
-                                    table.Cell().PaddingBottom(8).Text(expense.Category);
-                                    table.Cell().PaddingBottom(8).Text(expense.Description?.Truncate(20,true));
-                                    table.Cell().PaddingBottom(8).AlignRight().Text(expense.ExpenseAmount);
-                                }
-                                else
-                                {
-                                    table.Cell().Text(expense.ExpenseDate.Date.ToString("dd MMM yyyy"));
-                                    table.Cell().Text(expense.Category);
-                                    table.Cell().Text(expense.Description?.Truncate(20, true));
-                                    table.Cell().AlignRight().Text(expense.ExpenseAmount);
-                                }
-                                
+                                table.Cell().Text(rowCount.ToString());
+                                table.Cell().Text(expense.ExpenseDate.Date.ToString("dd MMM yyyy"));
+                                table.Cell().Text(expense.Category);
+                                table.Cell().Text(expense.Description?.Truncate(50, true));
+                                table.Cell().AlignRight().Text(expense.ExpenseAmount);
                             }
 
-                            table.Cell().ColumnSpan(3).BorderTop(1).Text("Total").Bold();
-                            table.Cell().BorderTop(1).AlignRight().Text(item.formattedTotalAmmount).Bold();
-
-                        });
-                        currentCurrencyCount++;
-
-                        if (currentCurrencyCount < expenseReport.groupedExpenseReportData.Count)
-                        {
-                            column.Item().PageBreak();
                         }
-                    }                    
+
+                        table.Cell().ColumnSpan(4).BorderTop(1).Text("Total").Bold();
+                        table.Cell().BorderTop(1).AlignRight().Text(expenseReport.formattedTotalAmmount).Bold();
+
+                    });
                 });                    
 
                 page.Footer().Height(20).Background(Colors.Grey.Lighten1).AlignCenter().AlignMiddle().Text(x =>

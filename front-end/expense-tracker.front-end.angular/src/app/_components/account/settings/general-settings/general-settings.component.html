@@ -5,18 +5,6 @@
 
     <mat-card-content>
         <form [formGroup]="settingsForm" (ngSubmit)="saveSettings()">
-            <mat-form-field class="full-width">
-                <mat-label>Preferred Currency </mat-label>
-                <mat-select id="preferredCurrencyId" formControlName="preferredCurrencyId" required>
-                    <mat-option *ngFor="let c of currencies" [value]="c.value">
-                        {{ c.text }}
-                    </mat-option>
-                </mat-select>
-                <mat-error
-                    *ngIf="showValidationError('preferredCurrencyId') && settingsForm.controls['preferredCurrencyId'].hasError('required')">
-                    Preferred currency is <strong>required</strong>.
-                </mat-error>
-            </mat-form-field>
             <div class="checkbox-container">
                 <mat-checkbox color="primary" formControlName="enableMonthlyExpenseReportMail">Enable Monthly Report
                     Mail</mat-checkbox>

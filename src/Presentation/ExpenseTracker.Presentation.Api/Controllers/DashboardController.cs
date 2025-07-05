@@ -52,9 +52,9 @@ namespace ExpenseTracker.Presentation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> ExpenseSummary(int yearRecordCount, int monthRecordCount, int categoryRecordCount)
+        public async Task<IActionResult> ExpenseSummary()
         {
-            var expenseSummaryResult = await _sender.Send(new ExpenseSummaryQuery(yearRecordCount, monthRecordCount, categoryRecordCount));
+            var expenseSummaryResult = await _sender.Send(new ExpenseSummaryQuery());
             if (expenseSummaryResult is not null && expenseSummaryResult.IsSuccess)
             {
                 return Ok(expenseSummaryResult);

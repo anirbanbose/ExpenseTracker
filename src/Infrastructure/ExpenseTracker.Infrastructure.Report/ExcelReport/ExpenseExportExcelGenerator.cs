@@ -4,9 +4,9 @@ using ExpenseTracker.Application.DTO.Report;
 
 namespace ExpenseTracker.Infrastructure.Report;
 
-public class ExpenseExportExcelGenerator : IExcelReportGenerator<List<ExpenseReportDataDTO>>
+public class ExpenseExportExcelGenerator : IExcelReportGenerator<List<ExpenseReportDataItemDTO>>
 {
-    public Task<byte[]> GenerateAsync(List<ExpenseReportDataDTO> exportData)
+    public Task<byte[]> GenerateAsync(List<ExpenseReportDataItemDTO> exportData)
     {
         using var wb = new XLWorkbook();
         var ws = wb.AddWorksheet("Expense Export");

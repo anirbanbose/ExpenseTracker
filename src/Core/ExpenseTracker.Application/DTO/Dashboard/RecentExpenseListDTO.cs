@@ -4,6 +4,6 @@ public record RecentExpenseListDTO(DateTime ExpenseDate, string ExpenseCategory,
 {
     public static RecentExpenseListDTO FromDomain(Domain.Models.Expense expense)
     {
-        return new RecentExpenseListDTO(expense.ExpenseDate, expense.Category.Name, expense.ExpenseAmount.FormattedAmount);
+        return new RecentExpenseListDTO(expense.ExpenseDate, expense.Category.Name, expense.ExpenseAmount.ToString());
     }
 }

@@ -16,15 +16,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-        <mat-label>Currency </mat-label>
-        <mat-select id="currency" formControlName="currency">
-            <mat-option *ngFor="let c of currencies" [value]="c.value">
-                {{ c.text }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
         <mat-label>Start Date</mat-label>
         <input matInput [matDatepicker]="startPicker" formControlName="startDate" />
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>

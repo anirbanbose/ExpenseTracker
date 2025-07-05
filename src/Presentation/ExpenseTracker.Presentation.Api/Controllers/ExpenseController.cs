@@ -56,17 +56,16 @@ public class ExpenseController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<IActionResult> SearchExpenses(string? search, string? categoryId, string? currencyId, string? startDate, string? endDate, int pageIndex = 0, int pageSize = 10, int order = 2, bool isAscending = false)
+    public async Task<IActionResult> SearchExpenses(string? search, string? categoryId, string? startDate, string? endDate, int pageIndex = 0, int pageSize = 10, ExpenseListOrder order = ExpenseListOrder.ExpenseDate, bool isAscending = false)
     {        
         SearchExpensesQuery query = new SearchExpensesQuery(
                 search: search,
                 expenseCategoryId: categoryId.IsGuid() ? categoryId!.ToGuid() : null,
-                currencyId: currencyId.IsGuid() ? currencyId!.ToGuid() : null,
                 startDate: startDate.IsDate() ? startDate!.ToDate() : null,
                 endDate: endDate.IsDate() ? endDate!.ToDate() : null,
                 pageIndex: pageIndex,
                 pageSize: pageSize,
-                order: (ExpenseListOrder)order,
+                order: order,
                 IsAscendingSort: isAscending
             );
         PagedResult<ExpenseListDTO> expenseListResult = await _sender.Send(query);

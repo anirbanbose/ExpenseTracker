@@ -24,12 +24,11 @@ public class ReportController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> ExpenseExport(string? search, string? categoryId, string? currencyId, string? startDate, string? endDate, ExpenseListOrder order = ExpenseListOrder.ExpenseDate, bool isAscending = false, ReportFormat reportFormat = ReportFormat.Excel )
+    public async Task<IActionResult> ExpenseExport(string? search, string? categoryId, string? startDate, string? endDate, ExpenseListOrder order = ExpenseListOrder.ExpenseDate, bool isAscending = false, ReportFormat reportFormat = ReportFormat.Excel )
     {
         ExpenseExportQuery query = new ExpenseExportQuery(
             search: search,
             expenseCategoryId: categoryId.IsGuid() ? categoryId!.ToGuid() : null,
-            currencyId: currencyId.IsGuid() ? currencyId!.ToGuid() : null,
             startDate: startDate.IsDate() ? startDate!.ToDate() : null,
             endDate: endDate.IsDate() ? endDate!.ToDate() : null,
             order: order,

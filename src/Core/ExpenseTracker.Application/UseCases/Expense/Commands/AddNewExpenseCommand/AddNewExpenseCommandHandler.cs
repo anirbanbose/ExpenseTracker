@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Application.DTO.Dashboard;
-using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.Utils;
@@ -40,20 +39,27 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
             if (failureResult != null)
                 return failureResult;
 
+            var userPreference = currentUser?.Preference;
+            if (userPreference is null)
+            {
+                _logger.LogWarning($"User preference not found for user: {CurrentUserName}.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Adding new expense failed.");
+            }
+
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.CategoryId, cancellationToken);
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense category with Id - {request.CategoryId} not found.");
                 return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Expense category not found.");
             }
-            var currency = await _currencyRepository.GetCurrencyByIdAsync(request.CurrencyId, cancellationToken);
+            var currency = await _currencyRepository.GetCurrencyByIdAsync(userPreference.PreferredCurrencyId, cancellationToken);
             if (currency is null)
             {
-                _logger.LogWarning($"Currency with Id {request.CurrencyId} not found.");
+                _logger.LogWarning($"Currency with Id {userPreference.PreferredCurrencyId} not found.");
                 return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Currency not found.");
             }
             var expense = new Domain.Models.Expense(
-                    new Money(request.Amount, currency.Id, currency.Code, currency.Symbol), 
+                    new Money(request.Amount, currency.Code, currency.Symbol), 
                     request.Description, 
                     expenseCategory.Id, 
                     request.ExpenseDate.ToDate(), 

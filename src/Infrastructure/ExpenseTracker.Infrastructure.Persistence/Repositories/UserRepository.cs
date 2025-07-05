@@ -18,7 +18,7 @@ public class UserRepository(ApplicationDbContext dbContext) : BaseRepository<Use
 
     public async Task<User?> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        return await TableNoTracking
+        return await TableNoTracking.Include(d => d.Preference).AsSplitQuery()
             .FirstOrDefaultAsync(d => string.Equals(d.Email.ToLower(), email.ToLower()), cancellationToken);
     }
 

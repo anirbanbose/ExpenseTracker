@@ -54,6 +54,7 @@ export class ExpenseAddEditComponent implements OnInit {
   private _expenseCategoryService = inject(ExpenseCategoryService);
   private _expenseService = inject(ExpenseService);
   private _currencyService = inject(CurrencyService);
+  currencyPrefix: string = '';
   filteredCategoryOptions!: Observable<any[]>;
   pageTitle = 'Add Expense';
   breadcrumbItems = [
@@ -63,14 +64,12 @@ export class ExpenseAddEditComponent implements OnInit {
   ];
 
   expenseCategories: any[] = [];
-  currencies: any[] = [];
   expenseForm: FormGroup = this.fb.group({
     id: [null],
     amount: [null, [Validators.required]],
     description: [null],
     expenseDate: [new Date(), [Validators.required]],
-    category: [null, [Validators.required]],
-    currency: [null, [Validators.required]],
+    category: [null, [Validators.required]]
   });
   isFormSubmitted = false;
 
@@ -79,7 +78,6 @@ export class ExpenseAddEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getExpenseCategories();
-    this.getCurrencies();
     this.getPreferredCurrency();
 
     this.activatedRoute.paramMap.subscribe(params => {
@@ -113,7 +111,6 @@ export class ExpenseAddEditComponent implements OnInit {
         amount: formValue.amount,
         description: formValue.description,
         categoryId: formValue.category?.id,
-        currencyId: formValue.currency,
         expenseDate: this._helperService.getDateOnly(formValue.expenseDate),
       };
       if (this.id && formValue.id) {
@@ -207,27 +204,6 @@ export class ExpenseAddEditComponent implements OnInit {
     });
   }
 
-  getCurrencies(): void {
-    this._currencyService.getCurrenciesForSelect().subscribe({
-      next: (data: any) => {
-        if (data && data.length > 0) {
-          this.currencies = data;
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == 401) {
-          //this._helperService.handle401Error(this._snackBar, this._authService);
-        }
-        else if (err.error?.errorMessage) {
-
-        }
-        else {
-
-        }
-      }
-    });
-  }
-
   displayFn(obj: any): string {
     return obj ? obj.name : '';
   }
@@ -237,9 +213,7 @@ export class ExpenseAddEditComponent implements OnInit {
     this._currencyService.getPreferredCurrency().subscribe({
       next: (data: any) => {
         if (data) {
-          this.expenseForm.patchValue({
-            currency: data.id
-          });
+          this.currencyPrefix = data.shortCurrencyPrefix;
         }
         else {
         }

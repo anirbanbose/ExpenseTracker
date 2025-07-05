@@ -37,14 +37,11 @@ export class ExpenseAdvancedSearchComponent implements OnInit {
   @Output() advancedSearch: EventEmitter<any> = new EventEmitter();
   filteredCategories!: Observable<any[]>;
   expenseCategories: any[] = [];
-  currencies: any[] = [];
   private _expenseCategoryService = inject(ExpenseCategoryService);
-  private _currencyService = inject(CurrencyService);
 
   searchForm: FormGroup = this.fb.group({
     searchText: [''],
     category: [null],
-    currency: [null],
     startDate: [null],
     endDate: [null]
   });
@@ -54,7 +51,6 @@ export class ExpenseAdvancedSearchComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe(params => {
       this.searchForm.patchValue({
         searchText: params.get('q'),
-        currency: params.get('cu'),
         startDate: params.get('sd'),
         endDate: params.get('ed')
       });
@@ -64,7 +60,6 @@ export class ExpenseAdvancedSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getExpenseCategories();
-    this.getCurrencies();
     this.searchForm.valueChanges.pipe(
       startWith(null),
       map((value: any) => {
@@ -133,26 +128,6 @@ export class ExpenseAdvancedSearchComponent implements OnInit {
     return obj ? obj.name : '';
   }
 
-  getCurrencies(): void {
-    this._currencyService.getCurrenciesForSelect().subscribe({
-      next: (data: any) => {
-        if (data && data.length > 0) {
-          this.currencies = data;
-        }
-      },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == 401) {
-          //this._helperService.handle401Error(this._snackBar, this._authService);
-        }
-        else if (err.error?.errorMessage) {
-
-        }
-        else {
-
-        }
-      }
-    });
-  }
 
   resetSearch(): void {
     this.searchForm.patchValue({
@@ -168,7 +143,6 @@ export class ExpenseAdvancedSearchComponent implements OnInit {
     this.advancedSearch.emit({
       searchText: this.searchForm.value.searchText,
       category: this.searchForm.value.category?.id,
-      currency: this.searchForm.value.currency,
       startDate: this.searchForm.value.startDate,
       endDate: this.searchForm.value.endDate,
     });

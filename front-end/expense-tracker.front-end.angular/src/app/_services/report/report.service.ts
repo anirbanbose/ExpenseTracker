@@ -10,11 +10,10 @@ export class ReportService {
 
   constructor() { }
 
-  downloadExpenseExport(search: string | null = null, categoryId: string | null = null, currencyId: string | null = null, startDate: string | null = null, endDate: string | null = null, order: number = 2, isAscending: boolean = false, format: 1 | 2 = 1) {
+  downloadExpenseExport(search: string | null = null, categoryId: string | null = null, startDate: string | null = null, endDate: string | null = null, order: number = 2, isAscending: boolean = false, format: 1 | 2 = 1) {
     const params = new HttpParams()
       .set('search', search ?? '')
       .set('categoryId', categoryId ?? '')
-      .set('currencyId', currencyId ?? '')
       .set('startDate', startDate ?? '')
       .set('endDate', endDate ?? '')
       .set('order', order)

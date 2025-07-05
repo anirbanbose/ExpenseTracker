@@ -28,9 +28,6 @@ export class DashboardComponent implements OnInit {
   ];
   private _dashboardService = inject(DashboardService);
   summaryData: any = {};
-  yearRecordCount: number = 2;
-  monthRecordCount: number = 2;
-  categoryRecordCount: number = 1;
 
 
   ngOnInit(): void {
@@ -43,7 +40,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getExpenseSummary() {
-    this._dashboardService.getExpenseSummary(this.yearRecordCount, this.monthRecordCount, this.categoryRecordCount).subscribe({
+    this._dashboardService.getExpenseSummary().subscribe({
       next: (response: any) => {
         if (response.isSuccess) {
           this.summaryData = response.value;

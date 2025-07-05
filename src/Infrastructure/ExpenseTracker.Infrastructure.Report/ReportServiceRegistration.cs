@@ -10,8 +10,8 @@ public static class ReportServiceRegistration
 {
     public static IServiceCollection AddReportServices(this IServiceCollection services)
     {
-        services.AddScoped<IExcelReportGenerator<List<ExpenseReportDataDTO>>, ExpenseExportExcelGenerator>();
-        services.AddScoped<IPdfReportGenerator<List<ExpenseReportDataDTO>>, ExpenseExportPdfGenerator>();
+        services.AddScoped<IExcelReportGenerator<List<ExpenseReportDataItemDTO>>, ExpenseExportExcelGenerator>();
+        services.AddScoped<IPdfReportGenerator<List<ExpenseReportDataItemDTO>>, ExpenseExportPdfGenerator>();
         
         services.AddScoped<IExcelReportGenerator<ExpenseReportDTO>, ExpenseExcelReportGenerator>();
         services.AddScoped<IPdfReportGenerator<ExpenseReportDTO>, ExpensePdfReportGenerator>();

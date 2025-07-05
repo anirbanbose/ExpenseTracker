@@ -12,9 +12,6 @@ public class UpdateExpenseCommand : IRequest<Result>
     public Guid Id { get; set; }
     [Required(ErrorMessage = "Please enter expense amount")]
     public decimal Amount { get; set; } = 0.0m;
-    [Required(ErrorMessage = "Currency is required")]
-    [NotEmptyGuid(ErrorMessage = "Please select Currency")]
-    public Guid CurrencyId { get; set; }
     public string? Description { get; set; }
     [Required(ErrorMessage = "Please enter expense date")]
     public string ExpenseDate { get; set; } = DateTime.UtcNow.Date.ToString();

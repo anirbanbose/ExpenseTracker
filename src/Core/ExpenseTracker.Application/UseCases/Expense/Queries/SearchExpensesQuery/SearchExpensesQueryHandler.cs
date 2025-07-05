@@ -29,7 +29,7 @@ public class SearchExpensesQueryHandler : BaseHandler, IRequestHandler<SearchExp
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.currencyId, request.startDate, request.endDate), currentUser.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
             if (expenseResult.IsSuccess && expenseResult.Items is not null)
             {
                 List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();

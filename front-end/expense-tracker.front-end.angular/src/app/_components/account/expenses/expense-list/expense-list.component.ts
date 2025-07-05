@@ -54,7 +54,6 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
 
   searchText: string | null = null;
   categoryId: string | null = null;
-  currencyId: string | null = null;
   startDate: string | null = null;
   endDate: string | null = null;
   sortColumn: string = 'date';
@@ -78,7 +77,6 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
       this.showAdvancedSearch = params.get('ads') === '1';
       this.searchText = params.get('q');
       this.categoryId = params.get('cid');
-      this.currencyId = params.get('cu');
       this.startDate = params.get('sd');
       this.endDate = params.get('ed');
       this.sortColumn = params.get('sa') === 'amount' ? 'amount' : params.get('sa') === 'category' ? 'category' : params.get('sa') ?? 'date';
@@ -140,7 +138,7 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
   getExpenses() {
     this.order = this.sortColumn === 'amount' ? 1 : this.sortColumn === 'date' ? 2 : this.sortColumn === 'category' ? 3 : 2;
     this.isAscending = this.sortDirection === 'asc';
-    this._expenseService.getExpenses(this.searchText, this.categoryId, this.currencyId, this.startDate, this.endDate, this.pageIndex, this.pageSize, this.order, this.isAscending).subscribe({
+    this._expenseService.getExpenses(this.searchText, this.categoryId, this.startDate, this.endDate, this.pageIndex, this.pageSize, this.order, this.isAscending).subscribe({
       next: (response: any) => {
         if (response.isSuccess) {
           this.dataSource = response.items;
@@ -184,21 +182,19 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
     this.showAdvancedSearch = !this.showAdvancedSearch;
     this.searchText = null;
     this.categoryId = null;
-    this.currencyId = null;
     this.startDate = null;
     this.endDate = null;
-    this._helperService.navigateWithSearchParams({ ads: this.showAdvancedSearch ? 1 : 0, q: this.searchText, cid: this.categoryId, cu: this.currencyId, sd: this.startDate, ed: this.endDate });
+    this._helperService.navigateWithSearchParams({ ads: this.showAdvancedSearch ? 1 : 0, q: this.searchText, cid: this.categoryId, sd: this.startDate, ed: this.endDate });
     this.getExpenses();
   }
 
   onAdvancedSearch(event: any): void {
     this.searchText = event.searchText ?? null;
     this.categoryId = event.category ?? null;
-    this.currencyId = event.currency ?? null;
     this.startDate = event.startDate ? this._helperService.getDateOnly(event.startDate) : null;
     this.endDate = event.endDate ? this._helperService.getDateOnly(event.endDate) : null;
     this.pageIndex = 0; // Reset to first page
-    this._helperService.navigateWithSearchParams({ ads: 1, q: this.searchText, cid: this.categoryId, cu: this.currencyId, sd: this.startDate, ed: this.endDate, pi: this.pageIndex, ps: this.pageSize });
+    this._helperService.navigateWithSearchParams({ ads: 1, q: this.searchText, cid: this.categoryId, sd: this.startDate, ed: this.endDate, pi: this.pageIndex, ps: this.pageSize });
     this.getExpenses();
   }
 
@@ -213,7 +209,7 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
         this.order = this.sortColumn === 'amount' ? 1 : this.sortColumn === 'date' ? 2 : this.sortColumn === 'category' ? 3 : 2;
         this.isAscending = this.sortDirection === 'asc';
 
-        this._reportService.downloadExpenseExport(this.searchText, this.categoryId, this.currencyId, this.startDate, this.endDate, this.order, this.isAscending, dialogResult).subscribe({
+        this._reportService.downloadExpenseExport(this.searchText, this.categoryId, this.startDate, this.endDate, this.order, this.isAscending, dialogResult).subscribe({
           next: (blob) => {
             const extension = dialogResult == 2 ? 'pdf' : 'xlsx';
             const fileName = `Expense Export.${extension}`;

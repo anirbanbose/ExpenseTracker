@@ -21,7 +21,10 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
 
     public async Task<Expense?> GetExpenseByIdAsync(Guid id, Guid userId, CancellationToken cancellationToken)
     {
-        return await Table.Include(d => d.Category).AsSplitQuery().FirstOrDefaultAsync(d => d.Id == id && !d.Deleted && d.ExpenseOwnerId == userId, cancellationToken);
+        return await Table
+            .Include(d => d.Category)
+            .Include(d => d.ExpenseOwner).ThenInclude(o => o.Preference).ThenInclude(p => p.PreferredCurrency)
+            .AsSplitQuery().FirstOrDefaultAsync(d => d.Id == id && !d.Deleted && d.ExpenseOwnerId == userId, cancellationToken);
     }
 
     public async Task<IEnumerable<Expense>> GetExpensesByUserIdAsync(Guid userId, CancellationToken cancellationToken)
@@ -46,7 +49,6 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
                                     || d.Category.Name.ToLower().Contains(searchString)
                                     || d.ExpenseAmount.Amount.ToString().Contains(searchString))
                                 && (search.ExpenseCategoryId == null || d.CategoryId == search.ExpenseCategoryId)
-                                && (search.CurrencyId == null || d.ExpenseAmount.CurrencyId == search.CurrencyId)
                                 && (search.StartDate == null || d.ExpenseDate.Date >= search.StartDate.Value.Date)
                                 && (search.EndDate == null || d.ExpenseDate.Date <= search.EndDate.Value.Date)
                                 );
@@ -76,7 +78,6 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
                                     || d.Category.Name.ToLower().Contains(searchString)
                                     || d.ExpenseAmount.Amount.ToString().Contains(searchString))
                                 && (search.ExpenseCategoryId == null || d.CategoryId == search.ExpenseCategoryId)
-                                && (search.CurrencyId == null || d.ExpenseAmount.CurrencyId == search.CurrencyId)
                                 && (search.StartDate == null || d.ExpenseDate.Date >= search.StartDate.Value.Date)
                                 && (search.EndDate == null || d.ExpenseDate.Date <= search.EndDate.Value.Date)
                                 );

@@ -10,47 +10,43 @@ public class ExpenseExcelReportGenerator : IExcelReportGenerator<ExpenseReportDT
     public Task<byte[]> GenerateAsync(ExpenseReportDTO expenseReport)
     {
         using var wb = new XLWorkbook();
-        
 
-        foreach (var item in expenseReport.groupedExpenseReportData)
+        var ws = wb.AddWorksheet("Expense Report");
+        SetColumnWidth(ws, 1, 20);
+        SetColumnWidth(ws, 2, 30);
+        SetColumnWidth(ws, 3, 50);
+        SetColumnWidth(ws, 4, 25);
+
+        ws.Cell("A1").Value = $"{(expenseReport.reportType == Domain.Enums.ExpenseReportType.Yearly ? "Yearly" : "Monthly")} Expense Report - {(expenseReport.reportType == Domain.Enums.ExpenseReportType.Monthly ? $"{UtilityServices.GetMonthName(expenseReport.month)} " : string.Empty)}{expenseReport.year}";
+        ws.Cell("A1").Style.Font.FontSize = 18;
+        ws.Cell("A1").Style.Font.Bold = true;
+        ws.Cell("A1").Style.Fill.BackgroundColor = XLColor.LightGray;
+        ws.Range("A1:D1").Merge();
+
+        int rowNumber = 3;
+
+        int tableStartRowNumber = rowNumber;
+
+        rowNumber = AddTableRow(ws, rowNumber, "Date", "Category", "Description", "Amount", true);
+
+        foreach (var expense in expenseReport.reportData)
         {
-            var ws = item.currency is not null ? wb.AddWorksheet($"{item.currency.Name} Expense Report") : wb.AddWorksheet("Expense Report");
-            SetColumnWidth(ws, 1, 20);
-            SetColumnWidth(ws, 2, 30);
-            SetColumnWidth(ws, 3, 50);
-            SetColumnWidth(ws, 4, 25);
-
-            ws.Cell("A1").Value = $"{(expenseReport.reportType == Domain.Enums.ExpenseReportType.Yearly ? "Yearly" : "Monthly")} Expense Report - {(expenseReport.reportType == Domain.Enums.ExpenseReportType.Monthly ? $"{UtilityServices.GetMonthName(expenseReport.month)} " : string.Empty)}{expenseReport.year}";
-            ws.Cell("A1").Style.Font.FontSize = 18;
-            ws.Cell("A1").Style.Font.Bold = true;
-            ws.Cell("A1").Style.Fill.BackgroundColor = XLColor.LightGray;
-            ws.Range("A1:D1").Merge();
-
-            int rowNumber = 3;
-
-            int tableStartRowNumber = rowNumber;
-
-            rowNumber = AddTableRow(ws, rowNumber, "Date", "Category", "Description", "Amount", true);
-
-            foreach (var expense in item.reportData)
-            {
-                rowNumber = AddTableRow(ws, rowNumber, expense.ExpenseDate.Date.ToString("dd MMM yyyy"), expense.Category, expense.Description, expense.ExpenseAmount);
-            }
-            var table = ws.Range($"A{tableStartRowNumber}:D{rowNumber - 1}").CreateTable();
-            table.Theme = XLTableTheme.TableStyleLight16;
-            ws.Cell($"A{rowNumber}").Value = "Total";
-            ws.Cell($"A{rowNumber}").Style.Font.FontSize = 14;
-            ws.Cell($"A{rowNumber}").Style.Font.Bold = true;
-            ws.Cell($"A{rowNumber}").Style.Font.FontColor = XLColor.White;
-            ws.Cell($"A{rowNumber}").Style.Fill.BackgroundColor = XLColor.Navy;
-            ws.Range($"A{rowNumber}:C{rowNumber}").Merge();
-            ws.Cell($"D{rowNumber}").Value = item.formattedTotalAmmount;
-            ws.Cell($"D{rowNumber}").Style.Font.FontSize = 14;
-            ws.Cell($"D{rowNumber}").Style.Font.Bold = true;
-            ws.Cell($"D{rowNumber}").Style.Font.FontColor = XLColor.White;
-            ws.Cell($"D{rowNumber}").Style.Fill.BackgroundColor = XLColor.Navy;
-            ws.Cell($"D{rowNumber}").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
-        }  
+            rowNumber = AddTableRow(ws, rowNumber, expense.ExpenseDate.Date.ToString("dd MMM yyyy"), expense.Category, expense.Description, expense.ExpenseAmount);
+        }
+        var table = ws.Range($"A{tableStartRowNumber}:D{rowNumber - 1}").CreateTable();
+        table.Theme = XLTableTheme.TableStyleLight16;
+        ws.Cell($"A{rowNumber}").Value = "Total";
+        ws.Cell($"A{rowNumber}").Style.Font.FontSize = 14;
+        ws.Cell($"A{rowNumber}").Style.Font.Bold = true;
+        ws.Cell($"A{rowNumber}").Style.Font.FontColor = XLColor.White;
+        ws.Cell($"A{rowNumber}").Style.Fill.BackgroundColor = XLColor.Navy;
+        ws.Range($"A{rowNumber}:C{rowNumber}").Merge();
+        ws.Cell($"D{rowNumber}").Value = expenseReport.formattedTotalAmmount;
+        ws.Cell($"D{rowNumber}").Style.Font.FontSize = 14;
+        ws.Cell($"D{rowNumber}").Style.Font.Bold = true;
+        ws.Cell($"D{rowNumber}").Style.Font.FontColor = XLColor.White;
+        ws.Cell($"D{rowNumber}").Style.Fill.BackgroundColor = XLColor.Navy;
+        ws.Cell($"D{rowNumber}").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
 
         using var stream = new MemoryStream();
         wb.SaveAs(stream);

@@ -6,4 +6,20 @@ public record CurrencyDTO(Guid Id, string Code, string? Symbol, string Name)
     {
         return new CurrencyDTO(currency.Id, currency.Code, currency.Symbol, currency.Name);
     }
+
+    public string LongCurrencyPrefix
+    {
+        get
+        {
+            return $"{Code} {(!string.IsNullOrEmpty(Symbol) ? Symbol : "")}";
+        }
+    }
+
+    public string ShortCurrencyPrefix
+    {
+        get
+        {
+            return !string.IsNullOrEmpty(Symbol) ? Symbol : Code;
+        }
+    }
 }

@@ -35,3 +35,16 @@
   gap: 12px;
   margin-top: 24px;
 }
+
+.amount-input {
+  text-align: right;
+}
+
+input.amount-input::-webkit-outer-spin-button,
+input.amount-input::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.amount-input {
+  -moz-appearance: textfield;
+}
