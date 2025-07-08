@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Currency;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Currency.Queries;
@@ -12,7 +12,7 @@ public class GetAllCurrenciesQueryHandler : BaseHandler, IRequestHandler<GetAllC
     private readonly ICurrencyRepository _currencyRepository;
     private readonly ILogger<GetAllCurrenciesQueryHandler> _logger;
 
-    public GetAllCurrenciesQueryHandler(IHttpContextAccessor httpContextAccessor, ICurrencyRepository currencyRepository, ILogger<GetAllCurrenciesQueryHandler> logger) : base(httpContextAccessor)
+    public GetAllCurrenciesQueryHandler(ICurrentUserManager currentUserManager, ICurrencyRepository currencyRepository, ILogger<GetAllCurrenciesQueryHandler> logger) : base(currentUserManager)
     {
         _currencyRepository = currencyRepository;
         _logger = logger;
@@ -26,7 +26,7 @@ public class GetAllCurrenciesQueryHandler : BaseHandler, IRequestHandler<GetAllC
             if (currencies is null || !currencies.Any())
             {
                 _logger.LogWarning("No currencies found in the database.");
-                return Result<List<CurrencyDTO>>.NotFoundResult("No currencies found.");
+                return Result<List<CurrencyDTO>>.NotFoundResult();
             }
             var list = currencies.Select(c => CurrencyDTO.FromDomain(c)).ToList();
 
@@ -36,7 +36,7 @@ public class GetAllCurrenciesQueryHandler : BaseHandler, IRequestHandler<GetAllC
         {
             _logger.LogError(ex, "An error occurred while handling GetAllCurrenciesQuery.");
         }
-        return Result<List<CurrencyDTO>>.FailureResult("Currency.UnknownException", "An error occurred while processing your request.");
+        return Result<List<CurrencyDTO>>.FailureResult("Currency.GetAllCurrencies");
     }
 
 }

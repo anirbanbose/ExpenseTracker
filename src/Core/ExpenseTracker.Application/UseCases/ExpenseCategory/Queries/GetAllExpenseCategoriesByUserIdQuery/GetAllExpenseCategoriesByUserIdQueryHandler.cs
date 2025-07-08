@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.ExpenseCategory;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.ExpenseCategory;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Queries;
@@ -14,7 +14,7 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
     private readonly ILogger<GetAllExpenseCategoriesByUserIdQueryHandler> _logger;
 
 
-    public GetAllExpenseCategoriesByUserIdQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<GetAllExpenseCategoriesByUserIdQueryHandler> logger) : base(httpContextAccessor)
+    public GetAllExpenseCategoriesByUserIdQueryHandler(ICurrentUserManager currentUserManager, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<GetAllExpenseCategoriesByUserIdQueryHandler> logger) : base(currentUserManager)
     {
         _expenseCategoryRepository = expenseCategoryRepository;
         _userRepository = userRepository;
@@ -32,7 +32,7 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
             var expenseCategories = await _expenseCategoryRepository.GetAllExpenseCategoriesByUserIdAsync(currentUser.Id, cancellationToken);
             if (expenseCategories is null || !expenseCategories.Any())
             {
-                return Result<List<ExpenseCategoryDTO>>.NotFoundResult("No Expense Category found.");
+                return Result<List<ExpenseCategoryDTO>>.NotFoundResult();
             }
             var list = expenseCategories.Select(c => ExpenseCategoryDTO.FromDomain(c)).ToList();
 
@@ -42,7 +42,7 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
         {
             _logger.LogError(ex, $"An error occurred while handling GetAllExpenseCategoriesByUserIdQuery for the user {CurrentUserName}.");
         }
-        return Result<List<ExpenseCategoryDTO>>.FailureResult("ExpenseCategory.GetAllExpenseCategories", "An error occurred while fetching the list of expense categories.");
+        return Result<List<ExpenseCategoryDTO>>.FailureResult("ExpenseCategory.GetAllExpenseCategories");
     }
 
 }

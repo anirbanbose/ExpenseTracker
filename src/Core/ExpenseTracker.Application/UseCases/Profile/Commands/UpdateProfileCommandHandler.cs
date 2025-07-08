@@ -1,12 +1,11 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Profile.Commands;
-
 
 public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdateProfileCommand, Result>
 {
@@ -14,7 +13,7 @@ public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdatePr
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UpdateProfileCommandHandler> _logger;
 
-    public UpdateProfileCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<UpdateProfileCommandHandler> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public UpdateProfileCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<UpdateProfileCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
@@ -49,6 +48,6 @@ public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdatePr
         {
             _logger?.LogError(ex, $"Error occurred while updating profile- {request} for the user: {CurrentUserName}.");
         }
-        return Result.FailureResult("Profile.UpdateProfile", "Profile update failed.");
+        return Result.FailureResult("Profile.UpdateProfile");
     }
 }

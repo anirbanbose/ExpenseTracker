@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Dashboard;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
@@ -13,7 +13,7 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
     private readonly IUserRepository _userRepository;
     private readonly ILogger<ExpenseSummaryQueryHandler> _logger;
 
-    public ExpenseSummaryQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<ExpenseSummaryQueryHandler> logger) : base(httpContextAccessor)
+    public ExpenseSummaryQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<ExpenseSummaryQueryHandler> logger) : base(currentUserManager)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;
@@ -57,7 +57,7 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
         {
             _logger.LogError(ex, $"Error occurred while handling ExpenseSummaryQuery with request - {request}  for the user: {CurrentUserName}.");
         } 
-        return Result<ExpenseSummaryDTO>.FailureResult("DashboardSummary.ExpenseSummary", "Couldn't fetch expense summary data.");
+        return Result<ExpenseSummaryDTO>.FailureResult("DashboardSummary.ExpenseSummary");
     }
 
     private static IEnumerable<CategoryExpenseDTO> GetCategoryTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, int currentMonth, int currentYear)

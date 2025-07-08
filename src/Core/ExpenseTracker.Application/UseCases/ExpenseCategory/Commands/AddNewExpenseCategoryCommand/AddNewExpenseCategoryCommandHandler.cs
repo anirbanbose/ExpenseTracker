@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Commands;
@@ -14,7 +14,7 @@ public class AddNewExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<AddNewExpenseCategoryCommandHandler> _logger;
 
-    public AddNewExpenseCategoryCommandHandler(IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCategoryCommandHandler> logger, IHttpContextAccessor _httpContextAccessor) : base(_httpContextAccessor)
+    public AddNewExpenseCategoryCommandHandler(IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCategoryCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _expenseCategoryRepository = expenseCategoryRepository;
@@ -49,6 +49,6 @@ public class AddNewExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         {
             _logger?.LogError(ex, $"Error occurred while adding new expense category- {request} for user - {CurrentUserName}.");
         }
-        return Result<Guid?>.FailureResult("Expense.AddNewExpenseCategory", "Adding new expense category failed.");
+        return Result<Guid?>.FailureResult("Expense.AddNewExpenseCategory");
     }
 }

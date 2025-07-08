@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.UserPreference.Commands;
@@ -14,7 +14,7 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<SaveUserPreferenceCommandHandler> _logger;
 
-    public SaveUserPreferenceCommandHandler(IUserRepository userRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<SaveUserPreferenceCommandHandler> logger, IHttpContextAccessor _httpContextAccessor) : base(_httpContextAccessor)
+    public SaveUserPreferenceCommandHandler(IUserRepository userRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<SaveUserPreferenceCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _currencyRepository = currencyRepository;
@@ -38,7 +38,7 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
             if (userToBeUpdated is null || userToBeUpdated.Preference is null)
             {
                 _logger.LogWarning($"User preference not found for user - {CurrentUserName}.");
-                return Result.FailureResult("UserPreference.SaveUserPreference", "User preference not found.");
+                return Result.FailureResult("UserPreference.SaveUserPreference");
             }
             var userPreference = userToBeUpdated.Preference;
             userPreference.Update(request.EnableMonthlyExpenseReportMail, request.EnableDailyExpenseReportMail);
@@ -51,6 +51,6 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
         {
             _logger?.LogError(ex, $"An error occurred while saving user preference with request: {request} for the user- {CurrentUserName}.");
         }
-        return Result.FailureResult("UserPreference.SaveUserPreference", "Saving user preference failed.");
+        return Result.FailureResult("UserPreference.SaveUserPreference");
     }
 }

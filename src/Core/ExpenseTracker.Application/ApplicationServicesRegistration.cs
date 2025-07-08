@@ -11,8 +11,6 @@ namespace ExpenseTracker.Application
 
             services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(assembly));
 
-            services.AddHttpContextAccessor();
-
             return services;
         }
     }

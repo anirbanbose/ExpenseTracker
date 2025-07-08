@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Dashboard;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
@@ -14,7 +14,7 @@ public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExp
     private readonly ILogger<RecentExpensesQueryHandler> _logger;
 
 
-    public RecentExpensesQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<RecentExpensesQueryHandler> logger) : base(httpContextAccessor)
+    public RecentExpensesQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<RecentExpensesQueryHandler> logger) : base(currentUserManager)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;
@@ -44,6 +44,6 @@ public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExp
         {
             _logger.LogError(ex, $"Error occurred while fetching recent expenses with request - {request} for the user: {CurrentUserName}.");
         }
-        return Result<List<RecentExpenseListDTO>>.FailureResult("Expense.RecentExpenses", "Couldn't fetch the expense list.");
+        return Result<List<RecentExpenseListDTO>>.FailureResult("Expense.RecentExpenses");
     }
 }

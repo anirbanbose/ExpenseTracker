@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Expense;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Expense;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Queries;
@@ -13,7 +13,7 @@ public class SearchExpensesWithIdQueryHandler : BaseHandler, IRequestHandler<Sea
     private readonly IUserRepository _userRepository;
     private readonly ILogger<SearchExpensesWithIdQueryHandler> _logger;
 
-    public SearchExpensesWithIdQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SearchExpensesWithIdQueryHandler> logger) : base(httpContextAccessor)
+    public SearchExpensesWithIdQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SearchExpensesWithIdQueryHandler> logger) : base(currentUserManager)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;
@@ -44,6 +44,6 @@ public class SearchExpensesWithIdQueryHandler : BaseHandler, IRequestHandler<Sea
         {
             _logger.LogError(ex, $"Error occurred while searching expenses for the user: {CurrentUserName}.");
         }
-        return PagedResult<ExpenseListDTO>.FailureResult("Expense.SearchExpenses", "Couldn't fetch the expense list.");
+        return PagedResult<ExpenseListDTO>.FailureResult("Expense.SearchExpensesWithId");
     }
 }

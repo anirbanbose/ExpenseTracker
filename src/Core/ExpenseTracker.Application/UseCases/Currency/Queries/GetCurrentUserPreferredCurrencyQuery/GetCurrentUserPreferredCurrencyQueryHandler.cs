@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Currency;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Currency.Queries;
@@ -13,8 +13,7 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : BaseHandler, IRequest
     private readonly IUserRepository _userRepository;
     private readonly ILogger<GetCurrentUserPreferredCurrencyQueryHandler> _logger;
 
-
-    public GetCurrentUserPreferredCurrencyQueryHandler(IHttpContextAccessor httpContextAccessor, ICurrencyRepository currencyRepository, IUserRepository userRepository, ILogger<GetCurrentUserPreferredCurrencyQueryHandler> logger) : base(httpContextAccessor)
+    public GetCurrentUserPreferredCurrencyQueryHandler(ICurrentUserManager currentUserManager, ICurrencyRepository currencyRepository, IUserRepository userRepository, ILogger<GetCurrentUserPreferredCurrencyQueryHandler> logger) : base(currentUserManager)
     {
         _currencyRepository = currencyRepository;
         _logger = logger;
@@ -38,13 +37,13 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : BaseHandler, IRequest
             if (user is null || user?.Preference is null)
             {
                 _logger.LogWarning($"User preference for user {CurrentUserName} not found.");
-                return Result<CurrencyDTO>.NotFoundResult("User preference not found.");
+                return Result<CurrencyDTO>.NotFoundResult();
             }
             var preferredCurrency = await _currencyRepository.GetCurrencyByIdAsync(user.Preference.PreferredCurrencyId, cancellationToken);
             if (preferredCurrency is null)
             {
                 _logger.LogWarning($"Preferred currency not found for user {CurrentUserName}.");
-                return Result<CurrencyDTO>.NotFoundResult("Preferred currency not found.");
+                return Result<CurrencyDTO>.NotFoundResult();
             }
             var currencyDto = CurrencyDTO.FromDomain(preferredCurrency);
             return Result<CurrencyDTO>.SuccessResult(currencyDto);
@@ -53,7 +52,7 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : BaseHandler, IRequest
         {
             _logger.LogError(ex, $"An error occurred while handling GetCurrentUserPreferredCurrencyQuery for the user: {CurrentUserName}.");
         }
-        return Result<CurrencyDTO>.FailureResult("Currency.GetCurrentUserPreferredCurrency", "An error occurred while processing your request.");
+        return Result<CurrencyDTO>.FailureResult("Currency.GetCurrentUserPreferredCurrency");
 
     }
 }

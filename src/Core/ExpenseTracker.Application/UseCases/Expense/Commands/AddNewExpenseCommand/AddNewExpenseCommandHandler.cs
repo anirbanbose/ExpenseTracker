@@ -1,9 +1,9 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.Utils;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
@@ -17,7 +17,7 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<AddNewExpenseCommandHandler> _logger;
 
-    public AddNewExpenseCommandHandler(IExpenseRepository expenseRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCommandHandler> logger, IHttpContextAccessor _httpContextAccessor) : base(_httpContextAccessor)
+    public AddNewExpenseCommandHandler(IExpenseRepository expenseRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _expenseCategoryRepository = expenseCategoryRepository;
@@ -43,20 +43,20 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
             if (userPreference is null)
             {
                 _logger.LogWarning($"User preference not found for user: {CurrentUserName}.");
-                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Adding new expense failed.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense");
             }
 
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.CategoryId, cancellationToken);
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense category with Id - {request.CategoryId} not found.");
-                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Expense category not found.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense");
             }
             var currency = await _currencyRepository.GetCurrencyByIdAsync(userPreference.PreferredCurrencyId, cancellationToken);
             if (currency is null)
             {
                 _logger.LogWarning($"Currency with Id {userPreference.PreferredCurrencyId} not found.");
-                return Result<Guid?>.FailureResult("Expense.AddNewExpense", $"Currency not found.");
+                return Result<Guid?>.FailureResult("Expense.AddNewExpense");
             }
             var expense = new Domain.Models.Expense(
                     new Money(request.Amount, currency.Code, currency.Symbol), 
@@ -75,6 +75,6 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
         {
             _logger?.LogError(ex, $"Error occurred while adding new expense- {request} for the user: {CurrentUserName}.");
         }
-        return Result<Guid?>.FailureResult("Expense.AddNewExpense", "Adding new expense failed.");
+        return Result<Guid?>.FailureResult("Expense.AddNewExpense");
     }
 }

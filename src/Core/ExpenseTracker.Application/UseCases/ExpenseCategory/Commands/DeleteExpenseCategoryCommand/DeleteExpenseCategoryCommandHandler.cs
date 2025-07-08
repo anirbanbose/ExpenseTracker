@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Commands;
@@ -14,7 +14,7 @@ public class DeleteExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<DeleteExpenseCategoryCommandHandler> _logger;
 
-    public DeleteExpenseCategoryCommandHandler(IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCategoryCommandHandler> logger, IHttpContextAccessor _httpContextAccessor) : base(_httpContextAccessor)
+    public DeleteExpenseCategoryCommandHandler(IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCategoryCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _expenseCategoryRepository = expenseCategoryRepository;
@@ -38,7 +38,7 @@ public class DeleteExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense Category with id - {request.Id} not found.");
-                return Result.FailureResult("ExpenseCategory.DeleteExpenseCategory", "Expense Category not found.");
+                return Result.FailureResult("ExpenseCategory.DeleteExpenseCategory");
             }
 
             expenseCategory.MarkAsDeleted();
@@ -51,6 +51,6 @@ public class DeleteExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         {
             _logger?.LogError(ex, $"Error occurred while deleting expense category with id {request.Id} for user {CurrentUserName}.");
         }
-        return Result.FailureResult("Expense.DeleteExpenseCategory", "Deleting expense category failed.");
+        return Result.FailureResult("Expense.DeleteExpenseCategory");
     }
 }

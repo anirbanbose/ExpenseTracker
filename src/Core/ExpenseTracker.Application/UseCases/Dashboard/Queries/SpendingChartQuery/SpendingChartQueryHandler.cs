@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Dashboard;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
@@ -13,7 +13,7 @@ public class SpendingChartQueryHandler : BaseHandler, IRequestHandler<SpendingCh
     private readonly IUserRepository _userRepository;
     private readonly ILogger<SpendingChartQueryHandler> _logger;
 
-    public SpendingChartQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SpendingChartQueryHandler> logger) : base(httpContextAccessor)
+    public SpendingChartQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SpendingChartQueryHandler> logger) : base(currentUserManager)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;
@@ -78,6 +78,6 @@ public class SpendingChartQueryHandler : BaseHandler, IRequestHandler<SpendingCh
         {
             _logger.LogError(ex, $"Error occurred while fetching spending chart data for the user: {CurrentUserName}.");
         }
-        return Result<SpendingChartDTO>.FailureResult("Chart.SpendingChart", "Couldn't fetch chart data.");
+        return Result<SpendingChartDTO>.FailureResult("Chart.SpendingChart");
     }
 }

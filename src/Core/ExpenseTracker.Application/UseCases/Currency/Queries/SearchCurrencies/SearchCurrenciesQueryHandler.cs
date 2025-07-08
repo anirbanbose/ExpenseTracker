@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Currency;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Currency.Queries;
@@ -13,7 +13,7 @@ public class SearchCurrenciesQueryHandler : BaseHandler, IRequestHandler<SearchC
     private readonly IUserRepository _userRepository;
     private readonly ILogger<SearchCurrenciesQueryHandler> _logger;
 
-    public SearchCurrenciesQueryHandler(IHttpContextAccessor httpContextAccessor, ICurrencyRepository currencyRepository, IUserRepository userRepository, ILogger<SearchCurrenciesQueryHandler> logger) : base(httpContextAccessor)
+    public SearchCurrenciesQueryHandler(ICurrentUserManager currentUserManager, ICurrencyRepository currencyRepository, IUserRepository userRepository, ILogger<SearchCurrenciesQueryHandler> logger) : base(currentUserManager)
     {
         _currencyRepository = currencyRepository;
         _userRepository = userRepository;
@@ -31,7 +31,7 @@ public class SearchCurrenciesQueryHandler : BaseHandler, IRequestHandler<SearchC
             var currenciesResult = await _currencyRepository.SearchCurrenciesAsync(request.search, request.pageIndex, request.pageSize, request.order, request.isAscendingSort, cancellationToken);
             if (!currenciesResult.IsSuccess && currenciesResult.Items.Any())
             {
-                return PagedResult<CurrencyDTO>.NotFoundResult("No currencies found.");
+                return PagedResult<CurrencyDTO>.NotFoundResult();
             }
             if (currenciesResult.IsSuccess && currenciesResult.Items.Any())
             {
@@ -48,7 +48,7 @@ public class SearchCurrenciesQueryHandler : BaseHandler, IRequestHandler<SearchC
             _logger.LogError(ex, $"An error occurred while handling SearchCurrenciesQuery for the user: {CurrentUserName}.");
         }
        
-        return PagedResult<CurrencyDTO>.FailureResult("Currency.SearchCurrencies", "Couldn't fetch the currency list.");
+        return PagedResult<CurrencyDTO>.FailureResult("Currency.SearchCurrencies");
     }
 
 }

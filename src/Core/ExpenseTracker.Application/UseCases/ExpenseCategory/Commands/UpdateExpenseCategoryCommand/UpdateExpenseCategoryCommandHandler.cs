@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Commands;
@@ -14,7 +14,7 @@ public class UpdateExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UpdateExpenseCategoryCommandHandler> _logger;
 
-    public UpdateExpenseCategoryCommandHandler(IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<UpdateExpenseCategoryCommandHandler> logger, IHttpContextAccessor _httpContextAccessor) : base(_httpContextAccessor)
+    public UpdateExpenseCategoryCommandHandler(IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<UpdateExpenseCategoryCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
@@ -38,7 +38,7 @@ public class UpdateExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense category with Id - {request.Id} not found.");
-                return Result.FailureResult("ExpenseCategory.UpdateExpenseCategory", "Expense category not found.");
+                return Result.FailureResult("ExpenseCategory.UpdateExpenseCategory");
             }
             expenseCategory.UpdateName(request.Name);
             _expenseCategoryRepository.UpdateExpenseCategory(expenseCategory);
@@ -50,6 +50,6 @@ public class UpdateExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         {
             _logger?.LogError(ex, $"Error occurred while updating expense category- {request} for the user {CurrentUserName}.");
         }
-        return Result.FailureResult("ExpenseCategory.UpdateExpenseCategory", "Update expense category failed.");
+        return Result.FailureResult("ExpenseCategory.UpdateExpenseCategory");
     }
 }

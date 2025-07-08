@@ -1,23 +1,21 @@
-﻿using ExpenseTracker.Domain.Models;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Models;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System.Security.Principal;
 
 namespace ExpenseTracker.Application;
 
 public abstract class BaseHandler
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    protected BaseHandler(IHttpContextAccessor httpContextAccessor)
+    private readonly ICurrentUserManager _currentUserManager;
+    protected BaseHandler(ICurrentUserManager currentUserManager)
     {
-        _httpContextAccessor = httpContextAccessor;
+        _currentUserManager = currentUserManager;
     }
 
-    private IIdentity? CurrentUserIdentity => _httpContextAccessor.HttpContext?.User.Identity;
-    protected string? CurrentUserName => CurrentUserIdentity?.Name;
-    protected bool IsCurrentUserAuthenticated => CurrentUserIdentity?.IsAuthenticated ?? false;
+    protected string? CurrentUserName => _currentUserManager?.CurrentUserName;
+    protected bool IsCurrentUserAuthenticated => _currentUserManager.IsAuthenticated;
 
     
     protected async Task<(User? user, T? failureResult)> GetAuthenticatedUserAsync<T>(IUserRepository userRepository, ILogger logger, CancellationToken cancellationToken, IUserNotAuthenticatedResultFactory<T> factory)

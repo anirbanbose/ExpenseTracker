@@ -1,15 +1,14 @@
 ﻿using ExpenseTracker.Domain.Persistence.Repositories;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.User.Queries;
 
-public class EmailAvailableQueryHandler : BaseHandler, IRequestHandler<EmailAvailableQuery, bool>
+public class EmailAvailableQueryHandler : IRequestHandler<EmailAvailableQuery, bool>
 {
     private readonly IUserRepository _userRepository;
     private readonly ILogger<EmailAvailableQueryHandler> _logger;
-    public EmailAvailableQueryHandler(IHttpContextAccessor httpContextAccessor, IUserRepository userRepository, ILogger<EmailAvailableQueryHandler> logger) : base(httpContextAccessor)
+    public EmailAvailableQueryHandler(IUserRepository userRepository, ILogger<EmailAvailableQueryHandler> logger) 
     {
         _userRepository = userRepository;
         _logger = logger;

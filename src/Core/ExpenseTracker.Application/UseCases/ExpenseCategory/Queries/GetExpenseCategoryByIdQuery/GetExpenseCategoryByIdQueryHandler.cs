@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.ExpenseCategory;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.ExpenseCategory;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Queries;
@@ -13,7 +13,7 @@ public class GetExpenseCategoryByIdQueryHandler : BaseHandler, IRequestHandler<G
     private readonly IUserRepository _userRepository;
     private readonly ILogger<GetExpenseCategoryByIdQueryHandler> _logger;
 
-    public GetExpenseCategoryByIdQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<GetExpenseCategoryByIdQueryHandler> logger) : base(httpContextAccessor)
+    public GetExpenseCategoryByIdQueryHandler(ICurrentUserManager currentUserManager, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<GetExpenseCategoryByIdQueryHandler> logger) : base(currentUserManager)
     {
         _expenseCategoryRepository = expenseCategoryRepository;
         _userRepository = userRepository;
@@ -35,7 +35,7 @@ public class GetExpenseCategoryByIdQueryHandler : BaseHandler, IRequestHandler<G
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id.Value, currentUser.Id, cancellationToken);
             if (expenseCategory is null)
             {
-                return Result<ExpenseCategoryDTO?>.NotFoundResult("No Expense Category found.");
+                return Result<ExpenseCategoryDTO?>.NotFoundResult();
             }
             var dto = ExpenseCategoryDTO.FromDomain(expenseCategory);
 
@@ -45,7 +45,7 @@ public class GetExpenseCategoryByIdQueryHandler : BaseHandler, IRequestHandler<G
         {
             _logger.LogError(ex, $"An error occurred while handling GetExpenseCategoryByIdQuery for user {CurrentUserName}.");
         }
-        return Result<ExpenseCategoryDTO?>.FailureResult("ExpenseCategory.GetExpenseCategoryById", "Couldn't fetch the expense category data.");
+        return Result<ExpenseCategoryDTO?>.FailureResult("ExpenseCategory.GetExpenseCategoryById");
     }
 
 }

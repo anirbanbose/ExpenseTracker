@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Report;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Report;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Report.Queries;
@@ -13,7 +13,7 @@ public class MinMaxExpenseDateQueryHandler : BaseHandler, IRequestHandler<MinMax
     private readonly IUserRepository _userRepository;
     private readonly ILogger<MinMaxExpenseDateQueryHandler> _logger;
 
-    public MinMaxExpenseDateQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<MinMaxExpenseDateQueryHandler> logger) : base(httpContextAccessor)
+    public MinMaxExpenseDateQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<MinMaxExpenseDateQueryHandler> logger) : base(currentUserManager)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;

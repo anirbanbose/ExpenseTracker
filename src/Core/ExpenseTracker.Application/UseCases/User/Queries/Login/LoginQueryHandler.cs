@@ -11,9 +11,9 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, Result<LoggedInUser
 {
     private readonly IUserRepository _userRepository;
     private readonly ILogger<LoginQueryHandler> _logger;
-    private readonly IAuthManager _authManager;
+    private readonly ITokenManager _authManager;
 
-    public LoginQueryHandler(IUserRepository userRepository, ILogger<LoginQueryHandler> logger, IAuthManager authManager)
+    public LoginQueryHandler(IUserRepository userRepository, ILogger<LoginQueryHandler> logger, ITokenManager authManager)
     {
         _userRepository = userRepository;
         _logger = logger;
@@ -49,6 +49,6 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, Result<LoggedInUser
             _logger.LogError(ex, $"An error occurred while handling the Login process for the request: {request}.");
         }
         
-        return Result<LoggedInUserDTO>.FailureResult("Login.UnauthorizedUser", "There was an issue while signing you in. Please try again later.");
+        return Result<LoggedInUserDTO>.FailureResult("Login.UnauthorizedUser");
     }
 }

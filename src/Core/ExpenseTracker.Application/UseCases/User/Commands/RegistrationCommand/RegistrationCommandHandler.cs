@@ -31,13 +31,13 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, R
             if(currency is null)
             {
                 _logger.LogWarning($"Preferred currency with Id - {request.PreferredCurrencyId} not found.");
-                return Result.FailureResult("Account.UserRegistration", "Preferred currency not found.");
+                return Result.FailureResult("Account.UserRegistration");
             }
             var userResult = Domain.Models.User.Create(_userRepository, request.Email, request.Password, currency, request.FirstName, request.LastName, request.MiddleName);
             if (userResult.IsFailure)
             {
-                _logger.LogWarning($"User registration failed for this request - {request}.");
-                return Result.FailureResult("Account.UserRegistration", userResult.ErrorMessage);
+                _logger.LogWarning($"User registration failed for this request - {request}. Reason - {userResult.ErrorMessage}");
+                return Result.FailureResult("Account.UserRegistration");
             }
             
             var user = userResult.Value;
@@ -50,6 +50,6 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, R
         {
             _logger?.LogError(ex, $"Error occurred while registering a user with request - {request}.");
         }
-        return Result.FailureResult("Account.UserRegistration", "Account registration failed.");
+        return Result.FailureResult("Account.UserRegistration");
     }
 }

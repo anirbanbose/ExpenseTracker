@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.Currency;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Currency.Queries;
@@ -13,7 +13,7 @@ public class GetCurrenciesForSelectQueryHandler : BaseHandler, IRequestHandler<G
     private readonly ILogger<GetCurrenciesForSelectQueryHandler> _logger;
 
 
-    public GetCurrenciesForSelectQueryHandler(IHttpContextAccessor httpContextAccessor, ICurrencyRepository currencyRepository, ILogger<GetCurrenciesForSelectQueryHandler> logger) : base(httpContextAccessor)
+    public GetCurrenciesForSelectQueryHandler(ICurrentUserManager currentUserManager, ICurrencyRepository currencyRepository, ILogger<GetCurrenciesForSelectQueryHandler> logger) : base(currentUserManager)
     {
         _currencyRepository = currencyRepository;
         _logger = logger;
@@ -27,7 +27,7 @@ public class GetCurrenciesForSelectQueryHandler : BaseHandler, IRequestHandler<G
             if (currencies is null || !currencies.Any())
             {
                 _logger.LogWarning("No currencies found in the database.");
-                return Result<List<CurrencyForSelectDTO>>.NotFoundResult("No currencies found.");
+                return Result<List<CurrencyForSelectDTO>>.NotFoundResult();
             }
             var list = currencies.Select(c => CurrencyForSelectDTO.FromDomain(c)).ToList();
 
@@ -37,7 +37,7 @@ public class GetCurrenciesForSelectQueryHandler : BaseHandler, IRequestHandler<G
         {
             _logger.LogError(ex, "An error occurred while fetching all currencies.");
         }
-        return Result<List<CurrencyForSelectDTO>>.FailureResult("Currency.UnknownException", "An error occurred while processing your request.");
+        return Result<List<CurrencyForSelectDTO>>.FailureResult("Currency.GetCurrenciesForSelect");
 
     }
 }

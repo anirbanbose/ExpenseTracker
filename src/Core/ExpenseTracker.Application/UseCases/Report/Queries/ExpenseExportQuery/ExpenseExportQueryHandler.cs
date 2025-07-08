@@ -1,10 +1,10 @@
-﻿using ExpenseTracker.Application.Contracts.Report;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.Contracts.Report;
 using ExpenseTracker.Application.DTO.Report;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.Persistence.SearchModels;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Report.Queries;
@@ -12,17 +12,15 @@ namespace ExpenseTracker.Application.UseCases.Report.Queries;
 public class ExpenseExportQueryHandler : BaseHandler, IRequestHandler<ExpenseExportQuery, Result<byte[]>>
 {
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IUserRepository _userRepository;
     private readonly ILogger<ExpenseExportQueryHandler> _logger;
     private readonly IExcelReportGenerator<List<ExpenseReportDataItemDTO>> _excelExportGenerator;
     private readonly IPdfReportGenerator<List<ExpenseReportDataItemDTO>> _pdfExportGenerator;
 
-    public ExpenseExportQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IExcelReportGenerator<List<ExpenseReportDataItemDTO>> excelExportGenerator, IPdfReportGenerator<List<ExpenseReportDataItemDTO>> pdfExportGenerator, ILogger<ExpenseExportQueryHandler> logger) : base(httpContextAccessor)
+    public ExpenseExportQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, IExcelReportGenerator<List<ExpenseReportDataItemDTO>> excelExportGenerator, IPdfReportGenerator<List<ExpenseReportDataItemDTO>> pdfExportGenerator, ILogger<ExpenseExportQueryHandler> logger) : base(currentUserManager)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;
-        _expenseCategoryRepository = expenseCategoryRepository;
         _excelExportGenerator = excelExportGenerator;
         _pdfExportGenerator = pdfExportGenerator;
         _logger = logger;
@@ -55,6 +53,6 @@ public class ExpenseExportQueryHandler : BaseHandler, IRequestHandler<ExpenseExp
         }
         
 
-        return Result<byte[]>.FailureResult("Report.ExpenseExport", "Couldn't generate expense export file.");
+        return Result<byte[]>.FailureResult("Report.ExpenseExport");
     }
 }

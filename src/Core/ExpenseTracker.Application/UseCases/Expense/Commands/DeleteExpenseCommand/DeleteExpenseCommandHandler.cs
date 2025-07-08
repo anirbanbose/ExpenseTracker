@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
@@ -14,7 +14,7 @@ public class DeleteExpenseCommandHandler : BaseHandler, IRequestHandler<DeleteEx
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<DeleteExpenseCommandHandler> _logger;
 
-    public DeleteExpenseCommandHandler(IExpenseRepository expenseRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCommandHandler> logger, IHttpContextAccessor _httpContextAccessor) : base(_httpContextAccessor)
+    public DeleteExpenseCommandHandler(IExpenseRepository expenseRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {        
         _userRepository = userRepository;
         _expenseRepository = expenseRepository;
@@ -38,7 +38,7 @@ public class DeleteExpenseCommandHandler : BaseHandler, IRequestHandler<DeleteEx
             if (expense is null)
             {
                 _logger.LogWarning($"Expense with Id - {request.Id} not found.");
-                return Result.FailureResult("Expense.DeleteExpense", $"Expense not found.");
+                return Result.FailureResult("Expense.DeleteExpense");
             }
 
             expense.MarkAsDeleted(); 
@@ -51,6 +51,6 @@ public class DeleteExpenseCommandHandler : BaseHandler, IRequestHandler<DeleteEx
         {
             _logger?.LogError(ex, $"Error occurred while deleting expense with id {request.Id} for the user: {CurrentUserName}.");
         }
-        return Result.FailureResult("Expense.DeleteExpense", "Deleting expense failed.");
+        return Result.FailureResult("Expense.DeleteExpense");
     }
 }

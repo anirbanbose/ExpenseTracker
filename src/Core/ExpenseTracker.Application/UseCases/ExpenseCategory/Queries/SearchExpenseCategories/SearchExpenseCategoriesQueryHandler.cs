@@ -1,9 +1,9 @@
-﻿using ExpenseTracker.Application.DTO.ExpenseCategory;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.ExpenseCategory;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.Persistence.SearchModels;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Queries;
@@ -15,7 +15,7 @@ public class SearchExpenseCategoriesQueryHandler : BaseHandler, IRequestHandler<
     private readonly ILogger<SearchExpenseCategoriesQueryHandler> _logger;
 
 
-    public SearchExpenseCategoriesQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<SearchExpenseCategoriesQueryHandler> logger) : base(httpContextAccessor)
+    public SearchExpenseCategoriesQueryHandler(ICurrentUserManager currentUserManager, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<SearchExpenseCategoriesQueryHandler> logger) : base(currentUserManager)
     {
         _expenseCategoryRepository = expenseCategoryRepository;
         _userRepository = userRepository;
@@ -47,7 +47,7 @@ public class SearchExpenseCategoriesQueryHandler : BaseHandler, IRequestHandler<
             _logger.LogError(ex, $"An error occurred while handling SearchExpenseCategoriesQuery for user - {CurrentUserName}.");
         }        
 
-        return PagedResult<ExpenseCategoryDTO>.FailureResult("ExpenseCategory.SearchExpenseCategories", "Couldn't fetch the expense category list.");
+        return PagedResult<ExpenseCategoryDTO>.FailureResult("ExpenseCategory.SearchExpenseCategories");
 
     }
 

@@ -1,20 +1,19 @@
-﻿using ExpenseTracker.Domain.Persistence;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.User.Commands;
 
 public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangePasswordCommand, Result>
 {
-
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<ChangePasswordCommandHandler> _logger;
 
-    public ChangePasswordCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<ChangePasswordCommandHandler> logger, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public ChangePasswordCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<ChangePasswordCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
@@ -44,13 +43,13 @@ public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangeP
                     await _unitOfWork.CommitAsync(cancellationToken);
                     return Result.SuccessResult();
                 }
-                return Result.FailureResult("Account.ChangePassword", "Password couldn't be changed. There is an issue with the Password combination.");
+                return Result.FailureResult("Account.ChangePassword");
             }            
         }
         catch (Exception ex)
         {
             _logger?.LogError(ex, $"Error occurred while updating user password for the user: {CurrentUserName} with password change request - {request}.");
         }
-        return Result.FailureResult("Account.ChangePassword", "Password couldn't be changed. Please try again later.");
+        return Result.FailureResult("Account.ChangePassword");
     }
 }

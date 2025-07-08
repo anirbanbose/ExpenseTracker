@@ -1,11 +1,10 @@
-﻿using ExpenseTracker.Application.Contracts.Report;
-using ExpenseTracker.Application.DTO.Currency;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.Contracts.Report;
 using ExpenseTracker.Application.DTO.Report;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.Persistence.SearchModels;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Report.Queries;
@@ -19,7 +18,7 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
     private readonly IExcelReportGenerator<ExpenseReportDTO> _excelReportGenerator;
     private readonly IPdfReportGenerator<ExpenseReportDTO> _pdfReportGenerator;
 
-    public ExpenseReportQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, ICurrencyRepository currencyRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IExcelReportGenerator<ExpenseReportDTO> excelReportGenerator,  IPdfReportGenerator<ExpenseReportDTO> pdfReportGenerator, ILogger<ExpenseReportQueryHandler> logger) : base(httpContextAccessor)
+    public ExpenseReportQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, ICurrencyRepository currencyRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IExcelReportGenerator<ExpenseReportDTO> excelReportGenerator,  IPdfReportGenerator<ExpenseReportDTO> pdfReportGenerator, ILogger<ExpenseReportQueryHandler> logger) : base(currentUserManager)
     {
         _expenseRepository = expenseRepository;
         _userRepository = userRepository;
@@ -55,7 +54,7 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
             if(currentUser?.Preference is null)
             {
                 _logger?.LogWarning($"User preference not present for the user: {CurrentUserName}.");
-                return Result<byte[]>.FailureResult("Report.ExpenseReport", "Couldn't generate expense export file.");
+                return Result<byte[]>.FailureResult("Report.ExpenseReport");
             }
 
             var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(null, null, startDate, endDate), currentUser.Id, Domain.Enums.ExpenseListOrder.ExpenseDate, true, cancellationToken);
@@ -64,7 +63,7 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
                 var currency = await _currencyRepository.GetCurrencyByIdAsync(currentUser?.Preference?.PreferredCurrencyId, cancellationToken);
                 if (currency is null)
                 {
-                    return Result<byte[]>.FailureResult("Report.ExpenseReport", "Couldn't generate expense export file.");
+                    return Result<byte[]>.FailureResult("Report.ExpenseReport");
                 }
 
                 var totalAmmount = expenseResult.Sum(d => d.ExpenseAmount.Amount);
@@ -82,6 +81,6 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
         }
 
 
-        return Result<byte[]>.FailureResult("Report.ExpenseExport", "Couldn't generate expense export file.");
+        return Result<byte[]>.FailureResult("Report.ExpenseExport");
     }
 }

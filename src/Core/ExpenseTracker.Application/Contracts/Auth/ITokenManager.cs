@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.Application.Contracts.Auth;
 
-public interface IAuthManager
+public interface ITokenManager
 {
     bool GenerateTokensAndSetCookies(LoggedInUserDTO user, bool isPersistent);
 }

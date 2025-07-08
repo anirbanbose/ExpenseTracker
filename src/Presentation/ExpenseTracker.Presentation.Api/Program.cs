@@ -1,8 +1,10 @@
 using ExpenseTracker.Application;
+using ExpenseTracker.Application.Contracts.Auth;
 using ExpenseTracker.Domain.Utils;
 using ExpenseTracker.Infrastructure.Email;
 using ExpenseTracker.Infrastructure.Persistence;
 using ExpenseTracker.Infrastructure.Report;
+using ExpenseTracker.Presentation.Api;
 using ExpenseTracker.Presentation.Api.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -68,6 +70,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<ICurrentUserManager, CurrenctUserManager>();
+builder.Services.AddScoped<ITokenManager, TokenManager>();
 
 var app = builder.Build();
 

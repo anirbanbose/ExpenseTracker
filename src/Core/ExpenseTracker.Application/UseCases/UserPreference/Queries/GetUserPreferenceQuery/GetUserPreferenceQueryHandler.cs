@@ -1,8 +1,8 @@
-﻿using ExpenseTracker.Application.DTO.UserPreference;
+﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.UserPreference;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.UserPreference.Queries;
@@ -12,7 +12,7 @@ public class GetUserPreferenceQueryHandler : BaseHandler, IRequestHandler<GetUse
     private readonly IUserRepository _userRepository;
     private readonly ILogger<GetUserPreferenceQueryHandler> _logger;
 
-    public GetUserPreferenceQueryHandler(IHttpContextAccessor httpContextAccessor, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<GetUserPreferenceQueryHandler> logger) : base(httpContextAccessor)
+    public GetUserPreferenceQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<GetUserPreferenceQueryHandler> logger) : base(currentUserManager)
     {
         _userRepository = userRepository;
         _logger = logger;
@@ -34,7 +34,7 @@ public class GetUserPreferenceQueryHandler : BaseHandler, IRequestHandler<GetUse
             if(user is null || user?.Preference is null)
             {
                 _logger.LogWarning($"User preference not found for user: {CurrentUserName}");
-                return Result<UserPreferenceDTO>.NotFoundResult("User preference not found.");
+                return Result<UserPreferenceDTO>.NotFoundResult();
             }
             return Result<UserPreferenceDTO>.SuccessResult(UserPreferenceDTO.FromDomain(user.Preference));
         }
@@ -42,6 +42,6 @@ public class GetUserPreferenceQueryHandler : BaseHandler, IRequestHandler<GetUse
         {
             _logger.LogError(ex, $"An error occurred while handling GetUserPreferenceQuery for the user - {CurrentUserName}.");
         }        
-        return Result<UserPreferenceDTO>.FailureResult("UserPreference.GetUserPreference", "Couldn't fetch user preference data.");
+        return Result<UserPreferenceDTO>.FailureResult("UserPreference.GetUserPreference");
     }
 }
