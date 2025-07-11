@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
-public class SpendingChartQueryHandler : BaseHandler, IRequestHandler<SpendingChartQuery, Result<SpendingChartDTO>>
+public class SpendingChartQueryHandler : IRequestHandler<SpendingChartQuery, Result<SpendingChartDTO>>
 {
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly ILogger<SpendingChartQueryHandler> _logger;
 
-    public SpendingChartQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SpendingChartQueryHandler> logger) : base(currentUserManager)
+    public SpendingChartQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<SpendingChartQueryHandler> logger) 
     {
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -24,11 +24,11 @@ public class SpendingChartQueryHandler : BaseHandler, IRequestHandler<SpendingCh
     {
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<SpendingChartDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<SpendingChartDTO>>(new ResultUserNotAuthenticatedFactory<SpendingChartDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenses = await _expenseRepository.GetLast12MonthsExpensesAsync(currentUser.Id, cancellationToken);
+            var expenses = await _expenseRepository.GetLast12MonthsExpensesAsync(currentUser!.Id, cancellationToken);
             if (expenses is not null)
             {
                 var groupedExpenses = expenses
@@ -76,7 +76,7 @@ public class SpendingChartQueryHandler : BaseHandler, IRequestHandler<SpendingCh
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred while fetching spending chart data for the user: {CurrentUserName}.");
+            _logger.LogError(ex, $"Error occurred while fetching spending chart data for the user: {_authProvider.CurrentUserName}.");
         }
         return Result<SpendingChartDTO>.FailureResult("Chart.SpendingChart");
     }

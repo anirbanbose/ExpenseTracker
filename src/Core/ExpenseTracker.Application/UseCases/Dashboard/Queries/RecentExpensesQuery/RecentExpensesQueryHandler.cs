@@ -7,17 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
-public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExpensesQuery, Result<List<RecentExpenseListDTO>>>
+public class RecentExpensesQueryHandler : IRequestHandler<RecentExpensesQuery, Result<List<RecentExpenseListDTO>>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<RecentExpensesQueryHandler> _logger;
 
-
-    public RecentExpensesQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<RecentExpensesQueryHandler> logger) : base(currentUserManager)
+    public RecentExpensesQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<RecentExpensesQueryHandler> logger)
     {
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -25,11 +24,11 @@ public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExp
     {
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<List<RecentExpenseListDTO>>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<List<RecentExpenseListDTO>>>(new ResultUserNotAuthenticatedFactory<List<RecentExpenseListDTO>>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.GetRecentExpensesAsync(currentUser.Id, request.recordCount, cancellationToken);
+            var expenseResult = await _expenseRepository.GetRecentExpensesAsync(currentUser!.Id, request.recordCount, cancellationToken);
             if (expenseResult is not null)
             {
                 List<RecentExpenseListDTO> dtoList = new List<RecentExpenseListDTO>();
@@ -42,7 +41,7 @@ public class RecentExpensesQueryHandler : BaseHandler, IRequestHandler<RecentExp
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred while fetching recent expenses with request - {request} for the user: {CurrentUserName}.");
+            _logger.LogError(ex, $"Error occurred while fetching recent expenses with request - {request} for the user: {_authProvider.CurrentUserName}.");
         }
         return Result<List<RecentExpenseListDTO>>.FailureResult("Expense.RecentExpenses");
     }

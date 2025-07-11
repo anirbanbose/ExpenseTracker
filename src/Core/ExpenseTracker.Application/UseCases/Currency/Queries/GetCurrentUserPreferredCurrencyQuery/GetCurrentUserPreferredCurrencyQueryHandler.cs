@@ -7,17 +7,17 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Currency.Queries;
 
-public class GetCurrentUserPreferredCurrencyQueryHandler : BaseHandler, IRequestHandler<GetCurrentUserPreferredCurrencyQuery, Result<CurrencyDTO>>
+public class GetCurrentUserPreferredCurrencyQueryHandler : IRequestHandler<GetCurrentUserPreferredCurrencyQuery, Result<CurrencyDTO>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly ICurrencyRepository _currencyRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<GetCurrentUserPreferredCurrencyQueryHandler> _logger;
 
-    public GetCurrentUserPreferredCurrencyQueryHandler(ICurrentUserManager currentUserManager, ICurrencyRepository currencyRepository, IUserRepository userRepository, ILogger<GetCurrentUserPreferredCurrencyQueryHandler> logger) : base(currentUserManager)
+    public GetCurrentUserPreferredCurrencyQueryHandler(IAuthenticatedUserProvider authProvider, ICurrencyRepository currencyRepository, ILogger<GetCurrentUserPreferredCurrencyQueryHandler> logger) 
     {
         _currencyRepository = currencyRepository;
+        _authProvider = authProvider;
         _logger = logger;
-        _userRepository = userRepository;
     }
 
     public async Task<Result<CurrencyDTO>> Handle(GetCurrentUserPreferredCurrencyQuery request, CancellationToken cancellationToken)
@@ -29,20 +29,19 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : BaseHandler, IRequest
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<CurrencyDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<CurrencyDTO>>(new ResultUserNotAuthenticatedFactory<CurrencyDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var user = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);
-            if (user is null || user?.Preference is null)
+            if (currentUser?.Preference is null)
             {
-                _logger.LogWarning($"User preference for user {CurrentUserName} not found.");
+                _logger.LogWarning($"User preference for user {_authProvider.CurrentUserName} not found.");
                 return Result<CurrencyDTO>.NotFoundResult();
             }
-            var preferredCurrency = await _currencyRepository.GetCurrencyByIdAsync(user.Preference.PreferredCurrencyId, cancellationToken);
+            var preferredCurrency = await _currencyRepository.GetCurrencyByIdAsync(currentUser.Preference.PreferredCurrencyId, cancellationToken);
             if (preferredCurrency is null)
             {
-                _logger.LogWarning($"Preferred currency not found for user {CurrentUserName}.");
+                _logger.LogWarning($"Preferred currency not found for user {_authProvider.CurrentUserName}.");
                 return Result<CurrencyDTO>.NotFoundResult();
             }
             var currencyDto = CurrencyDTO.FromDomain(preferredCurrency);
@@ -50,7 +49,7 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : BaseHandler, IRequest
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"An error occurred while handling GetCurrentUserPreferredCurrencyQuery for the user: {CurrentUserName}.");
+            _logger.LogError(ex, $"An error occurred while handling GetCurrentUserPreferredCurrencyQuery for the user: {_authProvider.CurrentUserName}.");
         }
         return Result<CurrencyDTO>.FailureResult("Currency.GetCurrentUserPreferredCurrency");
 

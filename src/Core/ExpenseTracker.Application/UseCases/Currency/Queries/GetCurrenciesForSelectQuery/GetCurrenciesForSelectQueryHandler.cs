@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Application.Contracts.Auth;
-using ExpenseTracker.Application.DTO.Currency;
+﻿using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
@@ -7,13 +6,13 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Currency.Queries;
 
-public class GetCurrenciesForSelectQueryHandler : BaseHandler, IRequestHandler<GetCurrenciesForSelectQuery, Result<List<CurrencyForSelectDTO>>>
+public class GetCurrenciesForSelectQueryHandler : IRequestHandler<GetCurrenciesForSelectQuery, Result<List<CurrencyForSelectDTO>>>
 {
     private readonly ICurrencyRepository _currencyRepository;
     private readonly ILogger<GetCurrenciesForSelectQueryHandler> _logger;
 
 
-    public GetCurrenciesForSelectQueryHandler(ICurrentUserManager currentUserManager, ICurrencyRepository currencyRepository, ILogger<GetCurrenciesForSelectQueryHandler> logger) : base(currentUserManager)
+    public GetCurrenciesForSelectQueryHandler(ICurrencyRepository currencyRepository, ILogger<GetCurrenciesForSelectQueryHandler> logger) 
     {
         _currencyRepository = currencyRepository;
         _logger = logger;

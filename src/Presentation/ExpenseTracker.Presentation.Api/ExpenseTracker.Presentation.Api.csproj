@@ -7,18 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ExpenseTracker.Application\ExpenseTracker.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.Web.Auth\ExpenseTracker.Infrastructure.Web.Auth.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.Email\ExpenseTracker.Infrastructure.Email.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.Persistence\ExpenseTracker.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.Report\ExpenseTracker.Infrastructure.Report.csproj" />

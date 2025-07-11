@@ -7,17 +7,17 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.UserPreference.Commands;
 
-public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<SaveUserPreferenceCommand, Result>
+public class SaveUserPreferenceCommandHandler : IRequestHandler<SaveUserPreferenceCommand, Result>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IUserRepository _userRepository;
-    private readonly ICurrencyRepository _currencyRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<SaveUserPreferenceCommandHandler> _logger;
 
-    public SaveUserPreferenceCommandHandler(IUserRepository userRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<SaveUserPreferenceCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
+    public SaveUserPreferenceCommandHandler(IAuthenticatedUserProvider authProvider, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<SaveUserPreferenceCommandHandler> logger) 
     {
+        _authProvider = authProvider;
         _userRepository = userRepository;
-        _currencyRepository = currencyRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
@@ -30,14 +30,14 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result>(new ResultUserNotAuthenticatedFactory(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);  
+            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser!.Id, cancellationToken);  
             if (userToBeUpdated is null || userToBeUpdated.Preference is null)
             {
-                _logger.LogWarning($"User preference not found for user - {CurrentUserName}.");
+                _logger.LogWarning($"User preference not found for user - {_authProvider.CurrentUserName}.");
                 return Result.FailureResult("UserPreference.SaveUserPreference");
             }
             var userPreference = userToBeUpdated.Preference;
@@ -49,7 +49,7 @@ public class SaveUserPreferenceCommandHandler : BaseHandler, IRequestHandler<Sav
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"An error occurred while saving user preference with request: {request} for the user- {CurrentUserName}.");
+            _logger?.LogError(ex, $"An error occurred while saving user preference with request: {request} for the user- {_authProvider.CurrentUserName}.");
         }
         return Result.FailureResult("UserPreference.SaveUserPreference");
     }

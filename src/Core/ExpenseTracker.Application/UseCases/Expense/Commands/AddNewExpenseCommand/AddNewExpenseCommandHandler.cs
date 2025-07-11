@@ -8,22 +8,22 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
 
-public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewExpenseCommand, Result<Guid?>>
+public class AddNewExpenseCommandHandler : IRequestHandler<AddNewExpenseCommand, Result<Guid?>>
 {
-    private readonly IUserRepository _userRepository;
     private readonly IExpenseRepository _expenseRepository;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly ICurrencyRepository _currencyRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly ILogger<AddNewExpenseCommandHandler> _logger;
 
-    public AddNewExpenseCommandHandler(IExpenseRepository expenseRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
+    public AddNewExpenseCommandHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, IExpenseCategoryRepository expenseCategoryRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCommandHandler> logger)
     {
-        _userRepository = userRepository;
         _expenseCategoryRepository = expenseCategoryRepository;
         _currencyRepository = currencyRepository;
         _expenseRepository = expenseRepository;
         _unitOfWork = unitOfWork;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -35,14 +35,14 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<Guid?>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync(new ResultUserNotAuthenticatedFactory<Guid?>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
             var userPreference = currentUser?.Preference;
             if (userPreference is null)
             {
-                _logger.LogWarning($"User preference not found for user: {CurrentUserName}.");
+                _logger.LogWarning($"User preference not found for user: {_authProvider.CurrentUserName}.");
                 return Result<Guid?>.FailureResult("Expense.AddNewExpense");
             }
 
@@ -61,9 +61,9 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
             var expense = new Domain.Models.Expense(
                     new Money(request.Amount, currency.Code, currency.Symbol), 
                     request.Description, 
-                    expenseCategory.Id, 
+                    expenseCategory, 
                     request.ExpenseDate.ToDate(), 
-                    currentUser.Id
+                    currentUser!.Id
                     );
             
             await _expenseRepository.AddExpenseAsync(expense);
@@ -73,7 +73,7 @@ public class AddNewExpenseCommandHandler : BaseHandler, IRequestHandler<AddNewEx
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while adding new expense- {request} for the user: {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while adding new expense- {request} for the user: {_authProvider.CurrentUserName}.");
         }
         return Result<Guid?>.FailureResult("Expense.AddNewExpense");
     }

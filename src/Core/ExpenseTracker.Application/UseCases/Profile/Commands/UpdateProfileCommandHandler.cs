@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Application.Contracts.Auth;
+using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
@@ -7,14 +8,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Profile.Commands;
 
-public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdateProfileCommand, Result>
+public class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand, Result>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UpdateProfileCommandHandler> _logger;
 
-    public UpdateProfileCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<UpdateProfileCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
+    public UpdateProfileCommandHandler(IAuthenticatedUserProvider authProvider, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<UpdateProfileCommandHandler> logger) 
     {
+        _authProvider = authProvider;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;        
@@ -28,11 +31,11 @@ public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdatePr
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result>(new ResultUserNotAuthenticatedFactory(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);
+            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser!.Id, cancellationToken);
             
             if(userToBeUpdated is not null)
             {
@@ -46,7 +49,7 @@ public class UpdateProfileCommandHandler : BaseHandler, IRequestHandler<UpdatePr
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while updating profile- {request} for the user: {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while updating profile- {request} for the user: {_authProvider.CurrentUserName}.");
         }
         return Result.FailureResult("Profile.UpdateProfile");
     }

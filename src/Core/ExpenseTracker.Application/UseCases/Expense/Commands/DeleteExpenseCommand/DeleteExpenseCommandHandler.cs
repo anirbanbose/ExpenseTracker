@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
 
-public class DeleteExpenseCommandHandler : BaseHandler, IRequestHandler<DeleteExpenseCommand, Result>
+public class DeleteExpenseCommandHandler : IRequestHandler<DeleteExpenseCommand, Result>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<DeleteExpenseCommandHandler> _logger;
 
-    public DeleteExpenseCommandHandler(IExpenseRepository expenseRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
-    {        
-        _userRepository = userRepository;
+    public DeleteExpenseCommandHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCommandHandler> logger) 
+    {
+        _authProvider = authProvider;
         _expenseRepository = expenseRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -30,11 +30,11 @@ public class DeleteExpenseCommandHandler : BaseHandler, IRequestHandler<DeleteEx
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync(new ResultUserNotAuthenticatedFactory(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id, currentUser.Id, cancellationToken);
+            var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id, currentUser!.Id, cancellationToken);
             if (expense is null)
             {
                 _logger.LogWarning($"Expense with Id - {request.Id} not found.");
@@ -49,7 +49,7 @@ public class DeleteExpenseCommandHandler : BaseHandler, IRequestHandler<DeleteEx
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while deleting expense with id {request.Id} for the user: {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while deleting expense with id {request.Id} for the user: {_authProvider.CurrentUserName}.");
         }
         return Result.FailureResult("Expense.DeleteExpense");
     }

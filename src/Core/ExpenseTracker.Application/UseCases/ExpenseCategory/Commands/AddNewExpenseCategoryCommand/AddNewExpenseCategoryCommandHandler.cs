@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Commands;
 
-public class AddNewExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<AddNewExpenseCategoryCommand, Result<Guid?>>
+public class AddNewExpenseCategoryCommandHandler : IRequestHandler<AddNewExpenseCategoryCommand, Result<Guid?>>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<AddNewExpenseCategoryCommandHandler> _logger;
 
-    public AddNewExpenseCategoryCommandHandler(IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCategoryCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
+    public AddNewExpenseCategoryCommandHandler(IAuthenticatedUserProvider authProvider, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<AddNewExpenseCategoryCommandHandler> logger) 
     {
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _expenseCategoryRepository = expenseCategoryRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -30,15 +30,11 @@ public class AddNewExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<Guid?>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync(new ResultUserNotAuthenticatedFactory<Guid?>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseCategory = new Domain.Models.ExpenseCategory(
-                    request.Name,
-                    false,
-                    currentUser?.Id
-                    );
+            var expenseCategory = new Domain.Models.ExpenseCategory(request.Name, false, currentUser!.Id);
 
             await _expenseCategoryRepository.AddExpenseCategoryAsync(expenseCategory);
             await _unitOfWork.CommitAsync(cancellationToken);
@@ -47,7 +43,7 @@ public class AddNewExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while adding new expense category- {request} for user - {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while adding new expense category- {request} for user - {_authProvider.CurrentUserName}.");
         }
         return Result<Guid?>.FailureResult("Expense.AddNewExpenseCategory");
     }

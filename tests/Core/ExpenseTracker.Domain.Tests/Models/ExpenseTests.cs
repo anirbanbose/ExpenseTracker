@@ -11,11 +11,11 @@ public class ExpenseTests
     {
         // Arrange
         Money amount = new Money(100, "USD", "$");
-        ExpenseCategoryId expenseCategoryId = new ExpenseCategoryId(Guid.NewGuid());
+        ExpenseCategory expenseCategory = new ExpenseCategory("Test Category", true);
         UserId userId = new UserId(Guid.NewGuid());
 
         //Act
-        var expense = new Expense(amount, "Test", expenseCategoryId, DateTime.Now, userId);
+        var expense = new Expense(amount, "Test", expenseCategory, DateTime.Now, userId);
 
         // Assert
         expense.Should().NotBeNull();
@@ -25,19 +25,19 @@ public class ExpenseTests
     public void Update_Should_Be_Modify_All_Data_Values()
     {
         // Arrange        
-        var expense = new Expense(new Money(100, "USD", "$"), "Old", new ExpenseCategoryId(Guid.NewGuid()), DateTime.Now.AddDays(-1), new UserId(Guid.NewGuid()));
+        var expense = new Expense(new Money(100, "USD", "$"), "Old", new ExpenseCategory("Old Category", true), DateTime.Now.AddDays(-1), new UserId(Guid.NewGuid()));
 
         Money amountToBeUpdated = new Money(200, "USD", "$");
-        ExpenseCategoryId expenseCategoryIdToBeUpdated = new ExpenseCategoryId(Guid.NewGuid());
+        ExpenseCategory expenseCategoryToBeUpdated = new ExpenseCategory("New Category", true);
         DateTime expenseDateToBeUpated = DateTime.Now;
 
         //Act
-        expense.Update(amountToBeUpdated, "New", expenseCategoryIdToBeUpdated, expenseDateToBeUpated);
+        expense.Update(amountToBeUpdated, "New", expenseCategoryToBeUpdated, expenseDateToBeUpated);
 
         // Assert
         expense.Description.Should().Be("New");
         expense.ExpenseAmount.Amount.Should().Be(200);
-        expense.CategoryId.Should().Be(expenseCategoryIdToBeUpdated);
+        expense.Category.Should().Be(expenseCategoryToBeUpdated);
         expense.ExpenseDate.Should().Be(expenseDateToBeUpated);
     }
 }

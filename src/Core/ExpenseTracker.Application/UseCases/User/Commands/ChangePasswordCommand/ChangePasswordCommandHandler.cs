@@ -7,14 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.User.Commands;
 
-public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangePasswordCommand, Result>
+public class ChangePasswordCommandHandler : IRequestHandler<ChangePasswordCommand, Result>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<ChangePasswordCommandHandler> _logger;
 
-    public ChangePasswordCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<ChangePasswordCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
+    public ChangePasswordCommandHandler(IAuthenticatedUserProvider authProvider, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<ChangePasswordCommandHandler> logger) 
     {
+        _authProvider = authProvider;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -28,11 +30,11 @@ public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangeP
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result>(new ResultUserNotAuthenticatedFactory(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);
+            var userToBeUpdated = await _userRepository.GetUserByIdAsync(currentUser!.Id, cancellationToken);
             if(userToBeUpdated is not null)
             {
                 var verifyPasswordResult = currentUser.VerifyPassword(request.CurrentPassword);
@@ -48,7 +50,7 @@ public class ChangePasswordCommandHandler : BaseHandler, IRequestHandler<ChangeP
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while updating user password for the user: {CurrentUserName} with password change request - {request}.");
+            _logger?.LogError(ex, $"Error occurred while updating user password for the user: {_authProvider.CurrentUserName} with password change request - {request}.");
         }
         return Result.FailureResult("Account.ChangePassword");
     }

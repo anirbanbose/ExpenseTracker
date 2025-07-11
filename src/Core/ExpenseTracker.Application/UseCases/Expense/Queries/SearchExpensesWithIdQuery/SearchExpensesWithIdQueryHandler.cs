@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Queries;
 
-public class SearchExpensesWithIdQueryHandler : BaseHandler, IRequestHandler<SearchExpensesWithIdQuery, PagedResult<ExpenseListDTO>>
+public class SearchExpensesWithIdQueryHandler : IRequestHandler<SearchExpensesWithIdQuery, PagedResult<ExpenseListDTO>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<SearchExpensesWithIdQueryHandler> _logger;
 
-    public SearchExpensesWithIdQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SearchExpensesWithIdQueryHandler> logger) : base(currentUserManager)
+    public SearchExpensesWithIdQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<SearchExpensesWithIdQueryHandler> logger) 
     {
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -24,11 +24,11 @@ public class SearchExpensesWithIdQueryHandler : BaseHandler, IRequestHandler<Sea
     {
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new PagedResultUserNotAuthenticatedFactory<ExpenseListDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<PagedResult<ExpenseListDTO>>(new PagedResultUserNotAuthenticatedFactory<ExpenseListDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(request.id, currentUser.Id, request.pageSize, cancellationToken);
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(request.id, currentUser!.Id, request.pageSize, cancellationToken);
 
             if (expenseResult.IsSuccess && expenseResult.Items is not null)
             {
@@ -42,7 +42,7 @@ public class SearchExpensesWithIdQueryHandler : BaseHandler, IRequestHandler<Sea
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred while searching expenses for the user: {CurrentUserName}.");
+            _logger.LogError(ex, $"Error occurred while searching expenses for the user: {_authProvider.CurrentUserName}.");
         }
         return PagedResult<ExpenseListDTO>.FailureResult("Expense.SearchExpensesWithId");
     }

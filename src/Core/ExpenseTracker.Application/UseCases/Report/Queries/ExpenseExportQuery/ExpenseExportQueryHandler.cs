@@ -9,18 +9,18 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Report.Queries;
 
-public class ExpenseExportQueryHandler : BaseHandler, IRequestHandler<ExpenseExportQuery, Result<byte[]>>
+public class ExpenseExportQueryHandler : IRequestHandler<ExpenseExportQuery, Result<byte[]>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<ExpenseExportQueryHandler> _logger;
     private readonly IExcelReportGenerator<List<ExpenseReportDataItemDTO>> _excelExportGenerator;
     private readonly IPdfReportGenerator<List<ExpenseReportDataItemDTO>> _pdfExportGenerator;
 
-    public ExpenseExportQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, IExcelReportGenerator<List<ExpenseReportDataItemDTO>> excelExportGenerator, IPdfReportGenerator<List<ExpenseReportDataItemDTO>> pdfExportGenerator, ILogger<ExpenseExportQueryHandler> logger) : base(currentUserManager)
+    public ExpenseExportQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, IExcelReportGenerator<List<ExpenseReportDataItemDTO>> excelExportGenerator, IPdfReportGenerator<List<ExpenseReportDataItemDTO>> pdfExportGenerator, ILogger<ExpenseExportQueryHandler> logger) 
     {
+        _authProvider = authProvider;
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
         _excelExportGenerator = excelExportGenerator;
         _pdfExportGenerator = pdfExportGenerator;
         _logger = logger;
@@ -29,12 +29,12 @@ public class ExpenseExportQueryHandler : BaseHandler, IRequestHandler<ExpenseExp
     public async Task<Result<byte[]>> Handle(ExpenseExportQuery request, CancellationToken cancellationToken)
     {
         try
-        {            
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<byte[]>());
+        {
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<byte[]>>(new ResultUserNotAuthenticatedFactory<byte[]>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser.Id, request.order, request.IsAscendingSort, cancellationToken);
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser!.Id, request.order, request.IsAscendingSort, cancellationToken);
             if (expenseResult is not null)
             {
                 var reportData = new List<ExpenseReportDataItemDTO>();
@@ -49,10 +49,8 @@ public class ExpenseExportQueryHandler : BaseHandler, IRequestHandler<ExpenseExp
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while exporting expense report- {request} for the user: {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while exporting expense report- {request} for the user: {_authProvider.CurrentUserName}.");
         }
-        
-
         return Result<byte[]>.FailureResult("Report.ExpenseExport");
     }
 }

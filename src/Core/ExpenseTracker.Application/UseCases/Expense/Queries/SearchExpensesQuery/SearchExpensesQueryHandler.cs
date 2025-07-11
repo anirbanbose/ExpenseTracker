@@ -8,16 +8,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Queries;
 
-public class SearchExpensesQueryHandler : BaseHandler, IRequestHandler<SearchExpensesQuery, PagedResult<ExpenseListDTO>>
+public class SearchExpensesQueryHandler : IRequestHandler<SearchExpensesQuery, PagedResult<ExpenseListDTO>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<SearchExpensesQueryHandler> _logger;
 
-    public SearchExpensesQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<SearchExpensesQueryHandler> logger) : base(currentUserManager)
+    public SearchExpensesQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<SearchExpensesQueryHandler> logger) 
     {
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -25,11 +25,11 @@ public class SearchExpensesQueryHandler : BaseHandler, IRequestHandler<SearchExp
     {
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new PagedResultUserNotAuthenticatedFactory<ExpenseListDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<PagedResult<ExpenseListDTO>>(new PagedResultUserNotAuthenticatedFactory<ExpenseListDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser!.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
             if (expenseResult.IsSuccess && expenseResult.Items is not null)
             {
                 List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();
@@ -42,7 +42,7 @@ public class SearchExpensesQueryHandler : BaseHandler, IRequestHandler<SearchExp
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred while searching expenses with request - {request} for the user: {CurrentUserName}.");
+            _logger.LogError(ex, $"Error occurred while searching expenses with request - {request} for the user: {_authProvider.CurrentUserName}.");
         }      
 
         return PagedResult<ExpenseListDTO>.FailureResult("Expense.SearchExpenses");

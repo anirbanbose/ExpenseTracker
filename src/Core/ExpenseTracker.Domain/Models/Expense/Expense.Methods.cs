@@ -7,11 +7,11 @@ public partial class Expense : Entity<ExpenseId>
 {
     private Expense(ExpenseId id) : base(id) { }
 
-    public Expense(Money amount, string? description, ExpenseCategoryId categoryId, DateTime expenseDate, UserId userId) : base(ExpenseId.Create())
+    public Expense(Money amount, string? description, ExpenseCategory category, DateTime expenseDate, UserId userId) : base(ExpenseId.Create())
     {
         ExpenseAmount = amount;
         Description = description;
-        CategoryId = categoryId;
+        Category = category;
         ExpenseDate = expenseDate;
         ExpenseOwnerId = userId;
     }
@@ -24,20 +24,20 @@ public partial class Expense : Entity<ExpenseId>
     {
         Description = description;
     }
-    public void UpdateCategory(ExpenseCategoryId categoryId)
+    public void UpdateCategory(ExpenseCategory category)
     {
-        CategoryId = categoryId;
+        Category = category;
     }
     public void UpdateExpenseDate(DateTime expenseDate)
     {
         ExpenseDate = expenseDate;
     }
 
-    public void Update(Money amount, string? description, ExpenseCategoryId categoryId, DateTime expenseDate)
+    public void Update(Money amount, string? description, ExpenseCategory category, DateTime expenseDate)
     {
         UpdateAmount(amount);
         UpdateDescription(description);
-        UpdateCategory(categoryId);
+        UpdateCategory(category);
         UpdateExpenseDate(expenseDate);
     }
 }

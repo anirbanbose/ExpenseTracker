@@ -8,16 +8,16 @@ using Microsoft.Extensions.Logging;
 namespace ExpenseTracker.Application.UseCases.Expense.Queries;
 
 
-public class GetExpenseQueryHandler : BaseHandler, IRequestHandler<GetExpenseQuery, Result<ExpenseDTO>>
+public class GetExpenseQueryHandler : IRequestHandler<GetExpenseQuery, Result<ExpenseDTO>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<GetExpenseQueryHandler> _logger;
 
-    public GetExpenseQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<GetExpenseQueryHandler> logger) : base(currentUserManager)
-    {        
+    public GetExpenseQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<GetExpenseQueryHandler> logger) 
+    {  
+        _authProvider = authProvider;
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
         _logger = logger;
     }
 
@@ -29,7 +29,7 @@ public class GetExpenseQueryHandler : BaseHandler, IRequestHandler<GetExpenseQue
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<ExpenseDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<ExpenseDTO>>(new ResultUserNotAuthenticatedFactory<ExpenseDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
@@ -41,7 +41,7 @@ public class GetExpenseQueryHandler : BaseHandler, IRequestHandler<GetExpenseQue
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred while fetching expense details for expense id: {request.Id.Value.ToString()} for the user: {CurrentUserName}.");
+            _logger.LogError(ex, $"Error occurred while fetching expense details for expense id: {request.Id.Value.ToString()} for the user: {_authProvider.CurrentUserName}.");
         }
         
         return Result<ExpenseDTO>.FailureResult("Expense.GetExpenses");

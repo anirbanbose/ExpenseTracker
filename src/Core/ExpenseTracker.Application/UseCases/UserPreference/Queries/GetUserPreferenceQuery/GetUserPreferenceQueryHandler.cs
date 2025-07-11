@@ -7,14 +7,14 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.UserPreference.Queries;
 
-public class GetUserPreferenceQueryHandler : BaseHandler, IRequestHandler<GetUserPreferenceQuery, Result<UserPreferenceDTO>>
+public class GetUserPreferenceQueryHandler : IRequestHandler<GetUserPreferenceQuery, Result<UserPreferenceDTO>>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly ILogger<GetUserPreferenceQueryHandler> _logger;
 
-    public GetUserPreferenceQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<GetUserPreferenceQueryHandler> logger) : base(currentUserManager)
+    public GetUserPreferenceQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<GetUserPreferenceQueryHandler> logger) 
     {
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -26,21 +26,20 @@ public class GetUserPreferenceQueryHandler : BaseHandler, IRequestHandler<GetUse
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<UserPreferenceDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<UserPreferenceDTO>>(new ResultUserNotAuthenticatedFactory<UserPreferenceDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var user = await _userRepository.GetUserByIdAsync(currentUser.Id, cancellationToken);
-            if(user is null || user?.Preference is null)
+            if(currentUser?.Preference is null)
             {
-                _logger.LogWarning($"User preference not found for user: {CurrentUserName}");
+                _logger.LogWarning($"User preference not found for user: {_authProvider.CurrentUserName}");
                 return Result<UserPreferenceDTO>.NotFoundResult();
             }
-            return Result<UserPreferenceDTO>.SuccessResult(UserPreferenceDTO.FromDomain(user.Preference));
+            return Result<UserPreferenceDTO>.SuccessResult(UserPreferenceDTO.FromDomain(currentUser!.Preference));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"An error occurred while handling GetUserPreferenceQuery for the user - {CurrentUserName}.");
+            _logger.LogError(ex, $"An error occurred while handling GetUserPreferenceQuery for the user - {_authProvider.CurrentUserName}.");
         }        
         return Result<UserPreferenceDTO>.FailureResult("UserPreference.GetUserPreference");
     }

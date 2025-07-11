@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Dashboard.Queries;
 
-public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSummaryQuery, Result<ExpenseSummaryDTO>>
+public class ExpenseSummaryQueryHandler : IRequestHandler<ExpenseSummaryQuery, Result<ExpenseSummaryDTO>>
 {
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly ILogger<ExpenseSummaryQueryHandler> _logger;
 
-    public ExpenseSummaryQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<ExpenseSummaryQueryHandler> logger) : base(currentUserManager)
+    public ExpenseSummaryQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<ExpenseSummaryQueryHandler> logger)
     {
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -24,11 +24,11 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
     {
         try
         {            
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<ExpenseSummaryDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<ExpenseSummaryDTO>>(new ResultUserNotAuthenticatedFactory<ExpenseSummaryDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenses = await _expenseRepository.GetExpensesByUserIdAsync(currentUser.Id, cancellationToken);
+            var expenses = await _expenseRepository.GetExpensesByUserIdAsync(currentUser!.Id, cancellationToken);
 
             if (expenses is not null)
             {
@@ -55,7 +55,7 @@ public class ExpenseSummaryQueryHandler : BaseHandler, IRequestHandler<ExpenseSu
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"Error occurred while handling ExpenseSummaryQuery with request - {request}  for the user: {CurrentUserName}.");
+            _logger.LogError(ex, $"Error occurred while handling ExpenseSummaryQuery with request - {request}  for the user: {_authProvider.CurrentUserName}.");
         } 
         return Result<ExpenseSummaryDTO>.FailureResult("DashboardSummary.ExpenseSummary");
     }

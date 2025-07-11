@@ -1,17 +1,12 @@
 using ExpenseTracker.Application;
-using ExpenseTracker.Application.Contracts.Auth;
-using ExpenseTracker.Domain.Utils;
 using ExpenseTracker.Infrastructure.Email;
 using ExpenseTracker.Infrastructure.Persistence;
 using ExpenseTracker.Infrastructure.Report;
-using ExpenseTracker.Presentation.Api;
 using ExpenseTracker.Presentation.Api.Middlewares;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using QuestPDF.Infrastructure;
 using Serilog;
-using System.Text;
+using ExpenseTracker.Infrastructure.Web.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,52 +22,13 @@ builder.Services
 .AddApplicationServices(configuration)
 .AddPersistenceServices(configuration)
 .AddEmailServices(configuration)
+.AddAuthServices(configuration)
 .AddReportServices();
 
 
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"])),
-        ClockSkew = TimeSpan.Zero
-    };
 
-    // Accept token from cookie
-    options.Events = new JwtBearerEvents
-    {
-        OnMessageReceived = ctx =>
-        {
-            if (ctx.Request.Cookies.ContainsKey(Constants.ACCESS_TOKEN_NAME))
-            {
-                ctx.Request.Cookies.TryGetValue(Constants.ACCESS_TOKEN_NAME, out var accessToken);
-                if (!string.IsNullOrWhiteSpace(accessToken))
-                {
-                    ctx.Token = accessToken;
-                }
-            }            
-            return Task.CompletedTask;
-        }
-    };
-});
-
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddTransient<ICurrentUserManager, CurrenctUserManager>();
-builder.Services.AddScoped<ITokenManager, TokenManager>();
 
 var app = builder.Build();
 

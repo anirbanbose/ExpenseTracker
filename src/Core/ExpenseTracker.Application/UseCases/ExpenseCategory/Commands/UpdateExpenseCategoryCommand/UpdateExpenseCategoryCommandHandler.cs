@@ -7,19 +7,19 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Commands;
 
-public class UpdateExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<UpdateExpenseCategoryCommand, Result>
+public class UpdateExpenseCategoryCommandHandler : IRequestHandler<UpdateExpenseCategoryCommand, Result>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UpdateExpenseCategoryCommandHandler> _logger;
 
-    public UpdateExpenseCategoryCommandHandler(IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<UpdateExpenseCategoryCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
+    public UpdateExpenseCategoryCommandHandler(IAuthenticatedUserProvider authProvider, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<UpdateExpenseCategoryCommandHandler> logger)
     {
-        _userRepository = userRepository;
+        _authProvider = authProvider;
+        _expenseCategoryRepository = expenseCategoryRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;
-        _expenseCategoryRepository = expenseCategoryRepository;
     }
 
     public async Task<Result> Handle(UpdateExpenseCategoryCommand request, CancellationToken cancellationToken)
@@ -30,11 +30,11 @@ public class UpdateExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync(new ResultUserNotAuthenticatedFactory(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id, currentUser.Id, cancellationToken);
+            var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id, currentUser!.Id, cancellationToken);
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense category with Id - {request.Id} not found.");
@@ -48,7 +48,7 @@ public class UpdateExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while updating expense category- {request} for the user {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while updating expense category- {request} for the user {_authProvider.CurrentUserName}.");
         }
         return Result.FailureResult("ExpenseCategory.UpdateExpenseCategory");
     }

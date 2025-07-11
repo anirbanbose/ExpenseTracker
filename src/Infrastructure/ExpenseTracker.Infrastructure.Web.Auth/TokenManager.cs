@@ -5,8 +5,11 @@ using System.Security.Claims;
 using System.Text;
 using ExpenseTracker.Domain.Utils;
 using ExpenseTracker.Application.DTO.User;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
-namespace ExpenseTracker.Presentation.Api;
+namespace ExpenseTracker.Infrastructure.Web.Auth;
 
 public class TokenManager : ITokenManager
 {

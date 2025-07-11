@@ -8,18 +8,18 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Expense.Commands;
 
-public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateExpenseCommand, Result>
+public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand, Result>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
     private readonly ICurrencyRepository _currencyRepository;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<UpdateExpenseCommandHandler> _logger;
 
-    public UpdateExpenseCommandHandler(IExpenseRepository expenseRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<UpdateExpenseCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
-    {        
-        _userRepository = userRepository;
+    public UpdateExpenseCommandHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, IExpenseCategoryRepository expenseCategoryRepository, ICurrencyRepository currencyRepository, IUnitOfWork unitOfWork, ILogger<UpdateExpenseCommandHandler> logger) 
+    {
+        _authProvider = authProvider;
         _expenseRepository = expenseRepository;
         _currencyRepository = currencyRepository;
         _unitOfWork = unitOfWork;
@@ -35,18 +35,18 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync(new ResultUserNotAuthenticatedFactory(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var userPreference = currentUser?.Preference;
+            var userPreference = currentUser!.Preference;
             if (userPreference is null)
             {
-                _logger.LogWarning($"User preference not found for user: {CurrentUserName}.");
+                _logger.LogWarning($"User preference not found for user: {_authProvider.CurrentUserName}.");
                 return Result<Guid?>.FailureResult("Expense.UpdateExpense");
             }
 
-            var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id, currentUser.Id, cancellationToken);
+            var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id, currentUser!.Id, cancellationToken);
             if(expense is null)
             {
                 _logger.LogWarning($"Expense with Id - {request.Id} not found.");
@@ -69,7 +69,7 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
             expense.Update(
                 new Money(request.Amount, currency.Code, currency.Symbol),
                 request.Description,
-                expenseCategory.Id,
+                expenseCategory,
                 request.ExpenseDate.ToDate()
             );
             _expenseRepository.UpdateExpense(expense);
@@ -79,7 +79,7 @@ public class UpdateExpenseCommandHandler : BaseHandler, IRequestHandler<UpdateEx
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while updating expense- {request} for the user: {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while updating expense- {request} for the user: {_authProvider.CurrentUserName}.");
         }
         return Result.FailureResult("Expense.UpdateExpense");
     }

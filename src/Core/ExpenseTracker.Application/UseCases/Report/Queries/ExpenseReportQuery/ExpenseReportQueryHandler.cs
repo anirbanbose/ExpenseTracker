@@ -9,19 +9,19 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Report.Queries;
 
-public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseReportQuery, Result<byte[]>>
+public class ExpenseReportQueryHandler : IRequestHandler<ExpenseReportQuery, Result<byte[]>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
     private readonly ICurrencyRepository _currencyRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<ExpenseReportQueryHandler> _logger;
     private readonly IExcelReportGenerator<ExpenseReportDTO> _excelReportGenerator;
     private readonly IPdfReportGenerator<ExpenseReportDTO> _pdfReportGenerator;
 
-    public ExpenseReportQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, ICurrencyRepository currencyRepository, IUserRepository userRepository, IExpenseCategoryRepository expenseCategoryRepository, IExcelReportGenerator<ExpenseReportDTO> excelReportGenerator,  IPdfReportGenerator<ExpenseReportDTO> pdfReportGenerator, ILogger<ExpenseReportQueryHandler> logger) : base(currentUserManager)
+    public ExpenseReportQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ICurrencyRepository currencyRepository, IExpenseCategoryRepository expenseCategoryRepository, IExcelReportGenerator<ExpenseReportDTO> excelReportGenerator,  IPdfReportGenerator<ExpenseReportDTO> pdfReportGenerator, ILogger<ExpenseReportQueryHandler> logger) 
     {
+        _authProvider = authProvider;
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
         _currencyRepository = currencyRepository;
         _excelReportGenerator = excelReportGenerator;
         _pdfReportGenerator = pdfReportGenerator;
@@ -32,7 +32,7 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
     {
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<byte[]>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<byte[]>>(new ResultUserNotAuthenticatedFactory<byte[]>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
@@ -53,14 +53,14 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
 
             if(currentUser?.Preference is null)
             {
-                _logger?.LogWarning($"User preference not present for the user: {CurrentUserName}.");
+                _logger?.LogWarning($"User preference not present for the user: {_authProvider.CurrentUserName}.");
                 return Result<byte[]>.FailureResult("Report.ExpenseReport");
             }
 
             var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(null, null, startDate, endDate), currentUser.Id, Domain.Enums.ExpenseListOrder.ExpenseDate, true, cancellationToken);
             if (expenseResult is not null)
             {
-                var currency = await _currencyRepository.GetCurrencyByIdAsync(currentUser?.Preference?.PreferredCurrencyId, cancellationToken);
+                var currency = await _currencyRepository.GetCurrencyByIdAsync(currentUser!.Preference!.PreferredCurrencyId, cancellationToken);
                 if (currency is null)
                 {
                     return Result<byte[]>.FailureResult("Report.ExpenseReport");
@@ -77,7 +77,7 @@ public class ExpenseReportQueryHandler : BaseHandler, IRequestHandler<ExpenseRep
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while exporting expense report- {request} for the user: {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while exporting expense report- {request} for the user: {_authProvider.CurrentUserName}.");
         }
 
 

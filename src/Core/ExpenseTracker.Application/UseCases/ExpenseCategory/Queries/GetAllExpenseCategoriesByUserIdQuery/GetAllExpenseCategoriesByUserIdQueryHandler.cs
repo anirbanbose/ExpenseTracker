@@ -7,17 +7,17 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Queries;
 
-public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequestHandler<GetAllExpenseCategoriesByUserIdQuery, Result<List<ExpenseCategoryDTO>>>
+public class GetAllExpenseCategoriesByUserIdQueryHandler : IRequestHandler<GetAllExpenseCategoriesByUserIdQuery, Result<List<ExpenseCategoryDTO>>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<GetAllExpenseCategoriesByUserIdQueryHandler> _logger;
 
 
-    public GetAllExpenseCategoriesByUserIdQueryHandler(ICurrentUserManager currentUserManager, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<GetAllExpenseCategoriesByUserIdQueryHandler> logger) : base(currentUserManager)
+    public GetAllExpenseCategoriesByUserIdQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseCategoryRepository expenseCategoryRepository, ILogger<GetAllExpenseCategoriesByUserIdQueryHandler> logger)
     {
+        _authProvider = authProvider;
         _expenseCategoryRepository = expenseCategoryRepository;
-        _userRepository = userRepository;
         _logger = logger;
     }
 
@@ -25,11 +25,11 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
     {
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<List<ExpenseCategoryDTO>>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<List<ExpenseCategoryDTO>>>(new ResultUserNotAuthenticatedFactory<List<ExpenseCategoryDTO>>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseCategories = await _expenseCategoryRepository.GetAllExpenseCategoriesByUserIdAsync(currentUser.Id, cancellationToken);
+            var expenseCategories = await _expenseCategoryRepository.GetAllExpenseCategoriesByUserIdAsync(currentUser!.Id, cancellationToken);
             if (expenseCategories is null || !expenseCategories.Any())
             {
                 return Result<List<ExpenseCategoryDTO>>.NotFoundResult();
@@ -40,7 +40,7 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : BaseHandler, IRequest
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"An error occurred while handling GetAllExpenseCategoriesByUserIdQuery for the user {CurrentUserName}.");
+            _logger.LogError(ex, $"An error occurred while handling GetAllExpenseCategoriesByUserIdQuery for the user {_authProvider.CurrentUserName}.");
         }
         return Result<List<ExpenseCategoryDTO>>.FailureResult("ExpenseCategory.GetAllExpenseCategories");
     }

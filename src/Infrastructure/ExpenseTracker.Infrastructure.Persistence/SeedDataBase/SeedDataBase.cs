@@ -153,7 +153,7 @@ public class SeedDataBase : ISeedDataBase
                                 currency is not null ? currency.Symbol : preferredCurrency.Symbol
                                 ),
                             expense.Description,
-                            category.Id,
+                            category,
                             mockDates[dateIndex],
                             user.Id
                         );

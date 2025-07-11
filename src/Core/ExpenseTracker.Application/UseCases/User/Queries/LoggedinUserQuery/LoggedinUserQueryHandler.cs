@@ -1,19 +1,18 @@
 ﻿using ExpenseTracker.Application.Contracts.Auth;
 using ExpenseTracker.Application.DTO.User;
-using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.User.Queries;
 
-public class LoggedinUserQueryHandler : BaseHandler, IRequestHandler<LoggedinUserQuery, Result<LoggedInUserDTO>>
+public class LoggedinUserQueryHandler : IRequestHandler<LoggedinUserQuery, Result<LoggedInUserDTO>>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly ILogger<LoggedinUserQueryHandler> _logger;
-    public LoggedinUserQueryHandler(ICurrentUserManager currentUserManager, IUserRepository userRepository, ILogger<LoggedinUserQueryHandler> logger) : base(currentUserManager)
+    public LoggedinUserQueryHandler(IAuthenticatedUserProvider authProvider, ILogger<LoggedinUserQueryHandler> logger) 
     {
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -24,18 +23,18 @@ public class LoggedinUserQueryHandler : BaseHandler, IRequestHandler<LoggedinUse
             return Result<LoggedInUserDTO>.ArgumentNullResult();
         }
         try
-        {            
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<LoggedInUserDTO>());
+        {
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<LoggedInUserDTO>>(new ResultUserNotAuthenticatedFactory<LoggedInUserDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var loggedInUser = LoggedInUserDTO.FromDomain(currentUser);
+            var loggedInUser = LoggedInUserDTO.FromDomain(currentUser!);
 
             return Result<LoggedInUserDTO>.SuccessResult(loggedInUser);
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while getting the LoggedinUser data for the user: {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while getting the LoggedinUser data for the user: {_authProvider.CurrentUserName}.");
         }
         return Result<LoggedInUserDTO>.FailureResult("Account.LoggedinUser");
     }

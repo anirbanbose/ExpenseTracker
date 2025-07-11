@@ -8,29 +8,29 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Queries;
 
-public class SearchExpenseCategoriesQueryHandler : BaseHandler, IRequestHandler<SearchExpenseCategoriesQuery, PagedResult<ExpenseCategoryDTO>>
+public class SearchExpenseCategoriesQueryHandler : IRequestHandler<SearchExpenseCategoriesQuery, PagedResult<ExpenseCategoryDTO>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<SearchExpenseCategoriesQueryHandler> _logger;
 
 
-    public SearchExpenseCategoriesQueryHandler(ICurrentUserManager currentUserManager, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<SearchExpenseCategoriesQueryHandler> logger) : base(currentUserManager)
+    public SearchExpenseCategoriesQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseCategoryRepository expenseCategoryRepository, ILogger<SearchExpenseCategoriesQueryHandler> logger) 
     {
         _expenseCategoryRepository = expenseCategoryRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
     public async Task<PagedResult<ExpenseCategoryDTO>> Handle(SearchExpenseCategoriesQuery request, CancellationToken cancellationToken)
     {
         try
-        {            
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new PagedResultUserNotAuthenticatedFactory<ExpenseCategoryDTO>());
+        {
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<PagedResult<ExpenseCategoryDTO>>(new PagedResultUserNotAuthenticatedFactory<ExpenseCategoryDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseCategoryResult = await _expenseCategoryRepository.SearchUserExpenseCategoriesAsync(ExpenseCategorySearchModel.Create(request.Search), currentUser.Id, request.PageIndex, request.PageSize, request.Order, request.IsAscendingSort, cancellationToken);
+            var expenseCategoryResult = await _expenseCategoryRepository.SearchUserExpenseCategoriesAsync(ExpenseCategorySearchModel.Create(request.Search), currentUser!.Id, request.PageIndex, request.PageSize, request.Order, request.IsAscendingSort, cancellationToken);
 
             if (expenseCategoryResult.IsSuccess && expenseCategoryResult.Items.Any())
             {
@@ -44,7 +44,7 @@ public class SearchExpenseCategoriesQueryHandler : BaseHandler, IRequestHandler<
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"An error occurred while handling SearchExpenseCategoriesQuery for user - {CurrentUserName}.");
+            _logger.LogError(ex, $"An error occurred while handling SearchExpenseCategoriesQuery for user - {_authProvider.CurrentUserName}.");
         }        
 
         return PagedResult<ExpenseCategoryDTO>.FailureResult("ExpenseCategory.SearchExpenseCategories");

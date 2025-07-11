@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.Report.Queries;
 
-public class MinMaxExpenseDateQueryHandler : BaseHandler, IRequestHandler<MinMaxExpenseDateQuery, Result<MinMaxExprenseDateDTO>>
+public class MinMaxExpenseDateQueryHandler : IRequestHandler<MinMaxExpenseDateQuery, Result<MinMaxExprenseDateDTO>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseRepository _expenseRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<MinMaxExpenseDateQueryHandler> _logger;
 
-    public MinMaxExpenseDateQueryHandler(ICurrentUserManager currentUserManager, IExpenseRepository expenseRepository, IUserRepository userRepository, ILogger<MinMaxExpenseDateQueryHandler> logger) : base(currentUserManager)
+    public MinMaxExpenseDateQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseRepository expenseRepository, ILogger<MinMaxExpenseDateQueryHandler> logger) 
     {
         _expenseRepository = expenseRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -26,10 +26,10 @@ public class MinMaxExpenseDateQueryHandler : BaseHandler, IRequestHandler<MinMax
         DateTime? maxDate = null;
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<MinMaxExprenseDateDTO>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<MinMaxExprenseDateDTO>>(new ResultUserNotAuthenticatedFactory<MinMaxExprenseDateDTO>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
-            var expenses = await _expenseRepository.GetExpensesByUserIdAsync(currentUser.Id, cancellationToken);
+            var expenses = await _expenseRepository.GetExpensesByUserIdAsync(currentUser!.Id, cancellationToken);
             if (expenses is not null && expenses.Any())
             {
                 minDate = expenses.Min(e => e.ExpenseDate);
@@ -38,7 +38,7 @@ public class MinMaxExpenseDateQueryHandler : BaseHandler, IRequestHandler<MinMax
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"An error occurred while handling MinMaxExpenseDateQuery for the user - {CurrentUserName}.");
+            _logger.LogError(ex, $"An error occurred while handling MinMaxExpenseDateQuery for the user - {_authProvider.CurrentUserName}.");
         }
         return Result<MinMaxExprenseDateDTO>.SuccessResult(new MinMaxExprenseDateDTO(minDate, maxDate));
     }

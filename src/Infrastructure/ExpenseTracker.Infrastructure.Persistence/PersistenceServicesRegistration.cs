@@ -1,10 +1,10 @@
 ﻿
-using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.Persistence;
+using ExpenseTracker.Domain.Persistence.Repositories;
+using ExpenseTracker.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using ExpenseTracker.Infrastructure.Persistence.Repositories;
 
 namespace ExpenseTracker.Infrastructure.Persistence;
 

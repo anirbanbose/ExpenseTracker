@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Commands;
 
-public class DeleteExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<DeleteExpenseCategoryCommand, Result>
+public class DeleteExpenseCategoryCommandHandler : IRequestHandler<DeleteExpenseCategoryCommand, Result>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<DeleteExpenseCategoryCommandHandler> _logger;
 
-    public DeleteExpenseCategoryCommandHandler(IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCategoryCommandHandler> logger, ICurrentUserManager currentUserManager) : base(currentUserManager)
+    public DeleteExpenseCategoryCommandHandler(IAuthenticatedUserProvider authProvider, IExpenseCategoryRepository expenseCategoryRepository, IUnitOfWork unitOfWork, ILogger<DeleteExpenseCategoryCommandHandler> logger) 
     {
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _expenseCategoryRepository = expenseCategoryRepository;
         _unitOfWork = unitOfWork;
         _logger = logger;
@@ -30,11 +30,11 @@ public class DeleteExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync(new ResultUserNotAuthenticatedFactory(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id, currentUser.Id, cancellationToken);
+            var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id, currentUser!.Id, cancellationToken);
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense Category with id - {request.Id} not found.");
@@ -49,7 +49,7 @@ public class DeleteExpenseCategoryCommandHandler : BaseHandler, IRequestHandler<
         }
         catch (Exception ex)
         {
-            _logger?.LogError(ex, $"Error occurred while deleting expense category with id {request.Id} for user {CurrentUserName}.");
+            _logger?.LogError(ex, $"Error occurred while deleting expense category with id {request.Id} for user {_authProvider.CurrentUserName}.");
         }
         return Result.FailureResult("Expense.DeleteExpenseCategory");
     }

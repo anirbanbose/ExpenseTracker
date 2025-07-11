@@ -7,16 +7,16 @@ using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Application.UseCases.ExpenseCategory.Queries;
 
-public class GetExpenseCategoryByIdQueryHandler : BaseHandler, IRequestHandler<GetExpenseCategoryByIdQuery, Result<ExpenseCategoryDTO?>>
+public class GetExpenseCategoryByIdQueryHandler : IRequestHandler<GetExpenseCategoryByIdQuery, Result<ExpenseCategoryDTO?>>
 {
+    private readonly IAuthenticatedUserProvider _authProvider;
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
-    private readonly IUserRepository _userRepository;
     private readonly ILogger<GetExpenseCategoryByIdQueryHandler> _logger;
 
-    public GetExpenseCategoryByIdQueryHandler(ICurrentUserManager currentUserManager, IExpenseCategoryRepository expenseCategoryRepository, IUserRepository userRepository, ILogger<GetExpenseCategoryByIdQueryHandler> logger) : base(currentUserManager)
+    public GetExpenseCategoryByIdQueryHandler(IAuthenticatedUserProvider authProvider, IExpenseCategoryRepository expenseCategoryRepository, ILogger<GetExpenseCategoryByIdQueryHandler> logger) 
     {
         _expenseCategoryRepository = expenseCategoryRepository;
-        _userRepository = userRepository;
+        _authProvider = authProvider;
         _logger = logger;
     }
 
@@ -28,11 +28,11 @@ public class GetExpenseCategoryByIdQueryHandler : BaseHandler, IRequestHandler<G
         }
         try
         {
-            var (currentUser, failureResult) = await GetAuthenticatedUserAsync(_userRepository, _logger, cancellationToken, new ResultUserNotAuthenticatedFactory<ExpenseCategoryDTO?>());
+            var (currentUser, failureResult) = await _authProvider.GetAuthenticatedUserAsync<Result<ExpenseCategoryDTO?>>(new ResultUserNotAuthenticatedFactory<ExpenseCategoryDTO?>(), cancellationToken);
             if (failureResult != null)
                 return failureResult;
 
-            var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id.Value, currentUser.Id, cancellationToken);
+            var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id.Value, currentUser!.Id, cancellationToken);
             if (expenseCategory is null)
             {
                 return Result<ExpenseCategoryDTO?>.NotFoundResult();
@@ -43,7 +43,7 @@ public class GetExpenseCategoryByIdQueryHandler : BaseHandler, IRequestHandler<G
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"An error occurred while handling GetExpenseCategoryByIdQuery for user {CurrentUserName}.");
+            _logger.LogError(ex, $"An error occurred while handling GetExpenseCategoryByIdQuery for user {_authProvider.CurrentUserName}.");
         }
         return Result<ExpenseCategoryDTO?>.FailureResult("ExpenseCategory.GetExpenseCategoryById");
     }
