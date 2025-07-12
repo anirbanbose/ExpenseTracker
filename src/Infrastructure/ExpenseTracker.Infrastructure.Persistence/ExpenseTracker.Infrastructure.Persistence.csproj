@@ -28,8 +28,4 @@
     <ProjectReference Include="..\..\Core\ExpenseTracker.Application\ExpenseTracker.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Auth\" />
-  </ItemGroup>
-
 </Project>

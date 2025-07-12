@@ -40,11 +40,11 @@ public class CurrencyRepository(ApplicationDbContext dbContext) : BaseRepository
 
         IQueryable<Currency> query = TableNoTracking;
 
-        query = query.Where(d => (string.IsNullOrEmpty(searchString)
+        query = query.Where(d => string.IsNullOrEmpty(searchString)
                                 || d.Name.ToLower().Contains(searchString)
                                 || d.Code.ToLower().Contains(searchString)
                                 || (!string.IsNullOrEmpty(d.Symbol) && d.Symbol.ToLower().Contains(searchString))
-                                ));
+                                );
 
         var totalCount = await query.CountAsync();
         
