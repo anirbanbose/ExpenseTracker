@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructure.Persistence.Tests", "tests\Infrastructure\ExpenseTracker.Infrastructure.Persistence.Tests\ExpenseTracker.Infrastructure.Persistence.Tests.csproj", "{A27E8626-D09E-4F71-9B8C-77705B8E3320}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructure.BackgroundJobs", "src\Infrastructure\ExpenseTracker.Infrastructure.BackgroundJobs\ExpenseTracker.Infrastructure.BackgroundJobs.csproj", "{77BDF64D-DA3D-4974-A7F6-1423B50544C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +94,10 @@ Global
 		{A27E8626-D09E-4F71-9B8C-77705B8E3320}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A27E8626-D09E-4F71-9B8C-77705B8E3320}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A27E8626-D09E-4F71-9B8C-77705B8E3320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77BDF64D-DA3D-4974-A7F6-1423B50544C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77BDF64D-DA3D-4974-A7F6-1423B50544C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77BDF64D-DA3D-4974-A7F6-1423B50544C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77BDF64D-DA3D-4974-A7F6-1423B50544C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -113,6 +119,7 @@ Global
 		{597119A7-B4B7-43EA-892F-9A2B84A48186} = {49C58360-0C89-441F-A229-401874921F6D}
 		{9F80C731-70D1-7D2F-5944-6ECC899FB0CE} = {3B1B4847-D16C-481E-AF93-73A7C394CB13}
 		{A27E8626-D09E-4F71-9B8C-77705B8E3320} = {CC0BDACD-E560-4E1B-B3EE-F4FEC32B64F6}
+		{77BDF64D-DA3D-4974-A7F6-1423B50544C7} = {3B1B4847-D16C-481E-AF93-73A7C394CB13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A159061A-F5CA-4049-A31C-ADC8C9A104E5}

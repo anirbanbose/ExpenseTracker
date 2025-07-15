@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../../_services/auth/auth.service';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HelperService } from '../../../_helpers/helper-service/helper.service';
 import { MatCardModule } from '@angular/material/card';
@@ -25,6 +25,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
+    RouterLink
   ],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
