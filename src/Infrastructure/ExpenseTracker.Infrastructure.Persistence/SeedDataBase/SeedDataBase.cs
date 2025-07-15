@@ -4,6 +4,7 @@ using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.Utils;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.Text.Json;
 
@@ -20,6 +21,7 @@ public class SeedDataBase : ISeedDataBase
     private readonly IExpenseCategoryRepository _expenseCategoryRepository;
     private readonly IExpenseRepository _expenseRepository;
     private readonly IConfiguration _configuration;
+    private readonly ILogger<SeedDataBase> _logger;
 
     private record MockCurrency(string Code, string? Symbol, string Name);
     private record MockUser(string Email, string Password, string FirstName, string LastName, string PreferredCurrencyCode
@@ -30,7 +32,8 @@ public class SeedDataBase : ISeedDataBase
     private record MockData(List<MockCurrency> Currencies, List<string> ExpenseCategories, MockUser User);
 
     public SeedDataBase(IUserRepository userRepository, IUnitOfWork unitOfWork
-        , ICurrencyRepository currencyRepository, IExpenseCategoryRepository expenseCategoryRepository, IExpenseRepository expenseRepository, IConfiguration configuration)
+        , ICurrencyRepository currencyRepository, IExpenseCategoryRepository expenseCategoryRepository, IExpenseRepository expenseRepository
+        , IConfiguration configuration, ILogger<SeedDataBase> logger)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
@@ -38,15 +41,18 @@ public class SeedDataBase : ISeedDataBase
         _expenseCategoryRepository = expenseCategoryRepository;
         _expenseRepository = expenseRepository;
         _configuration = configuration;
+        _logger = logger;
     }
 
     public async Task Seed()
     {
         try
-        {            
+        {
+            _logger.LogInformation("Data seeding started.");
             MockData? mockData = ReadMockDataFromJsonFile();
             if(mockData is null)
             {
+                _logger.LogError("Could not read Seed data. Please check the seed data file.");
                 throw new Exception("Could not read Seed data. Please check the seed data file.");
             }
 
@@ -55,6 +61,7 @@ public class SeedDataBase : ISeedDataBase
             var expenseCategories = await InsertExpenseCategoriesIfMissing(mockData.ExpenseCategories, cts.Token);
             await SeedTestUser(mockData.User, currencies, expenseCategories);
             await _unitOfWork.CommitAsync(cts.Token);
+            _logger.LogInformation("Data seeding successful.");
         }
         catch (OperationCanceledException)
         {
@@ -71,7 +78,11 @@ public class SeedDataBase : ISeedDataBase
         var basePath = AppContext.BaseDirectory;
         var jsonPath = Path.Combine(basePath, "SeedDataBase", "expense_tracker_mock_data.json");
         if (!File.Exists(jsonPath))
+        {
+            _logger.LogError($"Seed file not found at path: {jsonPath}");
             throw new FileNotFoundException($"Seed file not found at path: {jsonPath}");
+        }
+            
 
         var json = File.ReadAllText(jsonPath);
         var mockData = JsonSerializer.Deserialize<MockData>(json, new JsonSerializerOptions
@@ -96,7 +107,8 @@ public class SeedDataBase : ISeedDataBase
                     await _currencyRepository.AddCurrencyAsync(modelResult.Value);
                 }
             }
-        }        
+        }
+        _logger.LogInformation($"{currencies.Count} Currencies were added.");
         return currencies;
     }
 
@@ -113,6 +125,7 @@ public class SeedDataBase : ISeedDataBase
                 await _expenseCategoryRepository.AddExpenseCategoryAsync(model);
             }
         }
+        _logger.LogInformation($"{expenseCategories.Count} Expense Categories were added.");
         return expenseCategories;
     }
 
@@ -121,9 +134,11 @@ public class SeedDataBase : ISeedDataBase
         var seedTestUserData = Convert.ToBoolean(_configuration["SeedTestUserData:Enabled"]);
         if(seedTestUserData)
         {
+            _logger.LogInformation("Test user data seeding started.");
             var preferredCurrency = currencies.FirstOrDefault(c => c.Code == mockUser.PreferredCurrencyCode);
             if(preferredCurrency is null)
             {
+                _logger.LogInformation($"Preferred currency {mockUser.PreferredCurrencyCode} not found.");
                 throw new Exception($"Preferred currency {mockUser.PreferredCurrencyCode} not found.");
             }
             var userResult = User.Create(_userRepository, mockUser.Email, mockUser.Password, preferredCurrency, mockUser.FirstName, mockUser.LastName);
@@ -131,6 +146,7 @@ public class SeedDataBase : ISeedDataBase
             {
                 var user = userResult.Value;
                 await _userRepository.AddUserAsync(user);
+                _logger.LogInformation($"Test user {user.Email} has been added.");
                 foreach (var category in mockUser.UserExpenseCategories)
                 {
                     var expenseCategory = new ExpenseCategory(category, false, user.Id);

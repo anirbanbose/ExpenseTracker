@@ -1,16 +1,19 @@
 ﻿using MimeKit;
 using ExpenseTracker.Application.Contracts.Email;
 using MailKit.Net.Smtp;
+using Microsoft.Extensions.Logging;
 
 namespace ExpenseTracker.Infrastructure.Email;
 
 public class EmailSender : IEmailSender
 {
     private readonly EmailConfiguration _configuration;
+    private readonly ILogger<EmailSender> _logger;
 
-    public EmailSender(EmailConfiguration configuration)
+    public EmailSender(EmailConfiguration configuration, ILogger<EmailSender> logger)
     {
         _configuration = configuration;
+        _logger = logger;
     }
 
     public async Task SendEmail(IEmailMessage email)
@@ -29,7 +32,7 @@ public class EmailSender : IEmailSender
     private MimeMessage CreateEmailMessage(IEmailMessage message)
     {
         MimeMessage email = new MimeMessage();
-        email.From.Add(new MailboxAddress("Survey Manager", _configuration.From));
+        email.From.Add(new MailboxAddress("Expense Tracker", _configuration.From));
         email.Subject = message.Subject;
 
         if (message.IsHtml)
@@ -61,7 +64,7 @@ public class EmailSender : IEmailSender
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, "An error occurred while sending an email.");
             }
             finally
             {

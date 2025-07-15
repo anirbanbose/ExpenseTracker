@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ExpenseTracker.Application.Contracts.Email;
-using ExpenseTracker.Infrastructure.Email;
 
 namespace ExpenseTracker.Infrastructure.Email;
 

@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Domain.Persistence.Repositories;
+﻿using ExpenseTracker.Domain.DomainEvents;
+using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.SharedKernel.Errors;
 using ExpenseTracker.Domain.Utils;
@@ -33,7 +34,7 @@ public partial class User : Entity<UserId>
 
         user.Preference = UserPreference.Create(user.Id, preferredCurrency, false, false);
 
-        //user.AddDomainEvent(new UserRegisteredDomainEvent(user.UserName, user.Name.FullName));
+        user.AddDomainEvent(new UserRegisteredDomainEvent(user.Email, user.Name.FullName));
 
         return DomainResult<User>.SuccessResult(user);
     }
@@ -62,11 +63,12 @@ public partial class User : Entity<UserId>
     }
 
     public DomainResult UpdateName(string firstName, string lastName, string? middleName)
-    {
+    {        
         if (string.IsNullOrWhiteSpace(firstName)) return DomainResult.DomainValidationFailureResult("DomainError.User.NullArgumentError", "First Name is null"); 
         if (string.IsNullOrWhiteSpace(lastName)) return DomainResult.DomainValidationFailureResult("DomainError.User.NullArgumentError", "Last Name is null");
+        string oldName = Name.FullName;
         Name = new PersonName(firstName, lastName, middleName);
-
+        AddDomainEvent(new ProfileUpdatedDomainEvent(Email, oldName, Name.FullName));
         return DomainResult.SuccessResult();
     }
 

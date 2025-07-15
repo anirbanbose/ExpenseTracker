@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\ExpenseTracker.Application\ExpenseTracker.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.BackgroundJobs\ExpenseTracker.Infrastructure.BackgroundJobs.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.Web.Auth\ExpenseTracker.Infrastructure.Web.Auth.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.Email\ExpenseTracker.Infrastructure.Email.csproj" />
     <ProjectReference Include="..\..\Infrastructure\ExpenseTracker.Infrastructure.Persistence\ExpenseTracker.Infrastructure.Persistence.csproj" />

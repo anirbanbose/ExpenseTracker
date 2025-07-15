@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Currency\Commands\" />
+    <Folder Include="UseCases\Expense\Events\" />
   </ItemGroup>
 
   <ItemGroup>
