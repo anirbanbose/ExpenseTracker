@@ -1,6 +1,5 @@
 ﻿using ExpenseTracker.Application.UseCases.User.Commands;
 using ExpenseTracker.Application.UseCases.User.Queries;
-using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -54,11 +53,20 @@ namespace ExpenseTracker.Presentation.Api.Controllers
             });
         }
 
-        [HttpGet("logout")]
+        [HttpPost("logout")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete(Constants.ACCESS_TOKEN_NAME);
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddDays(-1), // Expire it in the past
+                Path = "/" // Explicitly match the original cookie path
+            };
+
+            Response.Cookies.Delete(Constants.ACCESS_TOKEN_NAME, cookieOptions);
             return Ok(new { message = "Logged out" });
         }
 

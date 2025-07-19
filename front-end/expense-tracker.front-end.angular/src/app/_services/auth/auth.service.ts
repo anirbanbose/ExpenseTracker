@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Constants } from '../../_helpers/constants';
 import { HelperService } from '../../_helpers/helper-service/helper.service';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +12,12 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
   private helperService = inject(HelperService);
   private httpClient = inject(HttpClient);
-  private router = inject(Router);
+  private apiUrl = environment.apiBaseUrl;
+
   constructor() { }
 
   login(loginModel: { Email: string, Password: string, RememberMe: boolean }): any {
-    return this.httpClient.post(`api/account/login`, loginModel)
+    return this.httpClient.post(`${this.apiUrl}/account/login`, loginModel)
       .pipe(
         tap((data: any) => {
           if (data && data.isLoggedIn) {
@@ -33,7 +34,7 @@ export class AuthService {
   }
 
   checkAuthStatus(): Observable<boolean> {
-    return this.httpClient.get('/api/account/me').pipe(
+    return this.httpClient.get(`${this.apiUrl}/account/me`).pipe(
       map(user => {
         // Authenticated
         return true;
@@ -46,7 +47,7 @@ export class AuthService {
   }
 
   logout() {
-    return this.httpClient.get(`api/account/logout`).pipe(
+    return this.httpClient.post(`${this.apiUrl}/account/logout`, null).pipe(
       map(message => {
         localStorage.removeItem(Constants.LOGIN_STATE_KEY);
         localStorage.removeItem(Constants.LOGGED_IN_USER_KEY);

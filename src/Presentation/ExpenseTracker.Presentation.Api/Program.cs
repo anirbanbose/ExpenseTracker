@@ -29,7 +29,21 @@ builder.Services
 .AddReportServices();
 
 
-//builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+// Add CORS policy
+var frontEndAddr = configuration["FrontEndUrl"];
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontEndClient",
+        policy =>
+        {
+            policy.WithOrigins(frontEndAddr!) 
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials(); ;
+        });
+});
+
+
 Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
 
 builder.Host.UseSerilog();
@@ -60,12 +74,15 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1");
     });
 }
+
+app.UseCors("AllowFrontEndClient");
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseHangfireDashboard("/jobs");
+app.UseHangfireDashboard("/hangfire-jobs");
 app.MapHangfireDashboard();
 
 

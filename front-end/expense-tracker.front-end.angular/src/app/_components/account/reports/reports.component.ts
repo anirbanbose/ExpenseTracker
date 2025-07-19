@@ -71,7 +71,6 @@ export class ReportsComponent implements OnInit {
   }
 
   loadReport() {
-    debugger;
     if (this.selectedDate) {
       switch (this.selectedViewMode) {
         case ViewMode.Excel:
@@ -99,7 +98,6 @@ export class ReportsComponent implements OnInit {
 
 
   downloadReport() {
-    debugger;
     let year: number, month: number | null, reportType: 1 | 2;
 
     if (this.selectedReportType === ReportType.Monthly && this.selectedDate) {

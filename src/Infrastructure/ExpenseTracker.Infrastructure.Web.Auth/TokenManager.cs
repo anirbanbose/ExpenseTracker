@@ -73,7 +73,7 @@ public class TokenManager : ITokenManager
                     HttpOnly = true, // Makes it inaccessible to JavaScript
                     Secure = true,   // Ensures the cookie is only sent over HTTPS
                     IsEssential = true,
-                    SameSite = SameSiteMode.Strict, // Protects from CSRF
+                    SameSite = SameSiteMode.None, 
                     Expires = isPersistent ? DateTime.Now.AddDays(30) : DateTime.Now.AddHours(24), // Set expiration to match token lifetime
                 };
 

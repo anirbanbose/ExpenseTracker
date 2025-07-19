@@ -1,12 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
   private httpClient = inject(HttpClient);
+  private apiUrl = environment.apiBaseUrl;
 
   constructor() { }
 
@@ -20,14 +22,14 @@ export class ReportService {
       .set('isAscending', isAscending)
       .set('reportFormat', format);
 
-    return this.httpClient.get(`api/report/expense-export`, {
+    return this.httpClient.get(`${this.apiUrl}/report/expense-export`, {
       params,
       responseType: 'blob' // Important: this tells Angular to treat response as binary
     });
   }
 
   getMinMaxDates() {
-    return this.httpClient.get<{ minDate: any, maxDate: any }>(`api/report/min-max-dates`);
+    return this.httpClient.get<{ minDate: any, maxDate: any }>(`${this.apiUrl}/report/min-max-dates`);
   }
 
   downloadExpenseReport(reportType: 1 | 2, year: number, month: number | null, format: 1 | 2 = 1) {
@@ -37,7 +39,7 @@ export class ReportService {
       .set('month', month ?? '')
       .set('reportFormat', format);
 
-    return this.httpClient.get(`api/report/expense-report`, {
+    return this.httpClient.get(`${this.apiUrl}/report/expense-report`, {
       params,
       responseType: 'blob' // Important: this tells Angular to treat response as binary
     });
