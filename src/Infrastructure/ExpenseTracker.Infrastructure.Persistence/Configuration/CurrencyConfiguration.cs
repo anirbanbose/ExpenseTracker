@@ -24,6 +24,6 @@ public class CurrencyConfiguration : IEntityTypeConfiguration<Currency>
         builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
         builder.Property(x => x.Symbol).HasMaxLength(5).IsRequired(false);
 
-        builder.ToTable("Currency");
+        builder.ToTable("Currency", "ET");
     }
 }

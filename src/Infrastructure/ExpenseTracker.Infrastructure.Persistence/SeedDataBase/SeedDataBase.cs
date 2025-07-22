@@ -5,7 +5,6 @@ using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Domain.Utils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System.Text.Json;
 
 namespace ExpenseTracker.Infrastructure.Persistence;

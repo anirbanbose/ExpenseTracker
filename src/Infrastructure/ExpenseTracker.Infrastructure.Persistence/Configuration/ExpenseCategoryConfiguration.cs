@@ -25,7 +25,7 @@ public class ExpenseCategoryConfiguration : IEntityTypeConfiguration<ExpenseCate
                 .WithMany(u => u.ExpenseCategories)
                 .HasForeignKey(t => t.CategoryOwnerId).IsRequired(false);
 
-        builder.ToTable("ExpenseCategory");
+        builder.ToTable("ExpenseCategory", "ET");
     }
 }
 

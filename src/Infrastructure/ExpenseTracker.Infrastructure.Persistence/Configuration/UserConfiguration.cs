@@ -36,6 +36,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 name.Property(a => a.MiddleName).HasMaxLength(100).IsRequired(false).HasColumnName("MiddleName");
             });
 
-        builder.ToTable("User");
+        builder.ToTable("User", "ET");
     }
 }

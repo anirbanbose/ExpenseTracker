@@ -22,6 +22,6 @@ public class UserPreferenceConfiguration : IEntityTypeConfiguration<UserPreferen
                 value => new CurrencyId(value)
             );
 
-        builder.ToTable("UserPreference");
+        builder.ToTable("UserPreference", "ET");
     }
 }

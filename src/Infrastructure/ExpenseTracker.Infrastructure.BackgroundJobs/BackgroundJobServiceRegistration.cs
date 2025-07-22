@@ -16,7 +16,7 @@ public static class BackgroundJobServiceRegistration
         if(hangfireStorageType != null && hangfireStorageType == "SQL_Server")
         {
             services.AddHangfire(config => 
-                config.UseSqlServerStorage(configuration.GetConnectionString("HangfireSqlServerConnection")) //Use 'SQL_Server' for production
+                config.UseSqlServerStorage(configuration.GetConnectionString("SqlServerConnection")) //Use 'SQL_Server' for production
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
             );

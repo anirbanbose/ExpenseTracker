@@ -48,6 +48,6 @@ public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
         });
 
 
-        builder.ToTable("Expense");
+        builder.ToTable("Expense", "ET");
     }
 }
