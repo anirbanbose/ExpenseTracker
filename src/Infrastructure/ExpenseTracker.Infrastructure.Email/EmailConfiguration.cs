@@ -2,6 +2,7 @@
 
 public class EmailConfiguration
 {
+    public bool Enabled { get; set; } = false;
     public string From { get; set; }
     public string SmtpServer { get; set; }
     public int Port { get; set; }

@@ -95,6 +95,7 @@ public class SeedDataBase : ISeedDataBase
     private async Task<List<Currency>> InsertCurrenciesIfMissing(List<MockCurrency> _mockCurrencies, CancellationToken cancellationToken)
     {
         var currencies = (await _currencyRepository.GetAllCurrenciesAsync(cancellationToken)).ToList();
+        int count = 0;
         if(!currencies.Any())
         {
             foreach (var c in _mockCurrencies)
@@ -104,8 +105,14 @@ public class SeedDataBase : ISeedDataBase
                 {
                     currencies.Add(modelResult.Value);
                     await _currencyRepository.AddCurrencyAsync(modelResult.Value);
+                    count++;
                 }
             }
+        }
+        if(count == 0)
+        {
+            _logger.LogInformation("No new currencies were added. All currencies already exist.");
+            return currencies;
         }
         _logger.LogInformation($"{currencies.Count} Currencies were added.");
         return currencies;
@@ -114,6 +121,7 @@ public class SeedDataBase : ISeedDataBase
     private async Task<List<ExpenseCategory>> InsertExpenseCategoriesIfMissing(List<string> _mockExpenseCategories, CancellationToken cancellationToken)
     {
         var expenseCategories = (await _expenseCategoryRepository.GetAllSystemExpenseCategoriesAsync(cancellationToken)).ToList();
+        int count = 0;
         if (!expenseCategories.Any())
         {
             foreach (var c in _mockExpenseCategories)
@@ -122,7 +130,13 @@ public class SeedDataBase : ISeedDataBase
 
                 expenseCategories.Add(model);
                 await _expenseCategoryRepository.AddExpenseCategoryAsync(model);
+                count++;
             }
+        }
+        if (count == 0)
+        {
+            _logger.LogInformation("No new Expense Categories were added. All Expense Categories already exist.");
+            return expenseCategories;
         }
         _logger.LogInformation($"{expenseCategories.Count} Expense Categories were added.");
         return expenseCategories;

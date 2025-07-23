@@ -18,6 +18,11 @@ public class EmailSender : IEmailSender
 
     public async Task SendEmail(IEmailMessage email)
     {
+        if (!_configuration.Enabled)
+        {
+            _logger.LogWarning("Email sending is disabled in the configuration.");
+            return;
+        }
         var message = CreateEmailMessage(email);
         await SendAsync(message);
     }
@@ -25,6 +30,11 @@ public class EmailSender : IEmailSender
 
     public async Task SendEmail(string subject, string body, List<string> to)
     {
+        if(!_configuration.Enabled)
+        {
+            _logger.LogWarning("Email sending is disabled in the configuration.");
+            return;
+        }
         EmailMessage email = new EmailMessage(to, subject, body, true);
         await SendEmail(email);
     }

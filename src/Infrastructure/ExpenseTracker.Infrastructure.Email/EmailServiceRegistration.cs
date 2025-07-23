@@ -11,10 +11,9 @@ public static class EmailServiceRegistration
         var emailConfig = configuration
             .GetSection("EmailConfiguration")
             .Get<EmailConfiguration>();
-
-        services.AddSingleton(emailConfig);
+        if(emailConfig != null)
+            services.AddSingleton<EmailConfiguration>(emailConfig);
         services.AddScoped<IEmailSender, EmailSender>();
-        //services.AddScoped<IAccountEmails, AccountEmails>();
 
         return services;
     }
