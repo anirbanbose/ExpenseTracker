@@ -12,13 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{40AACDE1-BF86-415A-961A-B0932405CA03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Domain", "D:\MyProjects\ExpenseTracker\src\Core\ExpenseTracker.Domain\ExpenseTracker.Domain.csproj", "{E4A23B6B-D98C-448F-97FF-3E30C79C62C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Domain", "src\Core\ExpenseTracker.Domain\ExpenseTracker.Domain.csproj", "{E4A23B6B-D98C-448F-97FF-3E30C79C62C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Application", "D:\MyProjects\ExpenseTracker\src\Core\ExpenseTracker.Application\ExpenseTracker.Application.csproj", "{73DC644D-EE6A-4F52-8F48-82485AD0BC72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Application", "src\Core\ExpenseTracker.Application\ExpenseTracker.Application.csproj", "{73DC644D-EE6A-4F52-8F48-82485AD0BC72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructure.Persistence", "D:\MyProjects\ExpenseTracker\src\Infrastructure\ExpenseTracker.Infrastructure.Persistence\ExpenseTracker.Infrastructure.Persistence.csproj", "{90393377-402B-430A-AA10-0A9D492E7781}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructure.Persistence", "src\Infrastructure\ExpenseTracker.Infrastructure.Persistence\ExpenseTracker.Infrastructure.Persistence.csproj", "{90393377-402B-430A-AA10-0A9D492E7781}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructure.Email", "D:\MyProjects\ExpenseTracker\src\Infrastructure\ExpenseTracker.Infrastructure.Email\ExpenseTracker.Infrastructure.Email.csproj", "{B8EF5590-A299-42AB-B237-EFA3628645E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Infrastructure.Email", "src\Infrastructure\ExpenseTracker.Infrastructure.Email\ExpenseTracker.Infrastructure.Email.csproj", "{B8EF5590-A299-42AB-B237-EFA3628645E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTracker.Presentation.Api", "src\Presentation\ExpenseTracker.Presentation.Api\ExpenseTracker.Presentation.Api.csproj", "{76DF8595-9150-42AD-87EA-0F0C91258CAF}"
 EndProject
