@@ -28,6 +28,9 @@ A full-featured personal expense tracker built using ASP.NET Core and Angular. T
 - Serilog (logging)
 - xUnit, Moq (testing)
 
+### Database
+- SQL Server
+  
 ### Frontend
 - Angular 19.x.x
 - Angular Material
