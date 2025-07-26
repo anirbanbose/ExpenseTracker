@@ -80,7 +80,7 @@ ExpenseTracker/
 - Docker Desktop installed and running
 
 ### Steps
-```bash
+``` bash
 git clone https://github.com/anirbanbose/ExpenseTracker.git
 cd ExpenseTracker
 docker-compose up --build
@@ -115,8 +115,8 @@ This project is licensed under the MIT License.
 ---
 
 ## 👨‍💻 About Me
-Anirban Bose – Freelance ASP.NET Developer
-### 📫 Email: aspnetlancer@gmail.com
-### 🔗 LinkedIn: [anirban-bose-programmer](https://www.linkedin.com/in/anirban-bose-programmer/)
+Anirban Bose – Freelance ASP.NET & Angular Developer
+##### 📫 Email: aspnetlancer@gmail.com
+##### 🔗 LinkedIn: [anirban-bose-programmer](https://www.linkedin.com/in/anirban-bose-programmer/)
 
 Looking to build something similar for your business? I'm available for freelance work!
