@@ -76,6 +76,7 @@ ExpenseTracker/
 ## 🐳 Running with Docker
 
 ### Prerequisites
+- Git is installed
 - Docker Desktop installed and running
 
 ### Steps
@@ -86,17 +87,17 @@ docker-compose up --build
 ```
 
 This will:
-Build and run the backend (.NET 9) API
-Run SQL Server as a container
-Run the Angular frontend
+- Build and run the backend (.NET 9) API
+- Run SQL Server as a container
+- Run the Angular frontend
 
 Access the application
-API: http://localhost:5000 (Note: Swagger UI will not be available because the Docker build runs in production mode)
-Frontend: http://localhost:5200
+- API: http://localhost:5000 (Note: Swagger UI will not be available because the Docker build runs in production mode)
+- Frontend: http://localhost:5200
 
 ### Default Credentials
-Initial seed data is automatically applied during the first run.
-You can log in using:
+##### Initial seed data is automatically applied during the first run.
+##### You can log in using:
 ```
 Email: testuser@expensetracker.com
 Password: 123456
