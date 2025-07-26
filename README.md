@@ -94,9 +94,10 @@ Frontend: http://localhost:5200
 Default Credentials
 Initial seed data is automatically applied during the first run.
 You can log in using:
+```
 Email: testuser@expensetracker.com
 Password: 123456
-
+```
 ---
 
 ## 🤝 Contributing
