@@ -55,7 +55,6 @@ export class HelperService {
 
   handleError(error: any) {
     let errorMessage = '';
-    console.log(error);
     if (error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.message}`;
     } else {

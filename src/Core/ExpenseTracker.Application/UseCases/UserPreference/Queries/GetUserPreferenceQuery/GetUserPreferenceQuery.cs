@@ -1,5 +1,5 @@
 ﻿using ExpenseTracker.Application.DTO.UserPreference;
-using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 
 namespace ExpenseTracker.Application.UseCases.UserPreference.Queries;

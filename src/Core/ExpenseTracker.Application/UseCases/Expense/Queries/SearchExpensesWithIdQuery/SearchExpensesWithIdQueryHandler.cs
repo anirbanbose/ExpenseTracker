@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.Expense;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -29,21 +30,23 @@ public class SearchExpensesWithIdQueryHandler : IRequestHandler<SearchExpensesWi
                 return failureResult;
 
             var expenseResult = await _expenseRepository.SearchExpensesAsync(request.id, currentUser!.Id, request.pageSize, cancellationToken);
-
-            if (expenseResult.IsSuccess && expenseResult.Items is not null)
+            if (expenseResult.Items is null)
             {
-                List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();
-                expenseResult.Items.ToList().ForEach(expense =>
-                {
-                    dtoList.Add(ExpenseListDTO.FromDomain(expense));
-                });
-                return PagedResult<ExpenseListDTO>.SuccessResult(dtoList, expenseResult.TotalCount, expenseResult.PageIndex, expenseResult.PageSize);
+                return PagedResult<ExpenseListDTO>.FailureResult();
             }
+            
+            List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();
+            expenseResult.Items.ToList().ForEach(expense =>
+            {
+                dtoList.Add(ExpenseListDTO.FromDomain(expense));
+            });
+            return PagedResult<ExpenseListDTO>.SuccessResult(dtoList, expenseResult.TotalCount, expenseResult.PageIndex, request.pageSize);
+            
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, $"Error occurred while searching expenses for the user: {_authProvider.CurrentUserName}.");
         }
-        return PagedResult<ExpenseListDTO>.FailureResult("Expense.SearchExpensesWithId");
+        return PagedResult<ExpenseListDTO>.FailureResult();
     }
 }

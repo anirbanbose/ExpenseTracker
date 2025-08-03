@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.ExpenseCategory;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -30,9 +31,9 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : IRequestHandler<GetAl
                 return failureResult;
 
             var expenseCategories = await _expenseCategoryRepository.GetAllExpenseCategoriesByUserIdAsync(currentUser!.Id, cancellationToken);
-            if (expenseCategories is null || !expenseCategories.Any())
+            if (expenseCategories is null)
             {
-                return Result<List<ExpenseCategoryDTO>>.NotFoundResult();
+                return Result<List<ExpenseCategoryDTO>>.FailureResult();
             }
             var list = expenseCategories.Select(c => ExpenseCategoryDTO.FromDomain(c)).ToList();
 
@@ -42,7 +43,7 @@ public class GetAllExpenseCategoriesByUserIdQueryHandler : IRequestHandler<GetAl
         {
             _logger.LogError(ex, $"An error occurred while handling GetAllExpenseCategoriesByUserIdQuery for the user {_authProvider.CurrentUserName}.");
         }
-        return Result<List<ExpenseCategoryDTO>>.FailureResult("ExpenseCategory.GetAllExpenseCategories");
+        return Result<List<ExpenseCategoryDTO>>.FailureResult();
     }
 
 }

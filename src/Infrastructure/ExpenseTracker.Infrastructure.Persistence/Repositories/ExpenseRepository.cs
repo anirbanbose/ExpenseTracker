@@ -1,8 +1,6 @@
 ﻿using ExpenseTracker.Domain.Enums;
 using ExpenseTracker.Domain.Models;
 using ExpenseTracker.Domain.Persistence.Repositories;
-using ExpenseTracker.Domain.Persistence.SearchModels;
-using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,9 +34,9 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<PagedResult<Expense>> SearchExpensesAsync(ExpenseSearchModel search, Guid userId, int PageIndex, int PageSize, ExpenseListOrder Order, bool IsAscendingSort, CancellationToken cancellationToken)
+    public async Task<(int TotalCount, IEnumerable<Expense> Items)> SearchExpensesAsync(string? searchText, Guid? expenseCategoryId, DateTime? startDate, DateTime? endDate, Guid userId, int pageIndex, int pageSize, ExpenseListOrder order, bool isAscendingSort, CancellationToken cancellationToken)
     {
-        string searchString = !string.IsNullOrWhiteSpace(search.SearchText) ? search.SearchText.Trim().ToLower() : string.Empty;
+        string searchString = !string.IsNullOrWhiteSpace(searchText) ? searchText.Trim().ToLower() : string.Empty;
 
         IQueryable<Expense> query = TableNoTracking;
         query = query.Include(d => d.ExpenseOwner)
@@ -49,26 +47,26 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
                                     || d.Category.Name.ToLower().Contains(searchString)
                                     || d.ExpenseAmount.Amount.ToString().Contains(searchString)
                                     )
-                                && (search.ExpenseCategoryId == null || d.CategoryId == search.ExpenseCategoryId)
-                                && (search.StartDate == null || d.ExpenseDate.Date >= search.StartDate.Value.Date)
-                                && (search.EndDate == null || d.ExpenseDate.Date <= search.EndDate.Value.Date)
+                                && (expenseCategoryId == null || d.CategoryId == expenseCategoryId)
+                                && (startDate == null || d.ExpenseDate.Date >= startDate.Value.Date)
+                                && (endDate == null || d.ExpenseDate.Date <= endDate.Value.Date)
                                 );
 
         var totalCount = await query.CountAsync();
 
         query = query.AsSplitQuery().AsQueryable();
 
-        var orderByExprssion = Order.ToOrderExpression();
-        query = IsAscendingSort ? query.OrderBy(orderByExprssion).ThenByDescending(d => d.CreatedDate) : query.OrderByDescending(orderByExprssion).ThenByDescending(d => d.CreatedDate);
+        var orderByExprssion = order.ToOrderExpression();
+        query = isAscendingSort ? query.OrderBy(orderByExprssion).ThenByDescending(d => d.CreatedDate) : query.OrderByDescending(orderByExprssion).ThenByDescending(d => d.CreatedDate);
         
-        var items = await query.Skip(PageIndex * PageSize).Take(PageSize).ToListAsync(cancellationToken);
+        var items = await query.Skip(pageIndex * pageSize).Take(pageSize).ToListAsync(cancellationToken);
 
-        return PagedResult<Expense>.SuccessResult(items, totalCount, PageIndex, PageSize);
+        return (totalCount, items);
     }
 
-    public async Task<IEnumerable<Expense>> SearchExpensesAsync(ExpenseSearchModel search, Guid userId, ExpenseListOrder Order, bool IsAscendingSort, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Expense>> SearchExpensesAsync(string? searchText, Guid? expenseCategoryId, DateTime? startDate, DateTime? endDate, Guid userId, ExpenseListOrder order, bool isAscendingSort, CancellationToken cancellationToken)
     {
-        string searchString = !string.IsNullOrWhiteSpace(search.SearchText) ? search.SearchText.Trim().ToLower() : string.Empty;
+        string searchString = !string.IsNullOrWhiteSpace(searchText) ? searchText.Trim().ToLower() : string.Empty;
 
         IQueryable<Expense> query = TableNoTracking;
         query = query.Include(d => d.ExpenseOwner)
@@ -78,23 +76,22 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
                                     || (d.Description != null && d.Description.ToLower().Contains(searchString))
                                     || d.Category.Name.ToLower().Contains(searchString)
                                     || d.ExpenseAmount.Amount.ToString().Contains(searchString))
-                                && (search.ExpenseCategoryId == null || d.CategoryId == search.ExpenseCategoryId)
-                                && (search.StartDate == null || d.ExpenseDate.Date >= search.StartDate.Value.Date)
-                                && (search.EndDate == null || d.ExpenseDate.Date <= search.EndDate.Value.Date)
+                                && (expenseCategoryId == null || d.CategoryId == expenseCategoryId)
+                                && (startDate == null || d.ExpenseDate.Date >= startDate.Value.Date)
+                                && (endDate == null || d.ExpenseDate.Date <= endDate.Value.Date)
                                 );
 
         var totalCount = await query.CountAsync();
 
         query = query.AsSplitQuery().AsQueryable();
 
-        var orderByExprssion = Order.ToOrderExpression();
-        query = IsAscendingSort ? query.OrderBy(orderByExprssion).ThenByDescending(d => d.CreatedDate) : query.OrderByDescending(orderByExprssion).ThenByDescending(d => d.CreatedDate);
+        var orderByExprssion = order.ToOrderExpression();
+        query = isAscendingSort ? query.OrderBy(orderByExprssion).ThenByDescending(d => d.CreatedDate) : query.OrderByDescending(orderByExprssion).ThenByDescending(d => d.CreatedDate);
         
-
         return await query.ToListAsync(cancellationToken);
     }
 
-    public async Task<PagedResult<Expense>> SearchExpensesAsync(Guid expenseId, Guid userId, int PageSize, CancellationToken cancellationToken)
+    public async Task<(int TotalCount, int PageIndex, IEnumerable<Expense> Items)> SearchExpensesAsync(Guid expenseId, Guid userId, int pageSize, CancellationToken cancellationToken)
     {
         IQueryable<Expense> query = TableNoTracking;
         query = query.Include(d => d.ExpenseOwner)
@@ -104,7 +101,7 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
         var item = await query.FirstOrDefaultAsync(d => d.Id == expenseId);
 
         int itemIndex = query.ToList().FindIndex(e => e.Id == expenseId);
-        int PageIndex = (int)Math.Ceiling((double)(itemIndex + 1) / PageSize);
+        int pageIndex = (int)Math.Ceiling((double)(itemIndex + 1) / pageSize);
 
 
         var totalCount = await query.CountAsync();
@@ -112,10 +109,10 @@ public class ExpenseRepository(ApplicationDbContext dbContext) : BaseRepository<
         query = query.AsSplitQuery().AsQueryable();
 
         var items = await query
-            .Skip(PageIndex * PageSize)
-            .Take(PageSize).ToListAsync(cancellationToken);
+            .Skip(pageIndex * pageSize)
+            .Take(pageSize).ToListAsync(cancellationToken);
 
-        return PagedResult<Expense>.SuccessResult(items, totalCount, PageIndex, PageSize);
+        return (totalCount, pageIndex, items);
     }
 
     public async Task<IEnumerable<Expense>> GetRecentExpensesAsync(Guid userId, int recordCount, CancellationToken cancellationToken)

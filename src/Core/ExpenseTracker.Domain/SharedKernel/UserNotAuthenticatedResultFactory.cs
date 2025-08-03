@@ -1,4 +1,6 @@
-﻿namespace ExpenseTracker.Domain.SharedKernel;
+﻿using ExpenseTracker.Domain.SharedKernel.Results;
+
+namespace ExpenseTracker.Domain.SharedKernel;
 
 public interface IUserNotAuthenticatedResultFactory<T>
 {

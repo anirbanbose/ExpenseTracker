@@ -148,11 +148,6 @@ namespace ExpenseTracker.Presentation.Api.Controllers
                 {
                     return Ok(new { message = "Password changed successfully" });
                 }
-                else if(changePasswordResponse.Code == Constants.AuthenticationErrorCode)
-                {
-                    return Unauthorized(new {
-                        errorMessage = changePasswordResponse.ErrorMessage ?? "User unauthorized." });
-                }
             }
             return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = changePasswordResponse?.ErrorMessage ?? "Failed to Change password" });
         }

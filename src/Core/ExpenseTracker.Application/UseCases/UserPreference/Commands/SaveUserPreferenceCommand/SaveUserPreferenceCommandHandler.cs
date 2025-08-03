@@ -2,6 +2,7 @@
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -38,7 +39,7 @@ public class SaveUserPreferenceCommandHandler : IRequestHandler<SaveUserPreferen
             if (userToBeUpdated is null || userToBeUpdated.Preference is null)
             {
                 _logger.LogWarning($"User preference not found for user - {_authProvider.CurrentUserName}.");
-                return Result.FailureResult("UserPreference.SaveUserPreference");
+                return Result.FailureResult();
             }
             var userPreference = userToBeUpdated.Preference;
             userPreference.Update(request.EnableMonthlyExpenseReportMail, request.EnableDailyExpenseReportMail);
@@ -51,6 +52,6 @@ public class SaveUserPreferenceCommandHandler : IRequestHandler<SaveUserPreferen
         {
             _logger?.LogError(ex, $"An error occurred while saving user preference with request: {request} for the user- {_authProvider.CurrentUserName}.");
         }
-        return Result.FailureResult("UserPreference.SaveUserPreference");
+        return Result.FailureResult();
     }
 }

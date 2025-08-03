@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -29,26 +30,25 @@ public class SearchCurrenciesQueryHandler : IRequestHandler<SearchCurrenciesQuer
                 return pagedFailureResult;
 
             var currenciesResult = await _currencyRepository.SearchCurrenciesAsync(request.search, request.pageIndex, request.pageSize, request.order, request.isAscendingSort, cancellationToken);
-            if (!currenciesResult.IsSuccess && currenciesResult.Items.Any())
+            if (currenciesResult.Items is null)
             {
-                return PagedResult<CurrencyDTO>.NotFoundResult();
+                return PagedResult<CurrencyDTO>.FailureResult();
             }
-            if (currenciesResult.IsSuccess && currenciesResult.Items.Any())
+            
+            List<CurrencyDTO> dtoList = new List<CurrencyDTO>();
+            currenciesResult.Items.ToList().ForEach(currency =>
             {
-                List<CurrencyDTO> dtoList = new List<CurrencyDTO>();
-                currenciesResult.Items.ToList().ForEach(currency =>
-                {
-                    dtoList.Add(CurrencyDTO.FromDomain(currency));
-                });
-                return PagedResult<CurrencyDTO>.SuccessResult(dtoList, currenciesResult.TotalCount, currenciesResult.PageIndex, currenciesResult.PageSize);
-            }
+                dtoList.Add(CurrencyDTO.FromDomain(currency));
+            });
+            return PagedResult<CurrencyDTO>.SuccessResult(dtoList, currenciesResult.TotalCount, request.pageIndex, request.pageSize);
+            
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, $"An error occurred while handling SearchCurrenciesQuery for the user: {_authProvider.CurrentUserName}.");
         }
        
-        return PagedResult<CurrencyDTO>.FailureResult("Currency.SearchCurrencies");
+        return PagedResult<CurrencyDTO>.FailureResult();
     }
 
 }

@@ -34,7 +34,7 @@ public class CurrencyRepository(ApplicationDbContext dbContext) : BaseRepository
         return await Table.FirstOrDefaultAsync(d => d.Id == id && !d.Deleted, cancellationToken);
     }
 
-    public async Task<PagedResult<Currency>> SearchCurrenciesAsync(string? search, int pageIndex, int pageSize, CurrencyListOrder order, bool isAscendingSort, CancellationToken cancellationToken)
+    public async Task<(int TotalCount, IEnumerable<Currency> Items)> SearchCurrenciesAsync(string? search, int pageIndex, int pageSize, CurrencyListOrder order, bool isAscendingSort, CancellationToken cancellationToken)
     {
         string searchString = !string.IsNullOrWhiteSpace(search) ? search.Trim().ToLower() : string.Empty;
 
@@ -54,7 +54,7 @@ public class CurrencyRepository(ApplicationDbContext dbContext) : BaseRepository
 
         var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
 
-        return PagedResult<Currency>.SuccessResult(items, totalCount, pageIndex, pageSize);
+        return (totalCount, items);
     }
 
     public void UpdateCurrency(Currency currency)

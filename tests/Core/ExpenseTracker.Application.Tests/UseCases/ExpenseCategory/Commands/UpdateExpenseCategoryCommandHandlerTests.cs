@@ -3,6 +3,7 @@ using ExpenseTracker.Application.UseCases.ExpenseCategory.Commands;
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;

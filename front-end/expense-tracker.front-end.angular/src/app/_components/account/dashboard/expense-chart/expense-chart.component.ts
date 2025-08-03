@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { DashboardService } from '../../../../_services/dashboard/dashboard.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'et-dashboard-expense-chart',
@@ -13,6 +14,7 @@ import { DashboardService } from '../../../../_services/dashboard/dashboard.serv
 })
 export class ExpenseChartComponent implements OnInit {
   private _dashboardService = inject(DashboardService);
+  private _snackBar = inject(MatSnackBar);
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     scales: {
@@ -47,7 +49,9 @@ export class ExpenseChartComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        console.log(error);
+        this._snackBar.open('There was an issue fetching the expense chart. Please try again later.', 'Close', {
+          duration: 5000
+        });
       }
     });
   }

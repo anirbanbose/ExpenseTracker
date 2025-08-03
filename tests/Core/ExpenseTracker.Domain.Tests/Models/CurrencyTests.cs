@@ -15,9 +15,9 @@ public class CurrencyTests
 
         //Assert
         result.IsSuccess.Should().BeFalse();
-        result.Code.Should().NotBeNull();
+        result.ErrorCode.Should().NotBeNull();
         result.Value.Should().BeNull();
-        result.Code.Should().Be("DomainError.Currency.NullArgumentError");
+        result.ErrorCode.Should().Be("DomainError.Currency.NullArgumentError");
     }
 
     [Fact]
@@ -30,7 +30,7 @@ public class CurrencyTests
         result.IsSuccess.Should().BeFalse();
         result.ErrorMessage.Should().NotBeNull();
         result.Value.Should().BeNull();
-        result.Code.Should().Be("DomainError.Currency.NullArgumentError");
+        result.ErrorCode.Should().Be("DomainError.Currency.NullArgumentError");
     }
 
     [Fact]

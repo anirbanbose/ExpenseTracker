@@ -3,6 +3,7 @@ using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -51,6 +52,6 @@ public class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand,
         {
             _logger?.LogError(ex, $"Error occurred while updating profile- {request} for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result.FailureResult("Profile.UpdateProfile");
+        return Result.FailureResult();
     }
 }

@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.Expense;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -44,7 +45,7 @@ public class GetExpenseQueryHandler : IRequestHandler<GetExpenseQuery, Result<Ex
             _logger.LogError(ex, $"Error occurred while fetching expense details for expense id: {request.Id.Value.ToString()} for the user: {_authProvider.CurrentUserName}.");
         }
         
-        return Result<ExpenseDTO>.FailureResult("Expense.GetExpenses");
+        return Result<ExpenseDTO>.FailureResult();
     }
 }
     

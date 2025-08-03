@@ -80,9 +80,7 @@ export class ProfileGeneralInfoComponent implements OnInit {
   getProfileData() {
     this._profileService.getUserProfile().subscribe({
       next: (data: any) => {
-        console.log(data);
         if (data && data.isSuccess) {
-          console.log(data);
           this.profileForm.patchValue({
             email: data.value.email,
             firstName: data.value.firstName,

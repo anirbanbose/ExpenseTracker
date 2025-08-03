@@ -1,6 +1,6 @@
 ﻿using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
-using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -22,10 +22,10 @@ public class GetAllCurrenciesQueryHandler : IRequestHandler<GetAllCurrenciesQuer
         try
         {
             var currencies = await _currencyRepository.GetAllCurrenciesAsync(cancellationToken);
-            if (currencies is null || !currencies.Any())
+            if (currencies is null)
             {
                 _logger.LogWarning("No currencies found in the database.");
-                return Result<List<CurrencyDTO>>.NotFoundResult();
+                return Result<List<CurrencyDTO>>.FailureResult();
             }
             var list = currencies.Select(c => CurrencyDTO.FromDomain(c)).ToList();
 
@@ -35,7 +35,7 @@ public class GetAllCurrenciesQueryHandler : IRequestHandler<GetAllCurrenciesQuer
         {
             _logger.LogError(ex, "An error occurred while handling GetAllCurrenciesQuery.");
         }
-        return Result<List<CurrencyDTO>>.FailureResult("Currency.GetAllCurrencies");
+        return Result<List<CurrencyDTO>>.FailureResult();
     }
 
 }

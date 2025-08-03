@@ -2,6 +2,7 @@
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -38,7 +39,7 @@ public class UpdateExpenseCategoryCommandHandler : IRequestHandler<UpdateExpense
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense category with Id - {request.Id} not found.");
-                return Result.FailureResult("ExpenseCategory.UpdateExpenseCategory");
+                return Result.FailureResult();
             }
             expenseCategory.UpdateName(request.Name);
             _expenseCategoryRepository.UpdateExpenseCategory(expenseCategory);
@@ -50,6 +51,6 @@ public class UpdateExpenseCategoryCommandHandler : IRequestHandler<UpdateExpense
         {
             _logger?.LogError(ex, $"Error occurred while updating expense category- {request} for the user {_authProvider.CurrentUserName}.");
         }
-        return Result.FailureResult("ExpenseCategory.UpdateExpenseCategory");
+        return Result.FailureResult();
     }
 }

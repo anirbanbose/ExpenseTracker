@@ -147,6 +147,10 @@ export class ExpenseListComponent implements OnInit, AfterViewInit {
         }
       },
       error: (error: any) => {
+        this.dataSource = new MatTableDataSource<any>([]);
+        this.totalExpensesCount = 0;
+        this.paginator.pageIndex = 0;
+
         this._snackBar.open('There was an issue fetching the expenses. Please try again later.', 'Close', {
           duration: 5000
         });

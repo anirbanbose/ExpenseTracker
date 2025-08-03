@@ -2,8 +2,8 @@
 using ExpenseTracker.Application.Contracts.Report;
 using ExpenseTracker.Application.DTO.Report;
 using ExpenseTracker.Domain.Persistence.Repositories;
-using ExpenseTracker.Domain.Persistence.SearchModels;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -54,16 +54,16 @@ public class ExpenseReportQueryHandler : IRequestHandler<ExpenseReportQuery, Res
             if(currentUser?.Preference is null)
             {
                 _logger?.LogWarning($"User preference not present for the user: {_authProvider.CurrentUserName}.");
-                return Result<byte[]>.FailureResult("Report.ExpenseReport");
+                return Result<byte[]>.FailureResult();
             }
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(null, null, startDate, endDate), currentUser.Id, Domain.Enums.ExpenseListOrder.ExpenseDate, true, cancellationToken);
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(null, null, startDate, endDate, currentUser.Id, Domain.Enums.ExpenseListOrder.ExpenseDate, true, cancellationToken);
             if (expenseResult is not null)
             {
                 var currency = await _currencyRepository.GetCurrencyByIdAsync(currentUser!.Preference!.PreferredCurrencyId, cancellationToken);
                 if (currency is null)
                 {
-                    return Result<byte[]>.FailureResult("Report.ExpenseReport");
+                    return Result<byte[]>.FailureResult();
                 }
 
                 var totalAmmount = expenseResult.Sum(d => d.ExpenseAmount.Amount);
@@ -81,6 +81,6 @@ public class ExpenseReportQueryHandler : IRequestHandler<ExpenseReportQuery, Res
         }
 
 
-        return Result<byte[]>.FailureResult("Report.ExpenseExport");
+        return Result<byte[]>.FailureResult();
     }
 }

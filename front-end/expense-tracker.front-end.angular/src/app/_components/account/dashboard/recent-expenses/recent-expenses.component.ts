@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DashboardService } from '../../../../_services/dashboard/dashboard.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'et-dashboard-recent-expenses',
@@ -14,6 +15,7 @@ import { DashboardService } from '../../../../_services/dashboard/dashboard.serv
 })
 export class RecentExpensesComponent {
   private _dashboardService = inject(DashboardService);
+  private _snackBar = inject(MatSnackBar);
   recentExpenses = new MatTableDataSource<any>([]);
   recordCount: number = 5;
 
@@ -30,7 +32,9 @@ export class RecentExpensesComponent {
         }
       },
       error: (error: any) => {
-        console.log(error);
+        this._snackBar.open('There was an issue fetching the recent expenses. Please try again later.', 'Close', {
+          duration: 5000
+        });
       }
     });
   }

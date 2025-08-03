@@ -1,7 +1,7 @@
 ﻿using ExpenseTracker.Domain.DomainEvents;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
-using ExpenseTracker.Domain.SharedKernel.Errors;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using ExpenseTracker.Domain.Utils;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
@@ -12,10 +12,10 @@ public partial class User : Entity<UserId>
     private User(UserId id) : base(id) { }
     public static DomainResult<User> Create(IUserRepository userRepository, string email, string password, Currency preferredCurrency, string firstName, string lastName, string? middleName = default)
     {
-        var userFieldValidationError = CheckFields(email, password, firstName, lastName);
-        if (userFieldValidationError.Type != ErrorType.NoError)
+        var validattionMsg = CheckFields(email, password, firstName, lastName);
+        if (!string.IsNullOrEmpty(validattionMsg))
         {
-            return DomainResult<User>.DomainValidationFailureResult(userFieldValidationError);
+            return DomainResult<User>.DomainValidationFailureResult(Constants.ValidationErrorCode, validattionMsg);
         }
         email = email.ToLower();
         Task<bool> task = Task.Run(async () => await CheckEmailAvailability(email, userRepository));
@@ -23,7 +23,7 @@ public partial class User : Entity<UserId>
 
         if (!emailAvailable)
         {
-            return DomainResult<User>.DomainValidationFailureResult("DomainError.User.EmailNotAvailable", "Email already registered.");
+            return DomainResult<User>.DomainValidationFailureResult(Constants.ValidationErrorCode, "Email already registered.");
         }
         var user = new User(UserId.Create())
         {
@@ -46,7 +46,7 @@ public partial class User : Entity<UserId>
     }
     private DomainResult SetPassword(string password)
     {
-        if (string.IsNullOrWhiteSpace(password)) return DomainResult.DomainValidationFailureResult("DomainError.User.NullArgumentError", "Password is null");
+        if (string.IsNullOrWhiteSpace(password)) return DomainResult.DomainValidationFailureResult(Constants.ValidationErrorCode, "Password is null");
         byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
         string hashed = Convert.ToBase64String(GetHashed(password, salt));
 
@@ -58,14 +58,14 @@ public partial class User : Entity<UserId>
     public DomainResult ChangePassword(string password)
     {
         var setPasswordResult = SetPassword(password);
-        //AddDomainEvent(new PasswordChangedDomainEvent(UserName, Name.FullName));
+        AddDomainEvent(new PasswordChangedDomainEvent(Email, Name.FullName));
         return setPasswordResult;
     }
 
     public DomainResult UpdateName(string firstName, string lastName, string? middleName)
     {        
-        if (string.IsNullOrWhiteSpace(firstName)) return DomainResult.DomainValidationFailureResult("DomainError.User.NullArgumentError", "First Name is null"); 
-        if (string.IsNullOrWhiteSpace(lastName)) return DomainResult.DomainValidationFailureResult("DomainError.User.NullArgumentError", "Last Name is null");
+        if (string.IsNullOrWhiteSpace(firstName)) return DomainResult.DomainValidationFailureResult(Constants.ValidationErrorCode, "First Name is null"); 
+        if (string.IsNullOrWhiteSpace(lastName)) return DomainResult.DomainValidationFailureResult(Constants.ValidationErrorCode, "Last Name is null");
         string oldName = Name.FullName;
         Name = new PersonName(firstName, lastName, middleName);
         AddDomainEvent(new ProfileUpdatedDomainEvent(Email, oldName, Name.FullName));
@@ -74,7 +74,7 @@ public partial class User : Entity<UserId>
 
     public DomainResult VerifyPassword(string passwordToBeVerified)
     {
-        if (string.IsNullOrWhiteSpace(passwordToBeVerified)) return DomainResult.DomainValidationFailureResult("DomainError.User.NullArgumentError", "Password is null");
+        if (string.IsNullOrWhiteSpace(passwordToBeVerified)) return DomainResult.DomainValidationFailureResult(Constants.ValidationErrorCode, "Password is null");
         byte[] salt = Convert.FromBase64String(PasswordSalt);
         byte[] hashedValueOfTheProvidedPassword = GetHashed(passwordToBeVerified, salt);
 
@@ -82,7 +82,7 @@ public partial class User : Entity<UserId>
 
         if (!UtilityServices.ByteArraysEqual(hashedValueOfThePassword, hashedValueOfTheProvidedPassword))
         {
-            return DomainResult.DomainValidationFailureResult("DomainError.User.InvalidPassword", "Password is invalid");
+            return DomainResult.DomainValidationFailureResult("User.InvalidPassword", "Password is invalid");
         }
         else
         {
@@ -106,12 +106,12 @@ public partial class User : Entity<UserId>
         return true;
     }
 
-    private static Error CheckFields(string email, string password, string firstName, string lastName)
+    private static string CheckFields(string email, string password, string firstName, string lastName)
     {
-        if (string.IsNullOrWhiteSpace(email)) return new Error("DomainError.User.NullArgumentError", "Email is null", ErrorType.Validation);
-        if (string.IsNullOrWhiteSpace(password)) return new Error("DomainError.User.NullArgumentError", "Password is null", ErrorType.Validation);
-        if (string.IsNullOrWhiteSpace(firstName)) return new Error("DomainError.User.NullArgumentError", "First Name is null", ErrorType.Validation);
-        if (string.IsNullOrWhiteSpace(lastName)) return new Error("DomainError.User.NullArgumentError", "Last Name is null", ErrorType.Validation);
-        return Error.None();
+        if (string.IsNullOrWhiteSpace(email)) return "Email is null";
+        if (string.IsNullOrWhiteSpace(password)) return "Password is null"; 
+        if (string.IsNullOrWhiteSpace(firstName)) return "First Name is null"; 
+        if (string.IsNullOrWhiteSpace(lastName)) return "Last Name is null"; 
+        return string.Empty;
     }
 }

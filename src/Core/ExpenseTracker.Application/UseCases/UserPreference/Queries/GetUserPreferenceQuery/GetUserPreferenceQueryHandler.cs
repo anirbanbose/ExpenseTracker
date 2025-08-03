@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.UserPreference;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -33,7 +34,7 @@ public class GetUserPreferenceQueryHandler : IRequestHandler<GetUserPreferenceQu
             if(currentUser?.Preference is null)
             {
                 _logger.LogWarning($"User preference not found for user: {_authProvider.CurrentUserName}");
-                return Result<UserPreferenceDTO>.NotFoundResult();
+                return Result<UserPreferenceDTO>.FailureResult();
             }
             return Result<UserPreferenceDTO>.SuccessResult(UserPreferenceDTO.FromDomain(currentUser!.Preference));
         }
@@ -41,6 +42,6 @@ public class GetUserPreferenceQueryHandler : IRequestHandler<GetUserPreferenceQu
         {
             _logger.LogError(ex, $"An error occurred while handling GetUserPreferenceQuery for the user - {_authProvider.CurrentUserName}.");
         }        
-        return Result<UserPreferenceDTO>.FailureResult("UserPreference.GetUserPreference");
+        return Result<UserPreferenceDTO>.FailureResult();
     }
 }

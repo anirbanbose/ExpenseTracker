@@ -1,7 +1,7 @@
 ﻿using ExpenseTracker.Application.Contracts.Auth;
 using ExpenseTracker.Application.DTO.User;
 using ExpenseTracker.Domain.Persistence.Repositories;
-using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -31,12 +31,12 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, Result<LoggedInUser
             var user = await _userRepository.GetUserByEmailAsync(request.Email, cancellationToken);
             if (user is null || user.Deleted)
             {
-                return Result<LoggedInUserDTO>.FailureResult("Login.UnauthorizedUser", "Invalid login attempt.");
+                return Result<LoggedInUserDTO>.FailureResult("Invalid login attempt.");
             }
             var passwordVerificationResult = user.VerifyPassword(request.Password);
             if (passwordVerificationResult.IsFailure)
             {
-                return Result<LoggedInUserDTO>.FailureResult("Login.UnauthorizedUser", "Invalid login attempt.");
+                return Result<LoggedInUserDTO>.FailureResult("Invalid login attempt.");
             }
             var loggedInUser = LoggedInUserDTO.FromDomain(user);
             if (_authManager.GenerateTokensAndSetCookies(loggedInUser, request.RememberMe))
@@ -49,6 +49,6 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, Result<LoggedInUser
             _logger.LogError(ex, $"An error occurred while handling the Login process for the request: {request}.");
         }
         
-        return Result<LoggedInUserDTO>.FailureResult("Login.UnauthorizedUser");
+        return Result<LoggedInUserDTO>.FailureResult("Invalid login attempt.");
     }
 }

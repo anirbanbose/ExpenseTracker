@@ -2,7 +2,7 @@
 using ExpenseTracker.Application.UseCases.Expense.Commands;
 using ExpenseTracker.Application.UseCases.Expense.Queries;
 using ExpenseTracker.Domain.Enums;
-using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using ExpenseTracker.Domain.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

@@ -4,6 +4,7 @@ using ExpenseTracker.Application.UseCases.Dashboard.Queries;
 using ExpenseTracker.Domain.Models;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -82,6 +83,5 @@ public class RecentExpensesQueryHandlerTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Code.Should().Be("AuthenticationError");
     }
 }

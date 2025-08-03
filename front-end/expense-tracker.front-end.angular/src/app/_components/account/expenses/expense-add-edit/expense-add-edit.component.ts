@@ -252,10 +252,9 @@ export class ExpenseAddEditComponent implements OnInit {
         }
       },
       error: (error: any) => {
-        console.log(error);
-        /* this._snackBar.open('There was an issue fetching the expenses. Please try again later.', 'Close', {
+        this._snackBar.open('There was an issue fetching the expenses. Please try again later.', 'Close', {
           duration: 5000
-        }); */
+        });
       }
     });
   }

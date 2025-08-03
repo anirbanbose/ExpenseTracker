@@ -38,7 +38,7 @@ namespace ExpenseTracker.Infrastructure.Persistence.Repositories.Common
             return await TableNoTracking.ToListAsync(cancellationToken);
         }
 
-        public async Task<PagedResult<TEntity>> GetPagedAsync(Expression<Func<TEntity, bool>> predicate, int pageIndex, int pageSize, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, string includeProperties, CancellationToken cancellationToken)
+        public async Task<(int TotalCount, IEnumerable<TEntity>)> GetPagedAsync(Expression<Func<TEntity, bool>> predicate, int pageIndex, int pageSize, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, string includeProperties, CancellationToken cancellationToken)
         {
             IQueryable<TEntity> query = TableNoTracking;
 
@@ -63,7 +63,7 @@ namespace ExpenseTracker.Infrastructure.Persistence.Repositories.Common
 
             var items = await query.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
             
-            return PagedResult<TEntity>.SuccessResult(items, totalCount, pageIndex, pageSize);
+            return (totalCount, items);
         }
 
         protected virtual async Task AddAsync(TEntity entity)
@@ -96,21 +96,5 @@ namespace ExpenseTracker.Infrastructure.Persistence.Repositories.Common
                 await entities.ExecuteUpdateAsync(updateExpression);
             }                
         }
-
-        //protected virtual async Task DeleteAsync(Expression<Func<TEntity, bool>> deleteExpression)
-        //{
-        //    var entities = Entities.Where(d => d is Entity).Where(deleteExpression).Select(x => x as Entity);
-        //    if(entities != null && entities.Any())
-        //    {
-        //        foreach (var entity in entities)
-        //        {
-        //            entity!.MarkAsDelete();
-        //            DbContext.Entry(entity).State = EntityState.Modified;
-        //        }
-
-        //        //await DbContext.SaveChangesAsync();
-        //    }
-            
-        //}
     }
 }

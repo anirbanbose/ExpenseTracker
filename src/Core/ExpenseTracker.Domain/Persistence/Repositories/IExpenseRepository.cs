@@ -1,7 +1,5 @@
 ﻿using ExpenseTracker.Domain.Enums;
 using ExpenseTracker.Domain.Models;
-using ExpenseTracker.Domain.Persistence.SearchModels;
-using ExpenseTracker.Domain.SharedKernel;
 
 namespace ExpenseTracker.Domain.Persistence.Repositories;
 
@@ -11,9 +9,9 @@ public interface IExpenseRepository
     void UpdateExpense(Expense expense);
     Task<Expense?> GetExpenseByIdAsync(Guid id, Guid userId, CancellationToken cancellationToken);
     Task<IEnumerable<Expense>> GetExpensesByUserIdAsync(Guid userId, CancellationToken cancellationToken);
-    Task<PagedResult<Expense>> SearchExpensesAsync(ExpenseSearchModel search, Guid userId, int PageIndex, int PageSize, ExpenseListOrder Order, bool IsAscendingSort, CancellationToken cancellationToken);
-    Task<IEnumerable<Expense>> SearchExpensesAsync(ExpenseSearchModel search, Guid userId, ExpenseListOrder Order, bool IsAscendingSort, CancellationToken cancellationToken);
-    Task<PagedResult<Expense>> SearchExpensesAsync(Guid id, Guid userId, int PageSize, CancellationToken cancellationToken);
+    Task<(int TotalCount, IEnumerable<Expense> Items)> SearchExpensesAsync(string? searchText, Guid? expenseCategoryId, DateTime? startDate, DateTime? endDate, Guid userId, int pageIndex, int pageSize, ExpenseListOrder order, bool isAscendingSort, CancellationToken cancellationToken);
+    Task<IEnumerable<Expense>> SearchExpensesAsync(string? searchText, Guid? expenseCategoryId, DateTime? startDate, DateTime? endDate, Guid userId, ExpenseListOrder order, bool isAscendingSort, CancellationToken cancellationToken);
+    Task<(int TotalCount, int PageIndex, IEnumerable<Expense> Items)> SearchExpensesAsync(Guid id, Guid userId, int pageSize, CancellationToken cancellationToken);
     Task<IEnumerable<Expense>> GetRecentExpensesAsync(Guid userId, int recordCount, CancellationToken cancellationToken);
     Task<IEnumerable<Expense>> GetLast12MonthsExpensesAsync(Guid userId, CancellationToken cancellationToken);    
 }

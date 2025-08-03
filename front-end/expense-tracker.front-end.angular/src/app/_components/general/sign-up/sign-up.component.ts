@@ -46,13 +46,11 @@ export class SignUpComponent {
   onEmailAdded(event: any): void {
     this.registrationProcess = RegistrationProcess.AddPassword;
     this.signupModel.email = event;
-    console.log('Email added:', this.signupModel);
   }
 
   onPasswordAdded(event: any): void {
     this.registrationProcess = RegistrationProcess.AddDetails;
     this.signupModel.password = event;
-    console.log('Password added:', this.signupModel);
   }
 
   onDetailsAdded(event: any): void {

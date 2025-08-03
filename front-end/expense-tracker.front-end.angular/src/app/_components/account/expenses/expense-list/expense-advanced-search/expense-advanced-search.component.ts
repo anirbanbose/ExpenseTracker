@@ -10,9 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Observable } from 'rxjs/internal/Observable';
 import { ExpenseCategoryService } from '../../../../../_services/expense-category/expense-category.service';
 import { map, startWith } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { CurrencyService } from '../../../../../_services/currency/currency.service';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
@@ -108,18 +106,13 @@ export class ExpenseAdvancedSearchComponent implements OnInit {
           );
         }
         else {
+          this.expenseCategories = [];
+          this.filteredCategories = new Observable<any[]>();
         }
       },
-      error: (err: HttpErrorResponse) => {
-        if (err.status == 401) {
-          //this._helperService.handle401Error(this._snackBar, this._authService);
-        }
-        else if (err.error?.errorMessage) {
-
-        }
-        else {
-
-        }
+      error: (err: any) => {
+        this.expenseCategories = [];
+        this.filteredCategories = new Observable<any[]>();
       }
     });
   }

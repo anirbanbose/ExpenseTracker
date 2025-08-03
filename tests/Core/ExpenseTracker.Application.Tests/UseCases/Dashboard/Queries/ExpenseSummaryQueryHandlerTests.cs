@@ -4,6 +4,7 @@ using ExpenseTracker.Application.UseCases.Dashboard.Queries;
 using ExpenseTracker.Domain.Models;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -25,7 +26,7 @@ public class ExpenseSummaryQueryHandlerTests
         var expenses = new List<Expense>
         {
             new FakeExpenseBuilder().WithDetails("Recent Groceries", "Groceries", DateTime.UtcNow, fakeUser.Id, 100, "USD", "$").Build(),
-            new FakeExpenseBuilder().WithDetails("Rent", "Others", DateTime.UtcNow.AddDays(-1), fakeUser.Id, 1000, "USD", "$").Build(),
+            new FakeExpenseBuilder().WithDetails("Rent", "Others", DateTime.UtcNow, fakeUser.Id, 1000, "USD", "$").Build(),
         };
 
         _expenseRepositoryMock

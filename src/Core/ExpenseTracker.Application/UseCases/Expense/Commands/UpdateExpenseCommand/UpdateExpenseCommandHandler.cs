@@ -2,6 +2,7 @@
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using ExpenseTracker.Domain.Utils;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -43,27 +44,27 @@ public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand,
             if (userPreference is null)
             {
                 _logger.LogWarning($"User preference not found for user: {_authProvider.CurrentUserName}.");
-                return Result<Guid?>.FailureResult("Expense.UpdateExpense");
+                return Result<Guid?>.FailureResult();
             }
 
             var expense = await _expenseRepository.GetExpenseByIdAsync(request.Id, currentUser!.Id, cancellationToken);
             if(expense is null)
             {
                 _logger.LogWarning($"Expense with Id - {request.Id} not found.");
-                return Result.FailureResult("Expense.UpdateExpense");
+                return Result.FailureResult();
             }
 
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.CategoryId, cancellationToken);
             if (expenseCategory is null)
             {
                 _logger.LogWarning($"Expense category with Id - {request.CategoryId} not found.");
-                return Result.FailureResult("Expense.UpdateExpense");
+                return Result.FailureResult();
             }
             var currency = await _currencyRepository.GetCurrencyByIdAsync(userPreference.PreferredCurrencyId, cancellationToken);
             if (currency is null)
             {
                 _logger.LogWarning($"Currency with Id {userPreference.PreferredCurrencyId} not found.");
-                return Result<Guid?>.FailureResult("Expense.UpdateExpense");
+                return Result<Guid?>.FailureResult();
             }
 
             expense.Update(
@@ -81,6 +82,6 @@ public class UpdateExpenseCommandHandler : IRequestHandler<UpdateExpenseCommand,
         {
             _logger?.LogError(ex, $"Error occurred while updating expense- {request} for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result.FailureResult("Expense.UpdateExpense");
+        return Result.FailureResult();
     }
 }

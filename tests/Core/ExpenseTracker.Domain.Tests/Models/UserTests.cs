@@ -37,7 +37,7 @@ public class UserTests
         result.IsSuccess.Should().BeFalse();
         result.ErrorMessage.Should().NotBeNull();
         result.Value.Should().BeNull();
-        result.Code.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
     }
 
     [Fact]
@@ -70,7 +70,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Code.Should().Be("DomainError.User.InvalidPassword");
+        result.ErrorCode.Should().Be("DomainError.User.InvalidPassword");
         result.ErrorMessage.Should().NotBeNull();
     }
 
@@ -89,7 +89,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Code.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
         result.ErrorMessage.Should().NotBeNull();
     }
 
@@ -125,7 +125,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Code.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
         result.ErrorMessage.Should().NotBeNull();
     }
 
@@ -144,7 +144,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.Code.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
         result.ErrorMessage.Should().NotBeNull();
     }
 

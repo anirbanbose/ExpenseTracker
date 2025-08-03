@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { PageTitleBarComponent } from '../common/page-title-bar/page-title-bar.component';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
 import { RecentExpensesComponent } from './recent-expenses/recent-expenses.component';
 import { ExpenseChartComponent } from './expense-chart/expense-chart.component';
 import { DashboardService } from '../../../_services/dashboard/dashboard.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +26,7 @@ export class DashboardComponent implements OnInit {
     { label: 'Dashboard', link: null },
   ];
   private _dashboardService = inject(DashboardService);
+  private _snackBar = inject(MatSnackBar);
   summaryData: any = {};
 
 
@@ -44,11 +44,12 @@ export class DashboardComponent implements OnInit {
       next: (response: any) => {
         if (response.isSuccess) {
           this.summaryData = response.value;
-          console.log(this.summaryData);
         }
       },
       error: (error: any) => {
-        console.log(error);
+        this._snackBar.open('There was an issue fetching the expense summary. Please try again later.', 'Close', {
+          duration: 5000
+        });
       }
     });
   }

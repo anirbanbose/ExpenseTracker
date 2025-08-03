@@ -1,8 +1,8 @@
 ﻿using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.Persistence;
-using ExpenseTracker.Domain.SharedKernel;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using ExpenseTracker.Domain.SharedKernel.Results;
 
 namespace ExpenseTracker.Application.UseCases.User.Commands;
 
@@ -31,17 +31,17 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, R
             if(currency is null)
             {
                 _logger.LogWarning($"Preferred currency with Id - {request.PreferredCurrencyId} not found.");
-                return Result.FailureResult("Account.UserRegistration");
+                return Result.FailureResult();
             }
             var userResult = Domain.Models.User.Create(_userRepository, request.Email, request.Password, currency, request.FirstName, request.LastName, request.MiddleName);
             if (userResult.IsFailure)
             {
                 _logger.LogWarning($"User registration failed for this request - {request}. Reason - {userResult.ErrorMessage}");
-                return Result.FailureResult("Account.UserRegistration");
+                return Result.FailureResult();
             }
             
             var user = userResult.Value;
-            await _userRepository.AddUserAsync(user);
+            await _userRepository.AddUserAsync(user!);
             await _unitOfWork.CommitAsync(cancellationToken);
 
             return Result.SuccessResult();       
@@ -50,6 +50,6 @@ public class RegistrationCommandHandler : IRequestHandler<RegistrationCommand, R
         {
             _logger?.LogError(ex, $"Error occurred while registering a user with request - {request}.");
         }
-        return Result.FailureResult("Account.UserRegistration");
+        return Result.FailureResult();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ExpenseTracker.Domain.Enums;
-using ExpenseTracker.Domain.Persistence.SearchModels;
 using ExpenseTracker.Infrastructure.Persistence.Repositories;
 using FluentAssertions;
 using MediatR;
@@ -137,11 +136,13 @@ public class ExpenseRepositoryTests : IDisposable
         _context.Expenses.Add(builder.WithAmountAndDescription("Test 1", user.Id, 100).Build());
         _context.Expenses.Add(builder.WithAmountAndDescription("Test 2", user.Id, 300).Build());
         
-        await _context.SaveChangesAsync(CancellationToken.None);
-        var searchModel = ExpenseSearchModel.Create(null, null, DateTime.UtcNow.Date, null);
+        await _context.SaveChangesAsync(CancellationToken.None);        
         // Act
         var results = await _repository.SearchExpensesAsync(
-            searchModel, 
+            null, 
+            null, 
+            DateTime.UtcNow.Date, 
+            null, 
             user.Id, 
             0,   // page index
             10,  // page size
@@ -150,7 +151,6 @@ public class ExpenseRepositoryTests : IDisposable
             CancellationToken.None);
 
         // Assert
-        results.IsSuccess.Should().BeTrue();
         results.TotalCount.Should().Be(2);
         results.Items.Should().HaveCount(2);
     }

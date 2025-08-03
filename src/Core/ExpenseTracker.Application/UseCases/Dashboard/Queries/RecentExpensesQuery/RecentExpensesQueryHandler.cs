@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -28,11 +29,11 @@ public class RecentExpensesQueryHandler : IRequestHandler<RecentExpensesQuery, R
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.GetRecentExpensesAsync(currentUser!.Id, request.recordCount, cancellationToken);
-            if (expenseResult is not null)
+            var expenseList = await _expenseRepository.GetRecentExpensesAsync(currentUser!.Id, request.recordCount, cancellationToken);
+            if (expenseList is not null)
             {
                 List<RecentExpenseListDTO> dtoList = new List<RecentExpenseListDTO>();
-                expenseResult.ToList().ForEach(expense =>
+                expenseList.ToList().ForEach(expense =>
                 {
                     dtoList.Add(RecentExpenseListDTO.FromDomain(expense));
                 });
@@ -43,6 +44,6 @@ public class RecentExpensesQueryHandler : IRequestHandler<RecentExpensesQuery, R
         {
             _logger.LogError(ex, $"Error occurred while fetching recent expenses with request - {request} for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result<List<RecentExpenseListDTO>>.FailureResult("Expense.RecentExpenses");
+        return Result<List<RecentExpenseListDTO>>.FailureResult();
     }
 }

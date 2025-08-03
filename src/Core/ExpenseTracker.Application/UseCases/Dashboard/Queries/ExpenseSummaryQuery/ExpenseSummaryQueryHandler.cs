@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -57,7 +58,7 @@ public class ExpenseSummaryQueryHandler : IRequestHandler<ExpenseSummaryQuery, R
         {
             _logger.LogError(ex, $"Error occurred while handling ExpenseSummaryQuery with request - {request}  for the user: {_authProvider.CurrentUserName}.");
         } 
-        return Result<ExpenseSummaryDTO>.FailureResult("DashboardSummary.ExpenseSummary");
+        return Result<ExpenseSummaryDTO>.FailureResult();
     }
 
     private static IEnumerable<CategoryExpenseDTO> GetCategoryTotalExpenses(IEnumerable<Domain.Models.Expense> expenses, int currentMonth, int currentYear)

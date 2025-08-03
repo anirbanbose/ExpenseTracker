@@ -2,8 +2,8 @@
 using ExpenseTracker.Application.Contracts.Report;
 using ExpenseTracker.Application.DTO.Report;
 using ExpenseTracker.Domain.Persistence.Repositories;
-using ExpenseTracker.Domain.Persistence.SearchModels;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -34,7 +34,7 @@ public class ExpenseExportQueryHandler : IRequestHandler<ExpenseExportQuery, Res
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser!.Id, request.order, request.IsAscendingSort, cancellationToken);
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(request.search, request.expenseCategoryId, request.startDate, request.endDate, currentUser!.Id, request.order, request.IsAscendingSort, cancellationToken);
             if (expenseResult is not null)
             {
                 var reportData = new List<ExpenseReportDataItemDTO>();
@@ -51,6 +51,6 @@ public class ExpenseExportQueryHandler : IRequestHandler<ExpenseExportQuery, Res
         {
             _logger?.LogError(ex, $"Error occurred while exporting expense report- {request} for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result<byte[]>.FailureResult("Report.ExpenseExport");
+        return Result<byte[]>.FailureResult();
     }
 }

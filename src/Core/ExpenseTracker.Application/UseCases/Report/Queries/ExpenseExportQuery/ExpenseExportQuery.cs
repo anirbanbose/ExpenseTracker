@@ -1,5 +1,5 @@
 ﻿using ExpenseTracker.Domain.Enums;
-using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 
 namespace ExpenseTracker.Application.UseCases.Report.Queries;

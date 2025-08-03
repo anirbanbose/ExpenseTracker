@@ -1,8 +1,8 @@
 ﻿using ExpenseTracker.Application.Contracts.Auth;
 using ExpenseTracker.Application.DTO.Expense;
 using ExpenseTracker.Domain.Persistence.Repositories;
-using ExpenseTracker.Domain.Persistence.SearchModels;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -29,22 +29,25 @@ public class SearchExpensesQueryHandler : IRequestHandler<SearchExpensesQuery, P
             if (failureResult != null)
                 return failureResult;
 
-            var expenseResult = await _expenseRepository.SearchExpensesAsync(ExpenseSearchModel.Create(request.search, request.expenseCategoryId, request.startDate, request.endDate), currentUser!.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
-            if (expenseResult.IsSuccess && expenseResult.Items is not null)
+            var expenseResult = await _expenseRepository.SearchExpensesAsync(request.search, request.expenseCategoryId, request.startDate, request.endDate, currentUser!.Id, request.pageIndex, request.pageSize, request.order, request.IsAscendingSort, cancellationToken);
+            if (expenseResult.Items is null)
             {
-                List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();
-                expenseResult.Items.ToList().ForEach(expense =>
-                {
-                    dtoList.Add(ExpenseListDTO.FromDomain(expense));
-                });
-                return PagedResult<ExpenseListDTO>.SuccessResult(dtoList, expenseResult.TotalCount, expenseResult.PageIndex, expenseResult.PageSize);
+                return PagedResult<ExpenseListDTO>.FailureResult();
             }
+            
+            List<ExpenseListDTO> dtoList = new List<ExpenseListDTO>();
+            expenseResult.Items.ToList().ForEach(expense =>
+            {
+                dtoList.Add(ExpenseListDTO.FromDomain(expense));
+            });
+            return PagedResult<ExpenseListDTO>.SuccessResult(dtoList, expenseResult.TotalCount, request.pageIndex, request.pageSize);
+            
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, $"Error occurred while searching expenses with request - {request} for the user: {_authProvider.CurrentUserName}.");
         }      
 
-        return PagedResult<ExpenseListDTO>.FailureResult("Expense.SearchExpenses");
+        return PagedResult<ExpenseListDTO>.FailureResult();
     }
 }

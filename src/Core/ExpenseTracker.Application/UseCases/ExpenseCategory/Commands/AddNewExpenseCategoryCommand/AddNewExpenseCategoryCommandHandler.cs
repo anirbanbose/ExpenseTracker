@@ -2,6 +2,7 @@
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -45,6 +46,6 @@ public class AddNewExpenseCategoryCommandHandler : IRequestHandler<AddNewExpense
         {
             _logger?.LogError(ex, $"Error occurred while adding new expense category- {request} for user - {_authProvider.CurrentUserName}.");
         }
-        return Result<Guid?>.FailureResult("Expense.AddNewExpenseCategory");
+        return Result<Guid?>.FailureResult();
     }
 }

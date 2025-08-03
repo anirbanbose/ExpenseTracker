@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.Dashboard;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -78,6 +79,6 @@ public class SpendingChartQueryHandler : IRequestHandler<SpendingChartQuery, Res
         {
             _logger.LogError(ex, $"Error occurred while fetching spending chart data for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result<SpendingChartDTO>.FailureResult("Chart.SpendingChart");
+        return Result<SpendingChartDTO>.FailureResult();
     }
 }

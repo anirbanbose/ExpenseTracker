@@ -1,8 +1,6 @@
 ﻿using ExpenseTracker.Domain.Enums;
 using ExpenseTracker.Domain.Models;
 using ExpenseTracker.Domain.Persistence.Repositories;
-using ExpenseTracker.Domain.Persistence.SearchModels;
-using ExpenseTracker.Domain.SharedKernel;
 using ExpenseTracker.Infrastructure.Persistence.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,9 +36,9 @@ public class ExpenseCategoryRepository(ApplicationDbContext dbContext) : BaseRep
         return await Table.Where(d => d.IsSystemCategory == true && !d.Deleted).OrderBy(d => d.Name).ToListAsync(cancellationToken);
     }
 
-    public async Task<PagedResult<ExpenseCategory>> SearchUserExpenseCategoriesAsync(ExpenseCategorySearchModel search, Guid userId, int PageIndex, int PageSize, ExpenseCategoryListOrder Order, bool IsAscendingSort, CancellationToken cancellationToken)
+    public async Task<(int TotalCount, IEnumerable<ExpenseCategory> Items)> SearchUserExpenseCategoriesAsync(string? searchText, Guid userId, int pageIndex, int pageSize, ExpenseCategoryListOrder order, bool isAscendingSort, CancellationToken cancellationToken)
     {
-        string searchString = !string.IsNullOrWhiteSpace(search.SearchText) ? search.SearchText.Trim().ToLower() : string.Empty;
+        string searchString = !string.IsNullOrWhiteSpace(searchText) ? searchText.Trim().ToLower() : string.Empty;
 
         IQueryable<ExpenseCategory> query = TableNoTracking;
 
@@ -56,12 +54,12 @@ public class ExpenseCategoryRepository(ApplicationDbContext dbContext) : BaseRep
                      .Include(d => d.Expenses)
                      .AsSplitQuery().AsQueryable();
 
-        var orderByExprssion = Order.ToOrderExpression();
-        query = IsAscendingSort ? query.OrderBy(orderByExprssion) : query.OrderByDescending(orderByExprssion);
+        var orderByExprssion = order.ToOrderExpression();
+        query = isAscendingSort ? query.OrderBy(orderByExprssion) : query.OrderByDescending(orderByExprssion);
 
-        var items = await query.Skip(PageIndex * PageSize).Take(PageSize).ToListAsync(cancellationToken);
+        var items = await query.Skip(pageIndex * pageSize).Take(pageSize).ToListAsync(cancellationToken);
 
-        return PagedResult<ExpenseCategory>.SuccessResult(items, totalCount, PageIndex, PageSize);
+        return (totalCount, items);
     }
 
     public void UpdateExpenseCategory(ExpenseCategory expenseCategory)

@@ -101,7 +101,7 @@ public class SeedDataBase : ISeedDataBase
             foreach (var c in _mockCurrencies)
             {
                 var modelResult = Currency.Create(c.Code, c.Name, c.Symbol);
-                if (modelResult is not null && modelResult.IsSuccess)
+                if (modelResult is not null && modelResult.IsSuccess && modelResult.Value is not null)
                 {
                     currencies.Add(modelResult.Value);
                     await _currencyRepository.AddCurrencyAsync(modelResult.Value);

@@ -2,6 +2,7 @@
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -45,13 +46,13 @@ public class ChangePasswordCommandHandler : IRequestHandler<ChangePasswordComman
                     await _unitOfWork.CommitAsync(cancellationToken);
                     return Result.SuccessResult();
                 }
-                return Result.FailureResult("Account.ChangePassword");
+                return Result.FailureResult();
             }            
         }
         catch (Exception ex)
         {
             _logger?.LogError(ex, $"Error occurred while updating user password for the user: {_authProvider.CurrentUserName} with password change request - {request}.");
         }
-        return Result.FailureResult("Account.ChangePassword");
+        return Result.FailureResult();
     }
 }

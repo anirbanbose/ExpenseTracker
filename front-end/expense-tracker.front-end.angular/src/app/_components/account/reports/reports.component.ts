@@ -88,7 +88,6 @@ export class ReportsComponent implements OnInit {
 
 
   dateRangeSelected(event: any) {
-    console.log('Date Range Selected:', event);
     this.selectedDate = event;
   }
 
@@ -114,7 +113,7 @@ export class ReportsComponent implements OnInit {
     this._reportService.downloadExpenseReport(reportType, year, month, reportFormat).subscribe({
       next: (blob) => {
         const extension = this.selectedViewMode === ViewMode.Pdf ? 'pdf' : 'xlsx';
-        const fileName = `Expense Export.${extension}`;
+        const fileName = this.getFileName(reportType, year, month, extension);
 
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
@@ -130,5 +129,13 @@ export class ReportsComponent implements OnInit {
     });
   }
 
+  getFileName(reportType: 1 | 2, year: number, month: number | null, extension: string): string {
+    if (reportType === 1 && month !== null) {
+      return `${year}-${month.toString().padStart(2, '0')}-Expense Report.${extension}`;
+    }
+    else {
+      return `${year}-Expense Report.${extension}`;
+    }
+  }
 
 }

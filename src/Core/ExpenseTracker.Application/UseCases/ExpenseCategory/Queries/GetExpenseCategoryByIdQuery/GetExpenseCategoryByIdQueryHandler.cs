@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.ExpenseCategory;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -33,19 +34,17 @@ public class GetExpenseCategoryByIdQueryHandler : IRequestHandler<GetExpenseCate
                 return failureResult;
 
             var expenseCategory = await _expenseCategoryRepository.GetExpenseCategoryByIdAsync(request.Id.Value, currentUser!.Id, cancellationToken);
-            if (expenseCategory is null)
+            if (expenseCategory is not null)
             {
-                return Result<ExpenseCategoryDTO?>.NotFoundResult();
-            }
-            var dto = ExpenseCategoryDTO.FromDomain(expenseCategory);
-
-            return Result<ExpenseCategoryDTO?>.SuccessResult(dto);
+                var dto = ExpenseCategoryDTO.FromDomain(expenseCategory);
+                return Result<ExpenseCategoryDTO?>.SuccessResult(dto);
+            }            
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, $"An error occurred while handling GetExpenseCategoryByIdQuery for user {_authProvider.CurrentUserName}.");
         }
-        return Result<ExpenseCategoryDTO?>.FailureResult("ExpenseCategory.GetExpenseCategoryById");
+        return Result<ExpenseCategoryDTO?>.FailureResult();
     }
 
 }

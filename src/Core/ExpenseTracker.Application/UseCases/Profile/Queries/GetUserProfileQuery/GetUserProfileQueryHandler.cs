@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Application.Contracts.Auth;
 using ExpenseTracker.Application.DTO.Profile;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -33,6 +34,6 @@ public class GetUserProfileQueryHandler : IRequestHandler<GetUserProfileQuery, R
         {
             _logger.LogError(ex, $"An error occurred while handling GetUserProfileQuery for the user: {_authProvider.CurrentUserName}.");
         }        
-        return Result<UserProfileDTO>.FailureResult("Profile.GetUserProfile");
+        return Result<UserProfileDTO>.FailureResult();
     }
 }

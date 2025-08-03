@@ -1,4 +1,4 @@
-﻿namespace ExpenseTracker.Domain.SharedKernel.Errors;
+﻿namespace ExpenseTracker.Domain.Enums;
 
 public enum ErrorType
 {

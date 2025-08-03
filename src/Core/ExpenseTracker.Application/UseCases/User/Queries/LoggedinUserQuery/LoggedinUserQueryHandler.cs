@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Application.Contracts.Auth;
 using ExpenseTracker.Application.DTO.User;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -36,6 +37,6 @@ public class LoggedinUserQueryHandler : IRequestHandler<LoggedinUserQuery, Resul
         {
             _logger?.LogError(ex, $"Error occurred while getting the LoggedinUser data for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result<LoggedInUserDTO>.FailureResult("Account.LoggedinUser");
+        return Result<LoggedInUserDTO>.FailureResult();
     }
 }

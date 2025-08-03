@@ -2,6 +2,7 @@
 using ExpenseTracker.Application.DTO.Currency;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -36,13 +37,13 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : IRequestHandler<GetCu
             if (currentUser?.Preference is null)
             {
                 _logger.LogWarning($"User preference for user {_authProvider.CurrentUserName} not found.");
-                return Result<CurrencyDTO>.NotFoundResult();
+                return Result<CurrencyDTO>.FailureResult();
             }
             var preferredCurrency = await _currencyRepository.GetCurrencyByIdAsync(currentUser.Preference.PreferredCurrencyId, cancellationToken);
             if (preferredCurrency is null)
             {
                 _logger.LogWarning($"Preferred currency not found for user {_authProvider.CurrentUserName}.");
-                return Result<CurrencyDTO>.NotFoundResult();
+                return Result<CurrencyDTO>.FailureResult();
             }
             var currencyDto = CurrencyDTO.FromDomain(preferredCurrency);
             return Result<CurrencyDTO>.SuccessResult(currencyDto);
@@ -51,7 +52,7 @@ public class GetCurrentUserPreferredCurrencyQueryHandler : IRequestHandler<GetCu
         {
             _logger.LogError(ex, $"An error occurred while handling GetCurrentUserPreferredCurrencyQuery for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result<CurrencyDTO>.FailureResult("Currency.GetCurrentUserPreferredCurrency");
+        return Result<CurrencyDTO>.FailureResult();
 
     }
 }

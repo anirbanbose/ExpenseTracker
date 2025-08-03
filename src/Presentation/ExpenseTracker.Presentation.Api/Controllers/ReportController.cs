@@ -85,8 +85,13 @@ public class ReportController : ControllerBase
             string contentType = reportFormat == ReportFormat.Pdf
                 ? "application/pdf"
                 : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
-            return File(expenseReportResult.Value, contentType, $"Expense Export.{extension}");
+            string fileName = reportType switch
+            {
+                ExpenseReportType.Monthly => $"{year}-{month:00}-Expense Report.{extension}",
+                ExpenseReportType.Yearly => $"{year}-Expense Report.{extension}",
+                _ => $"Expense Report.{extension}"
+            };
+            return File(expenseReportResult.Value, contentType, fileName);
         }
         return StatusCode((int)HttpStatusCode.InternalServerError, new { errorMessage = expenseReportResult?.ErrorMessage ?? "Failed to generate report file." });
     }

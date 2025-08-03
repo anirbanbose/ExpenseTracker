@@ -2,6 +2,7 @@
 using ExpenseTracker.Domain.Persistence;
 using ExpenseTracker.Domain.Persistence.Repositories;
 using ExpenseTracker.Domain.SharedKernel;
+using ExpenseTracker.Domain.SharedKernel.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -38,7 +39,7 @@ public class DeleteExpenseCommandHandler : IRequestHandler<DeleteExpenseCommand,
             if (expense is null)
             {
                 _logger.LogWarning($"Expense with Id - {request.Id} not found.");
-                return Result.FailureResult("Expense.DeleteExpense");
+                return Result.FailureResult();
             }
 
             expense.MarkAsDeleted(); 
@@ -51,6 +52,6 @@ public class DeleteExpenseCommandHandler : IRequestHandler<DeleteExpenseCommand,
         {
             _logger?.LogError(ex, $"Error occurred while deleting expense with id {request.Id} for the user: {_authProvider.CurrentUserName}.");
         }
-        return Result.FailureResult("Expense.DeleteExpense");
+        return Result.FailureResult();
     }
 }

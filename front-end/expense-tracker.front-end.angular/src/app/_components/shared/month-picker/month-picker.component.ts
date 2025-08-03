@@ -28,7 +28,7 @@ export class MonthPickerComponent implements OnInit {
   minMonth: number = -1;
   maxMonth: number = -1;
   private _reportService = inject(ReportService);
-
+  hasError: boolean = true;
   monthOptions: { value: number, label: string }[] = [
     { value: 1, label: 'January' },
     { value: 2, label: 'February' },
@@ -56,7 +56,6 @@ export class MonthPickerComponent implements OnInit {
       this.monthSelectedEvent.emit({ month: this.selectedMonth, year: this.selectedYear });
     }
   }
-
 
   getMinMaxDates() {
     this._reportService.getMinMaxDates().subscribe({
