@@ -1,6 +1,7 @@
 ﻿
 
 using ExpenseTracker.Domain.Models;
+using ExpenseTracker.Domain.Utils;
 using FluentAssertions;
 
 namespace ExpenseTracker.Domain.Tests.Models;
@@ -15,9 +16,9 @@ public class CurrencyTests
 
         //Assert
         result.IsSuccess.Should().BeFalse();
-        result.ErrorCode.Should().NotBeNull();
+        result.ErrorMessage.Should().NotBeNull();
         result.Value.Should().BeNull();
-        result.ErrorCode.Should().Be("DomainError.Currency.NullArgumentError");
+        result.ErrorCode.Should().Be(Constants.ValidationErrorCode);
     }
 
     [Fact]
@@ -30,7 +31,7 @@ public class CurrencyTests
         result.IsSuccess.Should().BeFalse();
         result.ErrorMessage.Should().NotBeNull();
         result.Value.Should().BeNull();
-        result.ErrorCode.Should().Be("DomainError.Currency.NullArgumentError");
+        result.ErrorCode.Should().Be(Constants.ValidationErrorCode);
     }
 
     [Fact]

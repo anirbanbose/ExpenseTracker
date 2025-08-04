@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Domain.Models;
 using ExpenseTracker.Domain.Persistence.Repositories;
+using ExpenseTracker.Domain.Utils;
 using FluentAssertions;
 using Moq;
 
@@ -37,7 +38,7 @@ public class UserTests
         result.IsSuccess.Should().BeFalse();
         result.ErrorMessage.Should().NotBeNull();
         result.Value.Should().BeNull();
-        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be(Constants.ValidationErrorCode);
     }
 
     [Fact]
@@ -70,7 +71,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.ErrorCode.Should().Be("DomainError.User.InvalidPassword");
+        result.ErrorCode.Should().Be("User.InvalidPassword");
         result.ErrorMessage.Should().NotBeNull();
     }
 
@@ -89,7 +90,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be(Constants.ValidationErrorCode);
         result.ErrorMessage.Should().NotBeNull();
     }
 
@@ -125,7 +126,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be(Constants.ValidationErrorCode);
         result.ErrorMessage.Should().NotBeNull();
     }
 
@@ -144,7 +145,7 @@ public class UserTests
 
         // Assert
         result.IsSuccess.Should().BeFalse();
-        result.ErrorCode.Should().Be("DomainError.User.NullArgumentError");
+        result.ErrorCode.Should().Be(Constants.ValidationErrorCode);
         result.ErrorMessage.Should().NotBeNull();
     }
 

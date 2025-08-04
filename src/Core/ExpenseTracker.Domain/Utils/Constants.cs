@@ -9,4 +9,5 @@ public class Constants
     public const string ValidationErrorCode = "ValidationError";
     public const string AuthenticationErrorCode = "AuthenticationError";
     public const string UnauthorizedErrorCode = "PermissionError";
+    public const string ArgumentNullErrorCode = "ArgumentNullError";
 }
